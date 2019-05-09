@@ -1,4 +1,4 @@
-# vega2
+# vue-ui-fr
 
 > A Vue.js project
 

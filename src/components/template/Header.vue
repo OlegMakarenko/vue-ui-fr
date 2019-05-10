@@ -13,9 +13,9 @@
       </nav>
     </div>
     <div>
-    <LRside />
-    <Control />
-    <Compon />
+      <LRside />
+      <Control />
+      <Compon />
     </div>
   </div>
 </template>

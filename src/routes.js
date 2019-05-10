@@ -1,6 +1,6 @@
-import Logo from './components/Logo.vue'
-import Alert from './components/Alert.vue'
-import Login from './components/Login.vue'
+import Logo from './components/template/Logo.vue'
+import Alert from './components/template/Alert.vue'
+import Login from './components//template/Login.vue'
 
 const routes = [
     { path: '/', component: Logo },

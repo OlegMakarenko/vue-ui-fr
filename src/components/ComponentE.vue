@@ -1,5 +1,5 @@
 <template>
-    <div class="component" @click="onClick">
+    <div class="component">
         <div class="title">
             {{textBeforeTitle + computedTitle}}
         </div>
@@ -21,9 +21,11 @@ export default {
         }
     },
 
-    computed(){
+    computed: {
+    computedTitle(){
         if(this.title)
             return this.title.toUpperCase();
+     }
     }
 }
 </script>

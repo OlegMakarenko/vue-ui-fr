@@ -1,6 +1,6 @@
 <template>
     <div class="center">
-       <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br>
+      <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br>
       <button class="btn1">+Подключить устройство</button>
       <button class="btn3">I</button>
       <button class="btn4">P</button>
@@ -8,8 +8,13 @@
 </template>
 
 <script>
+
+import ModalW from '../modalwindow/ModalW'
+
 export default {
-    
+    components:{
+      ModalW
+    }
 }
 </script>
 

@@ -1,37 +1,35 @@
 <template>
     <div>
         <div class="compo">
-            <p>some text here</p>
-        </div>
-
-        <!-- <el-main style="display: flex">
+            <div style="display: flex">
             <ComponentE
                 v-for="item in dataForComponents"
                 :title="item.title"
-                :conten="item.content"
+                :content="item.content"
                 :key="item.title"
             />
-        </el-main> -->
+        </div>
+        </div>        
     </div>
 </template>
 
 <script>
 
-//import ComponentE from './components/ComponentE.vue'
+import ComponentE from '../ComponentE.vue'
 
 export default {
-//     components: {
-//         ComponentE
-//     },
+    components: {
+        ComponentE
+    },
 
-//     data(){
-//         return{
-//             dataForComponents: [
-//                 {title: 'Temperature device', content: 'Temp 10C'},
-//                 {title: 'Himiditry device', content: 'Hum: 40%'}
-//             ]
-//         }
-//     }
+    data(){
+        return{
+            dataForComponents: [
+                { title: " Temperature device", content: "Temp 10C" },
+                { title: " Himiditry device", content: "Hum: 40%" }
+            ],
+        }
+    },
 }
 </script>
 
@@ -43,6 +41,7 @@ export default {
   float: left;
   text-align: center;
   background-color: whitesmoke;
+  
 }
 </style>
 

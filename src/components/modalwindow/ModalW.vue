@@ -1,34 +1,45 @@
 <template>
-    <transition name="modal-fade">
+<transition name="modal-fade">
     <div class="modal-backdrop">
-        <div class="modal">
-            <header class="modal-header">
-            <slot name="header">
-                This is the default title   
-                <button type="button" class="btn-close" @click="close">
-                    x
-                </button>
-            </slot>
+        
+        <div class="modal"
+             role="dialog"
+             aria-labelledby="modalTitle"
+             aria-describedby="modalDescription">
+            
+            <header class="modal-header" id="modalTitle">
+                <slot name="header">
+                    Введите название вашего устройства  
+                    <button type="button" 
+                            class="btn-close" 
+                            @click="close" 
+                            aria-label="Close modal">
+                        x
+                    </button>
+                </slot>
             </header>
 
-            <section class="modal-body">
+            <section class="modal-body"
+                     id="modalDescription">
                 <slot name="body">
-                   I'm the default body!
+                   Textarea to enter device name
                 </slot>
             </section>
 
             <footer class="modal-footer">
-              <slot name="footer">
-                I`m the default footer!
-               <router-link to="/"><button type="button" class="btn-green" @click="close">
-                    close me.
-                </button>
-                </router-link>
-              </slot>
+                <slot name="footer">
+                        Complete area
+                    <button type="button" 
+                            class="btn-green" 
+                            @click="close"
+                            aria-label="Close modal">
+                        close me.
+                    </button>
+                </slot>
             </footer>
         </div>
     </div>
-    </transition>
+</transition>
 </template>
 
 <script>
@@ -44,21 +55,11 @@ export default {
 </script>
 
 <style>
-.modal-fade-enter, .modal-fade-leave-active{
-    opacity: 0;
-}
-
-.modal-fade-enter, .modal-fade-leave-active{
-    transition: opacity .5s ease
-}
 
 .modal-backdrop{
+    height: 50vh;
+    width: 59.1%;
     position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: black;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -109,6 +110,15 @@ export default {
     border: 1px solid #4aae9b;
     border-radius: 2px;
 }
+
+.modal-fade-enter, .modal-fade-leave-active{
+    opacity: 0;
+}
+
+.modal-fade-enter, .modal-fade-leave-active{
+    transition: opacity .5s ease
+}
+
 
 </style>
 

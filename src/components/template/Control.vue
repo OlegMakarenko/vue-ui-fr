@@ -1,7 +1,8 @@
 <template>
     <div class="center">
       <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br>
-      <button class="btn1">+Подключить устройство</button>
+      <button class="btn1" @click="showModal">+Подключить устройство</button>
+      <ModalW v-show="isModalVisible" @close="closeModal"/>
       <button class="btn3">I</button>
       <button class="btn4">P</button>
     </div>
@@ -12,9 +13,25 @@
 import ModalW from '../modalwindow/ModalW'
 
 export default {
-    components:{
-      ModalW
+  name:'control',
+  components:{
+    ModalW
+  },
+
+  data(){
+    return{
+      isModalVisible: false,
+    };
+  },
+
+  methods:{
+    showModal(){
+      this.isModalVisible = true;
+    },
+    closeModal(){
+      this.isModalVisible = false;
     }
+  }
 }
 </script>
 

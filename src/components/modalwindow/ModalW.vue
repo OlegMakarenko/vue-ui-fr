@@ -115,7 +115,7 @@ export default {
     opacity: 0;
 }
 
-.modal-fade-enter, .modal-fade-leave-active{
+.modal-fade-enter-active, .modal-fade-leave-active{
     transition: opacity .5s ease
 }
 

@@ -41,7 +41,7 @@ export default {
     border-width: 1px;
     border-radius: 3px;
     cursor: pointer;
-    
+
     .title{
         font-size: 18px;
     }

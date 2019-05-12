@@ -9,7 +9,7 @@
                 :key="item.title"
             />
         </div>
-        </div>        
+        </div>
     </div>
 </template>
 
@@ -41,7 +41,6 @@ export default {
   float: left;
   text-align: center;
   background-color: whitesmoke;
-  
+
 }
 </style>
-

@@ -46,7 +46,7 @@ export default {
 
 .btn1 {
   width: 20%;
-  float: left; 
+  float: left;
   margin: 4px 2px 2px 4px;
   border: none;
   border-radius: 5px;
@@ -59,7 +59,7 @@ export default {
 
  .btn3, .btn4{
   width: 20px;
-  float: right; 
+  float: right;
   margin: 4px 2px 2px 4px;
   margin-top: 42px;
   border: none;

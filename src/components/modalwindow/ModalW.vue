@@ -1,18 +1,18 @@
 <template>
 <transition name="modal-fade">
     <div class="modal-backdrop">
-        
+
         <div class="modal"
              role="dialog"
              aria-labelledby="modalTitle"
              aria-describedby="modalDescription">
-            
+
             <header class="modal-header" id="modalTitle">
                 <slot name="header">
-                    Введите название вашего устройства  
-                    <button type="button" 
-                            class="btn-close" 
-                            @click="close" 
+                    Введите название вашего устройства
+                    <button type="button"
+                            class="btn-close"
+                            @click="close"
                             aria-label="Close modal">
                         x
                     </button>
@@ -29,8 +29,8 @@
             <footer class="modal-footer">
                 <slot name="footer">
                         Complete area
-                    <button type="button" 
-                            class="btn-green" 
+                    <button type="button"
+                            class="btn-green"
                             @click="close"
                             aria-label="Close modal">
                         close me.
@@ -45,7 +45,7 @@
 <script>
 export default {
     name: 'modal',
-    
+
     methods: {
         close(){
             this.$emit('close');
@@ -121,4 +121,3 @@ export default {
 
 
 </style>
-

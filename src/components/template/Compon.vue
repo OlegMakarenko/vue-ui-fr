@@ -1,6 +1,22 @@
 <template>
     <div>
-        <div class="compo">
+        <div class="center">
+            <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
+            <button class="btn1" @click="showModal">+Подключить устройство</button>
+            <ModalW v-show="isModalVisible" @close="closeModal"/>
+            <button @click="shows = !shows" class="btn3">I</button><!--this button showing right side-->
+            <button class="btn4">P</button><!--this button must change our list in component part blocks->lists->blocks -->
+        </div>
+
+        <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
+            <div class="right" v-if="shows">
+                <h3>Диспетчер устройств</h3>
+                <br><br>Вложений пока нет <br><br><hr><br> Действий пока нет <br><br><hr><br>
+                В этом пункте меню Вы можете подключить к своей учетной записи устройствo
+            </div>
+        </transition>
+
+        <div class="compo"><!--Component part, under center part, where we have info about devices-->
             <div style="display: flex">
             <ComponentE
                 v-for="item in dataForComponents"
@@ -8,39 +24,99 @@
                 :content="item.content"
                 :key="item.title"
             />
+            </div>
         </div>
-        </div>
+
     </div>
 </template>
 
 <script>
 
 import ComponentE from '../ComponentE.vue'
+import ModalW from '../modalwindow/ModalW'
 
 export default {
     components: {
-        ComponentE
+        ComponentE,
+        ModalW
     },
 
     data(){
         return{
+            shows: true, //showing right side
+
+            isModalVisible: false, //modal window
+
             dataForComponents: [
                 { title: " Temperature device", content: "Temp 10C" },
                 { title: " Himiditry device", content: "Hum: 40%" }
             ],
         }
     },
+
+    methods:{
+    showModal(){
+      this.isModalVisible = true;
+    },
+
+    closeModal(){
+      this.isModalVisible = false;
+    }
+  }
 }
 </script>
 
 
-<style>
+<style scoped>
+
 .compo {
   width: 60%;
   height: 87vh;
   float: left;
   text-align: center;
   background-color: whitesmoke;
+}
 
+.center {
+  width: 60%;
+  height: 13vh;
+  float: left;
+  margin-top: 7px;
+  background-color: #ccc;
+}
+
+.btn1 {
+  width: 20%;
+  float: left;
+  margin: 4px 2px 2px 4px;
+  border: none;
+  border-radius: 5px;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ .btn3, .btn4{
+  width: 20px;
+  float: right;
+  margin: 4px 2px 2px 4px;
+  margin-top: 42px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+ }
+
+ .right {
+  width: 20%;
+  min-height: 100vh;
+  float: right;
+  text-align: center;
+  margin-top: 7px;
+  background-color: #e5e5e5;
 }
 </style>

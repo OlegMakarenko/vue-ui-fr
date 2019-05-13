@@ -8,28 +8,25 @@
       
           <div class="rcorner">
             <router-link class="reg" to="/alert">Alert</router-link>
-            <router-link class="log" to="/login"><button class="btn-log">SignIN/UP</button></router-link>
+            <router-link class="log" to="/login"><button class="btn-log">SignIN</button></router-link>
           </div>
       </nav>
     </div>
     <div>
-      <LRside />
-      <Control />
+      <Lside />
       <Compon />
     </div>
   </div>
 </template>
 
 <script>
-import Control from './Control'
-import LRside from './LRside'
+import Lside from './Lside'
 import Compon from './Compon'
 
 export default {
   name: 'Header',
   components: {
-    Control,
-    LRside,
+    Lside,
     Compon
   }
 }

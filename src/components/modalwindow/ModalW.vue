@@ -13,8 +13,7 @@
                     <button type="button"
                             class="btn-close"
                             @click="close"
-                            aria-label="Close modal">
-                        x
+                            aria-label="Close modal">x
                     </button>
                 </slot>
             </header>
@@ -28,12 +27,11 @@
 
             <footer class="modal-footer">
                 <slot name="footer">
-                        Complete area
+                        <!-- Complete area -->
                     <button type="button"
-                            class="btn-green"
+                            class="btn-blue"
                             @click="close"
-                            aria-label="Close modal">
-                        close me.
+                            aria-label="Close modal">Complete
                     </button>
                 </slot>
             </footer>
@@ -73,9 +71,9 @@ export default {
     flex-direction: column;
 }
 
-.modal-header, .modal-footer {
+.modal-header, .modal-footer, .modal-body {
     padding: 15px;
-    display: flex;
+    /* display: flex; */
 }
 
 .modal-header{
@@ -89,26 +87,29 @@ export default {
     justify-content: flex-end;
 }
 
-.modal-body{
-    position: relative;
-    padding: 20px 10px;
-}
+/* .modal-body{
+    padding: 15px;
+     position: relative; 
+     padding: 20px 10px; 
+} */
 
 .btn-close{
     border: none;
     font-size: 20px;
-    padding: 20px;
+    /* padding: 10px; */
     cursor: pointer;
     font-weight: bold;
-    color: #4aae9b;
+    color: blue;
     background: transparent;
 }
 
-.btn-green{
+.btn-blue{
     color: white;
-    background: #4aae9b;
+    background: blue;
     border: 1px solid #4aae9b;
     border-radius: 2px;
+    margin-top: 55%;
+    float: right;
 }
 
 .modal-fade-enter, .modal-fade-leave-active{

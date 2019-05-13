@@ -23,6 +23,7 @@
               Log in
               </el-row>
             </el-form-item>
+
             <el-form-item prop="email">
               <el-input 
                 placeholder="email" 
@@ -32,6 +33,7 @@
                 @keyup.13.native="submitForm('authForm')"
               ></el-input>
             </el-form-item>
+
             <el-form-item prop="password">
               <el-input 
                 placeholder="password" 
@@ -42,6 +44,7 @@
               >
               </el-input>
             </el-form-item>
+            
             <el-form-item>
               <el-button class="auth-button" type="primary" @click="submitForm('authForm')">Log in</el-button> 
             </el-form-item>

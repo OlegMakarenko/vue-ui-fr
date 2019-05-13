@@ -11,18 +11,12 @@
           tree here
         </div>
      </div>
-
-     <div class="right">
-       <h3>Диспетчер устройств</h3>
-       <br><br>Вложений пока нет <br><br><hr><br> Действий пока нет <br><br><hr><br>
-       В этом пункте меню Вы можете подключить к своей учетной записи устройствo
-     </div>
     </div>
 </template>
 
 <script>
 export default {
-    
+  
 }
 </script>
 
@@ -50,14 +44,5 @@ export default {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-}
-
-.right {
-  width: 20%;
-  min-height: 100vh;
-  float: right;
-  text-align: center;
-  margin-top: 7px;
-  background-color: #e5e5e5;
 }
 </style>

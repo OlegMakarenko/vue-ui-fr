@@ -98,7 +98,7 @@ export default {
   cursor: pointer;
 }
 
- .btn3, .btn4{
+.btn3, .btn4{
   width: 20px;
   float: right;
   margin: 4px 2px 2px 4px;
@@ -109,9 +109,9 @@ export default {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
- }
+}
 
- .right {
+.right {
   width: 20%;
   min-height: 100vh;
   float: right;
@@ -119,4 +119,18 @@ export default {
   margin-top: 7px;
   background-color: #e5e5e5;
 }
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter, .slide-fade-leave-to{
+  transform: translateX(10px);
+  opacity: 0;
+}
+
 </style>

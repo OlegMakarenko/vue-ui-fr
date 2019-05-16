@@ -34,8 +34,8 @@ export default {
 .component{
     width: 200px;
     height: 200px;
-    margin: 15px;
-    padding: 5px;
+    margin: 15.7px;
+    padding: 17px;
     border-style: solid;
     border-color: #ebebeb;
     border-width: 1px;

@@ -17,14 +17,12 @@
         </transition>
 
         <div class="compo"><!--Component part, under center part, where we have info about devices-->
-            <div style="display: flex">
             <ComponentE
                 v-for="item in dataForComponents"
                 :title="item.title"
                 :content="item.content"
                 :key="item.title"
             />
-            </div>
         </div>
 
     </div>
@@ -49,7 +47,14 @@ export default {
 
             dataForComponents: [
                 { title: " Temperature device", content: "Temp 10C" },
-                { title: " Himiditry device", content: "Hum: 40%" }
+                { title: " Himiditry device", content: "Hum: 40%" },
+                { title: " Himiditry device1", content: "Hum: 40%" },
+                { title: " Himiditry device2", content: "Hum: 40%" },
+                { title: " Himiditry device3", content: "Hum: 40%" },
+                { title: " Himiditry device4", content: "Hum: 40%" },
+                { title: " Himiditry device5", content: "Hum: 40%" },
+                { title: " Himiditry device6", content: "Hum: 40%" },
+                { title: " Himiditry device7", content: "Hum: 40%" }
             ],
         }
     },
@@ -75,6 +80,9 @@ export default {
   float: left;
   text-align: center;
   background-color: whitesmoke;
+  display: flex; 
+  flex-flow: row wrap;
+  overflow-y: scroll;
 }
 
 .center {
@@ -83,6 +91,7 @@ export default {
   float: left;
   margin-top: 7px;
   background-color: #ccc;
+  display: block;
 }
 
 .btn1 {

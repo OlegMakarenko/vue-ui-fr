@@ -7,42 +7,53 @@
              aria-labelledby="modalTitle"
              aria-describedby="modalDescription">
 
-             <el-steps :active="active" align-center finish-status="succes">
-                 <el-step title="Step 1"></el-step>
-                 <el-step title="Step 2"></el-step>
-                 <el-step title="Step 3"></el-step>
-             </el-steps>
+                <p style="text-align: center; margin-top: 0;">
+                   Подключение WI-FI терморегулятора через браузер на ПК
+                </p>
 
-            <header class="modal-header" id="modalTitle">
-                <slot name="header">
-                    Введите название вашего устройства
-                    <button type="button"
-                            class="btn-close"
-                            @click="close"
-                            aria-label="Close modal">x
-                    </button>
-                </slot>
-            </header>
+                <!-- <button type="button"
+                    class="btn-close"
+                    @click="close"
+                    aria-label="Close modal">x
+                </button> -->
+                
+                <el-tabs v-model="activeName" @tab-click="handleClick">
+                    <el-tab-pane label="User1" name="first">
+                                <p class="allp">
+                                    1. Переключите регулятор в режим точки доступа
+                                </p>
+                                <button class="btn-left">Назад</button>
+                                <button class="btn-right">Вперед</button>
+                    </el-tab-pane>
 
-            <section class="modal-body"
-                     id="modalDescription">
-                <slot name="body">
-                   Textarea to enter device name
-                </slot>
-            </section>
+                    <el-tab-pane label="User2" name="second">
+                            <p class="allp">
+                                2. В доступных WI-FI сетях вашего ноутбукау вас в течение
+                            </p>
+                        <button class="btn-left">Назад</button>
+                        <button class="btn-right">Вперед</button>
+                    </el-tab-pane>
 
-            <footer class="modal-footer">
-                <slot name="footer">
-                        <!-- Complete area -->
-                    <button type="button"
-                            class="btn-blue"
-                            @click="close"
-                            aria-label="Close modal">Complete
-                    </button>
-                </slot>
-            </footer>
+                    <el-tab-pane label="User3" name="third">
+                            <p class="allp">
+                                3. На странице подключения вам понадобится ввести
+                            </p>
+                        <button class="btn-left">Назад</button>
+                        <button class="btn-right">Вперед</button>
+                    </el-tab-pane>
 
-            <el-button style="margin-top: 12px; width: 100px;" @click="next">Next step</el-button>
+                    <el-tab-pane label="User4" name="fourth">
+                                <p class="allp">
+                                    4. Устройство, получив эти параметры перейдет
+                                </p>
+                                <button type="button"
+                                    class="btn-blue"
+                                    @click="close"
+                                    aria-label="Close modal">Add device
+                                </button>
+                    </el-tab-pane>
+                </el-tabs> 
+            <!-- <el-button style="margin-top: 12px; width: 100px;" @click="next">Next step</el-button> -->
         </div>
     </div>
 </transition>
@@ -54,13 +65,13 @@ export default {
 
     data(){
         return{
-            active: 0
+            activeName: 'first'
         };
     },
 
     methods: {
-        next(){
-            if(this.active++ > 2) this.active = 0;
+        handleClick(tab, event){
+            console.log(tab, event);
         },
 
         close(){
@@ -72,13 +83,18 @@ export default {
 
 <style>
 
+.allp{
+    text-align: center; 
+    margin-top: 0;
+    font-size: 13px;
+}
+
 .modal-backdrop{
-    height: 52vh;
+    height: 55vh;
     width: 59.1%;
     position: fixed;
     display: flex;
     justify-content: center;
-    /* align-content: center; */
 }
 
 .modal{
@@ -91,15 +107,8 @@ export default {
     flex-direction: column;
 }
 
-.modal-header, .modal-footer, .modal-body {
+.modal-footer, .modal-body {
     padding: 15px;
-    /* display: flex; */
-}
-
-.modal-header{
-    border-bottom: 1px solid #eeeeee;
-    columns: #4aae9b;
-    justify-content: space-between;
 }
 
 .modal-footer{
@@ -107,29 +116,42 @@ export default {
     justify-content: flex-end;
 }
 
-/* .modal-body{
-    padding: 15px;
-     position: relative; 
-     padding: 20px 10px; 
-} */
-
 .btn-close{
+    width: 24px;
+    float: left;
     border: none;
     font-size: 20px;
-    /* padding: 10px; */
     cursor: pointer;
     font-weight: bold;
-    color: blue;
+    color: #6f92be;
     background: transparent;
 }
 
 .btn-blue{
-    color: white;
-    background: blue;
-    border: 1px solid #4aae9b;
-    border-radius: 2px;
-    margin-top: 10%;
+    margin-top: 37%;
     float: right;
+    color: white;
+    background: #6f92be;
+    border: 1px solid #6f92be;
+    border-radius: 2px;
+}
+
+.btn-left{
+    margin-top: 37%;
+    float: left;
+    border: 1px solid #6f92be;
+    border-radius: 2px;
+    background: #6f92be;
+    color: White;
+}
+
+.btn-right{
+    margin-top: 37%;
+    float: right;
+    border: 1px solid #6f92be;
+    border-radius: 2px;
+    background: #6f92be; 
+    color: White;
 }
 
 .modal-fade-enter, .modal-fade-leave-active{
@@ -140,5 +162,9 @@ export default {
     transition: opacity .5s ease
 }
 
+::-webkit-scrollbar { width: 3px; height: 3px;}
+::-webkit-scrollbar-track {  background-color: #999;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
+::-webkit-resizer { background-color: #666;}
 
 </style>

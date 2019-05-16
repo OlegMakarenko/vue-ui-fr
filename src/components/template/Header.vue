@@ -8,7 +8,7 @@
       
           <div class="rcorner">
             <router-link class="reg" to="/alert">Alert</router-link>
-            <router-link class="log" to="/login"><button class="btn-log">SignIN</button></router-link>
+            <router-link class="log" to="/login"><i class="el-icon-user-solid"></i></router-link>
           </div>
       </nav>
     </div>

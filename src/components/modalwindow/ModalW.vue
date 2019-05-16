@@ -7,6 +7,12 @@
              aria-labelledby="modalTitle"
              aria-describedby="modalDescription">
 
+             <el-steps :active="active" align-center finish-status="succes">
+                 <el-step title="Step 1"></el-step>
+                 <el-step title="Step 2"></el-step>
+                 <el-step title="Step 3"></el-step>
+             </el-steps>
+
             <header class="modal-header" id="modalTitle">
                 <slot name="header">
                     Введите название вашего устройства
@@ -35,6 +41,8 @@
                     </button>
                 </slot>
             </footer>
+
+            <el-button style="margin-top: 12px; width: 100px;" @click="next">Next step</el-button>
         </div>
     </div>
 </transition>
@@ -44,7 +52,17 @@
 export default {
     name: 'modal',
 
+    data(){
+        return{
+            active: 0
+        };
+    },
+
     methods: {
+        next(){
+            if(this.active++ > 2) this.active = 0;
+        },
+
         close(){
             this.$emit('close');
         },
@@ -55,15 +73,17 @@ export default {
 <style>
 
 .modal-backdrop{
-    height: 50vh;
+    height: 52vh;
     width: 59.1%;
     position: fixed;
     display: flex;
     justify-content: center;
-    align-content: center;
+    /* align-content: center; */
 }
 
 .modal{
+    padding: 15px;
+    width: 65%;
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
@@ -108,7 +128,7 @@ export default {
     background: blue;
     border: 1px solid #4aae9b;
     border-radius: 2px;
-    margin-top: 55%;
+    margin-top: 10%;
     float: right;
 }
 

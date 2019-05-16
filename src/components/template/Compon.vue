@@ -4,8 +4,8 @@
             <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
             <button class="btn1" @click="showModal">+Подключить устройство</button>
             <ModalW v-show="isModalVisible" @close="closeModal"/>
-            <button @click="shows = !shows" class="btn3">I</button><!--this button showing right side-->
-            <button class="btn4">P</button><!--this button must change our list in component part blocks->lists->blocks -->
+            <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
+            <i class="el-icon-menu btn4"></i><!--this button must change our list in component part blocks->lists->blocks -->
         </div>
 
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->

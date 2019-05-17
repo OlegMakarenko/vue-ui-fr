@@ -1,54 +1,53 @@
 <template>
-    <div>
-        
-                <p style="text-align: center; margin-top: 0;">
-                   Подключение WI-FI терморегулятора через браузер на ПК
-                </p>
-
-                <!-- <button type="button"
-                    class="btn-close"
-                    @click="close"
-                    aria-label="Close modal">x
-                </button> -->
-                
-                <el-tabs v-model="activeName" @tab-click="handleClick">
-                    <el-tab-pane label="User1" name="first">
-                                <p class="allp">
-                                    1. Переключите регулятор в режим точки доступа
-                                </p>
-                                <button class="btn-left">Назад</button>
-                                <button class="btn-right">Вперед</button>
-                    </el-tab-pane>
-
-                    <el-tab-pane label="User2" name="second">
+<transition name="modal-fade">
+    <div class="modal-backdrop">
+        <div class="modal" 
+             role="dialog" 
+             aria-labelledby="modalTitle"
+             aria-describedby="modalDescription">
+        <p style="text-align: center; margin-top: 0;">
+            Подключение WI-FI терморегулятора через браузер на ПК
+        </p>
+            <el-tabs v-model="activeName" @tab-click="handleClick">
+                <el-tab-pane label="User1" name="first">
                             <p class="allp">
-                                2. В доступных WI-FI сетях вашего ноутбукау вас в течение
+                                1. Переключите регулятор в режим точки доступа
                             </p>
-                        <button class="btn-left">Назад</button>
-                        <button class="btn-right">Вперед</button>
-                    </el-tab-pane>
+                            <button class="btn-left">Назад</button>
+                            <button class="btn-right">Вперед</button>
+                </el-tab-pane>
 
-                    <el-tab-pane label="User3" name="third">
-                            <p class="allp">
-                                3. На странице подключения вам понадобится ввести
-                            </p>
-                        <button class="btn-left">Назад</button>
-                        <button class="btn-right">Вперед</button>
-                    </el-tab-pane>
+                <el-tab-pane label="User2" name="second">
+                        <p class="allp">
+                            2. В доступных WI-FI сетях вашего ноутбукау вас в течение
+                        </p>
+                    <button class="btn-left">Назад</button>
+                    <button class="btn-right">Вперед</button>
+                </el-tab-pane>
 
-                    <el-tab-pane label="User4" name="fourth">
-                                <p class="allp">
-                                    4. Устройство, получив эти параметры перейдет
-                                </p>
-                                <button type="button"
-                                    class="btn-blue"
-                                    @click="close"
-                                    aria-label="Close modal">Add device
-                                </button>
-                    </el-tab-pane>
-                </el-tabs> 
-            <!-- <el-button style="margin-top: 12px; width: 100px;" @click="next">Next step</el-button> -->
+                <el-tab-pane label="User3" name="third">
+                        <p class="allp">
+                            3. На странице подключения вам понадобится ввести
+                        </p>
+                    <button class="btn-left">Назад</button>
+                    <button class="btn-right">Вперед</button>
+                </el-tab-pane>
+
+                <el-tab-pane label="User4" name="fourth">
+                        <p class="allp">
+                            4. Устройство, получив эти параметры перейдет
+                        </p>
+                    <button type="button"
+                            class="btn-blue"
+                            @click="close"
+                            aria-label="Close modal">Add device
+                    </button>
+                </el-tab-pane>
+            </el-tabs> 
+        <!-- <el-button style="margin-top: 12px; width: 100px;" @click="next">Next step</el-button> -->
+        </div>
     </div>
+    </transition>
 </template>
 
 <script>
@@ -65,6 +64,10 @@ export default {
         handleClick(tab, event){
             console.log(tab, event);
         },
+
+        close(){
+            this.$emit('close');
+        }
     }
 }
 </script>
@@ -78,14 +81,17 @@ export default {
 }
 
 .modal-backdrop{
-    height: 55vh;
-    width: 59.1%;
+    margin-top: -12%;
+    margin-left: -15.5%;
+    height: 60vh;
+    width: 70%;
     position: fixed;
     display: flex;
     justify-content: center;
 }
 
 .modal{
+    margin-top: 0px;
     padding: 15px;
     width: 65%;
     background: #ffffff;
@@ -93,26 +99,6 @@ export default {
     overflow-x: auto;
     display: flex;
     flex-direction: column;
-}
-
-.modal-footer, .modal-body {
-    padding: 15px;
-}
-
-.modal-footer{
-    border-top: 1px solid #eeeeee;
-    justify-content: flex-end;
-}
-
-.btn-close{
-    width: 24px;
-    float: left;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #6f92be;
-    background: transparent;
 }
 
 .btn-blue{

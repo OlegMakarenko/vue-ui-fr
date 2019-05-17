@@ -120,7 +120,7 @@ export default {
   margin-top: 42px;
   border: none;
   border-radius: 5px;
-  color: white;
+  color: black;
   text-align: center;
   text-decoration: none;
   cursor: pointer;

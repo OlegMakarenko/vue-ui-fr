@@ -22,7 +22,8 @@
             </div>
 
             <div>
-                <button class="center-btn">Аксессуар VEGA 4</button>
+                <button class="center-btn" @click="showModalV4">Аксессуар VEGA 4</button>
+                    <ModalV4 v-show="isModalV4Visible" @close="closeModalV4"/>
                 <button class="center-btn2">Аксессуар VEGA 1S</button>
             </div>
                 <p style="text-align: center;
@@ -43,18 +44,32 @@
 </template>
 
 <script>
+
+import ModalV4 from './ModalV4'
+
 export default {
     name: 'modal',
 
-    props:['smt'],
+    components:{
+        ModalV4
+    },
 
     data(){
         return{
+            isModalV4Visible: false,
+
             activeName: 'first'
         };
     },
 
     methods: {
+        showModalV4(){
+            this.isModalV4Visible = true;
+        },
+
+        closeModalV4(){
+            this.isModalV4Visible = false;
+        },
 
         close(){
             this.$emit('close');

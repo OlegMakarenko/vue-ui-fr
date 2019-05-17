@@ -23,7 +23,6 @@
                 :content="item.content"
                 :key="item.title"
             />
-            <list/>
         </div>
     </div>
 

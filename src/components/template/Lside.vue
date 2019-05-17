@@ -2,8 +2,10 @@
   <div>
     <div class="left">
       <div>
-        <button class="btn2">Моя система</button>
+        <button class="btn2" @click="showTree = !showTree">Моя система</button>
 
+            <transition name="slide-fade">
+              <div class="custom-tree-container" v-if="showTree">
 
         <div class="custom-tree-container">
           <div class="block">
@@ -34,6 +36,10 @@
             </el-tree>
           </div>
         </div>
+
+      </div>
+  </transition>
+
             <p class="allp">Здесь Вы можете группировать свои устройства и управлять ими.</p>
       </div>
 
@@ -90,7 +96,6 @@ export default {
 
      return {
        data: JSON.parse(JSON.stringify(data))
-      //  data: JSON.parse(JSON.stringify(data))
      }
    },
 
@@ -152,6 +157,12 @@ export default {
   font-size: 24px;
   cursor: pointer;
 
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+    opacity: 0;
+  }
 
 }
 </style>

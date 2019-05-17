@@ -9,15 +9,15 @@
             Подключение WI-FI терморегулятора через браузер на ПК
         </p>
             <el-tabs v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane label="User1" name="first">
+                <el-tab-pane label="Шаг 1" name="first">
                             <p class="allp">
                                 1. Переключите регулятор в режим точки доступа
                             </p>
-                            <button class="btn-left">Назад</button>
+                            <button class="btn-left" @click="close">Назад</button>
                             <button class="btn-right">Вперед</button>
                 </el-tab-pane>
 
-                <el-tab-pane label="User2" name="second">
+                <el-tab-pane label="Шаг 2" name="second">
                         <p class="allp">
                             2. В доступных WI-FI сетях вашего ноутбукау вас в течение
                         </p>
@@ -25,7 +25,7 @@
                     <button class="btn-right">Вперед</button>
                 </el-tab-pane>
 
-                <el-tab-pane label="User3" name="third">
+                <el-tab-pane label="Шаг 3" name="third">
                         <p class="allp">
                             3. На странице подключения вам понадобится ввести
                         </p>
@@ -33,7 +33,7 @@
                     <button class="btn-right">Вперед</button>
                 </el-tab-pane>
 
-                <el-tab-pane label="User4" name="fourth">
+                <el-tab-pane label="Шаг 4" name="fourth">
                         <p class="allp">
                             4. Устройство, получив эти параметры перейдет
                         </p>

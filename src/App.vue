@@ -2,9 +2,9 @@
   <div id="app">
     <el-container v-if="!isLoggedIn" class="container">
       <Auth/>
-    </el-container>    
+    </el-container>
     <Header/>
-    <router-view />
+    <router-view/>
   </div>
 </template>
 

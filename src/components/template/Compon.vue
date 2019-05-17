@@ -24,7 +24,6 @@
                 :key="item.title"
             />
         </div>
-
     </div>
 </template>
 
@@ -49,12 +48,12 @@ export default {
                 { title: " Temperature device", content: "Temp 10C" },
                 { title: " Himiditry device", content: "Hum: 40%" },
                 { title: " Himiditry device1", content: "Hum: 40%" },
-                { title: " Himiditry device2", content: "Hum: 40%" },
-                { title: " Himiditry device3", content: "Hum: 40%" },
-                { title: " Himiditry device4", content: "Hum: 40%" },
-                { title: " Himiditry device5", content: "Hum: 40%" },
-                { title: " Himiditry device6", content: "Hum: 40%" },
-                { title: " Himiditry device7", content: "Hum: 40%" }
+                // { title: " Himiditry device2", content: "Hum: 40%" },
+                // { title: " Himiditry device3", content: "Hum: 40%" },
+                // { title: " Himiditry device4", content: "Hum: 40%" },
+                // { title: " Himiditry device5", content: "Hum: 40%" },
+                // { title: " Himiditry device6", content: "Hum: 40%" },
+                // { title: " Himiditry device7", content: "Hum: 40%" }
             ],
         }
     },
@@ -79,18 +78,21 @@ export default {
   height: 87vh;
   float: left;
   text-align: center;
-  background-color: whitesmoke;
+  border: 0.11px solid #ccc;
+  background-color: #ffffff;
   display: flex; 
   flex-flow: row wrap;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .center {
   width: 60%;
   height: 13vh;
   float: left;
-  margin-top: 7px;
-  background-color: #ccc;
+  /* margin-top: 7px; */
+  display: block;
+  border: 0.11px solid #ccc;
+  background-color: #ffffff;
   display: block;
 }
 
@@ -100,7 +102,7 @@ export default {
   margin: 4px 2px 2px 4px;
   border: none;
   border-radius: 5px;
-  background-color: blue;
+  background-color: #6f92be;
   color: white;
   text-align: center;
   text-decoration: none;
@@ -121,12 +123,14 @@ export default {
 }
 
 .right {
-  width: 20%;
+  width: 19.8%;
   min-height: 100vh;
   float: right;
   text-align: center;
-  margin-top: 7px;
-  background-color: #e5e5e5;
+  /* margin-top: 7px; */
+  display: block;
+  border: 1.2px solid #ccc;
+  background-color: #ffffff;
 }
 
 .slide-fade-enter-active {

@@ -1,44 +1,47 @@
 <template>
-    <div>
-     <div class="left">
-       <div>
-         <button class="btn2">Моя система</button>
-          <div class="custom-tree-container">
-  <div class="block">
-    <el-tree
-      :data="data"
-      show-checkbox
-      node-key="id"
-      default-expand-all
-      :expand-on-click-node="false">
-      <span class="custom-tree-node" slot-scope="{ node, data }">
-        <span>{{ node.label }}</span>
-        <span>
-          <el-button
-            type="text"
-            size="mini"
-            @click="() => append(data)">
-            Append
-          </el-button>
-          <el-button
-            type="text"
-            size="mini"
-            @click="() => remove(node, data)">
-            Delete
-          </el-button>
-        </span>
-      </span>
-    </el-tree>
-  </div>
-</div>
-Здесь Вы можете группировать свои устройства и управлять ими.
-       </div>
-
-        <div>
-          <button class="btn2">Диспетчер устройств</button>
+  <div>
+    <div class="left">
+      <div>
+        <button class="btn2">Моя система</button>
+          
+          
+        <div class="custom-tree-container">
+          <div class="block">
+            <el-tree
+              :data="data"
+              show-checkbox
+              node-key="id"
+              default-expand-all
+              :expand-on-click-node="false">
+                <span class="custom-tree-node" slot-scope="{ node, data }">
+                  <span>{{ node.label }}</span>
+                    <span>
+                      <el-button
+                        type="text"
+                        size="mini"
+                        @click="() => append(data)">
+                        Append
+                      </el-button>
+                        
+                      <el-button
+                        type="text"
+                        size="mini"
+                        @click="() => remove(node, data)">
+                        Delete
+                      </el-button>
+                    </span>
+                </span>
+            </el-tree>
+          </div>
         </div>
-     </div>
+            <p class="allp">Здесь Вы можете группировать свои устройства и управлять ими.</p>
+      </div>
+
+      <div>
+        <button class="btn2">Диспетчер устройств</button>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -82,8 +85,8 @@ export default {
        }]
      }];
      return {
-       data: JSON.parse(JSON.stringify(data)),
        data: JSON.parse(JSON.stringify(data))
+      //  data: JSON.parse(JSON.stringify(data))
      }
    },
 
@@ -101,9 +104,7 @@ export default {
        const children = parent.data.children || parent.data;
        const index = children.findIndex(d => d.id === data.id);
        children.splice(index, 1);
-     },
-
-
+     }
    }
  };
 </script>
@@ -117,14 +118,16 @@ export default {
   justify-content: space-between;
   font-size: 14px;
   padding-right: 8px;
+  width: 20px;
 }
 
 .left {
   width: 20%;
   min-height: 100vh;
   float: left;
-  background-color: #B3D8FF;
-  margin-top: 7px;
+  background-color: #ccdbee;
+  /* margin-top: 7px; */
+  display: block;
   text-align: center;
   border-width: 4px;
   border-color: black;
@@ -133,9 +136,9 @@ export default {
 .btn2 {
   width: 95%;
   height: 12.5vh;
-  color: black;
+  color: #dfe0e0;
   margin: 2px;
-  border: 2px solid grey;
+  border: 1px solid #dddddc;
   border-radius: 2px;
   background-color: white;
   text-align: center;

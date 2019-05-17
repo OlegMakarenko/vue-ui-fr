@@ -12,10 +12,8 @@
           </div>
       </nav>
     </div>
-    <div>
       <Lside />
       <Compon />
-    </div>
   </div>
 </template>
 
@@ -26,8 +24,8 @@ import Compon from './Compon'
 export default {
   name: 'Header',
   components: {
-    Lside,
-    Compon
+    Compon,
+    Lside
   }
 }
 </script>
@@ -40,7 +38,7 @@ export default {
   } */
 
 .top {
-  background-color: #e5e5e5;
+  background-color: #ffffff;
   padding-top: 30px;
   padding-bottom: 30px;
   overflow: auto;

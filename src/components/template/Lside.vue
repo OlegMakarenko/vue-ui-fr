@@ -3,8 +3,8 @@
     <div class="left">
       <div>
         <button class="btn2">Моя система</button>
-          
-          
+
+
         <div class="custom-tree-container">
           <div class="block">
             <el-tree
@@ -22,7 +22,7 @@
                         @click="() => append(data)">
                         Append
                       </el-button>
-                        
+
                       <el-button
                         type="text"
                         size="mini"
@@ -97,7 +97,7 @@ export default {
   methods: {
     append(data) {
       const newChild = { id: id++, label: 'testtest', children: [] };
-       
+
       if (!data.children) {
         this.$set(data, 'children', []);
       }
@@ -139,7 +139,7 @@ export default {
 }
 
 .btn2 {
-  width: 95%;
+  width: 99%;
   height: 12.5vh;
   color: #dfe0e0;
   margin: 2px;
@@ -149,7 +149,7 @@ export default {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 24px;
   cursor: pointer;
 
 

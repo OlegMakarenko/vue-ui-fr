@@ -23,8 +23,10 @@
                 :content="item.content"
                 :key="item.title"
             />
+            <list/>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -35,7 +37,7 @@ import ModalW from '../modalwindow/ModalW'
 export default {
     components: {
         ComponentE,
-        ModalW
+        ModalW,
     },
 
     data(){
@@ -82,7 +84,7 @@ export default {
   border-right: 1px solid #ccc;
   border-top: 1px solid #ccc;
   background-color: #ffffff;
-  display: block; 
+  display: block;
   flex-flow: row wrap;
   overflow-y: auto;
 }

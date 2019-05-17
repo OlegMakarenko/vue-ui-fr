@@ -66,14 +66,14 @@ export default {
 <style>
 
 .allp{
-    text-align: center; 
     margin-top: 0;
     font-size: 13px;
+    text-align: center; 
 }
 
 .modal-backdrop{
-    height: 50vh;
     width: 59.1%;
+    height: 50vh;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -90,23 +90,23 @@ export default {
 }
 
 .btn-close{
-    width: 24px;
     float: right;
+    width: 24px;
+    margin-left: 95%;
     border: none;
     font-size: 20px;
     cursor: pointer;
     font-weight: bold;
     color: #6f92be;
     background: transparent;
-    margin-left: 95%;
 }
 .center-btn{
-    margin-left: 100px;
     float: left;
+    margin-left: 90px;
     width: 170px;
     height: 90px;
-    text-align: center;
     font-size: 22px; 
+    text-align: center;
     cursor: pointer;
     background-color: #ccdbee;
     border-radius: 15px;
@@ -115,12 +115,12 @@ export default {
 }
 
 .center-btn2{
-    margin-right: 100px;
     float: right;
+    margin-right: 90px;
     width: 170px;
     height: 90px;
-    text-align: center;
     font-size: 22px;
+    text-align: center;
     cursor: pointer; 
     background-color: #ccdbee;
     border-radius: 15px;

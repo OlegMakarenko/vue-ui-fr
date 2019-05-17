@@ -82,7 +82,7 @@ export default {
   border-right: 1px solid #ccc;
   border-top: 1px solid #ccc;
   background-color: #ffffff;
-  display: flex; 
+  display: inline-block; 
   flex-flow: row wrap;
   overflow-y: auto;
 }

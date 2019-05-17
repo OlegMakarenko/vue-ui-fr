@@ -40,6 +40,7 @@ export default {
     border-color: #ebebeb;
     border-width: 1px;
     border-radius: 3px;
+    display: inline-block;
     cursor: pointer;
 
     .title{

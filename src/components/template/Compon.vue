@@ -78,7 +78,9 @@ export default {
   height: 87vh;
   float: left;
   text-align: center;
-  border: 0.11px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
   background-color: #ffffff;
   display: flex; 
   flex-flow: row wrap;
@@ -87,11 +89,13 @@ export default {
 
 .center {
   width: 60%;
-  height: 13vh;
+  height: 12.7vh;
   float: left;
   /* margin-top: 7px; */
   display: block;
-  border: 0.11px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
   background-color: #ffffff;
   display: block;
 }
@@ -129,7 +133,7 @@ export default {
   text-align: center;
   /* margin-top: 7px; */
   display: block;
-  border: 1.2px solid #ccc;
+  border-top: 1px solid #ccc;
   background-color: #ffffff;
 }
 

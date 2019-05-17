@@ -6,54 +6,37 @@
              role="dialog"
              aria-labelledby="modalTitle"
              aria-describedby="modalDescription">
-
-                <p style="text-align: center; margin-top: 0;">
-                   Подключение WI-FI терморегулятора через браузер на ПК
-                </p>
-
-                <!-- <button type="button"
+             <div>
+                <button type="button"
                     class="btn-close"
                     @click="close"
                     aria-label="Close modal">x
-                </button> -->
+                </button>
                 
-                <el-tabs v-model="activeName" @tab-click="handleClick">
-                    <el-tab-pane label="User1" name="first">
-                                <p class="allp">
-                                    1. Переключите регулятор в режим точки доступа
-                                </p>
-                                <button class="btn-left">Назад</button>
-                                <button class="btn-right">Вперед</button>
-                    </el-tab-pane>
+                <p style="text-align: center;
+                      font-size: 22px;
+                      margin-top: 0;">Подключение аксессуара</p>
+                <p style="text-align: center;
+                      font-size: 20px;
+                      margin-top: 5px;">Для аксессуара устройства выберите тип подключаемого устройства</p>      
+            </div>
 
-                    <el-tab-pane label="User2" name="second">
-                            <p class="allp">
-                                2. В доступных WI-FI сетях вашего ноутбукау вас в течение
-                            </p>
-                        <button class="btn-left">Назад</button>
-                        <button class="btn-right">Вперед</button>
-                    </el-tab-pane>
-
-                    <el-tab-pane label="User3" name="third">
-                            <p class="allp">
-                                3. На странице подключения вам понадобится ввести
-                            </p>
-                        <button class="btn-left">Назад</button>
-                        <button class="btn-right">Вперед</button>
-                    </el-tab-pane>
-
-                    <el-tab-pane label="User4" name="fourth">
-                                <p class="allp">
-                                    4. Устройство, получив эти параметры перейдет
-                                </p>
-                                <button type="button"
-                                    class="btn-blue"
-                                    @click="close"
-                                    aria-label="Close modal">Add device
-                                </button>
-                    </el-tab-pane>
-                </el-tabs> 
-            <!-- <el-button style="margin-top: 12px; width: 100px;" @click="next">Next step</el-button> -->
+            <div>
+                <button class="center-btn">Аксессуар VEGA 4</button>
+                <button class="center-btn2">Аксессуар VEGA 1S</button>
+            </div>
+                <p style="text-align: center;
+                      font-size: 20px;
+                      margin-top: 15px;">После выбора типа акссесуара Вам будут показаны
+                                        соотвотствующие шаги подключения его в учетную
+                                        запись.</p>
+            <!-- <div>
+                <button type="button"
+                    class="btn-blue"
+                    @click="close"
+                    aria-label="Close modal">Add device
+                </button>
+            </div> -->
         </div>
     </div>
 </transition>
@@ -63,6 +46,8 @@
 export default {
     name: 'modal',
 
+    props:['smt'],
+
     data(){
         return{
             activeName: 'first'
@@ -70,9 +55,6 @@ export default {
     },
 
     methods: {
-        handleClick(tab, event){
-            console.log(tab, event);
-        },
 
         close(){
             this.$emit('close');
@@ -90,7 +72,7 @@ export default {
 }
 
 .modal-backdrop{
-    height: 55vh;
+    height: 50vh;
     width: 59.1%;
     position: fixed;
     display: flex;
@@ -107,27 +89,45 @@ export default {
     flex-direction: column;
 }
 
-.modal-footer, .modal-body {
-    padding: 15px;
-}
-
-.modal-footer{
-    border-top: 1px solid #eeeeee;
-    justify-content: flex-end;
-}
-
 .btn-close{
     width: 24px;
-    float: left;
+    float: right;
     border: none;
     font-size: 20px;
     cursor: pointer;
     font-weight: bold;
     color: #6f92be;
     background: transparent;
+    margin-left: 95%;
+}
+.center-btn{
+    margin-left: 100px;
+    float: left;
+    width: 170px;
+    height: 90px;
+    text-align: center;
+    font-size: 22px; 
+    cursor: pointer;
+    background-color: #ccdbee;
+    border-radius: 15px;
+    border: none;
+    display: block;
 }
 
-.btn-blue{
+.center-btn2{
+    margin-right: 100px;
+    float: right;
+    width: 170px;
+    height: 90px;
+    text-align: center;
+    font-size: 22px;
+    cursor: pointer; 
+    background-color: #ccdbee;
+    border-radius: 15px;
+    border: none;
+    display: block;
+}
+/* .btn-blue{
     margin-top: 37%;
     float: right;
     color: white;
@@ -152,7 +152,7 @@ export default {
     border-radius: 2px;
     background: #6f92be; 
     color: White;
-}
+} */
 
 .modal-fade-enter, .modal-fade-leave-active{
     opacity: 0;

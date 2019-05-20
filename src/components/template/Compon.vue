@@ -4,8 +4,9 @@
             <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
             <button class="btn1" @click="showModal">+Подключить устройство</button>
             <ModalW v-show="isModalVisible" @close="closeModal"/>
+              
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
-            <i class="el-icon-menu btn4"></i><!--this button must change our list in component part blocks->lists->blocks -->
+            <i class="el-icon-menu btn4" @click="showList = !showList"></i><!--this button must change our list in component part blocks->lists->blocks -->
         </div>
 
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
@@ -16,13 +17,23 @@
             </div>
         </transition>
 
+        
+
         <div class="compo"><!--Component part, under center part, where we have info about devices-->
+        <!-- <button><Switcher v-show="'v-a' || 'v-b'"/></button> -->
             <ComponentE
                 v-for="item in dataForComponents"
                 :title="item.title"
                 :content="item.content"
                 :key="item.title"
             />
+            <ComponentL
+              v-for="item in dataForComponents"
+              :title="item.title"
+              :content="item.content"
+              :key="item.title"
+            />
+            
         </div>
     </div>
 
@@ -31,12 +42,16 @@
 <script>
 
 import ComponentE from '../ComponentE.vue'
+import ComponentL from '../ComponentL.vue'
+// import Switcher from './Switcher.vue'
 import ModalW from '../modalwindow/ModalW'
 
 export default {
     components: {
         ComponentE,
-        ModalW,
+        ComponentL,
+        // Switcher,
+        ModalW
     },
 
     data(){
@@ -148,6 +163,14 @@ export default {
 
 .slide-fade-enter, .slide-fade-leave-to{
   transform: translateX(10px);
+  opacity: 0;
+}
+
+.component-fade-enter-active, .component-fade-leave-active {
+  transition: opacity .3s ease;
+}
+.component-fade-enter, .component-fade-leave-to
+/* .component-fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
 

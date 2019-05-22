@@ -142,14 +142,13 @@ export default {
 .btn3, .btn4{
   width: 20px;
   float: right;
-  margin: 4px 2px 2px 4px;
-  margin-top: 42px;
+  margin: 4px;
+  margin-top: 38px;
+  margin-right: 22px;
   border: none;
-  border-radius: 5px;
   color: black;
-  text-align: center;
-  text-decoration: none;
   cursor: pointer;
+  font-size: 35px;
 }
 
 .right {

@@ -36,7 +36,12 @@
               :content="item.content"
               :key="item.title"
             />-->
-            <component :is="radio1" />
+            <component 
+              :is="radio1" 
+              v-for="item in dataForComponents"
+              :title="item.title"
+              :content="item.content"
+              :key="item.title"/>
             
         </div>
     </div>
@@ -61,7 +66,8 @@ export default {
     data(){
         return{
             shows: true, //showing right side
-            radio1: null,
+
+            radio1: null, //our radio buttons for switching components blocks - list
 
             isModalVisible: false, //modal window
 
@@ -72,9 +78,9 @@ export default {
                 { title: " Himiditry device2", content: "Hum: 40%" },
                 { title: " Himiditry device3", content: "Hum: 40%" },
                 { title: " Himiditry device4", content: "Hum: 40%" },
-                // { title: " Himiditry device5", content: "Hum: 40%" },
-                // { title: " Himiditry device6", content: "Hum: 40%" },
-                // { title: " Himiditry device7", content: "Hum: 40%" }
+                { title: " Himiditry device5", content: "Hum: 40%" },
+                { title: " Himiditry device6", content: "Hum: 40%" },
+                { title: " Himiditry device7", content: "Hum: 40%" }
             ],
         }
     },
@@ -96,7 +102,7 @@ export default {
 
 .compo {
   width: 60%;
-  height: 87vh;
+  height: 76.1vh;
   float: left;
   text-align: center;
   border-left: 1px solid #ccc;

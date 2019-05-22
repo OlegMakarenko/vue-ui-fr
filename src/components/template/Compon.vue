@@ -4,9 +4,12 @@
             <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
             <button class="btn1" @click="showModal">+Подключить устройство</button>
             <ModalW v-show="isModalVisible" @close="closeModal"/>
-              
+              <el-radio-group v-model="radio1">
+                <el-radio-button label="ComponentE"></el-radio-button>
+                <el-radio-button label="ComponentL"></el-radio-button>
+              </el-radio-group>
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
-            <i class="el-icon-menu btn4" @click="showList = !showList"></i><!--this button must change our list in component part blocks->lists->blocks -->
+            <i class="el-icon-menu btn4" ></i><!--this button must change our list in component part blocks->lists->blocks -->
         </div>
 
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
@@ -21,7 +24,7 @@
 
         <div class="compo"><!--Component part, under center part, where we have info about devices-->
         <!-- <button><Switcher v-show="'v-a' || 'v-b'"/></button> -->
-            <ComponentE
+            <!--<ComponentE
                 v-for="item in dataForComponents"
                 :title="item.title"
                 :content="item.content"
@@ -32,7 +35,8 @@
               :title="item.title"
               :content="item.content"
               :key="item.title"
-            />
+            />-->
+            <component :is="radio1" />
             
         </div>
     </div>
@@ -48,8 +52,8 @@ import ModalW from '../modalwindow/ModalW'
 
 export default {
     components: {
-        ComponentE,
-        ComponentL,
+        "ComponentE": ComponentE,
+        "ComponentL": ComponentL,
         // Switcher,
         ModalW
     },
@@ -57,6 +61,7 @@ export default {
     data(){
         return{
             shows: true, //showing right side
+            radio1: null,
 
             isModalVisible: false, //modal window
 
@@ -64,9 +69,9 @@ export default {
                 { title: " Temperature device", content: "Temp 10C" },
                 { title: " Himiditry device", content: "Hum: 40%" },
                 { title: " Himiditry device1", content: "Hum: 40%" },
-                // { title: " Himiditry device2", content: "Hum: 40%" },
-                // { title: " Himiditry device3", content: "Hum: 40%" },
-                // { title: " Himiditry device4", content: "Hum: 40%" },
+                { title: " Himiditry device2", content: "Hum: 40%" },
+                { title: " Himiditry device3", content: "Hum: 40%" },
+                { title: " Himiditry device4", content: "Hum: 40%" },
                 // { title: " Himiditry device5", content: "Hum: 40%" },
                 // { title: " Himiditry device6", content: "Hum: 40%" },
                 // { title: " Himiditry device7", content: "Hum: 40%" }

@@ -5,7 +5,7 @@
         <div class="custom-tree-container">
           <div class="block">
             <el-tree
-              :data="data"
+              :data="treeData"
               show-checkbox
               node-key="id"
               default-expand-all
@@ -40,51 +40,12 @@
 let id = 1000;
 
 export default {
-    name:'',
+    props:['treeData', 'isDraggable'],
 
     data() {
-    const data = [{
-      id: 1,
-      label: 'Мой дом',
-
-      children: [{
-        id: 4,
-        label: 'Спальня',
-        children: [{
-            id: 9,
-            label: 'Кухня'
-        }, {
-            id: 10,
-            label: 'Ванная'
-        }]
-        }]
-        }, {
-
-        id: 2,
-        label: 'Дача',
-        children: [{
-            id: 5,
-            label: 'Пристройка'
-        }, {
-            id: 6,
-            label: 'Гараж'
-        }]
-        }, {
-
-        id: 3,
-        label: 'Дом родителей',
-            children: [{
-                id: 7,
-                label: 'Кухня'
-            }, {
-                id: 8,
-                label: 'Сад'
-            }]
-    }];
 
      return {
         showTree: true,
-        data: JSON.parse(JSON.stringify(data))
      }
    },
 

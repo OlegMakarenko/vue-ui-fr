@@ -3,9 +3,9 @@
     <div class="left">
       <div>
         <button class="btn2" @click="showTree = !showTree">Моя система</button>
-          <Tree v-if="showTree"
-
-          />
+        <br>
+          <Tree v-if="showTree" :treeData="mySystem" />
+          <Tree v-if="showTree" :treeData="[{children:[{}]}]" />
             <p class="allp">Здесь Вы можете группировать свои устройства и управлять ими.</p>
       </div>
 
@@ -25,7 +25,45 @@ export default {
 
     data(){
       return{
-        showTree: false
+        showTree: false,
+        mySystem: [{
+          id: 1,
+          label: 'Мой дом',
+
+          children: [{
+            id: 4,
+            label: 'Спальня',
+            children: [{
+                id: 9,
+                label: 'Кухня'
+            }, {
+                id: 10,
+                label: 'Ванная'
+            }]
+            }]
+            }, {
+
+            id: 2,
+            label: 'Дача',
+            children: [{
+                id: 5,
+                label: 'Пристройка'
+            }, {
+                id: 6,
+                label: 'Гараж'
+            }]
+            }, {
+
+            id: 3,
+            label: 'Дом родителей',
+                children: [{
+                    id: 7,
+                    label: 'Кухня'
+                }, {
+                    id: 8,
+                    label: 'Сад'
+                }]
+        }]
       }
     },
 

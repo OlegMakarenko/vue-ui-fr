@@ -146,7 +146,7 @@ export default {
   margin-top: 38px;
   margin-right: 22px;
   border: none;
-  color: black;
+  color: grey;
   cursor: pointer;
   font-size: 35px;
 }

@@ -119,7 +119,6 @@ export default {
   height: 12.7vh;
   float: left;
   /* margin-top: 7px; */
-  display: block;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   border-top: 1px solid #ccc;

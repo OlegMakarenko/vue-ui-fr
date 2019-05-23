@@ -4,14 +4,16 @@
             <i class="el-icon-folder" 
                style="float:left; 
                       font-size: 20px; 
-                      margin-top:3px;">
+                      margin-top:3px;
+                      cursor: pointer;">
             </i>
 
             <i class="el-icon-delete" 
                style="float:right;
                       font-size: 20px; 
                       margin-top:3px;
-                      margin-right:140px;">
+                      margin-right:140px;
+                      cursor: pointer;">
             </i>
         </div>
          <div class="list">
@@ -58,19 +60,22 @@ export default {
     border-radius: 4px;
     display: inline-block;
     text-align: left;
-    cursor: pointer;
+    // cursor: pointer;
 
     .title{
         margin-top: 4px;
         margin-left: 20px;
         font-size: 18px;
         text-align: center;
+        cursor: pointer;
+
     }
 
     .content{
         margin-top: -22px; 
         float: right;
         text-align: center;
+        cursor: pointer;
     }
 }
 </style>

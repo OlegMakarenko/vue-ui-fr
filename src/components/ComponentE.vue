@@ -2,8 +2,8 @@
     <div class="component">
 
         <div>
-            <i class="el-icon-folder" style="float:left; font-size: 20px"></i>
-            <i class="el-icon-delete" style="float:right; font-size: 20px"></i>
+            <i class="el-icon-folder" style="float:left; font-size: 20px; cursor: pointer;"></i>
+            <i class="el-icon-delete" style="float:right; font-size: 20px; cursor: pointer;"></i>
         </div>
     
         <div class="title">
@@ -48,16 +48,18 @@ export default {
     border-width: 1px;
     border-radius: 4px;
     display: inline-block;
-    cursor: pointer;
+    // cursor: pointer;
 
     .title{
         margin-top: 80px;
         font-size: 18px;
+        cursor: pointer;
     }
     .content{
         margin-top: 30%;
         text-align: right; 
         color: #333333;
+        cursor: pointer;
     }
 }
 </style>

@@ -1,8 +1,15 @@
 <template>
     <div class="component">
+
+        <div>
+            <i class="el-icon-folder" style="float:left; font-size: 20px"></i>
+            <i class="el-icon-delete" style="float:right; font-size: 20px"></i>
+        </div>
+    
         <div class="title">
             {{textBeforeTitle + computedTitle}}
         </div>
+        
         <div class="content">
             {{content}}
         </div>
@@ -39,14 +46,17 @@ export default {
     border-style: solid;
     border-color: #ebebeb;
     border-width: 1px;
-    border-radius: 3px;
+    border-radius: 4px;
     display: inline-block;
     cursor: pointer;
 
     .title{
+        margin-top: 80px;
         font-size: 18px;
     }
     .content{
+        margin-top: 30%;
+        text-align: right; 
         color: #333333;
     }
 }

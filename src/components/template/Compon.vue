@@ -7,10 +7,10 @@
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
               <el-radio-group v-model="radio1" class="btn4">
                 <el-radio-button label="ComponentE">
-                  <i class="el-icon-menu"  style="font-size: 15px;"></i>
+                  <i class="fa fa-th-large" style="font-size:15px;"></i>
                 </el-radio-button>
                 <el-radio-button label="ComponentL">
-                  <i class="fa fa-align-justify" style="font-size: 15px;"></i>
+                  <i class="fa fa-align-justify" style="font-size:15px;"></i>
                   </el-radio-button>
               </el-radio-group>
         </div>

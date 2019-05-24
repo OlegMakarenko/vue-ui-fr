@@ -37,8 +37,8 @@
               :key="item.title"
             />-->
             <component 
-              :is="radio1" 
               v-for="item in dataForComponents"
+              :is="radio1" 
               :title="item.title"
               :content="item.content"
               :key="item.title"/>

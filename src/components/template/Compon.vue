@@ -4,14 +4,15 @@
             <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
             <button class="btn1" @click="showModal">+Подключить устройство</button>
             <ModalW v-show="isModalVisible" @close="closeModal"/>
-            
-              <el-radio-group v-model="radio1">
-                <el-radio-button label="ComponentE"><i class="el-icon-menu"></i></el-radio-button>
-                <el-radio-button label="ComponentL"><i class="fa fa-align-justify"></i></el-radio-button>
-              </el-radio-group>
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
-            <i class="el-icon-menu btn4" ></i><!--this button must change our list in component part blocks->lists->blocks -->
-            <i class="el-icon-tickets btn4" ></i>
+              <el-radio-group v-model="radio1" class="btn4">
+                <el-radio-button label="ComponentE">
+                  <i class="el-icon-menu"  style="font-size: 15px;"></i>
+                </el-radio-button>
+                <el-radio-button label="ComponentL">
+                  <i class="fa fa-align-justify" style="font-size: 15px;"></i>
+                  </el-radio-button>
+              </el-radio-group>
         </div>
 
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
@@ -138,16 +139,28 @@ export default {
   cursor: pointer;
 }
 
-.btn3, .btn4{
+.btn3{
   width: 20px;
   float: right;
   margin: 4px;
-  margin-top: 38px;
+  margin-top: 33px;
   margin-right: 22px;
   border: none;
   color: grey;
   cursor: pointer;
   font-size: 35px;
+}
+
+.btn4{
+  width: auto;
+  float: right;
+  /* margin: 4px; */
+  margin-top: 30px;
+  /* margin-right: 22px; */
+  /* border: none; */
+  /* color: grey; */
+  /* cursor: pointer; */
+  /* font-size: 35px; */
 }
 
 .right {

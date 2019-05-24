@@ -18,7 +18,8 @@
         </div>
          <div class="list">
             <div class="title">
-                {{textBeforeTitle + computedTitle}}
+                <input class="tbox" v-model="computedTitle">
+                <!-- {{textBeforeTitle + computedTitle}} -->
             </div>
             <div class="content">
                 {{content}}
@@ -63,7 +64,7 @@ export default {
     // cursor: pointer;
 
     .title{
-        margin-top: 4px;
+        margin-top: -0.9%;
         margin-left: 20px;
         font-size: 18px;
         text-align: center;
@@ -72,10 +73,17 @@ export default {
     }
 
     .content{
-        margin-top: -22px; 
+        margin-top: -28px; 
         float: right;
         text-align: center;
         cursor: pointer;
+    }
+    .tbox{
+        width: auto;
+        height: 5vh;
+        font-size: 17px;
+        border: none;
+        text-align: center;
     }
 }
 </style>

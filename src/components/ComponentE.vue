@@ -7,8 +7,12 @@
         </div>
     
         <div class="title">
-            {{textBeforeTitle + computedTitle}}
+            <!-- {{computedTitle}} -->
+            <input 
+            class="tbox"
+            v-model="computedTitle">
         </div>
+            
         
         <div class="content">
             {{content}}
@@ -32,7 +36,7 @@ export default {
     computedTitle(){
         if(this.title)
             return this.title.toUpperCase();
-     }
+     },
     }
 }
 </script>
@@ -60,6 +64,13 @@ export default {
         text-align: right; 
         color: #333333;
         cursor: pointer;
+    }
+    .tbox{
+        width: 100%;
+        height: 5vh;
+        font-size: 17px;
+        border: none;
+        text-align: center;
     }
 }
 </style>

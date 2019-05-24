@@ -4,9 +4,10 @@
             <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
             <button class="btn1" @click="showModal">+Подключить устройство</button>
             <ModalW v-show="isModalVisible" @close="closeModal"/>
+            
               <el-radio-group v-model="radio1">
-                <el-radio-button label="ComponentE"></el-radio-button>
-                <el-radio-button label="ComponentL"></el-radio-button>
+                <el-radio-button label="ComponentE"><i class="el-icon-menu"></i></el-radio-button>
+                <el-radio-button label="ComponentL"><i class="fa fa-align-justify"></i></el-radio-button>
               </el-radio-group>
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
             <i class="el-icon-menu btn4" ></i><!--this button must change our list in component part blocks->lists->blocks -->
@@ -23,7 +24,6 @@
         
 
         <div class="compo"><!--Component part, under center part, where we have info about devices-->
-        <!-- <button><Switcher v-show="'v-a' || 'v-b'"/></button> -->
             <!--<ComponentE
                 v-for="item in dataForComponents"
                 :title="item.title"
@@ -52,14 +52,12 @@
 
 import ComponentE from '../ComponentE.vue'
 import ComponentL from '../ComponentL.vue'
-// import Switcher from './Switcher.vue'
 import ModalW from '../modalwindow/ModalW'
 
 export default {
     components: {
         "ComponentE": ComponentE,
         "ComponentL": ComponentL,
-        // Switcher,
         ModalW
     },
 

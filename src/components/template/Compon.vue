@@ -10,6 +10,7 @@
               </el-radio-group>
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
             <i class="el-icon-menu btn4" ></i><!--this button must change our list in component part blocks->lists->blocks -->
+            <i class="el-icon-tickets btn4" ></i>
         </div>
 
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
@@ -20,7 +21,7 @@
             </div>
         </transition>
 
-        
+
 
         <div class="compo"><!--Component part, under center part, where we have info about devices-->
         <!-- <button><Switcher v-show="'v-a' || 'v-b'"/></button> -->
@@ -36,13 +37,13 @@
               :content="item.content"
               :key="item.title"
             />-->
-            <component 
+            <component
               v-for="item in dataForComponents"
-              :is="radio1" 
+              :is="radio1"
               :title="item.title"
               :content="item.content"
               :key="item.title"/>
-            
+
         </div>
     </div>
 

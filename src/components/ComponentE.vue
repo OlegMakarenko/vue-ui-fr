@@ -6,8 +6,8 @@
             <i class="el-icon-delete" style="float:right; font-size: 20px; cursor: pointer;"></i>
         </div>
     
-        <div class="title"><input v-model="twoTitles">
-            <!-- {{textBeforeTitle + computedTitle}} -->
+        <div class="title">
+            {{textBeforeTitle + computedTitle}}
         </div>
         
         <div class="content">
@@ -32,9 +32,8 @@ export default {
     computedTitle(){
         if(this.title)
             return this.title.toUpperCase();
-     },
-    },
-        
+     }
+    }
 }
 </script>
 

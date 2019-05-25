@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
             <div class="right" v-if="shows">
                 <h3>Диспетчер устройств</h3>
@@ -28,25 +29,12 @@
           </div>
 
           <div class="compo"><!--Component part, under center part, where we have info about devices-->
-            <!--<ComponentE
-                v-for="item in dataForComponents"
-                :title="item.title"
-                :content="item.content"
-                :key="item.title"
-            />
-            <ComponentL
-              v-for="item in dataForComponents"
-              :title="item.title"
-              :content="item.content"
-              :key="item.title"
-            />-->
             <component
               v-for="item in dataForComponents"
               :is="radio1"
               :title="item.title"
               :content="item.content"
               :key="item.title"/>
-
           </div>
         </div>
     </div>
@@ -109,9 +97,7 @@ export default {
 }
 
 .compo {
-  /* width: 60%; */
   height: 76.1vh;
-  /* float: left; */
   text-align: center;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
@@ -123,10 +109,8 @@ export default {
 }
 
 .center {
-  /* width: 60%; */
   height: 12.7vh;
-  /* float: left; */
-  /* margin-top: 7px; */
+  /* float: right; */
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   border-top: 1px solid #ccc;
@@ -142,6 +126,7 @@ export default {
   text-align: center;
   display: block;
   border-top: 1px solid #ccc;
+  border-left:  1px solid #ccc;
   background-color: #ffffff;
 }
 

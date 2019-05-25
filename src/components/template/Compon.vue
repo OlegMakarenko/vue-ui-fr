@@ -1,20 +1,5 @@
 <template>
     <div>
-        <div class="center">
-            <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
-            <button class="btn1" @click="showModal">+Подключить устройство</button>
-            <ModalW v-show="isModalVisible" @close="closeModal"/>
-            <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
-              <el-radio-group v-model="radio1" class="btn4">
-                <el-radio-button label="ComponentE">
-                  <i class="fa fa-th-large" style="font-size:15px;"></i>
-                </el-radio-button>
-                <el-radio-button label="ComponentL">
-                  <i class="fa fa-align-justify" style="font-size:15px;"></i>
-                  </el-radio-button>
-              </el-radio-group>
-        </div>
-
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
             <div class="right" v-if="shows">
                 <h3>Диспетчер устройств</h3>
@@ -23,9 +8,26 @@
             </div>
         </transition>
 
+      <div class="all_components">
+          <div class="center">
+            <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
+            <button class="btn1" @click="showModal">+Подключить устройство</button>
+            
+            <ModalW v-show="isModalVisible" @close="closeModal"/>
+            
+            <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
+              
+              <el-radio-group v-model="radio1" class="btn4"> <!--There is our radio button for switching-->
+                <el-radio-button label="ComponentE">
+                  <i class="fa fa-th-large" style="font-size:15px;"></i>
+                </el-radio-button>
+                <el-radio-button label="ComponentL">
+                  <i class="fa fa-align-justify" style="font-size:15px;"></i>
+                  </el-radio-button>
+              </el-radio-group>
+          </div>
 
-
-        <div class="compo"><!--Component part, under center part, where we have info about devices-->
+          <div class="compo"><!--Component part, under center part, where we have info about devices-->
             <!--<ComponentE
                 v-for="item in dataForComponents"
                 :title="item.title"
@@ -45,6 +47,7 @@
               :content="item.content"
               :key="item.title"/>
 
+          </div>
         </div>
     </div>
 
@@ -99,11 +102,16 @@ export default {
 
 
 <style scoped>
+.all_components{
+  width: 100%;
+  min-width: 80%;
+  /* max-width: 900px; */
+}
 
 .compo {
-  width: 60%;
+  /* width: 60%; */
   height: 76.1vh;
-  float: left;
+  /* float: left; */
   text-align: center;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
@@ -115,15 +123,26 @@ export default {
 }
 
 .center {
-  width: 60%;
+  /* width: 60%; */
   height: 12.7vh;
-  float: left;
+  /* float: left; */
   /* margin-top: 7px; */
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   border-top: 1px solid #ccc;
   background-color: #ffffff;
   display: block;
+}
+
+
+.right {
+  width: 19.8%;
+  min-height: 100vh;
+  float: right;
+  text-align: center;
+  display: block;
+  border-top: 1px solid #ccc;
+  background-color: #ffffff;
 }
 
 .btn1 {
@@ -154,24 +173,8 @@ export default {
 .btn4{
   width: auto;
   float: right;
-  /* margin: 4px; */
+  color: grey;
   margin-top: 30px;
-  /* margin-right: 22px; */
-  /* border: none; */
-  /* color: grey; */
-  /* cursor: pointer; */
-  /* font-size: 35px; */
-}
-
-.right {
-  width: 19.8%;
-  min-height: 100vh;
-  float: right;
-  text-align: center;
-  /* margin-top: 7px; */
-  display: block;
-  border-top: 1px solid #ccc;
-  background-color: #ffffff;
 }
 
 .slide-fade-enter-active {

@@ -111,11 +111,14 @@ export default {
 .center {
   height: 12.7vh;
   /* float: right; */
+  text-align: center;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   border-top: 1px solid #ccc;
   background-color: #ffffff;
   display: block;
+  flex-flow: row wrap;
+  overflow-y: auto;
 }
 
 

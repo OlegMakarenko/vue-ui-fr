@@ -87,7 +87,7 @@ export default {
 }
 
 .modal-backdrop{
-    width: 70%;
+    width: 59.1%;
     height: 50vh;
     position: fixed;
     display: flex;
@@ -95,9 +95,8 @@ export default {
 }
 
 .modal{
-    margin-left: 440px;
     padding: 15px;
-    width: 100%;
+    width: 65%;
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;

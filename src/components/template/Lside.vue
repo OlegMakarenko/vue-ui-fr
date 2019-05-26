@@ -5,12 +5,12 @@
         <button class="btn2" @click="showTree = !showTree">Моя система</button>
         <br>
           <Tree v-if="showTree" :treeData="mySystem" />
-          <Tree v-if="showTree" :treeData="[{children:[{}]}]" />
             <p class="allp">Здесь Вы можете группировать свои устройства и управлять ими.</p>
       </div>
 
       <div>
-        <button class="btn2">Диспетчер устройств</button>
+        <button class="btn2" @click="showTree2 = !showTree2">Диспетчер устройств</button>
+          <Tree v-if="showTree2" :treeData="mySystem2" />
       </div>
     </div>
   </div>
@@ -26,6 +26,7 @@ export default {
     data(){
       return{
         showTree: false,
+        showTree2: false,
         mySystem: [{
           id: 1,
           label: 'Мой дом',
@@ -63,6 +64,11 @@ export default {
                     id: 8,
                     label: 'Сад'
                 }]
+        }],
+
+        mySystem2: [{
+          id: 1,
+          label: 'Регулятор на кухне дом',
         }]
       }
     },

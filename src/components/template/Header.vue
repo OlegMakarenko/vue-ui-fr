@@ -18,18 +18,18 @@
       </nav>
     </div>
       <Lside />
-      <Compon />
+      <Main />
   </div>
 </template>
 
 <script>
-import Lside from './Lside'
-import Compon from './Compon'
+import Lside from './Lside.vue'
+import Main from './Main.vue'
 
 export default {
   name: 'Header',
   components: {
-    Compon,
+    Main,
     Lside
   }
 }

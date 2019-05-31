@@ -9,6 +9,7 @@
             </div>
         </transition>
 
+
       <div class="all_components">
           <div class="center">
             <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
@@ -17,45 +18,74 @@
             <ModalW v-show="isModalVisible" @close="closeModal"/>
             
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
+
+              <!--There is our radio button for switching-->
               
-              <el-radio-group v-model="radio1" class="btn4"> <!--There is our radio button for switching-->
-                <el-radio-button label="ComponentE">
+              <!-- <button v-on:click="visible = !visible">{{visible? '1' : '2'}}</button> -->
+
+              <!-- <el-radio-group v-model="radio1" class="btn4" style="border:0px">
+                <el-radio-button v-if="visible" label="ComponentT">
                   <i class="fa fa-th-large" style="font-size:15px;"></i>
                 </el-radio-button>
-                <el-radio-button label="ComponentL">
+                <el-radio-button v-else label="ComponentL">
                   <i class="fa fa-align-justify" style="font-size:15px;"></i>
                   </el-radio-button>
-              </el-radio-group>
+              </el-radio-group> -->
+              <button id="btn3" class=" fa fa-align-justify" v-if="showc == ComponentT" @click="showComponents"></button>
+              <button id="btn3" class="fa fa-th-large" v-else @click="showComponents"></button>
           </div>
 
           <div class="compo"><!--Component part, under center part, where we have info about devices-->
             <component
               v-for="item in dataForComponents"
-              :is="radio1"
+              :is="showc"
               :title="item.title"
               :content="item.content"
               :key="item.title"/>
+
+              <!-- <ComponentT 
+              v-for="item in dataForComponents"
+              :is="showc"
+              :title="item.title"
+              :content="item.content"
+              :key="item.title"/>
+
+              <ComponentL
+              v-for="item in dataForComponents"
+              :is="showc"
+              :title="item.title"
+              :content="item.content"
+              :key="item.title"/> -->
           </div>
         </div>
     </div>
 
 </template>
 
+
 <script>
 
-import ComponentE from '../ComponentE.vue'
-import ComponentL from '../ComponentL.vue'
+import ComponentT from '../tile_list/ComponentT.vue'
+import ComponentL from '../tile_list/ComponentL.vue'
 import ModalW from '../modalwindow/ModalW'
 
 export default {
     components: {
-        "ComponentE": ComponentE,
+        "ComponentT": ComponentT,
         "ComponentL": ComponentL,
         ModalW
     },
 
     data(){
         return{
+
+          ComponentT: "ComponentT",
+          ComponentL: "ComponentL", 
+
+            visible: true,
+
+            showc: null,
+
             shows: true, //showing right side
 
             radio1: null, //our radio buttons for switching components blocks - list
@@ -83,7 +113,16 @@ export default {
 
     closeModal(){
       this.isModalVisible = false;
-    }
+    },
+
+    showComponents(){
+      if(this.showc == this.ComponentT){
+        this.showc = this.ComponentL;
+      } else {
+        this.showc = this.ComponentT;
+      }
+    },
+
   }
 }
 </script>
@@ -146,12 +185,27 @@ export default {
   cursor: pointer;
 }
 
+#btn3{
+  width: 20px;
+  float: right;
+  margin: 4px;
+  margin-top: 35px;
+  margin-right: 22px;
+  background-color: white;
+  border: none;
+  color: grey;
+  cursor: pointer;
+  font-size: 33px;
+  outline: none;
+}
+
 .btn3{
   width: 20px;
   float: right;
   margin: 4px;
   margin-top: 33px;
   margin-right: 22px;
+  background-color: white;
   border: none;
   color: grey;
   cursor: pointer;

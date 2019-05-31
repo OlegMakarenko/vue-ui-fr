@@ -18,7 +18,10 @@
         </div>
          <div class="list">
             <div class="title">
-                <input class="tbox" v-model="computedTitle">
+                <el-input class="tbox" v-model="computedTitle">
+                    <i slot="suffix" class="el-input__icon el-icon-edit"></i>
+                </el-input>
+                <!-- <input class="tbox" > -->
                 <!-- {{textBeforeTitle + computedTitle}} -->
             </div>
             <div class="content">
@@ -37,13 +40,20 @@ export default {
     data(){
         return{
             textBeforeTitle: "This is"
+            //  computedTitle: ''
         }
     },
 
     computed: {
-    computedTitle(){
-        if(this.title)
-            return this.title.toUpperCase();
+    computedTitle:{
+        get(){
+           if(this.title)
+            return this.title; 
+        },
+        set(value){
+            this.title = value
+        }
+        
      }
     }   
 }

@@ -22,8 +22,8 @@
             </div>
 
             <div>
-                <button class="center-btn" @click="showModalV4">Аксессуар VEGA 4</button>
-                    <ModalV4 v-show="isModalV4Visible" @close="closeModalV4"/>
+                <button class="center-btn" @click="showDeviceV4">Аксессуар VEGA 4</button>
+                    <DeviceV4 v-show="isDeviceV4Visible" @close="closeDeviceV4"/>
                 <button class="center-btn2">Аксессуар VEGA 1S</button>
             </div>
                 <p style="text-align: center;
@@ -45,30 +45,30 @@
 
 <script>
 
-import ModalV4 from './ModalV4'
+import DeviceV4 from './DeviceV4'
 
 export default {
     name: 'modal',
 
     components:{
-        ModalV4
+        DeviceV4
     },
 
     data(){
         return{
-            isModalV4Visible: false,
+            isDeviceV4Visible: false,
 
             activeName: 'first'
         };
     },
 
     methods: {
-        showModalV4(){
-            this.isModalV4Visible = true;
+        showDeviceV4(){
+            this.isDeviceV4Visible = true;
         },
 
-        closeModalV4(){
-            this.isModalV4Visible = false;
+        closeDeviceV4(){
+            this.isDeviceV4Visible = false;
         },
 
         close(){
@@ -142,32 +142,6 @@ export default {
     border: none;
     display: block;
 }
-/* .btn-blue{
-    margin-top: 37%;
-    float: right;
-    color: white;
-    background: #6f92be;
-    border: 1px solid #6f92be;
-    border-radius: 2px;
-}
-
-.btn-left{
-    margin-top: 37%;
-    float: left;
-    border: 1px solid #6f92be;
-    border-radius: 2px;
-    background: #6f92be;
-    color: White;
-}
-
-.btn-right{
-    margin-top: 37%;
-    float: right;
-    border: 1px solid #6f92be;
-    border-radius: 2px;
-    background: #6f92be; 
-    color: White;
-} */
 
 .modal-fade-enter, .modal-fade-leave-active{
     opacity: 0;

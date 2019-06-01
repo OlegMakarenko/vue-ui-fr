@@ -38,7 +38,7 @@
           <div class="compo"><!--Component part, under center part, where we have info about devices-->
             <component
               v-for="item in dataForComponents"
-              :is="radio1"
+              :is="showc"
               :title="item.title"
               :content="item.content"
               :key="item.title"/>

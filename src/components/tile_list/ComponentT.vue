@@ -2,8 +2,25 @@
     <div class="component">
 
         <div>
-            <i class="el-icon-folder" style="float:left; font-size: 20px; cursor: pointer;"></i>
-            <i class="el-icon-delete" style="float:right; font-size: 20px; cursor: pointer;"></i>
+            <i class="el-icon-folder" 
+               style="float:left; 
+                      font-size: 20px; 
+                      cursor: pointer;">
+            </i>
+            
+            <i class="el-icon-delete" 
+               style="float:right; 
+                      font-size: 20px; 
+                      cursor: pointer;">
+            </i>
+            
+            <i class="el-input__icon el-icon-edit" 
+               style="float:right; 
+                      font-size: 20px; 
+                      cursor: pointer; 
+                      margin-top: 39%; 
+                      margin-right: -10%">
+            </i>
         </div>
     
         <div class="title">
@@ -66,7 +83,7 @@ export default {
         cursor: pointer;
     }
     .tbox{
-        width: 100%;
+        width: 80%;
         height: 5vh;
         font-size: 17px;
         border: none;

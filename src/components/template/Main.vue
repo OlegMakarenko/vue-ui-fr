@@ -9,28 +9,16 @@
             </div>
         </transition>
 
-
       <div class="all_components">
           <div class="center">
             <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
             <button class="btn1" @click="showModal">+Подключить устройство</button>
             
             <ModalW v-show="isModalVisible" @close="closeModal"/>
-            
+
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
 
-              <!--There is our radio button for switching-->
-              
-              <!-- <button v-on:click="visible = !visible">{{visible? '1' : '2'}}</button> -->
-
-              <!-- <el-radio-group v-model="radio1" class="btn4" style="border:0px">
-                <el-radio-button v-if="visible" label="ComponentT">
-                  <i class="fa fa-th-large" style="font-size:15px;"></i>
-                </el-radio-button>
-                <el-radio-button v-else label="ComponentL">
-                  <i class="fa fa-align-justify" style="font-size:15px;"></i>
-                  </el-radio-button>
-              </el-radio-group> -->
+              <!--There is our acomponent switching button-->
               <button id="btn3" class=" fa fa-align-justify" v-if="showc == ComponentT" @click="showComponents"></button>
               <button id="btn3" class="fa fa-th-large" v-else @click="showComponents"></button>
           </div>
@@ -42,20 +30,6 @@
               :title="item.title"
               :content="item.content"
               :key="item.title"/>
-
-              <!-- <ComponentT 
-              v-for="item in dataForComponents"
-              :is="showc"
-              :title="item.title"
-              :content="item.content"
-              :key="item.title"/>
-
-              <ComponentL
-              v-for="item in dataForComponents"
-              :is="showc"
-              :title="item.title"
-              :content="item.content"
-              :key="item.title"/> -->
           </div>
         </div>
     </div>
@@ -84,7 +58,7 @@ export default {
 
             visible: true,
 
-            showc: null,
+            showc: null, //show components
 
             shows: true, //showing right side
 

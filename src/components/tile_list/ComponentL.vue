@@ -15,14 +15,15 @@
                       margin-right:140px;
                       cursor: pointer;">
             </i>
+
         </div>
          <div class="list">
             <div class="title">
-                <el-input class="tbox" v-model="computedTitle">
-                    <i slot="suffix" class="el-input__icon el-icon-edit"></i>
-                </el-input>
-                <!-- <input class="tbox" > -->
-                <!-- {{textBeforeTitle + computedTitle}} -->
+                <input class="tbox" v-model="computedTitle">                    
+                    <i class="el-input__icon el-icon-edit" 
+                       style="font-size: 20px; 
+                              cursor: pointer;">
+                    </i>
             </div>
             <div class="content">
                 {{content}}
@@ -40,7 +41,6 @@ export default {
     data(){
         return{
             textBeforeTitle: "This is"
-            //  computedTitle: ''
         }
     },
 

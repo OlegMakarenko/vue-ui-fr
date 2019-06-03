@@ -1,6 +1,6 @@
 <template>
   <div>
-   
+
    <div @click="expanded = !expanded"
         :style="{'margin-left': `${depth * 20}px`}"
         class="node">
@@ -44,7 +44,9 @@ export default {
 .node{
   cursor: pointer;
   text-align: left;
-  font-size: 18px;
+  font-size: 20px;
+  color: gray;
+
 }
 
 </style>

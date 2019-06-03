@@ -3,11 +3,14 @@
     <div class="left">
       <div>
         <button class="btn2" @click="showTree = !showTree">Моя система</button>
+          <Tree
+          :node="root1"
+          v-if="showTree"
+          :treeData="root"
+          />
 
-          <Tree :node="root"/>
-        
+
         <br>
-          <!-- <Tree v-if="showTree" :treeData="mySystem" /> -->
             <p class="allp">Здесь Вы можете группировать свои устройства и управлять ими.</p>
       </div>
 
@@ -33,26 +36,17 @@ export default {
 
   data(){
     return{
-      root:{
-        name: 'root',
+      showTree: false,
+      showTree2: false,
+      root1:{
+        name: 'Мой дом',
         children:[
           {
-            name: 'house',
-            children:[
-              {
-                name:123123
-              },
-              {
-                name: '555',
-                children:[
-                  {
-                    name: '999'
-                  }
-                ]
-              }
-            ]
+            name:'Кухня',
+          },
+          {
+            name: 'Спальня',
           }
-
         ]
       }
     }
@@ -61,7 +55,7 @@ export default {
     components:{
       Tree,
       showTree: false,
-      showTree2: false
+      showTree2: false,
     },
 
     methods:{

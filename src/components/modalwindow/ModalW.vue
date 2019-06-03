@@ -1,5 +1,6 @@
 <template>
 <transition name="modal-fade">
+    <div class="modal-mask">
     <div class="modal-backdrop">
 
         <div class="modal"
@@ -39,6 +40,7 @@
                 </button>
             </div> -->
         </div>
+    </div>
     </div>
 </transition>
 </template>
@@ -86,17 +88,29 @@ export default {
     text-align: center; 
 }
 
+.modal-mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: table;
+}
+
 .modal-backdrop{
-    width: 59.1%;
-    height: 50vh;
+    width: 80%;
+    height: 70vh;
     position: fixed;
     display: flex;
     justify-content: center;
 }
 
 .modal{
+    margin-top: 13%;
+    margin-left: 25%;
     padding: 15px;
-    width: 65%;
+    width: 50%;
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;

@@ -23,14 +23,10 @@
             </i>
         </div>
     
-        <div class="title">
-            <!-- {{computedTitle}} -->
-            <input 
-            class="tbox"
-            v-model="computedTitle">
+        <div class="title" @click="onClick">
+            <input class="tbox" v-model="computedTitle">
         </div>
             
-        
         <div class="content">
             {{content}}
         </div>
@@ -54,6 +50,12 @@ export default {
         if(this.title)
             return this.title.toUpperCase();
      },
+    },
+
+    methods:{
+        onClick(){
+            this.$emit("select", this.title);
+        }
     }
 }
 </script>

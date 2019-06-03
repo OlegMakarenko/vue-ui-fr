@@ -17,8 +17,8 @@
             </i>
 
         </div>
-         <div class="list">
-            <div class="title">
+         <div class="list" >
+            <div class="title" @click="onClick">
                 <input class="tbox" v-model="computedTitle">                    
                     <i class="el-input__icon el-icon-edit" 
                        style="font-size: 20px; 
@@ -55,6 +55,11 @@ export default {
         }
         
      }
+    },
+    methods:{
+        onClick(){
+            this.$emit("select", this.title);
+        }
     }   
 }
 </script>

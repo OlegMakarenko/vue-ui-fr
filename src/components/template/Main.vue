@@ -4,6 +4,9 @@
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
             <div class="right" v-if="shows">
                 <h3>Диспетчер устройств</h3>
+              <el-header v-if="selectedComponent"> <!--dynamic title-->
+                {{selectedComponent}}
+              </el-header>
                 <br><br>Вложений пока нет <br><br><hr><br> Действий пока нет <br><br><hr><br>
                 В этом пункте меню Вы можете подключить к своей учетной записи устройствo
             </div>
@@ -11,6 +14,7 @@
 
       <div class="all_components">
           <div class="center">
+
             <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
             <button class="btn1" @click="showModal">+Подключить устройство</button>
             
@@ -18,9 +22,20 @@
 
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
 
-              <!--There is our acomponent switching button-->
-              <button id="btn3" class=" fa fa-align-justify" v-if="showc == ComponentT" @click="showComponents"></button>
-              <button id="btn3" class="fa fa-th-large" v-else @click="showComponents"></button>
+              <!--There is our component switching button-->
+              <button 
+                id="btn3" 
+                class=" fa fa-align-justify" 
+                v-if="showc == ComponentT" 
+                @click="showComponents">
+              </button>
+              
+              <button 
+                id="btn3" 
+                class="fa fa-th-large" 
+                v-else 
+                @click="showComponents">
+              </button>
           </div>
 
           <div class="compo"><!--Component part, under center part, where we have info about devices-->
@@ -29,7 +44,8 @@
               :is="showc"
               :title="item.title"
               :content="item.content"
-              :key="item.title"/>
+              :key="item.title"
+              @select="onComponentSelect"/>
           </div>
         </div>
     </div>
@@ -56,16 +72,6 @@ export default {
           ComponentT: "ComponentT",
           ComponentL: "ComponentL", 
 
-            visible: true,
-
-            showc: null, //show components
-
-            shows: true, //showing right side
-
-            radio1: null, //our radio buttons for switching components blocks - list
-
-            isModalVisible: false, //modal window
-
             dataForComponents: [
                 { title: " Temperature device", content: "Temp 10C" },
                 { title: " Himiditry device", content: "Hum: 40%" },
@@ -77,6 +83,18 @@ export default {
                 { title: " Himiditry device6", content: "Hum: 40%" },
                 { title: " Himiditry device7", content: "Hum: 40%" }
             ],
+
+            visible: true,
+
+            showc: null, //show components
+
+            shows: true, //showing right side
+
+            radio1: null, //our radio buttons for switching components blocks - list
+
+            isModalVisible: false, //modal window
+
+            selectedComponent: null,
         }
     },
 
@@ -96,6 +114,10 @@ export default {
         this.showc = this.ComponentT;
       }
     },
+
+    onComponentSelect(title){
+      this.selectedComponent = title;
+    }
 
   }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="component">
+    <div class="component" @click="onClick">
         <div>
             <i class="el-icon-folder" 
                style="float:left; 
@@ -18,7 +18,7 @@
 
         </div>
          <div class="list" >
-            <div class="title" @click="onClick">
+            <div class="title" >
                 <input class="tbox" v-model="computedTitle">                    
                     <i class="el-input__icon el-icon-edit" 
                        style="font-size: 20px; 

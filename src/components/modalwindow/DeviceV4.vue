@@ -83,7 +83,7 @@ export default {
 
 .modal-backdrop{
     margin-top: -12%;
-    margin-left: -15.5%;
+    margin-left: -24%;
     height: 60vh;
     width: 70%;
     position: fixed;

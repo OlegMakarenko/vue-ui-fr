@@ -14,7 +14,6 @@
             <router-link class="reg" to="/alert">Alert</router-link>
           </div>
 
-          
       </nav>
     </div>
       <Lside />

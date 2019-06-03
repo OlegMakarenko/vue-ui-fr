@@ -1,5 +1,5 @@
 <template>
-    <div class="component">
+    <div class="component" @click="onClick">
 
         <div>
             <i class="el-icon-folder" 
@@ -23,7 +23,7 @@
             </i>
         </div>
     
-        <div class="title" @click="onClick">
+        <div class="title" >
             <input class="tbox" v-model="computedTitle">
         </div>
             
@@ -71,7 +71,7 @@ export default {
     border-width: 1px;
     border-radius: 4px;
     display: inline-block;
-    // cursor: pointer;
+    cursor: pointer;
 
     .title{
         margin-top: 80px;

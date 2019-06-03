@@ -3,20 +3,22 @@
     <div class="left">
       <div>
         <button class="btn2" @click="showTree = !showTree">Моя система</button>
+
+          <Tree :node="root"/>
+        
         <br>
-          <Tree v-if="showTree" :treeData="mySystem" />
+          <!-- <Tree v-if="showTree" :treeData="mySystem" /> -->
             <p class="allp">Здесь Вы можете группировать свои устройства и управлять ими.</p>
       </div>
 
       <div id="lside">
-      <Tree
-      :node="root"
-      />
+
+
       </div>
 
       <div>
         <button class="btn2" @click="showTree2 = !showTree2">Диспетчер устройств</button>
-          <Tree v-if="showTree2" :treeData="mySystem2" />
+          <!-- <Tree v-if="showTree2" :treeData="mySystem2" /> -->
       </div>
     </div>
   </div>
@@ -27,36 +29,48 @@
 import Tree from "./Tree.vue"
 
 export default {
-    name:'lside',
-    data(){
-      return{
-        root:{
-          name: '/',
-          children:[
-            {
-              name: 'house',
-              children:[
-                {
-                  name:123123
-                },
-                {
-                  name: '555',
-                  children:[
-                    {
-                      name: '999'
-                    }
-                  ]
-                }
-              ]
-            }
+  name:'lside',
 
-          ]
-        }
+  data(){
+    return{
+      root:{
+        name: 'root',
+        children:[
+          {
+            name: 'house',
+            children:[
+              {
+                name:123123
+              },
+              {
+                name: '555',
+                children:[
+                  {
+                    name: '999'
+                  }
+                ]
+              }
+            ]
+          }
+
+        ]
       }
-    },
+    }
+  },
 
     components:{
-      Tree
+      Tree,
+      showTree: false,
+      showTree2: false
+    },
+
+    methods:{
+      showTree(){
+        this.showTree = true
+      },
+      showTree2(){
+        this.showTree2 = true
+      }
     }
 }
 </script>

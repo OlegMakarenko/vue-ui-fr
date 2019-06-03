@@ -1,39 +1,40 @@
 <template>
   <div>
-   <div
-     @click="expanded = !expanded"
-     :style="{'margin-left': `${depth * 20}px`}"
-     class="node"
-     >
+   
+   <div @click="expanded = !expanded"
+        :style="{'margin-left': `${depth * 20}px`}"
+        class="node">
+
      <span class="el-icon-folder"></span>
      {{node.name}}
    </div>
-   <Tree
-     v-if="expanded"
-     v-for="child in node.children"
-     :key="child.name"
-     :node="child"
-     :depth="depth + 1"
-   />
+
+    <Tree v-if="expanded"
+          v-for="child in node.children"
+          :key="child.name"
+          :node="child"
+          :depth="depth + 1"/>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Tree',
+
   props:{
     node: Object,
-    depth: {
+
+    depth:{
       type: Number,
-      default: 0,
+      default: 0
     }
   },
+
   data(){
     return{
       expanded: false,
     }
   }
-
 }
 
 </script>
@@ -41,8 +42,9 @@ export default {
 <style scoped>
 
 .node{
-text-align: left;
-font-size: 18px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 18px;
 }
 
 </style>

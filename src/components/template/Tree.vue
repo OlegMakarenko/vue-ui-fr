@@ -5,7 +5,7 @@
      :style="{'margin-left': `${depth * 20}px`}"
      class="node"
      >
-     <span class="el-icon-folder">{{expanded ? '&#9660;' : '&#9658;'}}</span>
+     <span class="el-icon-folder"></span>
      {{node.name}}
    </div>
    <Tree

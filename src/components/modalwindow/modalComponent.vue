@@ -72,6 +72,12 @@
 
 <script>
 
+import tab1 from '../tabs/tab1_scute'
+import tab2 from '../tabs/tab2_events'
+import tab3 from '../tabs/tab3_graph'
+import tab4 from '../tabs/tab4_shedule'
+import tab5 from '../tabs/tab5_settings'
+
 export default {
     name: 'modal',
 
@@ -83,7 +89,13 @@ export default {
             tabPosition: 'left',
             radio1: 'Ручной',
             radio2: 'В сети',
-            num: '1'
+            num: '1',
+            
+            tab1,
+            tab2,
+            tab3,
+            tab4,
+            tab5
         };
     },
 

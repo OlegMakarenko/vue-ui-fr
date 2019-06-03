@@ -12,6 +12,7 @@
   "dependencies": {
     "element-theme-default": "^1.4.13",
     "element-ui": "^2.8.2",
+    "pug": "^2.0.3",
     "vue": "^2.5.11",
     "vue-router": "^3.0.6",
     "vue-touch": "^1.1.0",

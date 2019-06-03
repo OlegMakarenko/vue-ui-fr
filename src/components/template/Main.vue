@@ -50,6 +50,7 @@
               :key="item.title"
               @select="onComponentSelect"/>
           </div>
+
         </div>
     </div>
 
@@ -62,6 +63,7 @@ import ComponentT from '../tile_list/ComponentT.vue'
 import ComponentL from '../tile_list/ComponentL.vue'
 import ModalW from '../modalwindow/ModalW'
 import ModalC from '../modalwindow/modalComponent'
+
 
 export default {
     components: {

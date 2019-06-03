@@ -1,5 +1,5 @@
 <template>
-    <div class="component" @click="onClick">
+    <div class="component" @click="onClick" @dblclick="showModal2">
         <div>
             <i class="el-icon-folder" 
                style="float:left; 
@@ -17,6 +17,9 @@
             </i>
 
         </div>
+
+        <ModalC v-show="isModalVisible2" @close="closeModal2"/>
+
          <div class="list" >
             <div class="title" >
                 <input class="tbox" v-model="computedTitle">                    
@@ -33,6 +36,9 @@
 </template>
 
 <script>
+
+import ModalC from '../modalwindow/modalComponent'
+
 export default {
     props: [ 'title', 'content' ],
     created(){},
@@ -40,8 +46,13 @@ export default {
 
     data(){
         return{
-            textBeforeTitle: "This is"
+            textBeforeTitle: "This is",
+            isModalVisible2: false
         }
+    },
+
+    components:{
+        ModalC
     },
 
     computed: {
@@ -59,7 +70,15 @@ export default {
     methods:{
         onClick(){
             this.$emit("select", this.title);
-        }
+        },
+          
+        showModal2(){
+        this.isModalVisible2 = true;
+        },
+
+        closeModal2(){
+        this.isModalVisible2 = false;
+        },
     }   
 }
 </script>

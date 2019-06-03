@@ -17,11 +17,8 @@
 
             <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
             <button class="btn1" @click="showModal">+Подключить устройство</button>
-            <button class="btn1" @click="showModal2">dbclick on component</button> <!--need to delete it in future-->
-
             
             <ModalW v-show="isModalVisible" @close="closeModal"/>
-            <ModalC v-show="isModalVisible2" @close="closeModal2"/>
 
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
 
@@ -62,15 +59,13 @@
 import ComponentT from '../tile_list/ComponentT.vue'
 import ComponentL from '../tile_list/ComponentL.vue'
 import ModalW from '../modalwindow/ModalW'
-import ModalC from '../modalwindow/modalComponent'
 
 
 export default {
     components: {
         "ComponentT": ComponentT,
         "ComponentL": ComponentL,
-        ModalW,
-        ModalC
+        ModalW
     },
 
     data(){
@@ -100,7 +95,6 @@ export default {
             radio1: null, //our radio buttons for switching components blocks - list
 
             isModalVisible: false, //modal window
-            isModalVisible2: false, //modal window
 
             selectedComponent: null,
         }
@@ -113,14 +107,6 @@ export default {
 
     closeModal(){
       this.isModalVisible = false;
-    },
-
-    showModal2(){
-      this.isModalVisible2 = true;
-    },
-
-    closeModal2(){
-      this.isModalVisible2 = false;
     },
 
     showComponents(){

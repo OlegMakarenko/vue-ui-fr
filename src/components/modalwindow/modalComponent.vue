@@ -16,54 +16,13 @@
                 </button>
             </div>
 
-            <el-tabs :tab-position="tabPosition">
-                <el-tab-pane label="Щиток">Щиток
-                    <div class="first-tab">
-                        <div>
-                            <el-radio-group v-model="radio1" size="mini" class="tabn1">
-                                <el-radio-button label="Ручной"></el-radio-button>
-                                <el-radio-button label="По графику"></el-radio-button>
-                            </el-radio-group>
-
-                            <el-radio-group v-model="radio2" size="mini" class="tabn2">
-                                <el-radio-button label="В сети"></el-radio-button>
-                            </el-radio-group>
-                        </div>
-
-                        <el-input-number 
-                            class="input-number"
-                            v-model="num" 
-                            @change="handleChange" 
-                            :min="1" 
-                            :max="60"
-                            size="large"></el-input-number>
-                    </div>
-                </el-tab-pane>
-
-                <el-tab-pane label="События">События
-                    <div>
-
-                    </div>
-                </el-tab-pane>
-
-                <el-tab-pane label="Графики">Графики
-                    <div>
-
-                    </div>
-                </el-tab-pane>
-
-                <el-tab-pane label="Расписание">Расписание
-                    <div>
-
-                    </div>
-                </el-tab-pane>
-
-                <el-tab-pane label="Настройки">Настройки
-                    <div>
-
-                    </div>
-                </el-tab-pane>
-            </el-tabs>
+            <button style="outline: none"
+                    v-for="tab in tabs" 
+                    :key="tab" 
+                    @click="selected = tab;"
+                    :class="['tab-btn', {active: selected === tab}]">{{tab}}
+            </button>
+                <component :is="selected"/>
         </div>
     </div>
     </div>
@@ -82,20 +41,20 @@ export default {
     name: 'modal',
 
     components:{
-    },
-
-    data(){
-        return{
-            tabPosition: 'left',
-            radio1: 'Ручной',
-            radio2: 'В сети',
-            num: '1',
-            
             tab1,
             tab2,
             tab3,
             tab4,
             tab5
+    },
+
+    data(){
+        return{
+            tabs: ["tab1", "tab2", "tab3", "tab4", "tab5"],
+
+            selected:"tab1",
+            
+            num: '1',
         };
     },
 
@@ -118,33 +77,18 @@ export default {
     text-align: center; 
 }
 
-.first-tab{
-    width: 90%;
-    height: 70vh;
-    border-right: 1px solid #666;
-}
-
-.tabn1{
-    margin-top: 5%;
-    margin-right: 2%;
-    float: right;
-}
-
-.tabn2{
-    margin-top: 5%;
-    margin-right: 10%;
-    float: right;
-}
-
-.input-number{
-    margin-top: 4.5%;
-    margin-left: 15%;
+.tab-btn{
+    width: 10%; 
+    height: 200px;
+    background: #ffffff;
+    cursor: pointer;
     float: left;
+    outline: none;
 }
 
-.el-tabs__item{
-    height: 14vh;
-    text-align: center;
+.active{
+    border-right: 3px solid blue;
+    outline: none;
 }
 
 .modal-mask2{

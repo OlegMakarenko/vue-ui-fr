@@ -8,6 +8,12 @@
             <p class="allp">Здесь Вы можете группировать свои устройства и управлять ими.</p>
       </div>
 
+      <div id="lside">
+      <Tree
+      :node="root"
+      />
+      </div>
+
       <div>
         <button class="btn2" @click="showTree2 = !showTree2">Диспетчер устройств</button>
           <Tree v-if="showTree2" :treeData="mySystem2" />
@@ -22,54 +28,30 @@ import Tree from "./Tree.vue"
 
 export default {
     name:'lside',
-
     data(){
       return{
-        showTree: false,
-        showTree2: false,
-        mySystem: [{
-          id: 1,
-          label: 'Мой дом',
+        root:{
+          name: '/',
+          children:[
+            {
+              name: 'house',
+              children:[
+                {
+                  name:123123
+                },
+                {
+                  name: '555',
+                  children:[
+                    {
+                      name: '999'
+                    }
+                  ]
+                }
+              ]
+            }
 
-          children: [{
-            id: 4,
-            label: 'Спальня',
-            children: [{
-                id: 9,
-                label: 'Кухня'
-            }, {
-                id: 10,
-                label: 'Ванная'
-            }]
-            }]
-            }, {
-
-            id: 2,
-            label: 'Дача',
-            children: [{
-                id: 5,
-                label: 'Пристройка'
-            }, {
-                id: 6,
-                label: 'Гараж'
-            }]
-            }, {
-
-            id: 3,
-            label: 'Дом родителей',
-                children: [{
-                    id: 7,
-                    label: 'Кухня'
-                }, {
-                    id: 8,
-                    label: 'Сад'
-                }]
-        }],
-
-        mySystem2: [{
-          id: 1,
-          label: 'Регулятор на кухне дом',
-        }]
+          ]
+        }
       }
     },
 

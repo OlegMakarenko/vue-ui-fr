@@ -119,14 +119,15 @@ export default {
 }
 
 .btn-close{
-    float: right;
-    width: 24px;
+    /* float: right; */
+    /* width: 24%; */
+    margin-top: -2%;
     margin-left: 95%;
     border: none;
-    font-size: 20px;
+    font-size: 35px;
     cursor: pointer;
-    font-weight: bold;
-    color: #6f92be;
+    /* font-weight: bold; */
+    color: #666;
     background: transparent;
 }
 .center-btn{

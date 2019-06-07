@@ -8,7 +8,7 @@
              aria-labelledby="modalTitle"
              aria-describedby="modalDescription">
 
-             <div>
+             <div class="close">
                 <button type="button"
                     class="btn-close"
                     @click="close"
@@ -16,12 +16,14 @@
                 </button>
             </div>
 
+        <div class="left_side_tabs">
             <button style="outline: none"
                     v-for="tab in tabs" 
                     :key="tab" 
                     @click="selected = tab;"
                     :class="['tab-btn', {active: selected === tab}]">{{tab}}
             </button>
+        </div>
                 <component :is="selected"/>
         </div>
     </div>
@@ -40,14 +42,6 @@ import tab5 from '../tabs/tab5_settings'
 export default {
     name: 'modal',
 
-    components:{
-            tab1,
-            tab2,
-            tab3,
-            tab4,
-            tab5
-    },
-
     data(){
         return{
             tabs: ["tab1", "tab2", "tab3", "tab4", "tab5"],
@@ -57,6 +51,15 @@ export default {
             num: '1',
         };
     },
+
+    components:{
+            tab1,
+            tab2,
+            tab3,
+            tab4,
+            tab5
+    },
+
 
     methods: {
         handleChange(value){
@@ -77,14 +80,30 @@ export default {
     text-align: center; 
 }
 
+.left_side_tabs{
+    width:20%; 
+    float: left;
+}
+
+
 .tab-btn{
+    width: 100%;
+    display: block;
+    height: 14vh;
+}
+
+/* .tab-btn{
+    margin-top: 0;
     width: 10%; 
-    height: 200px;
+    height: 14vh;
     background: #ffffff;
     cursor: pointer;
     float: left;
+    position:inherit;
+    display:flex;
+    flex-direction: column;
     outline: none;
-}
+} */
 
 .active{
     border-right: 3px solid blue;
@@ -112,25 +131,35 @@ export default {
 .modal2{
     margin-top: 5%;
     margin-left: 0%;
-    padding: 15px;
+    /* padding: 15px; */
     width: 80%;
+    height: 80vh;
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
+    cursor:default;
     display: flex;
     flex-direction: column;
 }
 
 .btn-close2{
-    float: right;
-    width: 24px;
-    margin-left: 95%;
+    /* float: right; */
+    /* width: 24px; */
+    /* margin-left: 95%; */
     border: none;
     font-size: 20px;
     cursor: pointer;
     font-weight: bold;
     color: #6f92be;
     background: transparent;
+}
+
+.close{
+    float: right;
+    /* display:inline-flex; */
+    /* width: 10%; */
+    margin-right: 10%;
+    margin-top: 1%;
 }
 
 </style>

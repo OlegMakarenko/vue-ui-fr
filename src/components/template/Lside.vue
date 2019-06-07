@@ -46,25 +46,28 @@ export default {
           },
           {
             name: 'Спальня',
+            children:[{name:'WC'}]
           }
-        ]
+        ],
+        name: 'Мой дом2',
       }
     }
   },
 
     components:{
       Tree,
-      showTree: false,
-      showTree2: false,
+      // showTree: false,
+      // showTree2: false,
     },
 
     methods:{
-      showTree(){
-        this.showTree = true
-      },
-      showTree2(){
-        this.showTree2 = true
-      }
+    //   showTree(){
+    //     this.showTree = true
+    //   },
+    //   showTree2(){
+    //     this.showTree2 = true
+    //   }
+    // }
     }
 }
 </script>

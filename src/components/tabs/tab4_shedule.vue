@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1>This is schedule component</h1>
+    <div class="tagtag">
+        <h1 >This is schedule component</h1>
     </div>
 </template>
 

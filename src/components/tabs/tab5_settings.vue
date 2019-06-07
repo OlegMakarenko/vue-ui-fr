@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tagtag">
         <h1>This is settings component</h1>
     </div>
 </template>

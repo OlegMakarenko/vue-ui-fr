@@ -81,7 +81,7 @@ export default {
 }
 
 .left_side_tabs{
-    width:20%; 
+    width:10%; 
     float: left;
 }
 

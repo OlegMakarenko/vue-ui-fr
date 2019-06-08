@@ -16,8 +16,19 @@
                 </el-radio-group>
 
             </div>
-            
+
             <div class="main_input">
+                <button class="button_p" @click="counter -= 1">
+                    <p style="font-size:40px; color: white; margin-top: 25%;">-</p>
+                </button>
+                <!-- <input type="number"
+                       v-model="counter"> -->
+
+                <p class="counter_p">{{counter}}*C</p>
+                <button class="button_m" @click="counter += 1"><p style="font-size:40px; color: white; margin-top: 25%;">+</p></button>
+            </div>
+            
+            <!-- <div class="main_input">
                 <el-input-number 
                     class="input-number"
                     v-model="num" 
@@ -26,7 +37,7 @@
                     :max="60"
                     size="large">
                 </el-input-number>
-            </div>
+            </div> -->
     </div>
         <div class="right_side">
             <br>
@@ -52,9 +63,9 @@
 export default {
     data(){
         return{
-            num: '1',
             radio1: 'В сети',
-            radio2: 'Ручной'
+            radio2: 'Ручной',
+            counter: 30
         }
     },
 
@@ -62,6 +73,14 @@ export default {
         handleChange(value){
             console.log(value);
         },
+
+        plusMinus(){
+            if(this.counter){
+                this.counter += 1;
+            } else {
+                this.counter -= 1;
+            }
+        }
     }
 }
 </script>
@@ -88,14 +107,48 @@ export default {
 }
 
 .main_input{
-    margin-left: 2%;
+    width: 30%;
+    height: 10vh;
+    margin-left: 7%;
     float: left;
+    display: block;
+}
+
+.button_p{
+    height:10vh;
+    width: 20%;
+    float: left;
+    background-color: #c0d3ef;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.counter_p{
+    width:45%; 
+    height:10vh;
+    margin-top:0; 
+    font-size: 58px;
+    float: left; 
+    color: white; 
+    background-color: #a5c1e9; 
+}
+
+.button_m{
+    height:10vh;
+    width: 20%;
+    float: left;
+    background-color: #c0d3ef;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 
 .center_side{
-    width: 70%;
-    margin-left: 20%;
-    margin-top: -40%;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 7%;
+    text-align: center;
 }
 
 .right_side{

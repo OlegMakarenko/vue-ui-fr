@@ -5,7 +5,15 @@
         :style="{'margin-left': `${depth * 20}px`}"
         class="node">
 
-     <span class="el-icon-folder"></span>
+     <span>
+       {{expanded ? '&#9662;' : '&#9656;'}}
+       <i class="el-icon-folder"></i>
+       <i class="el-input__icon el-icon-edit"
+          style="font-size: 18px;
+                 cursor: pointer;
+                 line-height: 23px;
+                 float: right;"></i>
+     </span>
      {{node.name}}
    </div>
 
@@ -16,7 +24,6 @@
           :depth="depth + 1"/>
   </div>
 </template>
-
 <script>
 export default {
   name: 'Tree',
@@ -44,8 +51,9 @@ export default {
 .node{
   cursor: pointer;
   text-align: left;
-  font-size: 20px;
+  font-size: 18px;
   color: gray;
+
 
 }
 

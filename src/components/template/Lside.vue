@@ -1,13 +1,22 @@
 <template>
   <div>
     <div class="left">
+<br>
       <div>
         <Tree
-        :node="root"
-        :treeData="root"
+         :node="system"
+         :treeData="system"
         />
-    </div>
-  </div>
+      </div>
+
+      <div>
+        <Tree
+         :node="dispositif"
+         :treeData="dispositif"
+        />
+     </div>
+
+   </div>
   </div>
 </template>
 
@@ -20,7 +29,7 @@ export default {
 
   data(){
     return{
-      root:{
+      system:{
         name: 'Моя система',
           children:[
             {
@@ -46,7 +55,35 @@ export default {
            ],
           },
         ],
-      }
+      },
+
+      dispositif:{
+        name: 'Диспетчер устройств',
+          children:[
+            {
+            name:'Регулятор на кухне дом',
+              children:[
+               {
+                name: 'Кухня',
+              },
+               {
+                name: 'Спальня',
+              },
+           ],
+          },
+            {
+            name:'Регулятор на улице дом',
+              children:[
+               {
+                name: 'Пристройка',
+              },
+               {
+                name: 'Гараж',
+              },
+           ],
+          },
+        ],
+      },
     }
   },
 
@@ -63,6 +100,7 @@ export default {
 <style scoped>
 
 .left {
+  line-height: 2;
   width: 20%;
   min-height: 100vh;
   float: left;

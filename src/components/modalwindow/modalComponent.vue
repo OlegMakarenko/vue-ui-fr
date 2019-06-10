@@ -1,32 +1,33 @@
 <template>
 <transition name="modal-fade">
     <div class="modal-mask2">
-    <div class="modal-backdrop2">
+        <div class="modal-backdrop2">
 
-        <div class="modal2"
-             role="dialog"
-             aria-labelledby="modalTitle"
-             aria-describedby="modalDescription">
-
-             <div class="close">
-                <button type="button"
-                    class="btn-close"
-                    @click="close"
-                    aria-label="Close modal">x
-                </button>
+            <div class="modal2"
+                 role="dialog"
+                 aria-labelledby="modalTitle"
+                 aria-describedby="modalDescription">
+                
+                <div class="modal-content">
+                    <div class="close">
+                        <button type="button"
+                                class="btn-close"
+                                @click="close"
+                                aria-label="Close modal">x
+                        </button>
+                    </div>
+                    <div class="left_side_tabs">
+                        <button style="outline: none; background: transparent;"
+                                v-for="tab in tabs" 
+                                :key="tab" 
+                                @click="selected = tab;"
+                                :class="['tab-btn', {active: selected === tab}]">{{tab}}
+                        </button>
+                    </div>
+                        <component class="modal-tab" :is="selected"/>
+                </div>
             </div>
-
-        <div class="left_side_tabs">
-            <button style="outline: none"
-                    v-for="tab in tabs" 
-                    :key="tab" 
-                    @click="selected = tab;"
-                    :class="['tab-btn', {active: selected === tab}]">{{tab}}
-            </button>
         </div>
-                <component :is="selected"/>
-        </div>
-    </div>
     </div>
 </transition>
 </template>
@@ -73,7 +74,6 @@ export default {
 </script>
 
 <style>
-
 .allp{
     margin-top: 0;
     font-size: 13px;
@@ -81,29 +81,28 @@ export default {
 }
 
 .left_side_tabs{
-    width:10%; 
+    width:  100px; 
+    /* height: 90%; */
+    /* position: fixed; */
     float: left;
 }
 
+.modal-content{
+    display: flex;
+    height: 22.2%;
+}
+
+.modal-tab{
+    flex: 1 auto auto;
+}
 
 .tab-btn{
-    width: 100%;
-    display: block;
-    height: 14vh;
-}
-
-/* .tab-btn{
-    margin-top: 0;
-    width: 10%; 
-    height: 14vh;
-    background: #ffffff;
-    cursor: pointer;
-    float: left;
-    position:inherit;
-    display:flex;
+    width: 100px;
+    height: 90%;
+    display: flex;
     flex-direction: column;
-    outline: none;
-} */
+    align-items: stretch;
+}
 
 .active{
     border-right: 3px solid blue;
@@ -122,7 +121,7 @@ export default {
 
 .modal-backdrop2{
     width: 100%;
-    height: 90vh;
+    height: 90%;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -130,36 +129,30 @@ export default {
 
 .modal2{
     margin-top: 5%;
-    margin-left: 0%;
     /* padding: 15px; */
     width: 80%;
-    height: 80vh;
+    height: 90%;
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
-    cursor:default;
-    display: flex;
-    flex-direction: column;
+    cursor: default;
 }
 
 .btn-close2{
-    /* float: right; */
-    /* width: 24px; */
-    /* margin-left: 95%; */
     border: none;
     font-size: 20px;
     cursor: pointer;
     font-weight: bold;
     color: #6f92be;
     background: transparent;
+    top: 20px;
+    right: 20px;
 }
 
 .close{
-    float: right;
-    /* display:inline-flex; */
-    /* width: 10%; */
-    margin-right: 10%;
-    margin-top: 1%;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
 </style>

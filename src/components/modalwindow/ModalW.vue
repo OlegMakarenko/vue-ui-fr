@@ -119,10 +119,6 @@ export default {
 }
 
 .btn-close{
-    /* float: right; */
-    /* width: 24%; */
-    margin-top: -2%;
-    margin-left: 95%;
     border: none;
     font-size: 35px;
     cursor: pointer;

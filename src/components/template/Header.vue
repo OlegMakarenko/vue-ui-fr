@@ -6,9 +6,9 @@
             <router-link class="home" to="/">LOGOHERE</router-link>
           </div>
 
-          <div class="rcorner_icon">
+          <!-- <div class="rcorner_icon">
             <i style="cursor: pointer; font-size: 30px;" class="el-icon-user-solid"></i>
-          </div>
+          </div> -->
       
           <div class="rcorner">
             <router-link class="reg" to="/alert">Alert</router-link>
@@ -36,16 +36,12 @@ export default {
 
 <style>
 
-  /* * {
-    margin: 0;
-    padding: 0;
-  } */
-
 .top {
   background-color: #ffffff;
-  height: 11vh;
-  /* padding-top: 30px; */
-  /* padding-bottom: 30px; */
+  width: 100%;
+  height: 10%;
+  padding-top: 15px;
+  padding-bottom: 20px;
   overflow: auto;
 }
 
@@ -54,18 +50,17 @@ export default {
 }
 
 .lcorner {
-  margin-top: 2.1%;
+  top: 19px;
   float: left;
   position: fixed;
 }
 
 .rcorner {
-  margin-top: 2.1%;
   float: right;
 }
 
 .rcorner_icon{
-  margin-top: 1.8%;
+  top:19px;
   float: right;
 }
 </style>

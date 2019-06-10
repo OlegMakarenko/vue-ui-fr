@@ -7,8 +7,8 @@
 
     <span @click="expanded = !expanded">
        {{expanded ? '&#9662;' : '&#9656;'}}
-       <i class="el-icon-folder"></i>
-       <i class="el-icon-odometer"></i>
+       
+       <i :class="node.icon"></i>
        <i class="el-input__icon el-icon-edit"
           style="font-size: 17px;
                  cursor: pointer;

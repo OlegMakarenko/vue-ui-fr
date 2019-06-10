@@ -3,20 +3,31 @@
 
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
             <div class="right" v-if="shows">
-                <h3>Диспетчер устройств</h3>
+                <h3 style="font-size: 18px; bold: none; float: left">Project info</h3><br><br>
+                <p style="float: left; text-align: left; color: #9e9e9e" class="allp">
+                  hello my name ishello my name ishello my name ishello my name ishello my name is
+                  hello my name ishello my name ishello my name ishello my name ishello my name is
+                  hello my name ishello my name ishello my name ishello my name ishello my name 
+                </p>
+                <p style="float: left; text-align: left; color: #9e9e9e" class="allp">
+                  hello my name ishello my name ishello my name ishello my name ishello my name is
+                  hello my name ishello my name ishello my name ishello my name ishello my name is
+                  hello my name ishello my name ishello my name ishello my name ishello my name 
+                </p>
               <el-header v-if="selectedComponent"> <!--dynamic title-->
                 {{selectedComponent}}
               </el-header>
-                <br><br>Вложений пока нет <br><br><hr><br> Действий пока нет <br><br><hr><br>
-                В этом пункте меню Вы можете подключить к своей учетной записи устройствo
             </div>
         </transition>
 
       <div class="all_components">
           <div class="center">
-
-            <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> <!--Part, where we need to add our devices-->
-            <button class="btn1" @click="showModal">+Подключить устройство</button>
+            <!-- <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> Part, where we need to add our devices -->
+            <button 
+                  class="btn1" 
+                  @click="showModal">
+                      <h class="center_h_tag">+ </h><h>Подключить устройство</h>
+            </button>
             
             <ModalW v-show="isModalVisible" @close="closeModal"/>
 
@@ -62,6 +73,7 @@ import ModalW from '../modalwindow/ModalW'
 
 
 export default {
+
     components: {
         "ComponentT": ComponentT,
         "ComponentL": ComponentL,
@@ -79,11 +91,11 @@ export default {
                 { title: " Himiditry device", content: "Hum: 40%" },
                 { title: " Himiditry device1", content: "Hum: 40%" },
                 { title: " Himiditry device2", content: "Hum: 40%" },
-                { title: " Himiditry device3", content: "Hum: 40%" },
-                { title: " Himiditry device4", content: "Hum: 40%" },
-                { title: " Himiditry device5", content: "Hum: 40%" },
-                { title: " Himiditry device6", content: "Hum: 40%" },
-                { title: " Himiditry device7", content: "Hum: 40%" }
+                // { title: " Himiditry device3", content: "Hum: 40%" },
+                // { title: " Himiditry device4", content: "Hum: 40%" },
+                // { title: " Himiditry device5", content: "Hum: 40%" },
+                // { title: " Himiditry device6", content: "Hum: 40%" },
+                // { title: " Himiditry device7", content: "Hum: 40%" }
             ],
 
             visible: true,
@@ -130,15 +142,11 @@ export default {
 .all_components{
   width: 100%;
   min-width: 80%;
-  /* max-width: 900px; */
 }
 
 .compo {
-  height: 76.1vh;
+  height: 76%;
   text-align: center;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-top: 1px solid #ccc;
   background-color: #ffffff;
   display: block;
   flex-flow: row wrap;
@@ -146,12 +154,9 @@ export default {
 }
 
 .center {
-  height: 12.7vh;
-  /* float: right; */
+  height: 14%;
   text-align: center;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #ebeef5;
   background-color: #ffffff;
   display: block;
   flex-flow: row wrap;
@@ -160,23 +165,32 @@ export default {
 
 
 .right {
-  width: 19.8%;
+  width: 20%;
   min-height: 100vh;
   float: right;
   text-align: center;
   display: block;
-  border-top: 1px solid #ccc;
-  border-left:  1px solid #ccc;
+  border-top: 1px solid #ebeef5;
   background-color: #ffffff;
+}
+
+.center_h_tag{
+  font-size:30px;
+  float: left; 
+  font-weight: 400; 
+  margin-left:0;
 }
 
 .btn1 {
   width: 20%;
+  height: 40px;
   float: left;
-  margin: 4px 2px 2px 4px;
+  margin-top: 16px;
+  margin-left: 5px;
+  /* margin: 4px 2px 2px 4px; */
   border: none;
   border-radius: 5px;
-  background-color: #6f92be;
+  background-color: #57aaff;
   color: white;
   text-align: center;
   text-decoration: none;
@@ -184,30 +198,30 @@ export default {
 }
 
 #btn3{
-  width: 20px;
+  /* width: 20px; */
   float: right;
   margin: 4px;
-  margin-top: 35px;
-  margin-right: 22px;
+  margin-top: 19px;
+  margin-right: 10px;
   background-color: white;
   border: none;
   color: grey;
   cursor: pointer;
-  font-size: 33px;
+  font-size: 30px;
   outline: none;
 }
 
 .btn3{
-  width: 20px;
+  /* width: 20px; */
   float: right;
   margin: 4px;
-  margin-top: 33px;
-  margin-right: 22px;
+  margin-top: 18px;
+  margin-right: 15px;
   background-color: white;
   border: none;
   color: grey;
   cursor: pointer;
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .btn4{
@@ -236,6 +250,10 @@ export default {
 .component-fade-enter, .component-fade-leave-to
 /* .component-fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+.active_hover{
+  background: #ebeef5;
 }
 
 </style>

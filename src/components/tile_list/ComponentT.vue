@@ -1,5 +1,10 @@
 <template>
-    <div class="component" @click="onClick" @dblclick="showModal2">
+    <div class="component" 
+         @click="onClick" 
+         @dblclick="showModal2"
+         @mouseover="hover = true"
+         @mouseleave="hover = false"
+         :class="{active_hover: hover}">
 
         <div>
             <i class="el-icon-folder" 
@@ -27,6 +32,21 @@
 
         <div class="title" >
             <input class="tbox" v-model="computedTitle">
+                <!-- <div class="field">
+                    <span 
+                        class="field-value" 
+                        v-show="!showField('title')" 
+                        @click="focusField('title')">{{title}}</span>
+
+                    <input 
+                        v-model="tile.title" 
+                        v-show="showField('title')" 
+                        id="tile-title" 
+                        type="text" 
+                        class="field-value form-control" 
+                        @focus="focusField('title')" 
+                        @blur="blurField">
+                </div> -->
         </div>
             
         <div class="content">
@@ -47,7 +67,8 @@ export default {
     data(){
         return{
             textBeforeTitle: "This is",
-            isModalVisible2: false
+            isModalVisible2: false,
+            hover: false
         }
     },
 
@@ -68,12 +89,21 @@ export default {
         },
         
         showModal2(){
-        this.isModalVisible2 = true;
+            this.isModalVisible2 = true;
         },
 
         closeModal2(){
-        this.isModalVisible2 = false;
+            this.isModalVisible2 = false;
         },
+        focusField(title){
+            this.editField = title;
+        },
+        blurField(){
+            this.editField = '';
+        },
+        showField(title){
+            return (this.tile[title] == '' || this.editField == title)
+        }
     }
 }
 </script>

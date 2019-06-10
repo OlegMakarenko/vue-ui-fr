@@ -1,5 +1,5 @@
 <template>
-    <div class="component" @click="onClick" @dblclick="showModal2">
+    <div class="component" :class="{active: activeBtn === 'ccc'}" @click="onClick" @dblclick="showModal2">
         <div>
             <i class="el-icon-folder" 
                style="float:left; 
@@ -47,7 +47,8 @@ export default {
     data(){
         return{
             textBeforeTitle: "This is",
-            isModalVisible2: false
+            isModalVisible2: false,
+            activeBtn:''
         }
     },
 
@@ -69,6 +70,7 @@ export default {
     },
     methods:{
         onClick(){
+            this.activeBtn = 'ccc';
             this.$emit("select", this.title);
         },
           
@@ -118,6 +120,9 @@ export default {
         font-size: 17px;
         border: none;
         text-align: center;
+    }
+    .active{
+        background: red;
     }
 }
 </style>

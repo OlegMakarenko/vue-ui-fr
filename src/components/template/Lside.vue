@@ -31,15 +31,19 @@ export default {
     return{
       system:{
         name: 'Моя система',
+        icon: "el-icon-folder",
           children:[
             {
             name:'Мой дом',
+            icon: "el-icon-folder",
               children:[
                {
                 name: 'Кухня',
+                icon: "el-icon-folder",
               },
                {
                 name: 'Спальня',
+                icon: "el-icon-folder",
               },
            ],
           },
@@ -48,9 +52,11 @@ export default {
               children:[
                {
                 name: 'Пристройка',
+                icon: "el-icon-folder",
               },
                {
                 name: 'Гараж',
+                icon: "el-icon-folder",
               },
            ],
           },
@@ -59,15 +65,19 @@ export default {
 
       dispositif:{
         name: 'Диспетчер устройств',
+        icon: "el-icon-search",
           children:[
             {
             name:'Регулятор на кухне дом',
+            icon: "el-icon-odometer",
               children:[
                {
                 name: 'Кухня',
+                icon: "el-icon-odometr",
               },
                {
                 name: 'Спальня',
+                icon: "el-icon-odometr",
               },
            ],
           },

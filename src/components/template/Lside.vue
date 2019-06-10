@@ -49,6 +49,7 @@ export default {
           },
             {
             name:'Дача',
+            icon: "el-icon-folder",
               children:[
                {
                 name: 'Пристройка',
@@ -65,7 +66,7 @@ export default {
 
       dispositif:{
         name: 'Диспетчер устройств',
-        icon: "el-icon-search",
+        icon: "el-icon-odometer",
           children:[
             {
             name:'Регулятор на кухне дом',
@@ -73,22 +74,25 @@ export default {
               children:[
                {
                 name: 'Кухня',
-                icon: "el-icon-odometr",
+                icon: "el-icon-odometer",
               },
                {
                 name: 'Спальня',
-                icon: "el-icon-odometr",
+                icon: "el-icon-odometer",
               },
            ],
           },
             {
             name:'Регулятор на улице дом',
+            icon: "el-icon-odometer",
               children:[
                {
                 name: 'Пристройка',
+                icon: "el-icon-odometer",
               },
                {
                 name: 'Гараж',
+                icon: "el-icon-odometer",
               },
            ],
           },

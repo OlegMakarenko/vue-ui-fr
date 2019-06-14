@@ -8,6 +8,8 @@
 
         <div>
             <i class="el-icon-folder" 
+               @mouseover="hover = true"
+               @mouseleave="hover = false"
                style="float:left; 
                       font-size: 20px; 
                       cursor: pointer;">
@@ -138,6 +140,7 @@ export default {
         font-size: 17px;
         border: none;
         text-align: center;
+        background: transparent
     }
 }
 </style>

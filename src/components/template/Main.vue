@@ -3,20 +3,41 @@
 
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
             <div class="right" v-if="shows">
-                <h3 style="font-size: 18px; bold: none; float: left">Project info</h3><br><br>
-                <p style="float: left; text-align: left; color: #9e9e9e" class="allp">
-                  hello my name ishello my name ishello my name ishello my name ishello my name is
-                  hello my name ishello my name ishello my name ishello my name ishello my name is
-                  hello my name ishello my name ishello my name ishello my name ishello my name 
+                <h3 style="font-size: 18px; bold: none; float: left; font-weight: 500; margin-top: 65px;">Project info</h3><br><br>
+                
+                <!-- <el-header style="float:left;" > dynamic title
+                  
+                </el-header> -->
+
+                <p v-if="selectedComponent"
+                    style="text-align: center;
+                           font-weight: 500;
+                           margin-top: 60px;
+                           width: 300px;">
+                    {{selectedComponent}}
+                </p> <!--dynamic title-->
+                
+                <p style="float: left; 
+                          text-align: left; 
+                          color: #9e9e9e; 
+                          width:80%;
+                          margin-left: 5px;" 
+                          class="allp">
+                  A variety of sizes and densities can be downloaded from this site.
+                  Our icon set is also available as a git repository make it even
+                  easier for developers to customize, share and re-use. 
                 </p>
-                <p style="float: left; text-align: left; color: #9e9e9e" class="allp">
-                  hello my name ishello my name ishello my name ishello my name ishello my name is
-                  hello my name ishello my name ishello my name ishello my name ishello my name is
-                  hello my name ishello my name ishello my name ishello my name ishello my name 
+
+                <p style="float: left; 
+                          text-align: left; 
+                          color: #9e9e9e; 
+                          width:80%;
+                          margin-left: 5px;" 
+                          class="allp">
+                  The best way to use these icons on the web is with our icon web font.
+                  It`s lightweight, easy to use, and hosted by Google Web Fonts. Learn
+                  how to use font-based icons in our developer guide.
                 </p>
-              <el-header v-if="selectedComponent"> <!--dynamic title-->
-                {{selectedComponent}}
-              </el-header>
             </div>
         </transition>
 
@@ -24,10 +45,45 @@
           <div class="center">
             <!-- <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> Part, where we need to add our devices -->
             <button 
-                  class="btn1" 
+                  style="font-size: 15px;"
+                  class="btn_add_device" 
                   @click="showModal">
-                      <h class="center_h_tag">+ </h><h>Подключить устройство</h>
+                  <i class="fa fa-plus" style="margin-top: 2px; margin-right: 6px;"></i> Подключить устройство
             </button>
+
+            <button 
+                  style="font-size: 15px; text-align: right"
+                  class="btn_add_group">
+                  <i class="fa fa-folder" style="margin-top: 2px; margin-right: 6px;"></i> Добавить группу
+            </button>
+
+            <!-- <div class="el-modal-window">
+                <el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
+                <el-dialog
+                    title="Warning"
+                    :visible.sync="centerDialogVisible"
+                    width="50%"
+                    
+                    center>
+                <div style="height: 700px;">
+                  <el-tabs tab-position="left" style="height: 500px;">
+                    <el-tab-pane style="height: 200px;">
+                      <div slot="label" style="height: 200px; font-size: 50px"><i class="el-icon-date"></i></div>
+                      Route
+                    </el-tab-pane>
+                      <el-tab-pane style="height: 200px;">
+                      <div slot="label" style="height: 200px; font-size: 50px"><i class="el-icon-search"></i></div>
+                      Route
+                    </el-tab-pane>
+                     </el-tabs>
+                </div>
+                  
+                <span slot="footer" class="dialog-footer">
+                  <el-button @click="centerDialogVisible = false">Cancel</el-button>
+                  <el-button type="primary" @click="centerDialogVisible = false">Confirm</el-button>
+                </span>
+              </el-dialog>
+            </div> -->
             
             <ModalW v-show="isModalVisible" @close="closeModal"/>
 
@@ -36,16 +92,21 @@
               <!--There is our component switching button-->
               <button 
                 id="btn3" 
-                class=" fa fa-align-justify" 
+                class="el-icon-minus" 
                 v-if="showc == ComponentT" 
                 @click="showComponents">
               </button>
               
               <button 
                 id="btn3" 
-                class="fa fa-th-large" 
+                class="el-icon-s-grid" 
                 v-else 
                 @click="showComponents">
+              </button>
+              
+              <button 
+                id="btn3" 
+                class="el-icon-s-tools">
               </button>
           </div>
 
@@ -56,12 +117,21 @@
               :title="item.title"
               :content="item.content"
               :key="item.title"
-              @select="onComponentSelect"/>
+              @select="onComponentSelect"
+              />
           </div>
+
+          <!-- <ChildComponent
+          class="compo"
+            v-for="item in dataForComponents"
+            :title="item.title"
+            :id="item.id"
+            :key="'childCc'+item.id"
+            @nameChanged="childNameChanged"
+          /> -->
 
         </div>
     </div>
-
 </template>
 
 
@@ -70,6 +140,7 @@
 import ComponentT from '../tile_list/ComponentT.vue'
 import ComponentL from '../tile_list/ComponentL.vue'
 import ModalW from '../modalwindow/ModalW'
+import ChildComponent from './ChildComponent.vue'
 
 
 export default {
@@ -77,6 +148,7 @@ export default {
     components: {
         "ComponentT": ComponentT,
         "ComponentL": ComponentL,
+        ChildComponent,
         ModalW
     },
 
@@ -85,17 +157,18 @@ export default {
 
           ComponentT: "ComponentT",
           ComponentL: "ComponentL", 
+          centerDialogVisible: false,
 
             dataForComponents: [
-                { title: " Temperature device", content: "Temp 10C" },
-                { title: " Himiditry device", content: "Hum: 40%" },
-                { title: " Himiditry device1", content: "Hum: 40%" },
-                { title: " Himiditry device2", content: "Hum: 40%" },
-                // { title: " Himiditry device3", content: "Hum: 40%" },
-                // { title: " Himiditry device4", content: "Hum: 40%" },
-                // { title: " Himiditry device5", content: "Hum: 40%" },
-                // { title: " Himiditry device6", content: "Hum: 40%" },
-                // { title: " Himiditry device7", content: "Hum: 40%" }
+                { id: 0, title: " Temperature device", content: "Temp 10C" },
+                { id: 1, title: " Himiditry device", content: "Hum: 40%" },
+                { id: 2, title: " Himiditry device1", content: "Hum: 40%" },
+                { id: 3, title: " Himiditry device2", content: "Hum: 40%" },
+                { id: 4, title: " Himiditry device3", content: "Hum: 40%" },
+                { id: 5, title: " Himiditry device4", content: "Hum: 40%" },
+                { title: " Himiditry device5", content: "Hum: 40%" },
+                { title: " Himiditry device6", content: "Hum: 40%" },
+                { title: " Himiditry device7", content: "Hum: 40%" }
             ],
 
             visible: true,
@@ -113,6 +186,15 @@ export default {
     },
 
     methods:{
+
+      childNameChanged(e){
+        console.log(e)
+        for(var i=0; i < this.dataForComponents.length; i++)
+          if(this.dataForComponents[i].id == e.id)
+            this.dataForComponents[i].title = e.newTitle;
+
+            
+      },
     showModal(){
       this.isModalVisible = true;
     },
@@ -139,13 +221,16 @@ export default {
 
 
 <style scoped>
+
 .all_components{
   width: 100%;
   min-width: 80%;
 }
 
 .compo {
-  height: 76%;
+  height: 75vh;
+  min-width: 60%;
+  max-width: 90%;
   text-align: center;
   background-color: #ffffff;
   display: block;
@@ -154,13 +239,13 @@ export default {
 }
 
 .center {
-  height: 14%;
+  height: 14vh;
   text-align: center;
   border-top: 1px solid #ebeef5;
   background-color: #ffffff;
   display: block;
   flex-flow: row wrap;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 
@@ -174,19 +259,21 @@ export default {
   background-color: #ffffff;
 }
 
-.center_h_tag{
+/* .center_h_tag{
   font-size:30px;
   float: left; 
   font-weight: 400; 
   margin-left:0;
-}
+} */
 
 .btn1 {
-  width: 20%;
+  width: 200px;
   height: 40px;
   float: left;
-  margin-top: 16px;
+  margin-top: 2%;
   margin-left: 5px;
+  /* display: flex;  */
+  /* justify-content: flex-start; */
   /* margin: 4px 2px 2px 4px; */
   border: none;
   border-radius: 5px;
@@ -197,17 +284,51 @@ export default {
   cursor: pointer;
 }
 
+.btn_add_device{
+  width: 200px;
+  height: 35px;
+  float: left;
+  margin-top: 25px;
+  margin-left: 5px;
+  display: flex; justify-content: flex-start;
+  border: none;
+  /* outline:none; */
+  border-radius: 8px;
+  background-color: #57aaff;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn_add_group{
+  width: 200px;
+  height: 35px;
+  float: left;
+  margin-top: 25px;
+  margin-left: 5px;
+  display: flex; justify-content: flex-start;
+  border: 1px solid #ebeef5;
+  /* outline:none; */
+  border-radius: 8px;
+  background-color: white;
+  color: #c1c0c0;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 #btn3{
   /* width: 20px; */
   float: right;
   margin: 4px;
-  margin-top: 19px;
-  margin-right: 10px;
+  margin-top: 26px;
+  margin-right: 11px;
   background-color: white;
   border: none;
   color: grey;
   cursor: pointer;
-  font-size: 30px;
+  font-size: 28px;
   outline: none;
 }
 
@@ -215,13 +336,13 @@ export default {
   /* width: 20px; */
   float: right;
   margin: 4px;
-  margin-top: 18px;
-  margin-right: 15px;
+  margin-top: 25px;
+  margin-right: 18px;
   background-color: white;
   border: none;
   color: grey;
   cursor: pointer;
-  font-size: 30px;
+  font-size: 28px;
 }
 
 .btn4{
@@ -232,11 +353,11 @@ export default {
 }
 
 .slide-fade-enter-active {
-  transition: all .3s ease;
+  transition: all .2s ease;
 }
 
 .slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all .2s ease;
 }
 
 .slide-fade-enter, .slide-fade-leave-to{
@@ -255,5 +376,11 @@ export default {
 .active_hover{
   background: #ebeef5;
 }
+
+::-webkit-scrollbar { width: 3px; height: 3px;}
+::-webkit-scrollbar-track {  background-color: #999;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
+::-webkit-resizer { background-color: #666;}
+
 
 </style>

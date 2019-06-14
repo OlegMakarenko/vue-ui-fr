@@ -7,15 +7,7 @@
                  role="dialog"
                  aria-labelledby="modalTitle"
                  aria-describedby="modalDescription">
-                
-                <div class="modal-content">
-                    <div class="close">
-                        <button type="button"
-                                class="btn-close"
-                                @click="close"
-                                aria-label="Close modal">x
-                        </button>
-                    </div>
+                 <div class="modal-content">
                     <div class="left_side_tabs">
                         <button style="outline: none; background: transparent;"
                                 v-for="tab in tabs" 
@@ -25,7 +17,17 @@
                         </button>
                     </div>
                         <component class="modal-tab" :is="selected"/>
-                </div>
+                 </div>
+                
+                <!-- <div class="modal-content">
+                    <div class="close">
+                        <button type="button"
+                                class="btn-close"
+                                @click="close"
+                                aria-label="Close modal">x
+                        </button>
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -74,41 +76,6 @@ export default {
 </script>
 
 <style>
-.allp{
-    margin-top: 0;
-    font-size: 13px;
-    text-align: center; 
-}
-
-.left_side_tabs{
-    width:  100px; 
-    /* height: 90%; */
-    /* position: fixed; */
-    float: left;
-}
-
-.modal-content{
-    display: flex;
-    height: 22.2%;
-}
-
-.modal-tab{
-    flex: 1 auto auto;
-}
-
-.tab-btn{
-    width: 100px;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-
-.active{
-    border-right: 3px solid blue;
-    outline: none;
-}
-
 .modal-mask2{
     position: fixed;
     top: 0;
@@ -136,6 +103,41 @@ export default {
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
     cursor: default;
+}
+
+.modal-content{
+    display: flex;
+    height: 100%;/*need take to attention*/
+}
+
+.left_side_tabs{
+    width:  10%; 
+    height: 18%;
+    position: fixed;
+    float: left;
+}
+
+.tab-btn{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.modal-tab{
+    flex: 1 auto auto;
+}
+
+.allp{
+    margin-top: 0;
+    font-size: 13px;
+    text-align: center; 
+}
+
+.active{
+    border-right: 3px solid blue;
+    outline: none;
 }
 
 .btn-close2{

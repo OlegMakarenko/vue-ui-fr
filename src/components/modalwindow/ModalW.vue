@@ -161,10 +161,4 @@ export default {
 .modal-fade-enter-active, .modal-fade-leave-active{
     transition: opacity .5s ease
 }
-
-::-webkit-scrollbar { width: 3px; height: 3px;}
-::-webkit-scrollbar-track {  background-color: #999;}
-::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
-::-webkit-resizer { background-color: #666;}
-
 </style>

@@ -1,18 +1,32 @@
 <template>
   <div>
     <div class="top">
+      <img class="brand" 
+           src="./backgroundFractal.png" 
+           alt="fractal" 
+           style="float: left;
+                  margin-top: 5px; 
+                  margin-left: 5px;" 
+                  width="50" 
+                  height="50" />
+      <div class="header-text">
+        <div class="header-brand">Fractal</div>
+      </div>
       <nav>
-          <div class="lcorner">
-            <router-link class="home" to="/">LOGOHERE</router-link>
-          </div>
 
-          <!-- <div class="rcorner_icon">
-            <i style="cursor: pointer; font-size: 30px;" class="el-icon-user-solid"></i>
-          </div> -->
+          
+            <i style="cursor: pointer; 
+                      font-size: 30px; 
+                      float: right; 
+                      margin-top: 16px; 
+                      margin-right: 5px;
+                      color: #565656" 
+                      class="fa fa-user-circle-o"></i>
+          
       
-          <div class="rcorner">
+          <!-- <div class="rcorner">
             <router-link class="reg" to="/alert">Alert</router-link>
-          </div>
+          </div> -->
 
       </nav>
     </div>
@@ -39,9 +53,9 @@ export default {
 .top {
   background-color: #ffffff;
   width: 100%;
-  height: 10%;
-  padding-top: 15px;
-  padding-bottom: 20px;
+  height: 60px;
+  /* padding-top: 15px; */
+  padding-bottom: 0px;
   overflow: auto;
 }
 
@@ -60,7 +74,19 @@ export default {
 }
 
 .rcorner_icon{
-  top:19px;
+  /* top:19px; */
+  margin-top:-40px;
   float: right;
+}
+
+.header-text{
+  float: left;
+  margin-top: 15px;
+  margin-left: 20px;
+}
+
+.header-brand {
+  font-size: 27px;
+  color: #565656;
 }
 </style>

@@ -16,7 +16,7 @@
                 
                 <p style="text-align: center;
                       font-size: 22px;
-                      margin-top: 0;">Подключение аксессуара</p>
+                      margin-top: 20px;">Подключение аксессуара</p>
                 <p style="text-align: center;
                       font-size: 20px;
                       margin-top: 5px;">Для аксессуара устройства выберите тип подключаемого устройства</p>      
@@ -113,7 +113,7 @@ export default {
     width: 50%;
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
-    overflow-x: auto;
+    /* overflow-x: auto; */
     display: flex;
     flex-direction: column;
 }
@@ -125,6 +125,10 @@ export default {
     /* font-weight: bold; */
     color: #666;
     background: transparent;
+    display: flex;
+    position: absolute;
+    top: 160px;
+    right: 170px;
 }
 .center-btn{
     float: left;

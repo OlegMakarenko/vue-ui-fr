@@ -2,7 +2,6 @@
 <transition name="modal-fade">
     <div class="modal-mask2">
         <div class="modal-backdrop2">
-
             <div class="modal2"
                  role="dialog"
                  aria-labelledby="modalTitle"
@@ -15,11 +14,7 @@
                                 @click="selected = tab;"
                                 :class="['tab-btn', {active: selected === tab}]">{{tab}}
                         </button>
-                    </div>
-                        <component class="modal-tab" :is="selected"/>
-                 </div>
-                
-                <!-- <div class="modal-content">
+
                     <div class="close">
                         <button type="button"
                                 class="btn-close"
@@ -27,7 +22,9 @@
                                 aria-label="Close modal">x
                         </button>
                     </div>
-                </div> -->
+                    </div>
+                        <component class="modal-tab" :is="selected"/>
+                 </div>
             </div>
         </div>
     </div>
@@ -92,6 +89,7 @@ export default {
     position: fixed;
     display: flex;
     justify-content: center;
+    cursor: default;
 }
 
 .modal2{
@@ -153,8 +151,10 @@ export default {
 
 .close{
     position: absolute;
+    float: right;
     top: 20px;
     right: 20px;
+    left: 1150px;
 }
 
 </style>

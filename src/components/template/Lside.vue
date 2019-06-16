@@ -2,9 +2,8 @@
   <div>
     <div class="left">
 <br>
-      <div>
+      <div class="tree-style">
         <el-tree
-
           :data="system"
           node-key="id"
           default-expand-all
@@ -18,11 +17,15 @@
           :allow-drop="allowDrop"
           :allow-drag="allowDrag">
 
-        <span slot-scope="{ node, data }">
-            <i class="el-icon-folder"></i>
-          <span>{{node.label}}</span>
-            <i class="el-icon-edit  icon_edit_tree"></i>
-        </span>
+          <span slot-scope="{ node, data }">
+              <i class="el-icon-folder"></i>
+            <span>{{node.label}}</span>
+              <i class="el-icon-edit  icon_edit_tree"
+              style="font-size: 17px;
+                     cursor: pointer;
+                     line-height: 34px;
+                     float: right;"></i>
+          </span>
 
         </el-tree>
       </div>
@@ -82,6 +85,8 @@ export default {
               }]
             },]
           },],
+
+
           devices:[{
             label: 'Диспетчер устройств',
             children: [{
@@ -151,6 +156,10 @@ export default {
   </script>
 
 <style scoped>
+.tree-style{
+
+
+}
 .el-tree{
   background-color: #ebeef5;
 }
@@ -161,6 +170,7 @@ export default {
   min-height: 100vh;
   float: left;
   background-color: #ebeef5;
+
   display: block;
   text-align: center;
 }

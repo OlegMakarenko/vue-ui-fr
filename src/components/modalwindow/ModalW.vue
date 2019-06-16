@@ -1,5 +1,6 @@
 <template>
 <transition name="modal-fade">
+    <!--Modal window for adding accessorises-->
     <div class="modal-mask">
     <div class="modal-backdrop">
 
@@ -80,7 +81,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .allp{
     margin-top: 0;
@@ -108,7 +109,7 @@ export default {
 
 .modal{
     margin-top: 13%;
-    margin-left: 25%;
+    margin-left: 20%;
     padding: 15px;
     width: 50%;
     background: #ffffff;

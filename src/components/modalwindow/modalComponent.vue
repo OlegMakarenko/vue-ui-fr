@@ -1,12 +1,12 @@
 <template>
 <transition name="modal-fade">
-    <div class="modal-mask2">
-        <div class="modal-backdrop2">
-            <div class="modal2"
+    <div class="modal-mask-component">
+        <div class="modal-backdrop-component">
+            <div class="modal-component"
                  role="dialog"
                  aria-labelledby="modalTitle"
                  aria-describedby="modalDescription">
-                 <div class="modal-content">
+                 <div class="modal-content-componet">
                     <div class="left_side_tabs">
                         <button style="outline: none; background: transparent;"
                                 v-for="tab in tabs" 
@@ -17,7 +17,7 @@
 
                     <div class="close">
                         <button type="button"
-                                class="btn-close"
+                                class="btn-close2"
                                 @click="close"
                                 aria-label="Close modal">x
                         </button>
@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style>
-.modal-mask2{
+.modal-mask-component{
     position: fixed;
     top: 0;
     left: 0;
@@ -83,7 +83,7 @@ export default {
     display: table;
 }
 
-.modal-backdrop2{
+.modal-backdrop-component{
     width: 100%;
     height: 90%;
     position: fixed;
@@ -92,32 +92,32 @@ export default {
     cursor: default;
 }
 
-.modal2{
+.modal-component{
     margin-top: 5%;
     /* padding: 15px; */
     width: 80%;
     height: 90%;
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
-    overflow-x: auto;
+    overflow-x: none;
     cursor: default;
 }
 
-.modal-content{
+.modal-component-content{
     display: flex;
     height: 100%;/*need take to attention*/
 }
 
 .left_side_tabs{
     width:  10%; 
-    height: 18%;
+    height: 15%;
     position: fixed;
     float: left;
 }
 
 .tab-btn{
     width: 100%;
-    height: 90%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -140,12 +140,12 @@ export default {
 
 .btn-close2{
     border: none;
-    font-size: 20px;
+    font-size: 35px;
     cursor: pointer;
-    font-weight: bold;
-    color: #6f92be;
+    color: #666;
     background: transparent;
-    top: 20px;
+    display: flex;
+    position: absolute;
     right: 20px;
 }
 

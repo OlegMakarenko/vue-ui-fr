@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
             <div class="right" v-if="shows">
                 <h3 style="font-size: 18px; bold: none; float: left; font-weight: 500; margin-top: 65px;">Project info</h3><br><br>

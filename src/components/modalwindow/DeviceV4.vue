@@ -1,50 +1,28 @@
 <template>
-<transition name="modal-fade">
-    <div class="modal-backdrop">
-        <div class="modal" 
+<transition name="modal-fade-device">
+    <div class="modal-backdrop-device">
+        <div class="modal-device" 
              role="dialog" 
              aria-labelledby="modalTitle"
              aria-describedby="modalDescription">
-        <p style="text-align: center; margin-top: 0;">
-            Подключение WI-FI терморегулятора через браузер на ПК
-        </p>
-            <el-tabs v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane label="Шаг 1" name="first">
-                            <p class="allp">
-                                1. Переключите регулятор в режим точки доступа
-                            </p>
-                            <button class="btn-left" @click="close" style="cursor: pointer;">Назад</button>
-                            <button class="btn-right" style="cursor: pointer;">Вперед</button>
-                </el-tab-pane>
-
-                <el-tab-pane label="Шаг 2" name="second">
-                        <p class="allp">
-                            2. В доступных WI-FI сетях вашего ноутбукау вас в течение
-                        </p>
-                    <button class="btn-left" style="cursor: pointer;">Назад</button>
-                    <button class="btn-right" style="cursor: pointer;">Вперед</button>
-                </el-tab-pane>
-
-                <el-tab-pane label="Шаг 3" name="third">
-                        <p class="allp">
-                            3. На странице подключения вам понадобится ввести
-                        </p>
-                    <button class="btn-left" style="cursor: pointer;">Назад</button>
-                    <button class="btn-right" style="cursor: pointer;">Вперед</button>
-                </el-tab-pane>
-
-                <el-tab-pane label="Шаг 4" name="fourth">
-                        <p class="allp">
-                            4. Устройство, получив эти параметры перейдет
-                        </p>
-                    <button style="cursor: pointer;"
-                            type="button"
-                            class="btn-blue"
-                            @click="close"
-                            aria-label="Close modal">Add device
+             <div class="content_device">
+                 <p style="text-align: center; margin-top: 0;">
+                    Подключение WI-FI терморегулятора через браузер на ПК
+                </p>
+                <div class="top_tabs">
+                    <button 
+                        style="outline: none; background: transparent; background: #ccc;"
+                        v-for="step in deviceTabs" 
+                        :key="step" 
+                        @click="selectedTab = step;"
+                        :class="['top-tab-btn', {active1: selectedTab === step}]">{{step}}
                     </button>
-                </el-tab-pane>
-            </el-tabs> 
+                </div>
+                <component :is="selectedTab"/>
+            <button class="btn-device-left" @click="close" style="cursor: pointer;">Назад</button>
+            <button class="btn-device-right" style="cursor: pointer;">Вперед</button>
+             </div>
+
         <!-- <el-button style="margin-top: 12px; width: 100px;" @click="next">Next step</el-button> -->
         </div>
     </div>
@@ -52,13 +30,29 @@
 </template>
 
 <script>
+
+import step1 from '../modalwindow/thermostat_add_tabs/tab1_step1.vue'
+import step2 from '../modalwindow/thermostat_add_tabs/tab2_step2.vue'
+import step3 from '../modalwindow/thermostat_add_tabs/tab3_step3.vue'
+import step4 from '../modalwindow/thermostat_add_tabs/tab4_step4.vue'
+
 export default {
     name: 'modal',
 
     data(){
         return{
-            activeName: 'first'
+            deviceTabs: ['step1', 'step2', 'step3', 'step4'],
+
+            selectedTab: 'step1',
+
         };
+    },
+
+    components:{
+        step1,
+        step2,
+        step3,
+        step4
     },
 
     methods: {
@@ -81,9 +75,9 @@ export default {
     font-size: 13px;
 }
 
-.modal-backdrop{
-    margin-top: -12%;
-    margin-left: -24%;
+.modal-backdrop-device{
+    margin-top: -11%;
+    margin-left: -15%;
     height: 60vh;
     width: 70%;
     position: fixed;
@@ -91,7 +85,7 @@ export default {
     justify-content: center;
 }
 
-.modal{
+.modal-device{
     margin-top: 0px;
     padding: 15px;
     width: 65%;
@@ -100,6 +94,32 @@ export default {
     overflow-x: auto;
     display: flex;
     flex-direction: column;
+}
+
+.content_device{
+    width: 100%;
+    height: 100%;
+}
+
+.top_tabs{
+    width:  2.5%; 
+    height: 4%;
+    margin-left: 32%;
+    /* position: fixed; */
+    display: flex;
+    flex-direction: row;
+    /* float: left; */
+}
+
+.top-tab-btn{
+    width: 100%;
+    height: 100%;
+    border-radius: 200px;
+    margin-left: 30px;
+    border: none;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: stretch; */
 }
 
 .btn-blue{
@@ -111,8 +131,8 @@ export default {
     border-radius: 2px;
 }
 
-.btn-left{
-    margin-top: 37%;
+.btn-device-left{
+    /* margin-top: 37%; */
     float: left;
     border: 1px solid #6f92be;
     border-radius: 2px;
@@ -120,20 +140,26 @@ export default {
     color: White;
 }
 
-.btn-right{
-    margin-top: 37%;
+.btn-device-right{
+    /* margin-top: 37%; */
     float: right;
     border: 1px solid #6f92be;
     border-radius: 2px;
     background: #6f92be; 
+    /* position: fixed; */
     color: White;
 }
 
-.modal-fade-enter, .modal-fade-leave-active{
+.active1{
+    background-color: #6f92be;
+    /* border-right:1px solid red; */
+}
+
+.modal-fade-device-enter, .modal-fade-device-leave-active{
     opacity: 0;
 }
 
-.modal-fade-enter-active, .modal-fade-leave-active{
+.modal-fade-device-enter-active, .modal-fade-device-leave-active{
     transition: opacity .5s ease
 }
 </style>

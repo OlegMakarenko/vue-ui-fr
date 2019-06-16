@@ -1,12 +1,11 @@
 <template>
     <div>
-
         <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
             <div class="right" v-if="shows">
                 <h3 style="font-size: 18px; bold: none; float: left; font-weight: 500; margin-top: 65px;">Project info</h3><br><br>
-                
+
                 <!-- <el-header style="float:left;" > dynamic title
-                  
+
                 </el-header> -->
 
                 <p v-if="selectedComponent"
@@ -16,23 +15,23 @@
                            width: 300px;">
                     {{selectedComponent}}
                 </p> <!--dynamic title-->
-                
-                <p style="float: left; 
-                          text-align: left; 
-                          color: #9e9e9e; 
+
+                <p style="float: left;
+                          text-align: left;
+                          color: #9e9e9e;
                           width:80%;
-                          margin-left: 5px;" 
+                          margin-left: 5px;"
                           class="allp">
                   A variety of sizes and densities can be downloaded from this site.
                   Our icon set is also available as a git repository make it even
-                  easier for developers to customize, share and re-use. 
+                  easier for developers to customize, share and re-use.
                 </p>
 
-                <p style="float: left; 
-                          text-align: left; 
-                          color: #9e9e9e; 
+                <p style="float: left;
+                          text-align: left;
+                          color: #9e9e9e;
                           width:80%;
-                          margin-left: 5px;" 
+                          margin-left: 5px;"
                           class="allp">
                   The best way to use these icons on the web is with our icon web font.
                   It`s lightweight, easy to use, and hosted by Google Web Fonts. Learn
@@ -41,21 +40,23 @@
             </div>
         </transition>
 
+
       <div class="all_components">
           <div class="center">
             <!-- <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> Part, where we need to add our devices -->
-            <button 
+            <button
                   style="font-size: 15px;"
-                  class="btn_add_device" 
+                  class="btn_add_device"
                   @click="showModal">
                   <i class="fa fa-plus" style="margin-top: 2px; margin-right: 6px;"></i> Подключить устройство
             </button>
 
-            <button 
+            <button
                   style="font-size: 15px; text-align: right"
                   class="btn_add_group">
                   <i class="fa fa-folder" style="margin-top: 2px; margin-right: 6px;"></i> Добавить группу
             </button>
+
 
             <!-- <div class="el-modal-window">
                 <el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
@@ -63,7 +64,7 @@
                     title="Warning"
                     :visible.sync="centerDialogVisible"
                     width="50%"
-                    
+
                     center>
                 <div style="height: 700px;">
                   <el-tabs tab-position="left" style="height: 500px;">
@@ -77,37 +78,45 @@
                     </el-tab-pane>
                      </el-tabs>
                 </div>
-                  
+
                 <span slot="footer" class="dialog-footer">
                   <el-button @click="centerDialogVisible = false">Cancel</el-button>
                   <el-button type="primary" @click="centerDialogVisible = false">Confirm</el-button>
                 </span>
               </el-dialog>
             </div> -->
-            
+
             <ModalW v-show="isModalVisible" @close="closeModal"/>
 
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
 
               <!--There is our component switching button-->
-              <button 
-                id="btn3" 
-                class="el-icon-minus" 
-                v-if="showc == ComponentT" 
+              <button
+                id="btn3"
+                class="el-icon-minus"
+                v-if="showc == ComponentT"
                 @click="showComponents">
               </button>
-              
-              <button 
-                id="btn3" 
-                class="el-icon-s-grid" 
-                v-else 
+
+              <button
+                id="btn3"
+                class="el-icon-s-grid"
+                v-else
                 @click="showComponents">
               </button>
-              
-              <button 
-                id="btn3" 
+
+              <button
+                id="btn3"
                 class="el-icon-s-tools">
               </button>
+          </div>
+
+          <div class="breadcrumb">
+            <el-breadcrumb separator="/" style="margin-left: 35px;">
+            <el-breadcrumb-item :to="{ path: '/' }">Моя Система</el-breadcrumb-item>
+            <el-breadcrumb-item><a href="/">Мой дом</a></el-breadcrumb-item>
+            <el-breadcrumb-item>Кухня</el-breadcrumb-item>
+            </el-breadcrumb>
           </div>
 
           <div class="compo"><!--Component part, under center part, where we have info about devices-->
@@ -156,7 +165,7 @@ export default {
         return{
 
           ComponentT: "ComponentT",
-          ComponentL: "ComponentL", 
+          ComponentL: "ComponentL",
           centerDialogVisible: false,
 
             dataForComponents: [
@@ -193,7 +202,7 @@ export default {
           if(this.dataForComponents[i].id == e.id)
             this.dataForComponents[i].title = e.newTitle;
 
-            
+
       },
     showModal(){
       this.isModalVisible = true;
@@ -222,6 +231,10 @@ export default {
 
 <style scoped>
 
+.breadcrumb{
+ display: flow-root;
+}
+
 .all_components{
   width: 100%;
   min-width: 80%;
@@ -239,7 +252,7 @@ export default {
 }
 
 .center {
-  height: 14vh;
+  height: 95px;
   text-align: center;
   border-top: 1px solid #ebeef5;
   background-color: #ffffff;
@@ -261,8 +274,8 @@ export default {
 
 /* .center_h_tag{
   font-size:30px;
-  float: left; 
-  font-weight: 400; 
+  float: left;
+  font-weight: 400;
   margin-left:0;
 } */
 

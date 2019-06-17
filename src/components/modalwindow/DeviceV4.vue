@@ -11,11 +11,11 @@
                 </p>
                 <div class="top_tabs">
                     <button 
-                        style="outline: none; background: transparent; background: #ccc;"
+                        style="outline: none; background: transparent; background: #ccc; cursor: pointer"
                         v-for="step in deviceTabs" 
                         :key="step" 
                         @click="selectedTab = step;"
-                        :class="['top-tab-btn', {active1: selectedTab === step}]">{{step}}
+                        :class="['top-tab-btn', {active_device_v4: selectedTab === step}]">{{step}}
                     </button>
                 </div>
                 <component :is="selectedTab"/>
@@ -150,7 +150,7 @@ export default {
     color: White;
 }
 
-.active1{
+.active_device_v4{
     background-color: #6f92be;
     /* border-right:1px solid red; */
 }

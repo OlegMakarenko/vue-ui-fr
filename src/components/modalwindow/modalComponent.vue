@@ -6,7 +6,15 @@
                  role="dialog"
                  aria-labelledby="modalTitle"
                  aria-describedby="modalDescription">
-                 <div class="modal-content-componet">
+                    
+                    <div class="close">
+                        <button type="button"
+                                class="btn-close2"
+                                @click="close"
+                                aria-label="Close modal">x
+                        </button>
+                    </div>
+
                     <div class="left_side_tabs">
                         <button style="outline: none; background: transparent;"
                                 v-for="tab in tabs" 
@@ -15,16 +23,10 @@
                                 :class="['tab-btn', {active: selected === tab}]">{{tab}}
                         </button>
 
-                    <div class="close">
-                        <button type="button"
-                                class="btn-close2"
-                                @click="close"
-                                aria-label="Close modal">x
-                        </button>
                     </div>
-                    </div>
+
                         <component class="modal-tab" :is="selected"/>
-                 </div>
+                 
             </div>
         </div>
     </div>
@@ -86,14 +88,16 @@ export default {
 .modal-backdrop-component{
     width: 100%;
     height: 90%;
-    position: fixed;
-    display: flex;
-    justify-content: center;
+    /* position: fixed; */
+    margin-top: 3.5%;
+    margin-left: 10%;
+    /* display: flex;    */
+    /* justify-content: center; */
     cursor: default;
 }
 
 .modal-component{
-    margin-top: 5%;
+    /* margin-top: 5%; */
     /* padding: 15px; */
     width: 80%;
     height: 90%;
@@ -103,21 +107,16 @@ export default {
     cursor: default;
 }
 
-.modal-component-content{
-    display: flex;
-    height: 100%;/*need take to attention*/
-}
-
 .left_side_tabs{
     width:  10%; 
-    height: 15%;
-    position: fixed;
+    height: 100%;
+    position: absolute;
     float: left;
 }
 
 .tab-btn{
     width: 100%;
-    height: 100%;
+    height: 16.2%;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -144,17 +143,19 @@ export default {
     cursor: pointer;
     color: #666;
     background: transparent;
-    display: flex;
-    position: absolute;
-    right: 20px;
+    /* display: flex; */
+    margin-left: 42%;
+    /* position: absolute; */
+    /* right: 20px; */
 }
 
 .close{
+    width: 100%;
     position: absolute;
-    float: right;
-    top: 20px;
-    right: 20px;
-    left: 1150px;
+    /* float: right; */
+    /* top: 20px; */
+    /* right: 10px; */
+    /* left: 200px; */
 }
 
 </style>

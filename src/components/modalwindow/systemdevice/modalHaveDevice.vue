@@ -5,9 +5,12 @@
              role="dialog" 
              aria-labelledby="modalTitle"
              aria-describedby="modalDescription">
-        <p style="text-align: center; margin-top: 0;">
-            Подключение WI-FI терморегулятора через браузер на ПК
-        </p>
+             
+             <div class="modal_device_content">
+                 sdlfnjlasdfsfb
+                 sdf;nasldfnsdfls
+                 sdf;mslfnsdfl
+             </div>
         </div>
     </div>
     </transition>
@@ -64,31 +67,9 @@ export default {
     flex-direction: column;
 }
 
-.btn-blue{
-    margin-top: 37%;
-    float: right;
-    color: white;
-    background: #6f92be;
-    border: 1px solid #6f92be;
-    border-radius: 2px;
-}
-
-.btn-left{
-    margin-top: 37%;
-    float: left;
-    border: 1px solid #6f92be;
-    border-radius: 2px;
-    background: #6f92be;
-    color: White;
-}
-
-.btn-right{
-    margin-top: 37%;
-    float: right;
-    border: 1px solid #6f92be;
-    border-radius: 2px;
-    background: #6f92be; 
-    color: White;
+.modal_device_content{
+    width: 100%;
+    height: 100%;
 }
 
 .modal-fade-enter, .modal-fade-leave-active{

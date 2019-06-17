@@ -386,6 +386,10 @@ export default {
   opacity: 0;
 }
 
+.active{
+  background: #ebeef5;
+}
+
 .active_hover{
   background: #ebeef5;
 }

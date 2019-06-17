@@ -1,9 +1,10 @@
 <template>
     <div class="tab1_step1">
+            <!-- <button class="btn-device-left" @click="close" style="cursor: pointer;">Назад</button> -->
         <div class="step1_title">
             <h>1. Переключите регулятор в режим точи доступа</h>
         </div>
-        
+
         <div class="step1_content">
             <img src="./waves.png" class="waves_image">
         </div>
@@ -15,7 +16,6 @@
                 - Устройство не переключается, что мне делать?
             </h>
         </div>
-            <button class="btn-device-left" @click="close" style="cursor: pointer;">Назад</button>
         
     </div>
 </template>
@@ -42,11 +42,6 @@ export default {
 .tab1_step1{
     height: 80%;
     width: 100%;
-}
-
-.step1_content{
-    /* width: 20%; */
-    /* height: 20%; */
 }
 
 .step1_title{

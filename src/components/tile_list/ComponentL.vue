@@ -1,5 +1,11 @@
-<template>
-    <div class="component" :class="{active: activeBtn === 'ccc'}" @click="onClick" @dblclick="showModal2">
+    <template>
+    <div class="component" 
+         @click="onClick" 
+         @dblclick="showModal2"
+         @mouseover="hover = true"
+         @mouseleave="hover = false"
+         :class="{active_hover: hover}">
+
         <div>
             <i class="el-icon-folder" 
                style="float:left; 
@@ -48,6 +54,7 @@ export default {
         return{
             textBeforeTitle: "This is",
             isModalVisible2: false,
+            hover: false,
             activeBtn:''
         }
     },
@@ -119,10 +126,8 @@ export default {
         height: 5vh;
         font-size: 17px;
         border: none;
+        background: transparent;
         text-align: center;
-    }
-    .active{
-        background: red;
     }
 }
 </style>

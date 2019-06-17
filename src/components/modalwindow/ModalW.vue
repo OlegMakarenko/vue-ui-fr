@@ -127,9 +127,10 @@ export default {
     color: #666;
     background: transparent;
     display: flex;
-    position: absolute;
-    top: 160px;
-    right: 170px;
+    position: fixed;
+    /* top: 160px; */
+    /* margin-top: 0px; */
+    margin-left: 38%;
 }
 .center-btn{
     float: left;

@@ -1,6 +1,6 @@
 <template>
     <div class="component" 
-         @click="onClick" 
+         @click="onClick"
          @dblclick="showModal2"
          @mouseover="hover = true"
          @mouseleave="hover = false"

@@ -1,4 +1,4 @@
-    <template>
+<template>
     <div class="component" 
          @click="onClick" 
          @dblclick="showModal2"
@@ -103,7 +103,7 @@ export default {
     border-width: 1px;
     border-radius: 4px;
     display: inline-block;
-    text-align: left;
+    // text-align: left;
     // cursor: pointer;
 
     .title{

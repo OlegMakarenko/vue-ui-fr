@@ -3,8 +3,7 @@
     <el-container v-if="!isLoggedIn" class="container">
       <Auth/>
     </el-container>
-    <Header/>
-    <router-view/>
+    <Header v-else/>
   </div>
 </template>
 

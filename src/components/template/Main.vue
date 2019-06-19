@@ -51,46 +51,28 @@
                   <i class="fa fa-plus" style="margin-top: 2px; margin-right: 6px;"></i> Подключить устройство
             </button>
 
-            <button
+            <button @click="showAddGroup"
                   style="font-size: 15px; text-align: right"
                   class="btn_add_group">
                   <i class="fa fa-folder" style="margin-top: 2px; margin-right: 6px;"></i> Добавить группу
             </button>
 
-
-            <!-- <div class="el-modal-window">
-                <el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
-                <el-dialog
-                    title="Warning"
-                    :visible.sync="centerDialogVisible"
-                    width="50%"
-
-                    center>
-                <div style="height: 700px;">
-                  <el-tabs tab-position="left" style="height: 500px;">
-                    <el-tab-pane style="height: 200px;">
-                      <div slot="label" style="height: 200px; font-size: 50px"><i class="el-icon-date"></i></div>
-                      Route
-                    </el-tab-pane>
-                      <el-tab-pane style="height: 200px;">
-                      <div slot="label" style="height: 200px; font-size: 50px"><i class="el-icon-search"></i></div>
-                      Route
-                    </el-tab-pane>
-                     </el-tabs>
-                </div>
-
-                <span slot="footer" class="dialog-footer">
-                  <el-button @click="centerDialogVisible = false">Cancel</el-button>
-                  <el-button type="primary" @click="centerDialogVisible = false">Confirm</el-button>
-                </span>
-              </el-dialog>
-            </div> -->
-
             <ModalW v-show="isModalVisible" @close="closeModal"/>
+
+            <wifiDevice v-show="isWiFiDeviceVisible" @close="closeWiFiDevice"/>
+
+            <addDevice v-show="isAddDeviceVisible" @close="closeAddDevice"/>
+
+            <addGroup v-show="isAddGroupVisible" @close="closeAddGroup" />
 
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
 
               <!--There is our component switching button-->
+              <div style="display: flex; flex-direction: column; width: 170px; position: absolute; margin-left: 670px;">
+                <button style="font-size: 13px">Подключение устройства</button> <!--Wi-FI / GSM-->
+                <button style="font-size: 13px" @click="showWiFiDevice">Wi-Fi терморегулятор</button> <!-- Web-Browser / Web-Browser on smartphone-->
+                <button style="font-size: 13px" @click="showAddDevice">Добавление в систему</button> <!--adding device to the system-->
+              </div>
               <button
                 id="btn3"
                 class="el-icon-minus"
@@ -114,12 +96,13 @@
           <div class="breadcrumb">
             <el-breadcrumb separator="/" style="margin-left: 35px;">
             <el-breadcrumb-item :to="{ path: '/' }">Моя Система</el-breadcrumb-item>
-            <el-breadcrumb-item><a href="/">Мой дом</a></el-breadcrumb-item>
+            <el-breadcrumb-item><a href="https:/google.com.ua">Мой дом</a></el-breadcrumb-item>
             <el-breadcrumb-item>Кухня</el-breadcrumb-item>
             </el-breadcrumb>
           </div>
 
           <div class="compo"><!--Component part, under center part, where we have info about devices-->
+            <ModalC v-show="isModalVisible2" @close="closeModal2"/>
             <component
               v-for="item in dataForComponents"
               :is="showc"
@@ -127,6 +110,7 @@
               :content="item.content"
               :key="item.title"
               @select="onComponentSelect"
+              @dblclick="showModal2"
               />
           </div>
 
@@ -149,7 +133,15 @@
 import ComponentT from '../tile_list/ComponentT.vue'
 import ComponentL from '../tile_list/ComponentL.vue'
 import ModalW from '../modalwindow/ModalW'
+import ModalC from '../modalwindow/modalComponent.vue'
 import ChildComponent from './ChildComponent.vue'
+
+import wifiDevice from '../modalwindow/systemdevice/modalWiFiDevice.vue'
+
+import addDevice from '../modalwindow/systemdevice/modalAddDevice.vue'
+
+import addGroup from '../modalwindow/creategroup/modalAddGroup.vue'
+
 
 
 export default {
@@ -158,7 +150,11 @@ export default {
         "ComponentT": ComponentT,
         "ComponentL": ComponentL,
         ChildComponent,
-        ModalW
+        ModalW,
+        ModalC,
+        wifiDevice,
+        addDevice,
+        addGroup
     },
 
     data(){
@@ -169,9 +165,9 @@ export default {
           centerDialogVisible: false,
 
             dataForComponents: [
-                { id: 0, title: " Temperature device", content: "Temp 10C" },
-                { id: 1, title: " Himiditry device", content: "Hum: 40%" },
-                { id: 2, title: " Himiditry device1", content: "Hum: 40%" },
+                { id: 0, title: " Temperature device", type: "folder", content: "Temp 10C" },
+                { id: 1, title: " Himiditry device", type: "device", content: "Hum: 40%" },
+                { id: 2, title: " Himiditry device1", type: "device", content: "Hum: 40%" },
                 { id: 3, title: " Himiditry device2", content: "Hum: 40%" },
                 { id: 4, title: " Himiditry device3", content: "Hum: 40%" },
                 { id: 5, title: " Himiditry device4", content: "Hum: 40%" },
@@ -189,6 +185,14 @@ export default {
             radio1: null, //our radio buttons for switching components blocks - list
 
             isModalVisible: false, //modal window
+            
+            isModalVisible2: false,
+            
+            isWiFiDeviceVisible: false,
+
+            isAddDeviceVisible: false,
+
+            isAddGroupVisible: false,
 
             selectedComponent: null,
         }
@@ -212,6 +216,30 @@ export default {
       this.isModalVisible = false;
     },
 
+    showWiFiDevice(){
+      this.isWiFiDeviceVisible = true;
+    },
+
+    closeWiFiDevice(){
+      this.isWiFiDeviceVisible = false;
+    },
+
+    showAddDevice(){
+      this.isAddDeviceVisible = true;
+    },
+
+    closeAddDevice(){
+      this.isAddDeviceVisible = false;
+    },
+
+    showAddGroup(){
+      this.isAddGroupVisible = true;
+    },
+
+    closeAddGroup(){
+      this.isAddGroupVisible = false;
+    },
+
     showComponents(){
       if(this.showc == this.ComponentT){
         this.showc = this.ComponentL;
@@ -222,7 +250,15 @@ export default {
 
     onComponentSelect(title){
       this.selectedComponent = title;
-    }
+    },
+
+    showModal2(){
+      this.isModalVisible2 = true;
+    },
+
+      closeModal2(){
+        this.isModalVisible2 = false;
+    },
 
   }
 }

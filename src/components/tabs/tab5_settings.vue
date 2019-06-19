@@ -5,8 +5,6 @@
                 When have devices
             </button>
             
-            <devicehave v-show="isDeviceHaveVisible" @close="closeDeviceHave"/>
-            
             <button>
                 When don`t have devices
             </button>
@@ -15,7 +13,6 @@
 </template>
 
 <script>
-import devicehave from '../modalwindow/systemdevice/modalHaveDevice.vue'
 
 export default {
     
@@ -26,7 +23,7 @@ export default {
     },
 
     components:{
-        devicehave
+        // devicehave
     },
 
     methods:{

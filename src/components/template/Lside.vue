@@ -17,14 +17,16 @@
           :allow-drop="allowDrop"
           :allow-drag="allowDrag">
 
-          <span slot-scope="{ node, data }">
+          <span class="tree-node" slot-scope="{ node, data }">
+            <span>
+              <i v-if="node.type=='foler'" class="el-icon-folder"></i>
               <i class="el-icon-folder"></i>
-            <span>{{node.label}}</span>
-              <i class="el-icon-edit  icon_edit_tree"
-              style="font-size: 17px;
-                     cursor: pointer;
-                     line-height: 34px;
-                     float: right;"></i>
+              <span>{{node.label}}</span>
+            </span>
+
+            <span class="tree-node-edit">
+              <i class="el-icon-edit"></i>
+            </span>         
           </span>
 
         </el-tree>
@@ -46,11 +48,16 @@
           :allow-drop="allowDrop"
           :allow-drag="allowDrag2">
 
-        <span slot-scope="{ node, data }">
-            <i class="el-icon-odometer"></i>
-          <span>{{node.label}}</span>
-            <i class="el-icon-edit"></i>
-        </span>
+        <span class="tree-node" slot-scope="{ node, data }">
+            <span>
+              <i class="el-icon-odometer"></i>
+              <span>{{node.label}}</span>
+            </span>
+
+            <span class="tree-node-edit">
+              <i class="el-icon-edit"></i>
+            </span>         
+          </span>
 
       </el-tree>
      </div>
@@ -170,9 +177,27 @@ export default {
   min-height: 100vh;
   float: left;
   background-color: #ebeef5;
-
   display: block;
   text-align: center;
+  
+}
+
+.tree-node{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  
+}
+
+
+.tree-node-edit{
+  padding-right: 10px;
+  
+}
+
+.el-tree-node__content{
+  height: 50px;
+  
 }
 
 

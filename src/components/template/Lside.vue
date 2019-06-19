@@ -3,8 +3,18 @@
     <div class="left">
 <br>
       <div class="tree-style">
+<!-- 
+        <component v-for="concom in children" 
+                   :is="showw" 
+                   :key="concom"
+                   :id="concom.id"
+                   :title="concom.title"
+                   :content="concom.content"/> -->
+
         <el-tree
-          :data="system"
+          v-for="con in MySystem"
+          :key="con.title"
+          :data="MySystem"
           node-key="id"
           default-expand-all
           @node-drag-start="handleDragStart"
@@ -13,15 +23,17 @@
           @node-drag-over="handleDragOver"
           @node-drag-end="handleDragEnd"
           @node-drop="handleDrop"
+          @node-click="onNodeClick"
           draggable
           :allow-drop="allowDrop"
           :allow-drag="allowDrag">
 
-          <span class="tree-node" slot-scope="{ node, data }">
+          <span class="tree-node" slot-scope="{ node }"> <!-- node, data-->
             <span>
               <i v-if="node.type=='foler'" class="el-icon-folder"></i>
               <i class="el-icon-folder"></i>
               <span>{{node.label}}</span>
+              <tileComponent v-show="showtile"/>
             </span>
 
             <span class="tree-node-edit">
@@ -48,7 +60,7 @@
           :allow-drop="allowDrop"
           :allow-drag="allowDrag2">
 
-        <span class="tree-node" slot-scope="{ node, data }">
+        <span class="tree-node" slot-scope="{ node }"> <!-- node, data-->
             <span>
               <i class="el-icon-odometer"></i>
               <span>{{node.label}}</span>
@@ -66,6 +78,11 @@
 </template>
 
 <script>
+import listComponent from '../tile_list/ComponentL.vue'
+
+import tileComponent from '../tile_list/ComponentT.vue'
+
+
 
 export default {
   name:'lside',
@@ -73,25 +90,46 @@ export default {
       data() {
         return {
           showTree: false,
-          system: [{
-            label: 'Моя система',
-            children: [{
-              label: 'Мой дом',
-              children: [{
-                label: 'Кухня'
-              }, {
-                label: 'Спальня'
-              }],
-            },
-            {
-              label: 'Дача',
-              children: [{
-                label: 'Пристройка',
-              }, {
-                label: 'Гараж',
-              }]
-            },]
+          showtile: false,
+          MySystem:[{
+            label: 'My system',
+            children:[
+              {label: 'My home',
+              children: [
+                {label:'Kitchen',
+                  contentdevice:[
+                    {id:'0',
+                     title:'Hum device',
+                     type:'deivce',
+                     content: 'Hum: 40%'},],
+                 },
+                {label: 'Badroom'}]
+              },]
           },],
+
+          // system: [{
+          //   label: 'Моя система',
+          //   children: [{
+          //     label: 'Мой дом',
+          //     children: [{
+          //       label: 'Кухня',
+          //       children:[
+          //         { id: 1, title: " Himiditry device", type: "device", content: "Hum: 40%" },
+          //         { id: 2, title: " Himiditry device1", type: "device", content: "Hum: 40%" }
+          //       ]
+          //     }, {
+          //       label: 'Спальня'
+          //     }],
+          //   },
+          //   {
+          //     label: 'Дача',
+          //     children: [{
+          //       label: 'Пристройка',
+          //     }, {
+          //       label: 'Гараж',
+          //     }]
+          //   },]
+          // },],
 
 
           devices:[{
@@ -123,6 +161,12 @@ export default {
           }
         };
       },
+
+      components:{
+        listComponent,
+        tileComponent,
+      },
+
       methods: {
         handleDragStart(node, ev) {
           console.log('drag start', node);
@@ -148,7 +192,6 @@ export default {
           if (dropNode.data.label === 'Level two 3-1') {
             return type !== 'inner';
           } else {
-
             return true;
           }
         },
@@ -157,16 +200,17 @@ export default {
         },
         allowDrag2(draggingNode) {
           return draggingNode.data.label.indexOf('Диспетчер устройств') === -1;
+        },
+        onNodeClick(n){
+          this.MySystem = n.contentdevice,
+          console.log('Label are clicked(Successful working of function)'),
+          this.showtile = true
         }
       }
     };
   </script>
 
 <style scoped>
-.tree-style{
-
-
-}
 .el-tree{
   background-color: #ebeef5;
 }

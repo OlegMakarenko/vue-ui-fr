@@ -129,11 +129,14 @@
 
 
 <script>
-
 import ComponentT from '../tile_list/ComponentT.vue'
+
 import ComponentL from '../tile_list/ComponentL.vue'
+
 import ModalW from '../modalwindow/ModalW'
+
 import ModalC from '../modalwindow/modalComponent.vue'
+
 import ChildComponent from './ChildComponent.vue'
 
 import wifiDevice from '../modalwindow/systemdevice/modalWiFiDevice.vue'
@@ -159,21 +162,25 @@ export default {
 
     data(){
         return{
-
           ComponentT: "ComponentT",
           ComponentL: "ComponentL",
+
           centerDialogVisible: false,
 
             dataForComponents: [
-                { id: 0, title: " Temperature device", type: "folder", content: "Temp 10C" },
-                { id: 1, title: " Himiditry device", type: "device", content: "Hum: 40%" },
-                { id: 2, title: " Himiditry device1", type: "device", content: "Hum: 40%" },
-                { id: 3, title: " Himiditry device2", content: "Hum: 40%" },
-                { id: 4, title: " Himiditry device3", content: "Hum: 40%" },
-                { id: 5, title: " Himiditry device4", content: "Hum: 40%" },
-                { title: " Himiditry device5", content: "Hum: 40%" },
-                { title: " Himiditry device6", content: "Hum: 40%" },
-                { title: " Himiditry device7", content: "Hum: 40%" }
+                { 
+                  id: 0, 
+                  title: " Temperature device", 
+                  type: "folder", 
+                  content: "Temp 10C",
+                  children: [
+                    { id: 1, title: " Himiditry device", type: "device", content: "Hum: 40%" },
+                    { id: 2, title: " Himiditry device1", type: "device", content: "Hum: 40%" }
+                  ]
+                },
+                { id: 3, title: " Himiditry device2", type: "device", content: "Hum: 40%" },
+                { id: 4, title: " Himiditry device3", type: "device", content: "Hum: 40%" },
+                { id: 5, title: " Himiditry device4", type: "device", content: "Hum: 40%" },
             ],
 
             visible: true,
@@ -256,8 +263,8 @@ export default {
       this.isModalVisible2 = true;
     },
 
-      closeModal2(){
-        this.isModalVisible2 = false;
+    closeModal2(){
+      this.isModalVisible2 = false;
     },
 
   }

@@ -10,16 +10,22 @@ const exampleFetchAPI = (endpoint, body) =>
 export default  new Vuex.Store({
     state:{
         auth_token: null,
+        currentDeviceList: [],
     },
 
     getters:{
-        isLoggedIn: state => state.auth_token != null
+        isLoggedIn: state => state.auth_token != null,
+        currentDeviceList: state => state.currentDeviceList,
     },
 
     mutations:{
         SET_AUTH_TOKEN: (state, token) => {
             state.auth_token = token;
-        }
+        },
+        OPEN_FOLDER: (state, folder) => {
+            if(folder.children)
+                state.currentDeviceList = folder.children;
+        },
     },
 
     actions:{

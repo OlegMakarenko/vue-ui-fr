@@ -58,8 +58,9 @@ export default {
 }
 
 .settings_header{
-    width: 100%;
-    height: 10%;
+  width: 100%; 
+  height: 10%;
+  text-align: center;
 }
 
 .settings_content{

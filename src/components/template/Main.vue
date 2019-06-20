@@ -48,13 +48,15 @@
                   style="font-size: 15px;"
                   class="btn_add_device"
                   @click="showModal">
-                  <i class="fa fa-plus" style="margin-top: 2px; margin-right: 6px;"></i> Подключить устройство
+              <i class="fa fa-plus" 
+                 style="margin-top: 2px; margin-right: 6px;"></i> Подключить устройство
             </button>
 
             <button @click="showAddGroup"
-                  style="font-size: 15px; text-align: right"
-                  class="btn_add_group">
-                  <i class="fa fa-folder" style="margin-top: 2px; margin-right: 6px;"></i> Добавить группу
+                    style="font-size: 15px; text-align: right"
+                    class="btn_add_group">
+              <i class="fa fa-folder" 
+                 style="margin-top: 2px; margin-right: 6px;"></i> Добавить группу
             </button>
 
             <ModalW v-show="isModalVisible" @close="closeModal"/>
@@ -68,7 +70,7 @@
             <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
 
               <!--There is our component switching button-->
-              <div style="display: flex; flex-direction: column; width: 170px; position: absolute; margin-left: 670px;">
+              <div style="display: flex; flex-direction: column; width: 170px; position: absolute; margin-left: 54%;">
                 <button style="font-size: 13px">Подключение устройства</button> <!--Wi-FI / GSM-->
                 <button style="font-size: 13px" @click="showWiFiDevice">Wi-Fi терморегулятор</button> <!-- Web-Browser / Web-Browser on smartphone-->
                 <button style="font-size: 13px" @click="showAddDevice">Добавление в систему</button> <!--adding device to the system-->
@@ -76,15 +78,15 @@
               <button
                 id="btn3"
                 class="el-icon-minus"
-                v-if="showc == ComponentT"
-                @click="showComponents">
+                v-if="deviceComponentView == ComponentT"
+                @click="changeDeviceComponentView">
               </button>
 
               <button
                 id="btn3"
                 class="el-icon-s-grid"
                 v-else
-                @click="showComponents">
+                @click="changeDeviceComponentView">
               </button>
 
               <button
@@ -104,12 +106,13 @@
           <div class="compo"><!--Component part, under center part, where we have info about devices-->
             <ModalC v-show="isModalVisible2" @close="closeModal2"/>
             <component
-              v-for="item in dataForComponents"
-              :is="showc"
-              :title="item.title"
-              :content="item.content"
-              :key="item.title"
-              @select="onComponentSelect"
+              v-for="node in content"
+              :is="deviceComponentView"
+              :title="node.name"
+              :content="node.content"
+              :key="node.name"
+              @select="onComponentSelect(node)"
+              @open="onComponentOpen(node)"
               @dblclick="showModal2"
               />
           </div>
@@ -168,7 +171,7 @@ export default {
           centerDialogVisible: false,
 
             dataForComponents: [
-                { 
+               /* { 
                   id: 0, 
                   title: " Temperature device", 
                   type: "folder", 
@@ -180,12 +183,12 @@ export default {
                 },
                 { id: 3, title: " Himiditry device2", type: "device", content: "Hum: 40%" },
                 { id: 4, title: " Himiditry device3", type: "device", content: "Hum: 40%" },
-                { id: 5, title: " Himiditry device4", type: "device", content: "Hum: 40%" },
+                { id: 5, title: " Himiditry device4", type: "device", content: "Hum: 40%" },*/
             ],
 
             visible: true,
 
-            showc: null, //show components
+            deviceComponentView: "ComponentT", //show components
 
             shows: true, //showing right side
 
@@ -203,6 +206,12 @@ export default {
 
             selectedComponent: null,
         }
+    },
+
+    computed:{
+      content(){
+        return this.$store.getters.currentDeviceList;
+      },
     },
 
     methods:{
@@ -247,16 +256,20 @@ export default {
       this.isAddGroupVisible = false;
     },
 
-    showComponents(){
-      if(this.showc == this.ComponentT){
-        this.showc = this.ComponentL;
+    changeDeviceComponentView(){
+      if(this.deviceComponentView == this.ComponentT){
+        this.deviceComponentView = this.ComponentL;
       } else {
-        this.showc = this.ComponentT;
+        this.deviceComponentView = this.ComponentT;
       }
     },
 
-    onComponentSelect(title){
-      this.selectedComponent = title;
+    onComponentSelect(node){
+      this.selectedComponent = node.name;
+    },
+
+    onComponentOpen(node){
+      this.$store.commit('OPEN_FOLDER', node);
     },
 
     showModal2(){
@@ -266,7 +279,6 @@ export default {
     closeModal2(){
       this.isModalVisible2 = false;
     },
-
   }
 }
 </script>

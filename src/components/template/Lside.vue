@@ -3,17 +3,7 @@
     <div class="left">
 <br>
       <div class="tree-style">
-<!-- 
-        <component v-for="concom in children" 
-                   :is="showw" 
-                   :key="concom"
-                   :id="concom.id"
-                   :title="concom.title"
-                   :content="concom.content"/> -->
-
         <el-tree
-          v-for="con in MySystem"
-          :key="con.title"
           :data="MySystem"
           node-key="id"
           default-expand-all
@@ -26,14 +16,15 @@
           @node-click="onNodeClick"
           draggable
           :allow-drop="allowDrop"
-          :allow-drag="allowDrag">
+          :allow-drag="allowDrag"
+          label="name"
+          >
 
-          <span class="tree-node" slot-scope="{ node }"> <!-- node, data-->
+          <span class="tree-node" slot-scope="{ node, data }"> <!-- node, data-->
             <span>
-              <i v-if="node.type=='foler'" class="el-icon-folder"></i>
-              <i class="el-icon-folder"></i>
-              <span>{{node.label}}</span>
-              <tileComponent v-show="showtile"/>
+              <i v-if="node.data.type=='folder'" class="el-icon-folder"></i>
+              <i v-if="node.data.type=='device'" class="el-icon-odometer"></i>
+              <span>{{node.data.name}}</span>
             </span>
 
             <span class="tree-node-edit">
@@ -56,14 +47,18 @@
           @node-drag-over="handleDragOver"
           @node-drag-end="handleDragEnd"
           @node-drop="handleDrop"
+          @node-click="onNodeClick"
           draggable
           :allow-drop="allowDrop"
-          :allow-drag="allowDrag2">
+          :allow-drag="allowDrag2"
+          label="name"
+          >
 
-        <span class="tree-node" slot-scope="{ node }"> <!-- node, data-->
+   <span class="tree-node" slot-scope="{ node, data }"> <!-- node, data-->
             <span>
-              <i class="el-icon-odometer"></i>
-              <span>{{node.label}}</span>
+              <i v-if="node.data.type=='folder'" class="el-icon-folder"></i>
+              <i v-if="node.data.type=='device'" class="el-icon-odometer"></i>
+              <span>{{node.data.name}}</span>
             </span>
 
             <span class="tree-node-edit">
@@ -78,6 +73,8 @@
 </template>
 
 <script>
+
+
 import listComponent from '../tile_list/ComponentL.vue'
 
 import tileComponent from '../tile_list/ComponentT.vue'
@@ -85,75 +82,66 @@ import tileComponent from '../tile_list/ComponentT.vue'
 
 
 export default {
-  name:'lside',
+  label:'lside',
   props:['treeData', 'isDraggable'],
       data() {
         return {
           showTree: false,
           showtile: false,
-          MySystem:[{
-            label: 'My system',
-            children:[
-              {label: 'My home',
-              children: [
-                {label:'Kitchen',
-                  contentdevice:[
-                    {id:'0',
-                     title:'Hum device',
-                     type:'deivce',
-                     content: 'Hum: 40%'},],
+          MySystem:[
+            {
+              id:0,
+              name: 'My system',
+              type: "folder",
+              children:[
+                {
+                  id: 1,
+                  name: 'My home',
+                  type: "folder",
+                  children: [
+                    {
+                      id: 2,
+                      name:'Kitchen',
+                      type: "folder",
+                      children:[
+                        {
+                          id: 2,
+                          name:'Device 1',
+                          type: "device",
+                        },
+                      ],
                  },
-                {label: 'Badroom'}]
+                {name: 'Badroom',
+                type: 'folder'}]
               },]
           },],
 
-          // system: [{
-          //   label: 'Моя система',
-          //   children: [{
-          //     label: 'Мой дом',
-          //     children: [{
-          //       label: 'Кухня',
-          //       children:[
-          //         { id: 1, title: " Himiditry device", type: "device", content: "Hum: 40%" },
-          //         { id: 2, title: " Himiditry device1", type: "device", content: "Hum: 40%" }
-          //       ]
-          //     }, {
-          //       label: 'Спальня'
-          //     }],
-          //   },
-          //   {
-          //     label: 'Дача',
-          //     children: [{
-          //       label: 'Пристройка',
-          //     }, {
-          //       label: 'Гараж',
-          //     }]
-          //   },]
-          // },],
-
-
-          devices:[{
-            label: 'Диспетчер устройств',
-            children: [{
-              label: 'Регулятор на кухне дом',
-              children: [{
-                label: 'Термостат'
-              }, {
-                label: 'Датчик'
-              }],
-            },
+          devices:[
             {
-              label: 'Регулятор на улицу дача',
-              children: [{
-                label: 'Термостат',
-              }, {
-                label: 'Датчик',
-              }]
-            }, {
-              label: 'Регулятор на улице родители'
-            }, {
-              label: 'Регулятор в пристройке'
-            }]
+              id:3,
+              name: 'Диспетчер устройств',
+              type: "folder",
+              children:[
+                {
+                  id: 4,
+                  name: 'Регулятор на кухне дом',
+                  type: "device",
+                  children: [
+                    {
+                      id: 4,
+                      name:'Kitchen',
+                      type: "device",
+                      children:[
+                        {
+                          id: 4,
+                          name:'Device 1',
+                          type: "device",
+                        },
+                      ],
+                 },
+                {name: 'Регулятор ванная',
+                type: 'device'}]
+              },]
           },],
           defaultProps: {
             children: 'children',
@@ -201,10 +189,8 @@ export default {
         allowDrag2(draggingNode) {
           return draggingNode.data.label.indexOf('Диспетчер устройств') === -1;
         },
-        onNodeClick(n){
-          this.MySystem = n.contentdevice,
-          console.log('Label are clicked(Successful working of function)'),
-          this.showtile = true
+        onNodeClick(node){
+          this.$store.commit('OPEN_FOLDER', node)
         }
       }
     };

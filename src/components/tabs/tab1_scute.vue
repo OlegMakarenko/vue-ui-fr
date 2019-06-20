@@ -1,58 +1,50 @@
 <template>
 <div class="scute_manager">
     <div class="scute_center_side">
+        <div class="right_side">
+            <p>123123123123123</p>
+            <p>123123123123123</p>
+            <br>
+            <br>
+            <hr>
+            <p>123123123123123</p>
+            <p>123123123123123</p>
+        </div>
 
-            <div class="right_side">
-                <p>123123123123123</p>
-                <p>123123123123123</p>
-                <br>
-                <br>
-                <hr>
-                <p>123123123123123</p>
-                <p>123123123123123</p>
-            </div>
+        <div class="scute_header">
+            Регулятор в пристройке <br><br>
+            Щиток
+        </div>
 
-            <p class="header_text">Регулятор в пристройке</p>
-            <p class="header_paragraph">Щиток</p>
+        <div class="main_input">
+            <button class="button_p" @click="counter -= 1">
+                <p style="font-size:40px; color: white; margin-top: 25%;">-</p>
+            </button>
+
+            <p class="counter_p">{{counter}}<span style="font-size: 50px">&#8451</span></p>
             
-            <div class="main_input">
-                <button class="button_p" @click="counter -= 1">
-                    <p style="font-size:40px; color: white; margin-top: 25%;">-</p>
-                </button>
+            <button class="button_m" @click="counter += 1">
+                <p style="font-size:40px; color: white; margin-top: 25%;">+</p>
+            </button>
+        </div>
 
-                <p class="counter_p">{{counter}}<span style="font-size: 50px">&#8451</span></p>
-                
-                <button class="button_m" @click="counter += 1">
-                    <p style="font-size:40px; color: white; margin-top: 25%;">+</p>
-                </button>
+        <div class="main_tabs">
+            <button class="btn_online">В сети</button>
+            
+            <button style="width:20%; 
+                            margin-right: 18.5%; 
+                            color: #a5c1e9; 
+                            background-color: white" 
+                    class="group_btn">По графику</button>
+
+            <button class="group_btn" style="width:20%;">Ручной</button>
+
+            <div class="input_value">
+                <input class="all_input" type="text" v-model="title_1">
+                <input class="all_input" type="text" v-model="title_2">
+                <input class="all_input" type="text" v-model="title_3">
             </div>
-
-            <div class="main_tabs">
-                <!-- <el-radio-group v-model="radio1" size="mini">
-                    <el-radio-button label="В сети"></el-radio-button>
-                </el-radio-group>
-
-                <el-radio-group v-model="radio2" size="mini" style="margin-left: 20%">
-                    <el-radio-button label="Ручной"></el-radio-button>
-                    <el-radio-button label="По графику"></el-radio-button>
-                </el-radio-group> -->
-                    <button class="btn_online">В сети</button>
-                    
-                    <button style="width:20%; 
-                                   margin-right: 18.5%; 
-                                   color: #a5c1e9; 
-                                   background-color: white" 
-                            class="group_btn">По графику</button>
-
-                    <button class="group_btn" style="width:20%;">Ручной</button>
-
-
-                    <div class="input_value">
-                        <input class="all_input" type="text" v-model="title_1">
-                        <input class="all_input" type="text" v-model="title_2">
-                        <input class="all_input" type="text" v-model="title_3">
-                    </div>
-            </div>
+        </div>
     </div>
 </div>
 </template>
@@ -106,6 +98,12 @@ export default {
     height: 100%;
 }
 
+.scute_header{
+  width: 100%; 
+  height: 10%;
+  text-align: center;
+}
+
 .first_tab{
     width: 100%;
     height: 100%;
@@ -113,6 +111,7 @@ export default {
 
 .main_tabs{
     width: 60%;
+    margin-top: 2%;
     float: right;
 }
 
@@ -128,6 +127,7 @@ export default {
 .main_input{
     width: 25%;
     height: 14%;
+    margin-top: 2%;
     margin-left: 4%;
     float: left;
     display: block;

@@ -1,44 +1,37 @@
 <template>
     <div>
-        <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
-            <div class="right" v-if="shows">
-                <h3 style="font-size: 18px; bold: none; float: left; font-weight: 500; margin-top: 65px;">Project info</h3><br><br>
+      <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
+          <div class="right" v-if="shows">
+              <h3 style="font-size: 18px; bold: none; float: left; font-weight: 500; margin-top: 65px; width: 100px">Project info</h3>
+                  
+                  <div class="width:100%;">
+                    <input class="device_input" type="text" v-model="selectedComponent">
+                    <i class="el-icon-edit" style="font-size:19px"></i>
+                  </div>
 
-                <!-- <el-header style="float:left;" > dynamic title
+              <p style="float: left;
+                        text-align: left;
+                        color: #9e9e9e;
+                        width:80%;
+                        margin-left: 5px;"
+                        class="allp">
+                A variety of sizes and densities can be downloaded from this site.
+                Our icon set is also available as a git repository make it even
+                easier for developers to customize, share and re-use.
+              </p>
 
-                </el-header> -->
-
-                <p v-if="selectedComponent"
-                    style="text-align: center;
-                           font-weight: 500;
-                           margin-top: 60px;
-                           width: 300px;">
-                    {{selectedComponent}}
-                </p> <!--dynamic title-->
-
-                <p style="float: left;
-                          text-align: left;
-                          color: #9e9e9e;
-                          width:80%;
-                          margin-left: 5px;"
-                          class="allp">
-                  A variety of sizes and densities can be downloaded from this site.
-                  Our icon set is also available as a git repository make it even
-                  easier for developers to customize, share and re-use.
-                </p>
-
-                <p style="float: left;
-                          text-align: left;
-                          color: #9e9e9e;
-                          width:80%;
-                          margin-left: 5px;"
-                          class="allp">
-                  The best way to use these icons on the web is with our icon web font.
-                  It`s lightweight, easy to use, and hosted by Google Web Fonts. Learn
-                  how to use font-based icons in our developer guide.
-                </p>
-            </div>
-        </transition>
+              <p style="float: left;
+                        text-align: left;
+                        color: #9e9e9e;
+                        width:80%;
+                        margin-left: 5px;"
+                        class="allp">
+                The best way to use these icons on the web is with our icon web font.
+                It`s lightweight, easy to use, and hosted by Google Web Fonts. Learn
+                how to use font-based icons in our developer guide.
+              </p>
+          </div>
+      </transition>
 
 
       <div class="all_components">
@@ -111,8 +104,7 @@
               :title="node.name"
               :content="node.content"
               :key="node.name"
-              @select="onComponentSelect(node)"
-              @open="onComponentOpen(node)"
+              @select="onComponentOpen(node)"
               @dblclick="showModal2"
               />
           </div>
@@ -264,11 +256,13 @@ export default {
       }
     },
 
-    onComponentSelect(node){
-      this.selectedComponent = node.name;
-    },
+    // onComponentSelect(node){
+    //   this.selectedComponent = node.name;
+    //   @click="onComponentSelect(node)"
+    // },
 
     onComponentOpen(node){
+      this.selectedComponent = node.name;
       this.$store.commit('OPEN_FOLDER', node);
     },
 
@@ -313,7 +307,6 @@ export default {
   background-color: #ffffff;
   display: block;
   flex-flow: row wrap;
-  /* overflow-y: auto; */
 }
 
 
@@ -322,17 +315,20 @@ export default {
   min-height: 100vh;
   float: right;
   text-align: center;
-  display: block;
+  display: flex;
+  flex-direction: column;
   border-top: 1px solid #ebeef5;
   background-color: #ffffff;
 }
 
-/* .center_h_tag{
-  font-size:30px;
-  float: left;
-  font-weight: 400;
-  margin-left:0;
-} */
+.device_input{
+  width: 200px;
+  height: 40px;
+  font-size: 17px;
+  border: none;
+  background: transparent;
+  text-align: center;
+}
 
 .btn1 {
   width: 200px;
@@ -340,9 +336,6 @@ export default {
   float: left;
   margin-top: 2%;
   margin-left: 5px;
-  /* display: flex;  */
-  /* justify-content: flex-start; */
-  /* margin: 4px 2px 2px 4px; */
   border: none;
   border-radius: 5px;
   background-color: #57aaff;
@@ -358,9 +351,9 @@ export default {
   float: left;
   margin-top: 25px;
   margin-left: 5px;
-  display: flex; justify-content: flex-start;
+  display: flex; 
+  justify-content: flex-start;
   border: none;
-  /* outline:none; */
   border-radius: 8px;
   background-color: #57aaff;
   color: white;
@@ -375,9 +368,9 @@ export default {
   float: left;
   margin-top: 25px;
   margin-left: 5px;
-  display: flex; justify-content: flex-start;
+  display: flex; 
+  justify-content: flex-start;
   border: 1px solid #ebeef5;
-  /* outline:none; */
   border-radius: 8px;
   background-color: white;
   color: #c1c0c0;
@@ -387,7 +380,6 @@ export default {
 }
 
 #btn3{
-  /* width: 20px; */
   float: right;
   margin: 4px;
   margin-top: 26px;
@@ -401,7 +393,6 @@ export default {
 }
 
 .btn3{
-  /* width: 20px; */
   float: right;
   margin: 4px;
   margin-top: 25px;

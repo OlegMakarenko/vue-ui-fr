@@ -1,20 +1,25 @@
 <template>
 <div class="scute_manager">
-    <div class="scute_center_side">
-        <div class="right_side">
-            <p>123123123123123</p>
-            <p>123123123123123</p>
-            <br>
-            <br>
-            <hr>
-            <p>123123123123123</p>
-            <p>123123123123123</p>
-        </div>
+    <div class="scute_center_side" >
+        <transition name="scute_slide_fade">
+            <div class="right_side" v-if="scute_right_side">
+                <p>123123123123123</p>
+                <p>123123123123123</p>
+                <br>
+                <br>
+                <hr>
+                <p>123123123123123</p>
+                <p>123123123123123</p>
+            </div>
+        </transition>
+
 
         <div class="scute_header">
             Регулятор в пристройке <br><br>
             Щиток
         </div>
+
+        <i class="el-icon-info scute_info" @click="scute_right_side = !scute_right_side"></i>
 
         <div class="main_input">
             <button class="button_p" @click="counter -= 1">
@@ -55,13 +60,14 @@ export default {
 
     data(){
         return{
+            scute_right_side: true,
+
             radio1: 'В сети',
             radio2: 'Ручной',
             counter: 30,
             title_1: 'A = 3 мкА',
             title_2: 'V = 12.5В',
             title_3: 'P = 0.4 кВт/Час'
-
         }
     },
 
@@ -122,6 +128,14 @@ export default {
     border-left: 1px solid #666;
     float: right;
     word-wrap: break-word;
+}
+
+.scute_info{
+    margin-left: 86%;
+    display: flex;
+    color: #565656;
+    font-size: 25px;
+    cursor: pointer;
 }
 
 .main_input{
@@ -193,6 +207,19 @@ export default {
     border: 1px solid #c0d3ef;
     text-align: center;
     font-size: 15px;   
+}
+
+.scute-slide-fade-enter-active {
+  transition: all .2s ease;
+}
+
+.scute-slide-fade-leave-active {
+  transition: all .2s ease;
+}
+
+.scute-slide-fade-enter, .scute-slide-fade-leave-to{
+  transform: translateX(10px);
+  opacity: 0;
 }
 
 </style>

@@ -1,52 +1,43 @@
 <template>
     <div class="component" 
          @click="onClick"
-         @dblclick="showModal2"
          @mouseover="hover = true"
          @mouseleave="hover = false"
+         v-on:mouseover="show_icons = true"
+         v-on:mouseleave="show_icons = false"
          :class="{active_hover: hover}">
 
-        <div>
-            <i class="el-icon-folder" 
+        <div v-if="show_icons">
+            <i class="el-icon-folder"
                style="float:left; 
+                      color: grey;
                       font-size: 20px; 
                       cursor: pointer;">
             </i>
             
-            <i class="el-icon-delete" 
+            <i class="el-icon-s-tools"
+               @click="showModal2"  
                style="float:right; 
+                      color: grey;
                       font-size: 20px; 
                       cursor: pointer;">
             </i>
             
-            <i class="el-input__icon el-icon-edit" 
+            <!-- <i class="el-input__icon el-icon-edit" 
                style="float:right; 
                       font-size: 20px; 
                       cursor: pointer; 
                       margin-top: 39%; 
                       margin-right: -10%">
-            </i>
+            </i> -->
         </div>
     
         <ModalC v-show="isModalVisible2" @close="closeModal2"/>
 
         <div class="title" >
-            <input class="tbox" v-model="computedTitle">
-                <!-- <div class="field">
-                    <span 
-                        class="field-value" 
-                        v-show="!showField('title')" 
-                        @click="focusField('title')">{{title}}</span>
-
-                    <input 
-                        v-model="tile.title" 
-                        v-show="showField('title')" 
-                        id="tile-title" 
-                        type="text" 
-                        class="field-value form-control" 
-                        @focus="focusField('title')" 
-                        @blur="blurField">
-                </div> -->
+            <!-- <input class="tbox" v-model="computedTitle"> -->
+            <h>{{computedTitle}}</h>
+                
         </div>
             
         <div class="content">
@@ -119,10 +110,10 @@ export default {
     border-width: 1px;
     border-radius: 4px;
     display: inline-block;
-    cursor: pointer;
+    // cursor: pointer;
 
     .title{
-        margin-top: 80px;
+        margin-top: 90px;
         font-size: 18px;
         cursor: pointer;
     }

@@ -2,10 +2,8 @@
     <div class="component"
          @click="onClick"
          @dblclick="onDblclick" 
-         @mouseover="hover = true"
-         @mouseleave="hover = false"
-         v-on:mouseover="show_icons = true"
-         v-on:mouseleave="show_icons = false"
+         @mouseenter="mouseOver"
+         @mouseleave="mouseLeave"
          :class="{active_hover: hover}">
 
         <div v-if="show_icons">
@@ -29,13 +27,7 @@
 
         </div>
             
-            <div class="title" 
-            >
-                <!-- <input class="tbox" v-model="computedTitle">                    
-                    <i class="el-input__icon el-icon-edit" 
-                       style="font-size: 20px; 
-                              cursor: pointer;">
-                    </i> -->
+            <div class="title">
                    {{computedTitle}}
             </div>
             <div class="content">
@@ -70,21 +62,40 @@ export default {
     },
 
     computed: {
-    computedTitle:{
-        get(){
-           if(this.title)
-            return this.title; 
-        },
-        set(value){
-            this.title = value
+        computedTitle:{
+            get(){
+            if(this.title)
+                return this.title; 
+            },
+            set(value){
+                this.title = value
+            }
+            
         }
-        
-     }
     },
     methods:{
         onClick(){
-            this.activeBtn = 'ccc';
             this.$emit("select", this.title);
+            
+                if(this.hover == true){
+                    this.hover = false;
+                    this.mouseOver = false;
+                    this.mouseLeave = false;
+                    this.show_icons = false;                    
+                } else {
+                    this.hover = true;
+                    this.show_icons = true;
+                }
+        },
+
+        mouseOver(){
+            this.hover = true; 
+            this.show_icons = true;
+        },
+
+        mouseLeave(){
+            this.hover = false; 
+            this.show_icons = false
         },
 
         onDblclick(){
@@ -92,11 +103,11 @@ export default {
         },
           
         showModal2(){
-        this.isModalVisible2 = true;
+            this.isModalVisible2 = true;
         },
 
         closeModal2(){
-        this.isModalVisible2 = false;
+            this.isModalVisible2 = false;
         },
     }   
 }
@@ -104,8 +115,8 @@ export default {
 
 <style lang="scss" scoped>
 .component{
-    width: 85%;
-    height: 3.5vh;
+    width: 90%;
+    height: 20px;
     margin: 15.7px;
     padding: 17px;
     border-style: solid;
@@ -113,8 +124,7 @@ export default {
     border-width: 1px;
     border-radius: 4px;
     display: inline-block;
-    // text-align: left;
-    // cursor: pointer;
+    cursor: pointer;
     -webkit-touch-callout: none; /* iOS Safari */
      -webkit-user-select: none; /* Safari */
       -khtml-user-select: none; /* Konqueror HTML */
@@ -125,31 +135,29 @@ export default {
 
     .title{
         width: 100%;
-        // display: flex;
-        // justify-content: center;
+        // align-content: center;
+        justify-content: baseline;
         font-size: 18px;
         text-align: center;
         cursor: pointer;
-
     }
 
     .content{
-        margin-top: -28px; 
+        // margin-top: -28px; 
+        display: flex;
+        justify-content: baseline;
         float: right;
         text-align: center;
         cursor: pointer;
     }
     .tbox{
         width: auto;
-        height: 5vh;
+        height: 5%;
         font-size: 17px;
         border: none;
+        justify-content: baseline;
         background: transparent;
         text-align: center;
-    }
-
-    .active_icon{
-
     }
 }
 </style>

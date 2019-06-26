@@ -2,12 +2,14 @@
     <div class="component" 
          @click="onClick"
          @dblclick="onDblclick" 
-         @mouseenter="mouseOver"
-         @mouseleave="mouseLeave"
+         @mouseover="hover = true; 
+                     show_icons = true"
+         @mouseleave="hover = false; 
+                      show_icons = false"
          :class="{active_hover: hover}">
 
         <div v-if="show_icons">
-            <i class="el-icon-odometer"
+            <i class="el-icon-folder"
                style="float:left; 
                       color: grey;
                       font-size: 20px; 
@@ -21,12 +23,22 @@
                       font-size: 20px; 
                       cursor: pointer;">
             </i>
+            
+            <!-- <i class="el-input__icon el-icon-edit" 
+               style="float:right; 
+                      font-size: 20px; 
+                      cursor: pointer; 
+                      margin-top: 39%; 
+                      margin-right: -10%">
+            </i> -->
         </div>
     
         <ModalC v-show="isModalVisible2" @close="closeModal2"/>
 
         <div class="title" >
-            <h>{{computedTitle}}</h>    
+            <!-- <input class="tbox" v-model="computedTitle"> -->
+            <h>{{computedTitle}}</h>
+                
         </div>
             
         <div class="content">
@@ -66,26 +78,6 @@ export default {
     methods:{
         onClick(){
             this.$emit("select", this.title);
-
-            if(this.hover == true){
-                    this.hover = false;
-                    this.mouseOver = false;
-                    this.mouseLeave = false;
-                    this.show_icons = false;                    
-                } else {
-                    this.hover = true;
-                    this.show_icons = true;
-                }
-        },
-
-        mouseOver(){
-            this.hover = true; 
-            this.show_icons = true;
-        },
-
-        mouseLeave(){
-            this.hover = false; 
-            this.show_icons = false
         },
 
          onDblclick(){
@@ -99,7 +91,15 @@ export default {
         closeModal2(){
             this.isModalVisible2 = false;
         },
-
+        focusField(title){
+            this.editField = title;
+        },
+        blurField(){
+            this.editField = '';
+        },
+        showField(title){
+            return (this.tile[title] == '' || this.editField == title)
+        }
     }
 }
 </script>
@@ -107,7 +107,7 @@ export default {
 <style lang="scss" scoped>
 .component{
     width: 200px;
-    height: 200px;
+    height: 75px;
     margin: 15.7px;
     padding: 17px;
     border-style: solid;
@@ -115,7 +115,7 @@ export default {
     border-width: 1px;
     border-radius: 4px;
     display: inline-block;
-    cursor: pointer;
+    // cursor: pointer;
 
     .title{
         margin-top: 90px;

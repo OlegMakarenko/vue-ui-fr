@@ -106,7 +106,7 @@
               :content="node.content"
               :key="node.name"
               @open="onComponentOpen(node)"
-
+              @select="onComponentSelect(node)"
               />
           </div>
 
@@ -165,21 +165,21 @@ export default {
 
           centerDialogVisible: false,
 
-            dataForComponents: [
-               /* {
-                  id: 0,
-                  title: " Temperature device",
-                  type: "folder",
-                  content: "Temp 10C",
-                  children: [
-                    { id: 1, title: " Himiditry device", type: "device", content: "Hum: 40%" },
-                    { id: 2, title: " Himiditry device1", type: "device", content: "Hum: 40%" }
-                  ]
-                },
-                { id: 3, title: " Himiditry device2", type: "device", content: "Hum: 40%" },
-                { id: 4, title: " Himiditry device3", type: "device", content: "Hum: 40%" },
-                { id: 5, title: " Himiditry device4", type: "device", content: "Hum: 40%" },*/
-            ],
+          dataForComponents: [
+              /* {
+                id: 0,
+                title: " Temperature device",
+                type: "folder",
+                content: "Temp 10C",
+                children: [
+                  { id: 1, title: " Himiditry device", type: "device", content: "Hum: 40%" },
+                  { id: 2, title: " Himiditry device1", type: "device", content: "Hum: 40%" }
+                ]
+              },
+              { id: 3, title: " Himiditry device2", type: "device", content: "Hum: 40%" },
+              { id: 4, title: " Himiditry device3", type: "device", content: "Hum: 40%" },
+              { id: 5, title: " Himiditry device4", type: "device", content: "Hum: 40%" },*/
+          ],
 
             visible: true,
 
@@ -264,8 +264,11 @@ export default {
     // },
 
     onComponentOpen(node){
-      this.selectedComponent = node.name;
       this.$store.commit('OPEN_FOLDER', node);
+    },
+
+    onComponentSelect(node){
+      this.selectedComponent = node.name;
     },
 
     showModal2(){

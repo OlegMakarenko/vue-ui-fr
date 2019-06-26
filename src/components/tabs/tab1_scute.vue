@@ -34,7 +34,13 @@
         </div>
 
         <div class="main_tabs">
-            <button class="btn_online">В сети</button>
+                <button class="scute_on_btn" @click="switchButtonsScute" v-if="showbscute == button11scute">
+                    В сети
+                </button>
+                <button class="scute_off_btn" @click="switchButtonsScute" v-else>
+                    В сети
+                </button>
+            
             
             <button style="width:20%; 
                             margin-right: 18.5%; 
@@ -62,6 +68,11 @@ export default {
         return{
             scute_right_side: true,
 
+            showbscute: null, //showing buttons online-offline
+            button11scute: 'btn11',
+            button21scute: 'btn21',
+            selectedComponent: null,
+
             radio1: 'В сети',
             radio2: 'Ручной',
             counter: 30,
@@ -75,6 +86,14 @@ export default {
         // handleChange(value){
         //     console.log(value);
         // },
+
+        switchButtonsScute(){
+            if (this.showbscute == this.button11scute) {
+                this.showbscute = this.button21scute;
+            } else {
+                this.showbscute = this.button11scute;
+            }
+        },
 
         plusMinus(){
             if(this.counter){
@@ -177,13 +196,26 @@ export default {
     cursor: pointer;
 }
 
-.btn_online{
+.scute_on_btn{
     width: 20%; 
     height: 30px; 
     margin-left: 14.5%;
+    font-size: 14px;
     color: white;
     background-color: #a5c1e9;
-    border: 1px solid #a5c1e9;
+    border: 1px solid #84b2f3;
+    text-align: center;
+}
+
+.scute_off_btn{
+    width: 20%; 
+    height: 30px; 
+    margin-left: 14.5%;
+    font-size: 14px;
+    color: #a5c1e9;
+    background-color: white;
+    border: 1px solid #84b2f3;
+    text-align: center;
 }
 
 .group_btn{

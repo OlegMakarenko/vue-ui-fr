@@ -84,7 +84,8 @@
 
               <button
                 id="btn3"
-                class="el-icon-s-tools">
+                class="el-icon-s-tools"
+                @click="dbClick">
               </button>
           </div>
 
@@ -104,8 +105,8 @@
               :title="node.name"
               :content="node.content"
               :key="node.name"
-              @select="onComponentOpen(node)"
-              @dblclick="showModal2"
+              @open="onComponentOpen(node)"
+              
               />
           </div>
 
@@ -145,20 +146,22 @@ import addGroup from '../modalwindow/creategroup/modalAddGroup.vue'
 export default {
 
     components: {
-        "ComponentT": ComponentT,
-        "ComponentL": ComponentL,
-        ChildComponent,
-        ModalW,
-        ModalC,
-        wifiDevice,
-        addDevice,
-        addGroup
+      "ComponentT": ComponentT,
+      "ComponentL": ComponentL,
+      ChildComponent,
+      ModalW,
+      ModalC,
+      wifiDevice,
+      addDevice,
+      addGroup,
     },
 
     data(){
         return{
           ComponentT: "ComponentT",
           ComponentL: "ComponentL",
+
+          doubleClick: 0,
 
           centerDialogVisible: false,
 
@@ -208,14 +211,13 @@ export default {
 
     methods:{
 
-      childNameChanged(e){
-        console.log(e)
-        for(var i=0; i < this.dataForComponents.length; i++)
-          if(this.dataForComponents[i].id == e.id)
-            this.dataForComponents[i].title = e.newTitle;
-
-
-      },
+    childNameChanged(e){
+      console.log(e)
+      for(var i=0; i < this.dataForComponents.length; i++)
+        if(this.dataForComponents[i].id == e.id)
+          this.dataForComponents[i].title = e.newTitle;
+    },
+    
     showModal(){
       this.isModalVisible = true;
     },
@@ -273,6 +275,15 @@ export default {
     closeModal2(){
       this.isModalVisible2 = false;
     },
+
+    dbClick(){
+      this.doubleClick++
+      if(this.doubleClick == 1){
+        console.log('clicked once')
+      } else if (this.doubleClick == 2){
+        console.log('clicked twice')
+      }
+    }
   }
 }
 </script>

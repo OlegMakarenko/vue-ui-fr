@@ -6,13 +6,14 @@
         <el-tree
           :data="MySystem"
           node-key="id"
-          default-expand-all
+          :default-expanded-keys="[0]"
           @node-drag-start="handleDragStart"
           @node-drag-enter="handleDragEnter"
           @node-drag-leave="handleDragLeave"
           @node-drag-over="handleDragOver"
           @node-drag-end="handleDragEnd"
           @node-drop="handleDrop"
+          :expand-on-click-node="false"
           @node-click="onNodeClick"
           draggable
           :allow-drop="allowDrop"
@@ -37,10 +38,9 @@
 
       <div>
         <el-tree
-
           :data="devices"
           node-key="id"
-          default-expand-all
+          :default-expanded-keys="[0]"
           @node-drag-start="handleDragStart"
           @node-drag-enter="handleDragEnter"
           @node-drag-leave="handleDragLeave"
@@ -50,6 +50,7 @@
           @node-click="onNodeClick"
           draggable
           :allow-drop="allowDrop"
+          :expand-on-click-node="false"
           :allow-drag="allowDrag2"
           label="name"
           >
@@ -105,7 +106,7 @@ export default {
                       type: "folder",
                       children:[
                         {
-                          id: 2,
+                          id: 3,
                           name:'Device 1',
                           type: "device",
                         },
@@ -118,22 +119,22 @@ export default {
 
           devices:[
             {
-              id:3,
+              id: 0,
               name: 'Диспетчер устройств',
               type: "folder",
               children:[
                 {
-                  id: 4,
+                  id: 1,
                   name: 'Регулятор на кухне дом',
                   type: "device",
                   children: [
                     {
-                      id: 4,
+                      id: 2,
                       name:'Kitchen',
                       type: "device",
                       children:[
                         {
-                          id: 4,
+                          id: 3,
                           name:'Device 1',
                           type: "device",
                         },

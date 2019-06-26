@@ -1,6 +1,7 @@
 <template>
     <div class="component" 
          @click="onClick"
+         @dblclick="onDblclick" 
          @mouseover="hover = true"
          @mouseleave="hover = false"
          v-on:mouseover="show_icons = true"
@@ -77,6 +78,10 @@ export default {
     methods:{
         onClick(){
             this.$emit("select", this.title);
+        },
+
+         onDblclick(){
+            this.$emit("open", this.title);
         },
         
         showModal2(){

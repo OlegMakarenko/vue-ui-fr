@@ -1,6 +1,7 @@
 <template>
     <div class="component"
-         @click="onClick" 
+         @click="onClick"
+         @dblclick="onDblclick" 
          @mouseover="hover = true"
          @mouseleave="hover = false"
          v-on:mouseover="show_icons = true"
@@ -8,7 +9,8 @@
          :class="{active_hover: hover}">
 
         <div v-if="show_icons">
-            <i class="el-icon-folder" 
+            
+            <i class="el-icon-odometer" 
                style="float:left; 
                       color: grey;
                       font-size: 20px; 
@@ -83,6 +85,10 @@ export default {
         onClick(){
             this.activeBtn = 'ccc';
             this.$emit("select", this.title);
+        },
+
+        onDblclick(){
+            this.$emit("open", this.title);
         },
           
         showModal2(){

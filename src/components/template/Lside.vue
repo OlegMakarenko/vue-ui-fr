@@ -30,7 +30,7 @@
 
             <span class="tree-node-edit">
               <i class="el-icon-edit"></i>
-            </span>         
+            </span>
           </span>
 
         </el-tree>
@@ -64,7 +64,7 @@
 
             <span class="tree-node-edit">
               <i class="el-icon-edit"></i>
-            </span>         
+            </span>
           </span>
 
       </el-tree>
@@ -92,27 +92,27 @@ export default {
           MySystem:[
             {
               id:0,
-              name: 'My system',
+              name: 'Моя система',
               type: "folder",
               children:[
                 {
                   id: 1,
-                  name: 'My home',
+                  name: 'Мой дом',
                   type: "folder",
                   children: [
                     {
                       id: 2,
-                      name:'Kitchen',
+                      name:'Кухня',
                       type: "folder",
                       children:[
                         {
                           id: 3,
-                          name:'Device 1',
+                          name:'Устройство 1',
                           type: "device",
                         },
                       ],
                  },
-                {name: 'Badroom',
+                {name: 'Ванная',
                 type: 'folder'}]
               },]
           },],
@@ -161,34 +161,34 @@ export default {
           console.log('drag start', node);
         },
         handleDragEnter(draggingNode, dropNode, ev) {
-          console.log('tree drag enter: ', dropNode.label);
+          console.log('tree drag enter: ', dropNode.name);
         },
         handleDragLeave(draggingNode, dropNode, ev) {
-          console.log('tree drag leave: ', dropNode.label);
+          console.log('tree drag leave: ', dropNode.name);
         },
         handleDragOver(draggingNode, dropNode, ev) {
-          console.log('tree drag over: ', dropNode.label);
+          console.log('tree drag over: ', dropNode.name);
         },
         handleDragEnd(draggingNode, dropNode, dropType, ev) {
-          console.log('tree drag end: ', dropNode && dropNode.label, dropType);
+          console.log('tree drag end: ', dropNode && dropNode.name, dropType);
         },
         handleDrop(draggingNode, dropNode, dropType, ev) {
-          console.log('tree drop: ', dropNode.label, dropType);
+          console.log('tree drop: ', dropNode.name, dropType);
 
-          console.warn("Send to server", "Device: " + draggingNode.data.label + "To folder " + dropNode.data.label )
+          console.warn("Send to server", "Device: " + draggingNode.data.name + "To folder " + dropNode.data.name )
         },
         allowDrop(draggingNode, dropNode, type) {
-          if (dropNode.data.label === 'Level two 3-1') {
+          if (dropNode.data.name === 'Level two 3-1') {
             return type !== 'inner';
           } else {
             return true;
           }
         },
         allowDrag(draggingNode) {
-          return draggingNode.data.label.indexOf('Моя система') === -1;
+          return draggingNode.data.name.indexOf('Моя система') === -1;
         },
         allowDrag2(draggingNode) {
-          return draggingNode.data.label.indexOf('Диспетчер устройств') === -1;
+          return draggingNode.data.name.indexOf('Диспетчер устройств') === -1;
         },
         onNodeClick(node){
           this.$store.commit('OPEN_FOLDER', node)
@@ -210,25 +210,25 @@ export default {
   background-color: #ebeef5;
   display: block;
   text-align: center;
-  
+
 }
 
 .tree-node{
   display: flex;
   justify-content: space-between;
   width: 100%;
-  
+
 }
 
 
 .tree-node-edit{
   padding-right: 10px;
-  
+
 }
 
 .el-tree-node__content{
   height: 50px;
-  
+
 }
 
 

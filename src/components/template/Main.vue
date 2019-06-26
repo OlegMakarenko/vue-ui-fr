@@ -3,7 +3,7 @@
       <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
           <div class="right" v-if="shows">
               <h3 style="font-size: 18px; bold: none; float: left; font-weight: 500; margin-top: 65px; width: 100px">Project info</h3>
-                  
+
                   <div class="width:100%;">
                     <input class="device_input" type="text" v-model="selectedComponent">
                     <i class="el-icon-edit" style="font-size:19px"></i>
@@ -41,14 +41,14 @@
                   style="font-size: 15px;"
                   class="btn_add_device"
                   @click="showModal">
-              <i class="fa fa-plus" 
+              <i class="fa fa-plus"
                  style="margin-top: 2px; margin-right: 6px;"></i> Подключить устройство
             </button>
 
             <button @click="showAddGroup"
                     style="font-size: 15px; text-align: right"
                     class="btn_add_group">
-              <i class="fa fa-folder" 
+              <i class="fa fa-folder"
                  style="margin-top: 2px; margin-right: 6px;"></i> Добавить группу
             </button>
 
@@ -90,7 +90,7 @@
           </div>
 
           <div class="breadcrumb">
-            <el-breadcrumb separator="/" style="margin-left: 35px;">
+            <el-breadcrumb separator="/" style="margin-left: 30px;">
             <el-breadcrumb-item :to="{ path: '/' }">Моя Система</el-breadcrumb-item>
             <el-breadcrumb-item><a href="https:/google.com.ua">Мой дом</a></el-breadcrumb-item>
             <el-breadcrumb-item>Кухня</el-breadcrumb-item>
@@ -106,7 +106,7 @@
               :content="node.content"
               :key="node.name"
               @open="onComponentOpen(node)"
-              
+
               />
           </div>
 
@@ -166,10 +166,10 @@ export default {
           centerDialogVisible: false,
 
             dataForComponents: [
-               /* { 
-                  id: 0, 
-                  title: " Temperature device", 
-                  type: "folder", 
+               /* {
+                  id: 0,
+                  title: " Temperature device",
+                  type: "folder",
                   content: "Temp 10C",
                   children: [
                     { id: 1, title: " Himiditry device", type: "device", content: "Hum: 40%" },
@@ -190,9 +190,9 @@ export default {
             radio1: null, //our radio buttons for switching components blocks - list
 
             isModalVisible: false, //modal window
-            
+
             isModalVisible2: false,
-            
+
             isWiFiDeviceVisible: false,
 
             isAddDeviceVisible: false,
@@ -217,7 +217,7 @@ export default {
         if(this.dataForComponents[i].id == e.id)
           this.dataForComponents[i].title = e.newTitle;
     },
-    
+
     showModal(){
       this.isModalVisible = true;
     },
@@ -361,8 +361,8 @@ export default {
   height: 35px;
   float: left;
   margin-top: 25px;
-  margin-left: 5px;
-  display: flex; 
+  margin-left: 30px;
+  display: flex;
   justify-content: flex-start;
   border: none;
   border-radius: 8px;
@@ -379,7 +379,7 @@ export default {
   float: left;
   margin-top: 25px;
   margin-left: 5px;
-  display: flex; 
+  display: flex;
   justify-content: flex-start;
   border: 1px solid #ebeef5;
   border-radius: 8px;

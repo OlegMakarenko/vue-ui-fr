@@ -26,7 +26,7 @@
                 <p style="font-size:40px; color: white; margin-top: 25%;">-</p>
             </button>
 
-            <p class="counter_p">{{counter}}<span style="font-size: 50px">&#8451</span></p>
+            <p class="counter_p">{{counter}}<span style="font-size: 50px">{{'&#8451'}}</span></p>
             
             <button class="button_m" @click="counter += 1">
                 <p style="font-size:40px; color: white; margin-top: 25%;">+</p>

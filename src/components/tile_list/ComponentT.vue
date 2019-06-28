@@ -48,12 +48,13 @@ export default {
         return{
             textBeforeTitle: "This is",
             isModalVisible2: false,
-            hover: false
+            hover: false,
+            show_icons: false,
         }
     },
 
     components:{
-        ModalC
+        ModalC,
     },
 
     computed: {
@@ -65,17 +66,17 @@ export default {
 
     methods:{
         onClick(){
-            this.$emit("select", this.title);
 
+            this.$emit("select", this.title);
             if(this.hover == true){
-                    this.hover = false;
-                    this.mouseOver = false;
-                    this.mouseLeave = false;
-                    this.show_icons = false;                    
-                } else {
-                    this.hover = true;
-                    this.show_icons = true;
-                }
+                this.hover = false;
+                this.mouseOver = false;
+                this.mouseLeave = false;
+                this.show_icons = false;                    
+            } else {
+                this.hover = true;
+                this.show_icons = true;
+            }
         },
 
         mouseOver(){

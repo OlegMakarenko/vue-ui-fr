@@ -75,17 +75,17 @@ export default {
     },
     methods:{
         onClick(){
-            this.$emit("select", this.title);
             
-                if(this.hover == true){
-                    this.hover = false;
-                    this.mouseOver = false;
-                    this.mouseLeave = false;
-                    this.show_icons = false;                    
-                } else {
-                    this.hover = true;
-                    this.show_icons = true;
-                }
+            this.$emit("select", this.title);
+            if(this.hover == true){
+                this.hover = false;
+                this.mouseOver = false;
+                this.mouseLeave = false;
+                this.show_icons = false;                    
+            } else {
+                this.hover = true;
+                this.show_icons = true;
+            }
         },
 
         mouseOver(){

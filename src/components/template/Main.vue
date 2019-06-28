@@ -1,126 +1,123 @@
 <template>
-    <div>
-      <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
-          <div class="right" v-if="shows">
-              <h3 style="font-size: 18px; bold: none; float: left; font-weight: 500; margin-top: 65px; width: 100px">Project info</h3>
+<div class="main_component">
+  <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
+      <div class="right" v-if="shows">
+          <h3 style="font-size: 18px; bold: none; float: left; font-weight: 500; margin-top: 65px; width: 100px">Project info</h3>
 
-                  <div class="width:100%;">
-                    <input class="device_input" type="text" v-model="selectedComponent">
-                    <i class="el-icon-edit" style="font-size:19px"></i>
-                  </div>
-
-              <p style="float: left;
-                        text-align: left;
-                        color: #9e9e9e;
-                        width:80%;
-                        margin-left: 5px;"
-                        class="allp">
-                A variety of sizes and densities can be downloaded from this site.
-                Our icon set is also available as a git repository make it even
-                easier for developers to customize, share and re-use.
-              </p>
-
-              <p style="float: left;
-                        text-align: left;
-                        color: #9e9e9e;
-                        width:80%;
-                        margin-left: 5px;"
-                        class="allp">
-                The best way to use these icons on the web is with our icon web font.
-                It`s lightweight, easy to use, and hosted by Google Web Fonts. Learn
-                how to use font-based icons in our developer guide.
-              </p>
-          </div>
-      </transition>
-
-
-      <div class="all_components">
-          <div class="center">
-            <!-- <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> Part, where we need to add our devices -->
-            <button
-                  style="font-size: 15px;"
-                  class="btn_add_device"
-                  @click="showModal">
-              <i class="fa fa-plus"
-                 style="margin-top: 2px; margin-right: 6px;"></i> Подключить устройство
-            </button>
-
-            <button @click="showAddGroup"
-                    style="font-size: 15px; text-align: right"
-                    class="btn_add_group">
-              <i class="fa fa-folder"
-                 style="margin-top: 2px; margin-right: 6px;"></i> Добавить группу
-            </button>
-
-            <ModalW v-show="isModalVisible" @close="closeModal"/>
-
-            <wifiDevice v-show="isWiFiDeviceVisible" @close="closeWiFiDevice"/>
-
-            <addDevice v-show="isAddDeviceVisible" @close="closeAddDevice"/>
-
-            <addGroup v-show="isAddGroupVisible" @close="closeAddGroup" />
-
-            <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
-
-              <!--There is our component switching button-->
-              <div style="display: flex; flex-direction: column; width: 170px; position: absolute; margin-left: 54%;">
-                <button style="font-size: 13px">Подключение устройства</button> <!--Wi-FI / GSM-->
-                <button style="font-size: 13px" @click="showWiFiDevice">Wi-Fi терморегулятор</button> <!-- Web-Browser / Web-Browser on smartphone-->
-                <button style="font-size: 13px" @click="showAddDevice">Добавление в систему</button> <!--adding device to the system-->
-              </div>
-              <button
-                id="btn3"
-                class="el-icon-minus"
-                v-if="deviceComponentView == ComponentT"
-                @click="changeDeviceComponentView">
-              </button>
-
-              <button
-                id="btn3"
-                class="el-icon-s-grid"
-                v-else
-                @click="changeDeviceComponentView">
-              </button>
-
-              <button
-                id="btn3"
-                class="el-icon-s-tools"
-                @click="dbClick">
-              </button>
+          <div style="width:100%;">
+            <input class="device_input" type="text" v-model="selectedComponent">
+            <i class="el-icon-edit" style="font-size:19px"></i>
           </div>
 
-          <div class="breadcrumb">
-            <el-breadcrumb separator="/" style="margin-left: 30px;">
-            <el-breadcrumb-item :to="{ path: '/' }">Моя Система</el-breadcrumb-item>
-            <el-breadcrumb-item><a href="https:/google.com.ua">Мой дом</a></el-breadcrumb-item>
-            <el-breadcrumb-item>Кухня</el-breadcrumb-item>
-            </el-breadcrumb>
-          </div>
+          <p style="float: left;
+                    text-align: left;
+                    color: #9e9e9e;
+                    width:80%;
+                    margin-left: 5px;"
+                    class="allp">
+            A variety of sizes and densities can be downloaded from this site.
+            Our icon set is also available as a git repository make it even
+            easier for developers to customize, share and re-use.
+          </p>
 
-          <div class="compo"><!--Component part, under center part, where we have info about devices-->
-            <ModalC v-show="isModalVisible2" @close="closeModal2"/>
-            <component
-              v-for="node in content"
-              :is="deviceComponentView"
-              :title="node.name"
-              :content="node.content"
-              :key="node.name"
-              @open="onComponentOpen(node)"
-              @select="onComponentSelect(node)"
-              />
-          </div>
+          <p style="float: left;
+                    text-align: left;
+                    color: #9e9e9e;
+                    width:80%;
+                    margin-left: 5px;"
+                    class="allp">
+            The best way to use these icons on the web is with our icon web font.
+            It`s lightweight, easy to use, and hosted by Google Web Fonts. Learn
+            how to use font-based icons in our developer guide.
+          </p>
+      </div>
+  </transition>
 
-          <!-- <ChildComponent
-          class="compo"
-            v-for="item in dataForComponents"
-            :title="item.title"
-            :id="item.id"
-            :key="'childCc'+item.id"
-            @nameChanged="childNameChanged"
-          /> -->
 
-        </div>
+  <div class="all_components">
+      <div class="center">
+        <!-- <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> Part, where we need to add our devices -->
+        <button
+              style="font-size: 15px;"
+              class="btn_add_device"
+              @click="showModal">
+          <i class="fa fa-plus"
+              style="margin-top: 2px; margin-right: 6px;"></i> Подключить устройство
+        </button>
+
+        <button @click="showAddGroup"
+                style="font-size: 15px; text-align: right"
+                class="btn_add_group">
+          <i class="fa fa-folder"
+              style="margin-top: 2px; margin-right: 6px;"></i> Добавить группу
+        </button>
+
+        <ModalW v-show="isModalVisible" @close="closeModal"/>
+
+        <wifiDevice v-show="isWiFiDeviceVisible" @close="closeWiFiDevice"/>
+
+        <addDevice v-show="isAddDeviceVisible" @close="closeAddDevice"/>
+
+        <addGroup v-show="isAddGroupVisible" @close="closeAddGroup" />
+
+        <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
+
+          <!--There is our component switching button-->
+          <!-- <div style="display: flex; flex-direction: column; width: 170px; position: absolute; margin-left: 54%;"> -->
+            <!-- <button style="font-size: 13px">Подключение устройства</button> Wi-FI / GSM -->
+            <!-- <button style="font-size: 13px" @click="showWiFiDevice">Wi-Fi терморегулятор</button> Web-Browser / Web-Browser on smartphone -->
+            <!-- <button style="font-size: 13px" @click="showAddDevice">Добавление в систему</button> adding device to the system -->
+          <!-- </div> -->
+
+          <button
+            id="btn3"
+            class="el-icon-minus"
+            v-if="deviceComponentView == ComponentT"
+            @click="changeDeviceComponentView">
+          </button>
+
+          <button
+            id="btn3"
+            class="el-icon-s-grid"
+            v-else
+            @click="changeDeviceComponentView">
+          </button>
+
+          <button
+            id="btn3"
+            class="el-icon-s-tools"
+            @click="dbClick">
+          </button>
+      </div>
+      
+      <!-- here is our breadcrumb component -->
+      <breadcrumb class="breadcrumb"/>
+      
+
+      <div class="compo"><!--Component part, under center part, where we have info about devices-->
+        <ModalC v-show="isModalVisible2" @close="closeModal2"/>
+        <component
+          v-for="node in content"
+          :is="deviceComponentView"
+          :title="node.name"
+          :content="node.content"
+          :key="node.name"
+          @open="onComponentOpen(node)"
+          @select="onComponentSelect(node)"
+          />
+      </div>
+
+      <!-- <ChildComponent
+      class="compo"
+        v-for="item in dataForComponents"
+        :title="item.title"
+        :id="item.id"
+        :key="'childCc'+item.id"
+        @nameChanged="childNameChanged"
+      /> -->
+
     </div>
+</div>
 </template>
 
 
@@ -141,6 +138,8 @@ import addDevice from '../modalwindow/systemdevice/modalAddDevice.vue'
 
 import addGroup from '../modalwindow/creategroup/modalAddGroup.vue'
 
+import breadcrumb from './breadcrumb.vue'
+
 
 
 export default {
@@ -154,6 +153,7 @@ export default {
       wifiDevice,
       addDevice,
       addGroup,
+      breadcrumb
     },
 
     data(){
@@ -293,6 +293,11 @@ export default {
 
 
 <style scoped>
+
+.main_component{
+  width:100%;
+  height: 100%;
+}
 
 .breadcrumb{
  display: flow-root;

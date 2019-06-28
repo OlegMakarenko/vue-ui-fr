@@ -9,36 +9,18 @@
          :class="{active_hover: hover}">
 
         <div v-if="show_icons">
-            <i class="el-icon-folder"
+            
+            <i class="el-icon-s-folder"
                style="float:left; 
                       color: grey;
                       font-size: 20px; 
                       cursor: pointer;">
             </i>
-            
-            <i class="el-icon-s-tools"
-               @click="showModal2"  
-               style="float:right; 
-                      color: grey;
-                      font-size: 20px; 
-                      cursor: pointer;">
-            </i>
-            
-            <!-- <i class="el-input__icon el-icon-edit" 
-               style="float:right; 
-                      font-size: 20px; 
-                      cursor: pointer; 
-                      margin-top: 39%; 
-                      margin-right: -10%">
-            </i> -->
+
         </div>
-    
-        <ModalC v-show="isModalVisible2" @close="closeModal2"/>
 
         <div class="title" >
-            <!-- <input class="tbox" v-model="computedTitle"> -->
             <h>{{computedTitle}}</h>
-                
         </div>
             
         <div class="content">
@@ -49,8 +31,6 @@
 
 <script>
 
-import ModalC from '../modalwindow/modalComponent'
-
 export default {
     props: [ 'title', 'content' ],
     created(){},
@@ -58,14 +38,11 @@ export default {
 
     data(){
         return{
-            textBeforeTitle: "This is",
-            isModalVisible2: false,
             hover: false
         }
     },
 
     components:{
-        ModalC
     },
 
     computed: {
@@ -83,23 +60,6 @@ export default {
          onDblclick(){
             this.$emit("open", this.title);
         },
-        
-        showModal2(){
-            this.isModalVisible2 = true;
-        },
-
-        closeModal2(){
-            this.isModalVisible2 = false;
-        },
-        focusField(title){
-            this.editField = title;
-        },
-        blurField(){
-            this.editField = '';
-        },
-        showField(title){
-            return (this.tile[title] == '' || this.editField == title)
-        }
     }
 }
 </script>
@@ -115,7 +75,7 @@ export default {
     border-width: 1px;
     border-radius: 4px;
     display: inline-block;
-    // cursor: pointer;
+    cursor: pointer;
 
     .title{
         margin-top: 90px;

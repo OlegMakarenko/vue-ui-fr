@@ -1,6 +1,6 @@
 <template>
 <transition name="modal-fade-add-group">
-    <!--Modal window for adding accessorises-->
+    <!--Modal window of creating group when we have devices-->
     <div class="modal-mask-add-group">
     <div class="modal-backdrop-add-group">
 
@@ -16,27 +16,23 @@
                 </button>
                 
                 <p style="text-align: center;
-                      font-size: 22px;
-                      margin-top: 20px;">Создание группы</p>
-                <p style="text-align: center;
-                      font-size: 20px;
-                      margin-top: 5px;">Для добавления лобой группы необходимо, чтобы у Вас были устройства</p>      
+                          font-size: 22px;
+                          margin-top: 20px;">Создание группы</p>
             </div>
+                <div class="button-add-group-top">
+                    <button class="button-enter-group-name">Введите имя добавляемой группы</button>
+                </div>
 
-            <div class="add_group_button">
-                <button class="center-btn-add-group">Перейти в диспетчер устройств</button>
-                <!-- <button class="center-btn2-add-device">Web-браузер на Смартфоне/Планшете</button> -->
-            </div>
                 <p style="text-align: center;
-                      font-size: 20px;
-                      margin-top: 15px;">Для добавления устройств, перейдите в менеджер устройств.</p>
-            <!-- <div>
-                <button type="button"
-                    class="btn-blue"
-                    @click="close"
-                    aria-label="Close modal">Add device
-                </button>
-            </div> -->
+                          font-size: 20px;
+                          margin-top: 15px;">
+                            Группа будет добавлена в текущую группу в Моей системе.
+                            После появления появится компонент для управления ею.
+                </p>
+            
+            <div class="add_group_button">
+                <button class="center-btn-add-group">Добавить</button>
+            </div>
         </div>
     </div>
     </div>
@@ -120,11 +116,28 @@ export default {
 
 .add_group_button{
     width:100%;
+    display: flex;
+    justify-content: center;
+}
+
+.button-add-group-top{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.button-enter-group-name{
+    width: 400px;
+    font-size: 20px; 
+    text-align: center;
+    cursor: pointer;
+    background-color: #ccdbee;
+    border-radius: 12px;
+    border: none;
 }
 
 .center-btn-add-group{
-    float: left;
-    margin-left: 35%;
     width: 170px;
     height: 90px;
     font-size: 20px; 

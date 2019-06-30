@@ -63,11 +63,11 @@
         <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
 
           <!--There is our component switching button-->
-          <!-- <div style="display: flex; flex-direction: column; width: 170px; position: absolute; margin-left: 54%;"> -->
-            <!-- <button style="font-size: 13px">Подключение устройства</button> Wi-FI / GSM -->
-            <!-- <button style="font-size: 13px" @click="showWiFiDevice">Wi-Fi терморегулятор</button> Web-Browser / Web-Browser on smartphone -->
-            <!-- <button style="font-size: 13px" @click="showAddDevice">Добавление в систему</button> adding device to the system -->
-          <!-- </div> -->
+          <div style="display: flex; flex-direction: column; width: 170px; position: absolute; margin-left: 54%;">
+            <button style="font-size: 13px" @click="showAddGroup">Подключение устройства</button> <!--Wi-FI / GSM-->
+            <button style="font-size: 13px" @click="showWiFiDevice">Wi-Fi терморегулятор</button> <!--Web-Browser / Web-Browser on smartphone-->
+            <button style="font-size: 13px" @click="showAddDevice">Добавление в систему</button> <!--adding device to the system-->
+          </div>
 
           <button
             id="btn3"

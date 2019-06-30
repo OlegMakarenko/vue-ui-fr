@@ -1,38 +1,36 @@
 <template>
-<transition name="modal-fade-add-device">
-    <!--Modal window when we have devices-->
-    <div class="modal-mask-add-device">
-    <div class="modal-backdrop-add-device">
+<transition name="modal-fade-wifi-gsm">
+    <!--Modal window for adding accessorises-->
+    <div class="modal-mask-wifi-gsm">
+    <div class="modal-backdrop-wifi-gsm">
 
-        <div class="modal-add-device"
+        <div class="modal-wifi-gsm"
              role="dialog"
              aria-labelledby="modalTitle"
              aria-describedby="modalDescription">
              <div>
                 <button type="button"
-                    class="btn-close-add-device"
+                    class="btn-close-wifi-gsm"
                     @click="close"
                     aria-label="Close modal">x
                 </button>
                 
                 <p style="text-align: center;
                       font-size: 22px;
-                      margin-top: 20px;">Добавление устройства в систему</p>
-            </div>
-
-            <div class="button-choose-device">
-                    <button class="button-choose-device-name">Выберите устройство в учетной записи</button>
-            </div>
-
+                      margin-top: 20px;">Подключение устройства</p>
                 <p style="text-align: center;
                       font-size: 20px;
-                      margin-top: 15px;">Добавление устройства. Устройство будет добавлено
-                                         в текущую группу в Моей системе. После добавления
-                                         появится компонент для управления им.</p>
-            
-            <div class="add_device_button">
-                <button class="center-btn-add-device">Добавить</button>
+                      margin-top: 5px;">Для подключения устройства выберите тип подключаемого устройства.</p>      
             </div>
+
+            <div>
+                <button class="center-btn-wifi-gsm">Wi-Fi терморегулятор</button>
+                <button class="center-btn2-wifi-gsm">GSM терморегулятор</button>
+            </div>
+                <p style="text-align: center;
+                      font-size: 20px;
+                      margin-top: 15px;">После выбора типа устройства Вам будет показаны
+                                         соответствующие шаги подключения его в учетную запись.</p>
             <!-- <div>
                 <button type="button"
                     class="btn-blue"
@@ -57,11 +55,21 @@ export default {
 
     data(){
         return{
+            isDeviceV4Visible: false,
 
+            activeName: 'first'
         };
     },
 
     methods: {
+        showDeviceV4(){
+            this.isDeviceV4Visible = true;
+        },
+
+        closeDeviceV4(){
+            this.isDeviceV4Visible = false;
+        },
+
         close(){
             this.$emit('close');
         },
@@ -77,7 +85,7 @@ export default {
     text-align: center; 
 }
 
-.modal-mask-add-device{
+.modal-mask-wifi-gsm{
     position: fixed;
     top: 0;
     left: 0;
@@ -87,7 +95,7 @@ export default {
     display: table;
 }
 
-.modal-backdrop-add-device{
+.modal-backdrop-wifi-gsm{
     width: 80%;
     height: 70vh;
     position: fixed;
@@ -95,7 +103,7 @@ export default {
     justify-content: center;
 }
 
-.modal-add-device{
+.modal-wifi-gsm{
     margin-top: 13%;
     margin-left: 20%;
     padding: 15px;
@@ -107,7 +115,7 @@ export default {
     flex-direction: column;
 }
 
-.btn-close-add-device{
+.btn-close-wifi-gsm{
     border: none;
     font-size: 35px;
     cursor: pointer;
@@ -120,31 +128,9 @@ export default {
     /* margin-top: 0px; */
     margin-left: 38%;
 }
-
-.button-choose-device{
-    width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-}
-
-.button-choose-device-name{
-    width: 400px;
-    font-size: 20px; 
-    text-align: center;
-    cursor: pointer;
-    background-color: #ccdbee;
-    border-radius: 12px;
-    border: none;
-}
-
-.add_device_button{
-    width:100%;
-}
-
-.center-btn-add-device{
+.center-btn-wifi-gsm{
     float: left;
-    margin-left: 35%;
+    margin-left: 90px;
     width: 170px;
     height: 90px;
     font-size: 20px; 
@@ -153,14 +139,28 @@ export default {
     background-color: #ccdbee;
     border-radius: 15px;
     border: none;
-
+    display: block;
 }
 
-.modal-fade-add-device-enter, .modal-fade-add-device-leave-active{
+.center-btn2-wifi-gsm{
+    float: right;
+    margin-right: 90px;
+    width: 170px;
+    height: 90px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer; 
+    background-color: #ccdbee;
+    border-radius: 15px;
+    border: none;
+    display: block;
+}
+
+.modal-fade-wifi-gsm-enter, .modal-fade-wifi-gsm-leave-active{
     opacity: 0;
 }
 
-.modal-fade-add-device-enter-active, .modal-fade-add-device-leave-active{
+.modal-fade-wifi-gsm-enter-active, .modal-fade-wifi-gsm-leave-active{
     transition: opacity .5s ease;
 }
 </style>

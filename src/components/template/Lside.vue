@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="left">
+    <div class="left-side-menu">
       <treeview class="tree_view"/> <!--here is our tree component-->
    </div>
   </div>
@@ -24,7 +24,7 @@ export default {
 
 <style scoped>
 
-.left {
+.left-side-menu {
   line-height: 2;
   width: 20%;
   min-height: 100vh;

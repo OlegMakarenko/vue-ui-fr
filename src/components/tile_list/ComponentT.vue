@@ -1,5 +1,5 @@
 <template>
-    <div class="component" 
+    <div class="component-tile" 
          @click="onClick"
          @dblclick="onDblclick" 
          @mouseenter="mouseOver"
@@ -106,7 +106,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.component{
+.component-tile{
     width: 200px;
     height: 200px;
     margin: 15.7px;

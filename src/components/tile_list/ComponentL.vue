@@ -1,5 +1,5 @@
 <template>
-    <div class="component"
+    <div class="component-list"
          @click="onClick"
          @dblclick="onDblclick" 
          @mouseenter="mouseOver"
@@ -114,7 +114,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.component{
+.component-list{
     width: 90%;
     height: 20px;
     margin: 15.7px;

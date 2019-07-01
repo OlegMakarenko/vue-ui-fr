@@ -1,5 +1,5 @@
 <template>
-    <div class="component" 
+    <div class="component-file" 
          @click="onClick"
          @dblclick="onDblclick" 
          @mouseover="hover = true; 
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.component{
+.component-file{
     width: 200px;
     height: 75px;
     margin: 15.7px;

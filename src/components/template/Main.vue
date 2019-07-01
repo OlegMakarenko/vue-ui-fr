@@ -1,7 +1,7 @@
 <template>
 <div class="main_component">
   <transition name="slide-fade"> <!-- the right side where we have Device manager info-->
-      <div class="right" v-if="shows">
+      <div class="right-side-menu" v-if="shows">
           <h3 style="font-size: 18px; bold: none; float: left; font-weight: 500; margin-top: 65px; width: 100px">Project info</h3>
 
           <div style="width:100%;">
@@ -35,7 +35,7 @@
 
 
   <div class="all_components">
-      <div class="center">
+      <div class="center-component-control">
         <!-- <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> Part, where we need to add our devices -->
         <button
               style="font-size: 15px;"
@@ -60,31 +60,31 @@
 
         <addGroup v-show="isAddGroupVisible" @close="closeAddGroup" />
 
-        <i class="el-icon-info btn3" @click="shows = !shows"></i><!--this button showing right side-->
+        <i class="el-icon-info button-right-side" @click="shows = !shows"></i><!--this button showing right side-->
 
           <!--There is our component switching button-->
-          <div style="display: flex; flex-direction: column; width: 170px; position: absolute; margin-left: 54%;">
-            <button style="font-size: 13px" @click="showAddGroup">Подключение устройства</button> <!--Wi-FI / GSM-->
-            <button style="font-size: 13px" @click="showWiFiDevice">Wi-Fi терморегулятор</button> <!--Web-Browser / Web-Browser on smartphone-->
-            <button style="font-size: 13px" @click="showAddDevice">Добавление в систему</button> <!--adding device to the system-->
-          </div>
+          <!-- <div style="display: flex; flex-direction: column; width: 170px; position: absolute; margin-left: 54%;"> -->
+            <!-- <button style="font-size: 13px" @click="showAddGroup">Подключение устройства</button> Wi-FI / GSM -->
+            <!-- <button style="font-size: 13px" @click="showWiFiDevice">Wi-Fi терморегулятор</button> Web-Browser / Web-Browser on smartphone -->
+            <!-- <button style="font-size: 13px" @click="showAddDevice">Добавление в систему</button> adding device to the system -->
+          <!-- </div> -->
 
           <button
-            id="btn3"
+            id="button-icon-minus"
             class="el-icon-minus"
             v-if="deviceComponentView == ComponentT"
             @click="changeDeviceComponentView">
           </button>
 
           <button
-            id="btn3"
+            id="button-icon-grid"
             class="el-icon-s-grid"
             v-else
             @click="changeDeviceComponentView">
           </button>
 
           <button
-            id="btn3"
+            id="button-icon-tools"
             class="el-icon-s-tools"
             @click="dbClick">
           </button>
@@ -94,7 +94,7 @@
       <breadcrumb class="breadcrumb"/>
       
 
-      <div class="compo"><!--Component part, under center part, where we have info about devices-->
+      <div class="center-component-bloc"><!--Component part, under center part, where we have info about devices-->
         <ModalC v-show="isModalVisible2" @close="closeModal2"/>
         <component
           v-for="node in content"
@@ -308,7 +308,17 @@ export default {
   min-width: 80%;
 }
 
-.compo {
+
+.center-component-control {
+  height: 95px;
+  text-align: center;
+  border-top: 1px solid #ebeef5;
+  background-color: #ffffff;
+  display: block;
+  flex-flow: row wrap;
+}
+
+.center-component-bloc {
   height: 75vh;
   min-width: 60%;
   max-width: 90%;
@@ -319,17 +329,7 @@ export default {
   overflow-y: auto;
 }
 
-.center {
-  height: 95px;
-  text-align: center;
-  border-top: 1px solid #ebeef5;
-  background-color: #ffffff;
-  display: block;
-  flex-flow: row wrap;
-}
-
-
-.right {
+.right-side-menu {
   width: 20%;
   min-height: 100vh;
   float: right;
@@ -411,6 +411,45 @@ export default {
   outline: none;
 }
 
+#button-icon-minus{
+  float: right;
+  margin: 4px;
+  margin-top: 26px;
+  margin-right: 11px;
+  background-color: white;
+  border: none;
+  color: grey;
+  cursor: pointer;
+  font-size: 28px;
+  outline: none;
+}
+
+#button-icon-grid{
+  float: right;
+  margin: 4px;
+  margin-top: 26px;
+  margin-right: 11px;
+  background-color: white;
+  border: none;
+  color: grey;
+  cursor: pointer;
+  font-size: 28px;
+  outline: none;
+}
+
+#button-icon-tools{
+  float: right;
+  margin: 4px;
+  margin-top: 26px;
+  margin-right: 11px;
+  background-color: white;
+  border: none;
+  color: grey;
+  cursor: pointer;
+  font-size: 28px;
+  outline: none;
+}
+
 .btn3{
   float: right;
   margin: 4px;
@@ -422,6 +461,17 @@ export default {
   cursor: pointer;
   font-size: 28px;
 }
+
+.button-right-side{
+  float: right;
+  margin: 4px;
+  margin-top: 25px;
+  margin-right: 18px;
+  background-color: white;
+  border: none;
+  color: grey;
+  cursor: pointer;
+  font-size: 28px;}
 
 .btn4{
   width: auto;

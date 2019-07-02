@@ -1,7 +1,7 @@
 <template>
     <div class="admin">
         <Header/>
-        <div class="container">
+        <div class="container" v-if="!$store.getters.isLoading">
             <LeftSide/>
             <ContentPanel/>
         </div>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-loading="$store.getters.isLoading">
     <el-container v-if="!isLoggedIn" class="container">
       <Auth/>
     </el-container>

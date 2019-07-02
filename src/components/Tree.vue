@@ -2,7 +2,7 @@
 <div>
   <div class="tree-style">
     <el-tree
-      :data="MySystem"
+      :data="treeData"
       node-key="id"
       :default-expanded-keys="[0]"
       @node-drag-start="handleDragStart"
@@ -30,37 +30,6 @@
         </span>
       </span>
     </el-tree>
-
-
-    <el-tree
-      :data="devices"
-      node-key="id"
-      :default-expanded-keys="[0]"
-      @node-drag-start="handleDragStart"
-      @node-drag-enter="handleDragEnter"
-      @node-drag-leave="handleDragLeave"
-      @node-drag-over="handleDragOver"
-      @node-drag-end="handleDragEnd"
-      @node-drop="handleDrop"
-      @node-click="onNodeClick"
-      draggable
-      :allow-drop="allowDrop"
-      :expand-on-click-node="false"
-      :allow-drag="allowDrag2"
-      label="name">
-
-      <span class="tree-node" slot-scope="{ node, data }"> <!-- node, data-->
-        <span>
-          <i v-if="node.data.type=='folder'" class="el-icon-folder"></i>
-          <i v-if="node.data.type=='device'" class="el-icon-odometer"></i>
-          <span>{{node.data.name}}</span>
-        </span>
-
-        <span class="tree-node-edit">
-          <i class="el-icon-edit"></i>
-        </span>
-      </span>
-    </el-tree>
   </div>
 </div>
 </template>
@@ -68,72 +37,10 @@
 <script>
 export default {
   label:'lside',
-  props:['treeData', 'isDraggable'],
+  props:['treeData', 'id', 'isDraggable'],
     data() {
       return {
-        showTree: false,
-        showtile: false,
-        MySystem:[
-          {
-            id:0,
-            name: 'Моя система',
-            type: "folder",
-            children:[
-              {
-                id: 1,
-                name: 'Мой дом',
-                type: "folder",
-                children: [
-                  {
-                    id: 2,
-                    name:'Кухня',
-                    type: "folder",
-                    children:[
-                      {
-                        id: 3,
-                        name:'Устройство 1',
-                        type: "device",
-                      },
-                    ],
-                },
-              {
-                id: 4,
-                name: 'Ванная',
-              type: 'folder'}]
-            },]
-        },],
-
-        devices:[
-          {
-            id: 0,
-            name: 'Диспетчер устройств',
-            type: "folder",
-            children:[
-              {
-                id: 1,
-                name: 'Регулятор на кухне дом',
-                type: "device",
-                children: [
-                  {
-                    id: 2,
-                    name:'Kitchen',
-                    type: "device",
-                    children:[
-                      {
-                        id: 3,
-                        name:'Device 1',
-                        type: "device",
-                      },
-                    ],
-                },
-              {name: 'Регулятор ванная',
-              type: 'device'}]
-            },]
-        },],
-        defaultProps: {
-          children: 'children',
-          label: 'label'
-        }
+      
       };
     },
 
@@ -176,7 +83,11 @@ export default {
       return draggingNode.data.name.indexOf('Диспетчер устройств') === -1;
     },
     onNodeClick(node){
-      this.$store.commit('OPEN_FOLDER', node)
+      console.log(node)
+      this.$store.dispatch('OPEN_NODE', {
+        nodeId: node.id,
+        treeId: this.id,
+      })
     }
   }
 };

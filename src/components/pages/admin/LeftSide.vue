@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="left-side-menu">
-      <Tree class="tree_view"/> <!--here is our tree component-->
+      <Tree 
+        :treeData="tree1Data"
+        :id="1"
+        class="tree_view"
+      />
    </div>
   </div>
 </template>
@@ -18,6 +22,12 @@ export default {
 
   components:{
     Tree
+  },
+
+  computed:{
+    tree1Data(){
+      return this.$store.getters.tree1Data;
+    }
   }
 }
 </script>

@@ -49,7 +49,8 @@ export default {
 
     computed:{
       content(){
-        return this.$store.getters.currentDeviceList;
+          if(this.$store.getters.content)
+            return this.$store.getters.content.children;
       },
     },
     
@@ -72,6 +73,10 @@ export default {
 
         onComponentOpen(id){
             this.$set(this, 'selectedId', null);
+            this.$store.dispatch('OPEN_NODE', {
+                nodeId: id,
+                treeId: 1,
+            })
         },
 
         onInfoClick(){

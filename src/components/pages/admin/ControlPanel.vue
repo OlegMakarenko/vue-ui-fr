@@ -43,7 +43,7 @@
         </el-row>   
 
         <el-row>
-            <Breadcrumb/>
+            <Breadcrumb :path="path"/>
         </el-row>
         <ModalAddDevice 
         v-if="showAddDevice"
@@ -77,6 +77,12 @@ export default {
             showAddDevice: false,
             showAddGroup: false,
         }
+    },
+
+    computed:{
+        path(){
+            return this.$store.getters.path;
+        },
     },
     
     methods:{

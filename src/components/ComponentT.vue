@@ -23,7 +23,7 @@
         <ModalC v-show="isModalVisible2" @close="closeModal2"/>
 
         <div class="title" >
-            <h>{{computedTitle}}</h>    
+            <div>{{computedTitle}}</div>    
         </div>
             
         <div class="content">
@@ -86,7 +86,7 @@ export default {
         },
 
          onDblclick(){
-            this.$emit("open", this.title);
+            this.$emit("open", this.id);
         },
         
         showModal2(){

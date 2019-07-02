@@ -1,6 +1,6 @@
 <template>
     <div class="breadcrumb">
-        <el-breadcrumb separator="/" style="margin-left: 30px;">
+        <el-breadcrumb separator="/">
             <el-breadcrumb-item :to="{ path: '/' }">Моя Система</el-breadcrumb-item>
             <el-breadcrumb-item><a href="https:/google.com.ua">Мой дом</a></el-breadcrumb-item>
             <el-breadcrumb-item>Кухня</el-breadcrumb-item>

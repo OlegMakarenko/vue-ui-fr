@@ -6,7 +6,7 @@
          @mouseleave="mouseLeave"
          :class="{active_hover: hover}">
 
-        <div v-if="show_icons">
+        
             
             <i class="el-icon-odometer" 
                style="float:left; 
@@ -15,7 +15,7 @@
                       margin-top:3px;
                       cursor: pointer;">
             </i>
-
+        <div v-if="show_icons">
             <i class="el-icon-s-tools"
                @click="showModal2" 
                style="float:right;
@@ -41,7 +41,7 @@
 
 <script>
 
-import ModalC from '../modalwindow/modalComponent'
+import ModalC from '../components/modalwindow/modalComponent.vue'
 
 export default {
     props: [ 'title', 'content' ],

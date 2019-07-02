@@ -96,7 +96,9 @@ export default {
                       },
                     ],
                 },
-              {name: 'Ванная',
+              {
+                id: 4,
+                name: 'Ванная',
               type: 'folder'}]
             },]
         },],

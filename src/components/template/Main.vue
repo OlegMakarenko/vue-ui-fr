@@ -37,7 +37,7 @@
   <div class="all_components">
       <div class="center-component-control">
         <!-- <h5 style="float: left; margin: 2px 0px 0px 2px">Device Manager</h5><br> Part, where we need to add our devices -->
-        <button
+        <!--<button
               style="font-size: 15px;"
               class="btn_add_device"
               @click="showModal">
@@ -50,7 +50,14 @@
                 class="btn_add_group">
           <i class="fa fa-folder"
               style="margin-top: 2px; margin-right: 6px;"></i> Добавить группу
-        </button>
+        </button>-->
+
+        <el-button 
+            class="btn_add_device" 
+            type="primary" 
+            icon="el-icon-plus" 
+            @click="showModal" size="mini">Подключить устройство</el-button>
+        <el-button class="btn_add_group" icon="el-icon-folder" @click="showAddGroup" size="mini">Добавить группу</el-button>
 
         <ModalW v-show="isModalVisible" @close="closeModal"/>
 
@@ -138,7 +145,7 @@ import addDevice from '../modalwindow/systemdevice/modalAddDevice.vue'
 
 import addGroup from '../modalwindow/creategroup/modalAddGroup.vue'
 
-import breadcrumb from './breadcrumb.vue'
+import breadcrumb from '../breadcrumb.vue'
 
 
 
@@ -365,34 +372,22 @@ export default {
 }
 
 .btn_add_device{
-  width: 200px;
-  height: 35px;
   float: left;
   margin-top: 25px;
   margin-left: 30px;
   display: flex;
   justify-content: flex-start;
-  border: none;
-  border-radius: 8px;
-  background-color: #57aaff;
-  color: white;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
 }
 
 .btn_add_group{
-  width: 200px;
-  height: 35px;
   float: left;
   margin-top: 25px;
   margin-left: 5px;
   display: flex;
   justify-content: flex-start;
-  border: 1px solid #ebeef5;
-  border-radius: 8px;
-  background-color: white;
-  color: #c1c0c0;
   text-align: center;
   text-decoration: none;
   cursor: pointer;

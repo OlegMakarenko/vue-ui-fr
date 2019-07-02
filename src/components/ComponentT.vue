@@ -2,18 +2,15 @@
     <div class="component-tile" 
          @click="onClick"
          @dblclick="onDblclick" 
-         @mouseenter="mouseOver"
-         @mouseleave="mouseLeave"
-         :class="{active_hover: hover}">
+         :class="{selected: isSelected}">
 
-        <div v-if="show_icons">
-            <i class="el-icon-odometer"
+            <i :class="iconClass"
                style="float:left; 
                       color: grey;
                       font-size: 20px; 
                       cursor: pointer;">
             </i>
-            
+        <div v-if="isSelected">    
             <i class="el-icon-s-tools"
                @click="showModal2"  
                style="float:right; 
@@ -37,10 +34,10 @@
 
 <script>
 
-import ModalC from '../modalwindow/modalComponent'
+import ModalC from '../components/modalwindow/modalComponent.vue'
 
 export default {
-    props: [ 'title', 'content' ],
+    props: [ 'title', 'content', 'selectedId', 'id', 'type' ],
     created(){},
     mounted(){},
 
@@ -58,25 +55,24 @@ export default {
     },
 
     computed: {
-    computedTitle(){
-        if(this.title)
-            return this.title.toUpperCase();
-     },
+        computedTitle(){
+            if(this.title)
+                return this.title.toUpperCase();
+        },
+
+        isSelected(){
+            return this.selectedId == this.id;
+        },
+
+        iconClass(){
+            if(this.type === 'device') return 'el-icon-odometer'
+            if(this.type === 'folder') return 'el-icon-folder'
+        },
     },
 
     methods:{
         onClick(){
-
-            this.$emit("select", this.title);
-            if(this.hover == true){
-                this.hover = false;
-                this.mouseOver = false;
-                this.mouseLeave = false;
-                this.show_icons = false;                    
-            } else {
-                this.hover = true;
-                this.show_icons = true;
-            }
+            this.$emit("select", this.id);
         },
 
         mouseOver(){
@@ -121,6 +117,7 @@ export default {
     .title{
         margin-top: 90px;
         font-size: 18px;
+        text-align: center;
         cursor: pointer;
     }
     .content{
@@ -137,5 +134,9 @@ export default {
         text-align: center;
         background: transparent;
     }
+    
 }
+.selected{
+        background: #ebeef5;
+    }
 </style>

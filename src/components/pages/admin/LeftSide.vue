@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="left-side-menu">
-      <treeview class="tree_view"/> <!--here is our tree component-->
+      <Tree class="tree_view"/> <!--here is our tree component-->
    </div>
   </div>
 </template>
 
 <script>
-import treeview from './Tree.vue'
+import Tree from '../../Tree.vue'
 
 export default {
   data(){
@@ -17,7 +17,7 @@ export default {
   },
 
   components:{
-    treeview
+    Tree
   }
 }
 </script>

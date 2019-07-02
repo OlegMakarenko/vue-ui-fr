@@ -2,7 +2,6 @@
   <div>
     <div class="top">
       <img class="brand" 
-           src="./backgroundFractal.png" 
            alt="fractal" 
            style="float: left;
                   margin-top: 5px; 
@@ -15,19 +14,13 @@
       <nav>
 
           
-            <i style="cursor: pointer; 
-                      font-size: 30px; 
-                      float: right; 
-                      margin-top: 16px; 
-                      margin-right: 5px;
-                      color: #565656" 
-                      class="fa fa-user-circle-o"></i>
-          
-      
-          <!-- <div class="rcorner">
-            <router-link class="reg" to="/alert">Alert</router-link>
-          </div> -->
-
+      <i style="cursor: pointer; 
+                font-size: 30px; 
+                float: right; 
+                margin-top: 16px; 
+                margin-right: 5px;
+                color: #565656" 
+                class="fa fa-user-circle-o"></i>
       </nav>
     </div>
       <Lside />
@@ -36,7 +29,7 @@
 </template>
 
 <script>
-import Lside from './Lside.vue'
+// import Lside from '../pages/admin/Lside.vue'
 import Main from './Main.vue'
 
 export default {

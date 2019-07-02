@@ -3,20 +3,21 @@
     <el-container v-if="!isLoggedIn" class="container">
       <Auth/>
     </el-container>
-    <Header v-else/>
+    <Admin v-else/>
   </div>
 </template>
 
 <script>
 
 import Auth from './Auth'
-import Header from './components/template/Header'
+import Admin from './components/pages/admin/Admin.vue'
+
 
 export default {
   name: 'app',
   components: {
-    Header,
-    Auth
+    Auth,
+    Admin
   },
 
   computed:{
@@ -35,8 +36,9 @@ body {
   margin: 0;
   overflow: hidden;
   font-family: "Roboto";
-
-  .app {
+    height: 100vh;
+    width: 100vw;
+  #app {
     height: 100vh;
     width: 100vw;
 

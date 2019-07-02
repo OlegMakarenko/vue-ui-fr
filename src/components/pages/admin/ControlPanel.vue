@@ -126,7 +126,7 @@ export default {
     height: 100%;
 
     .el-row{
-        padding: 15px;
+        padding-bottom: 15px;
 
 
         #button-icon-minus{

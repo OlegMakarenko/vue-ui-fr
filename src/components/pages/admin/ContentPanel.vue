@@ -96,10 +96,11 @@ export default {
         display: flex;
         flex-direction: column;
         height: 100%;
+        padding: 20px;
 
         .control-panel{
             flex: 0 0 auto;
-            height: 110px;
+            
         }
 
         .content-panel-view{

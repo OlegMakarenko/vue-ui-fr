@@ -2,38 +2,34 @@
   <div>
     <div class="left-side-menu">
       <Tree 
-        :treeData="tree1Data"
-        :id="1"
-        class="tree_view"
-      />
-   </div>
+        :treeData="tree1Data" 
+        :id="1" 
+        class="tree_view"/>
+    </div>
   </div>
 </template>
 
 <script>
-import Tree from '../../Tree.vue'
+import Tree from "../../Tree.vue";
 
 export default {
-  data(){
-    return{
-
-    }
+  data() {
+    return {};
   },
 
-  components:{
+  components: {
     Tree
   },
 
-  computed:{
-    tree1Data(){
+  computed: {
+    tree1Data() {
       return this.$store.getters.tree1Data;
     }
   }
-}
+};
 </script>
 
 <style scoped>
-
 .left-side-menu {
   line-height: 2;
   width: 20%;
@@ -44,7 +40,7 @@ export default {
   text-align: center;
 }
 
-.tree_view{
+.tree_view {
   margin-top: 20px;
 }
 </style>

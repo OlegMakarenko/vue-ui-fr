@@ -5,8 +5,8 @@
       src="./backgroundFractal.png"
       alt="fractal"
       style="float: left;
-                  margin-top: 5px; 
-                  margin-left: 5px;"
+             margin-top: 5px; 
+             margin-left: 5px;"
       width="50"
       height="50"
     >
@@ -20,7 +20,7 @@
                 color: #565656"
         class="fa fa-user-circle-o"
       ></i>
-    </nav> -->
+    </nav>-->
   </div>
 </template>
 
@@ -40,15 +40,15 @@ export default {};
   overflow: auto;
   border-bottom: 2px solid #ebeef5;
 
-    .header-text{
+  .header-text {
     float: left;
     margin-top: 15px;
     margin-left: 20px;
-    }
+  }
 
-    .header-brand {
+  .header-brand {
     font-size: 27px;
     color: #565656;
-    }
+  }
 }
 </style>

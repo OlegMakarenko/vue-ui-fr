@@ -13,7 +13,7 @@
              cursor: pointer;"
     ></i>
     
-    <div v-if="isSelected + isSelectedTitle">
+    <div v-if="isSelected">
       <i
         class="el-icon-s-tools"
         @click="showModal2"

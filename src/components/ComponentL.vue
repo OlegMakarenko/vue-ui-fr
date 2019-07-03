@@ -2,6 +2,7 @@
   <div
     class="component-list"
     @click="onClick"
+    v-on:click="onClickTitle"
     @dblclick="onDblclick"
     :class="{selected: isSelected}">
     
@@ -38,7 +39,7 @@
 import ModalC from "../components/modalwindow/modalComponent.vue";
 
 export default {
-  props: ["title", "content", "selectedId", "id", "type"],
+  props: ["title", "content", "selectedId", "selectedTitle", "id", "type"],
   created() {},
   mounted() {},
 
@@ -64,6 +65,10 @@ export default {
       return this.selectedId == this.id;
     },
 
+    isSelectedTitle() {
+      return this.selectedTitle == this.title;
+    },
+
     iconClass() {
       if (this.type === "device") return "el-icon-odometer";
       if (this.type === "folder") return "el-icon-folder";
@@ -73,6 +78,10 @@ export default {
   methods: {
     onClick() {
       this.$emit("select", this.id);
+    },
+
+    onClickTitle() {
+      this.$emit("click", this.title);
     },
 
     mouseOver() {

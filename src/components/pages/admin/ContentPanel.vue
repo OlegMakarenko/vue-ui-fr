@@ -5,7 +5,7 @@
         <ControlPanel @onInfoClick="onInfoClick" @changeView="changeDeviceComponentView"/>
       </div>
 
-      <input type="text" v-model="selectedId">
+      <input name="textfield" type="text" value="ID:" v-model="selectedId">
       <input type="text" v-model="selectedTitle">
       <div class="content-panel-view">
         <!-- <ModalC v-show="isModalVisible2" @close="closeModal2"/> -->

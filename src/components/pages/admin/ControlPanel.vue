@@ -29,8 +29,6 @@
         ></i>
 
         <i id="button-icon-grid" class="el-icon-s-grid" v-else @click="changeDeviceComponentView"></i>
-
-        <i id="button-icon-tools" class="el-icon-s-tools"></i>
       </el-col>
     </el-row>
 
@@ -95,13 +93,24 @@ export default {
     },
 
     onAddGroupClick() {
-      this.showAddGroup = true;
+       this.$prompt('Введите имя добавляемой группы', 'Добавить группу', {
+          confirmButtonText: 'Применить',
+          cancelButtonText: 'Отмена',
+          inputValidator: function(value){return value.length},
+        }).then(({ value }) => {
+          this.$message({
+            type: 'success',
+            message: 'Новое имя группы: ' + value
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Редактирование отменено '
+          });       
+        });
+      }
     },
-    onAddGroupClose() {
-      this.showAddGroup = false;
-    }
-  }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -124,17 +133,6 @@ export default {
     }
 
     #button-icon-grid {
-      float: right;
-      margin-right: 15px;
-      background-color: white;
-      border: none;
-      color: grey;
-      cursor: pointer;
-      font-size: 24px;
-      outline: none;
-    }
-
-    #button-icon-tools {
       float: right;
       margin-right: 15px;
       background-color: white;

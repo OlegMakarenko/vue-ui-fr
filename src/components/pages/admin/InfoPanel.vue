@@ -3,42 +3,28 @@
     <transition name="slide-fade">
       <!-- the right side where we have Device manager info-->
       <div class="right-side-menu">
+        <div class="info-title">
         <h3
-          style="font-size: 18px; 
-                 bold: none; 
-                 float: left; 
-                 font-weight: 500; 
-                 margin-top: 65px; 
-                 width: 100px"
-        >Project info</h3>
-
-        <div style="width:100%;">
-          <input class="device_input" type="text" v-model="selectedId">
-          <i class="el-icon-edit" style="font-size:19px"></i>
+          style="font-size: 18px;
+                 font-weight: 500;"
+        >{{title}}</h3>
+          <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
         </div>
+        
 
-        <p
-          style="float: left;
-                    text-align: left;
-                    color: #9e9e9e;
-                    width:80%;
-                    margin-left: 5px;"
-          class="allp">
-          A variety of sizes and densities can be downloaded from this site.
-          Our icon set is also available as a git repository make it even
-          easier for developers to customize, share and re-use.
+        <p class="description" v-if="childrenCount">
+          Вложения: {{childrenCount}}
         </p>
 
         <p
-          style="float: left;
-                    text-align: left;
-                    color: #9e9e9e;
-                    width:80%;
-                    margin-left: 5px;"
-          class="allp">
-          The best way to use these icons on the web is with our icon web font.
-          It`s lightweight, easy to use, and hosted by Google Web Fonts. Learn
-          how to use font-based icons in our developer guide.
+          class="description">
+          Активность: {{activity}}
+        </p>
+
+        <p
+          class="description">
+          В этом пункте меню Вы можете подключать 
+          устройства к своей учетной записи
         </p>
       </div>
     </transition>
@@ -47,6 +33,8 @@
 
 <script>
 export default {
+  props:['title', 'id', 'childrenCount'],
+  
   data(){
     return{
 
@@ -54,7 +42,23 @@ export default {
   },
 
   methods:{
-
+    editTitle() {
+        this.$prompt('Пожалуйста введите новое имя', 'Подсказка', {
+          confirmButtonText: 'Применить',
+          cancelButtonText: 'Отмена',
+          inputValidator: function(value){return value.length},
+        }).then(({ value }) => {
+          this.$message({
+            type: 'success',
+            message: 'Новое имя устройства: ' + value
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Редактирование отменено '
+          });       
+        });
+      }
   },
 };
 </script>
@@ -62,6 +66,9 @@ export default {
 <style lang="scss" scoped>
 .info-panel {
   height: 100%;
+  padding-top: 40px;
+  // padding-left: 10px;
+  padding-right: 20px;
   width: 300px;
   .slide-fade-enter-active {
     transition: all 0.2s ease;
@@ -81,7 +88,7 @@ export default {
     width: 100%;
     height: 100%;
     float: right;
-    text-align: center;
+    // text-align: center;
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
@@ -94,6 +101,18 @@ export default {
     border: none;
     background: transparent;
     text-align: center;
+  }
+
+  .info-title{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .description{
+    float: left;
+    text-align: left;
+    color: #9e9e9e;
   }
 }
 </style>

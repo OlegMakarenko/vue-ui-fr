@@ -5,15 +5,15 @@
     v-on:click="onClickTitle"
     @dblclick="onDblclick"
     :class="{selected: isSelected}">
-    <i
-      :class="iconClass"
-      style="float:left; 
-             color: grey;
-             font-size: 20px; 
-             cursor: pointer;"
-    ></i>
-    
-    <div v-if="isSelected">
+    <div class="tile-header">
+      <i
+        :class="iconClass"
+        style="float:left; 
+              color: grey;
+              font-size: 20px; 
+              cursor: pointer;"
+      ></i>
+      <div v-if="isSelected">
       <i
         class="el-icon-s-tools"
         @click="showModal2"
@@ -24,13 +24,17 @@
       ></i>
     </div>
 
+    </div>
+
+
     <ModalC v-show="isModalVisible2" @close="closeModal2"/>
 
-    <div class="title">
+    <div class="tile-body">
       <div>{{computedTitle}}</div>
     </div>
 
-    <div class="content">{{content}}</div>
+    <div v-if="isTemperature">Температура: {{temperature}}</div>
+    <div class="tile-footer" v-if="childrenCount">Вложения: {{childrenCount}}</div>
   </div>
 </template>
 
@@ -38,7 +42,7 @@
 import ModalC from "../components/modalwindow/modalComponent.vue";
 
 export default {
-  props: ["title", "content", "selectedId", "selectedTitle", "id", "type"],
+  props: ["title", "content", "selectedId", "selectedTitle", "id", "type", 'childrenCount', 'data'],
   created() {},
   mounted() {},
 
@@ -47,7 +51,7 @@ export default {
       textBeforeTitle: "This is",
       isModalVisible2: false,
       hover: false,
-      show_icons: false
+      show_icons: false,
     };
   },
 
@@ -71,12 +75,25 @@ export default {
     iconClass() {
       if (this.type === "device") return "el-icon-odometer";
       if (this.type === "folder") return "el-icon-folder";
+    },
+
+    isTemperature(){
+      if(!this.data)  return false;
+      if(this.data.temperature === 'undefined' || this.data.temperature == null) return false;
+      return true;
+    },
+
+    temperature(){
+      return this.data.temperature;
     }
+
   },
 
   methods: {
     onClick() {
+      console.log(this.data.temperature)
       this.$emit("select", this.id);
+      // this.$set(this, "selectedNodeChildrenTemp", node.children.length);
     },
 
     onClickTitle() {
@@ -121,25 +138,26 @@ export default {
   display: inline-block;
   cursor: pointer;
 
-  .title {
-    margin-top: 90px;
+  .tile-header{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tile-body {
+    width: 100%;
+    height: 100px;
+    display: table-cell; 
+    vertical-align: middle;
     font-size: 18px;
-    text-align: center;
     cursor: pointer;
   }
-  .content {
-    margin-top: 30%;
-    text-align: right;
+  .tile-footer {
+    width:100%;
+    height: 50px;
+    flex-direction: column;
     color: #333333;
-    cursor: pointer;
-  }
-  .tbox {
-    width: 80%;
-    height: 5vh;
-    font-size: 17px;
-    border: none;
-    text-align: center;
-    background: transparent;
   }
 }
 .selected {

@@ -5,16 +5,26 @@
     v-on:click="onClickTitle"
     @dblclick="onDblclick"
     :class="{selected: isSelected}">
-    
-    <i
-      :class="iconClass"
-      style="float:left; 
-             color: grey;
-             font-size: 20px; 
-             cursor: pointer;"
-    ></i>
 
-    <div v-if="isSelected">
+    <div class="left-side-list">
+      <i
+        :class="iconClass"
+        style="float:left; 
+              color: grey;
+              font-size: 20px; 
+              cursor: pointer;"
+      ></i>
+      <div class="children-count-list" v-if="childrenCount">Вложения: {{childrenCount}}</div>
+      <div class="children-count-list" v-if="childrenCount">Температура: {{childrenCount}}</div>
+    </div>
+
+    <ModalC v-show="isModalVisible2" @close="closeModal2"/>
+
+    <div class="center-side-list">
+      <div>{{computedTitle}}</div>
+    </div>
+
+    <div class="right-side-list" v-if="isSelected">
       <i
         class="el-icon-s-tools"
         @click="showModal2"
@@ -24,14 +34,6 @@
                cursor: pointer;"
       ></i>
     </div>
-
-    <ModalC v-show="isModalVisible2" @close="closeModal2"/>
-
-    <div class="title">
-      <div>{{computedTitle}}</div>
-    </div>
-
-    <div class="content">{{content}}</div>
   </div>
 </template>
 
@@ -39,7 +41,7 @@
 import ModalC from "../components/modalwindow/modalComponent.vue";
 
 export default {
-  props: ["title", "content", "selectedId", "selectedTitle", "id", "type"],
+  props: ["title", "content", "selectedId", "selectedTitle", "id", "type", 'childrenCount'],
   created() {},
   mounted() {},
 
@@ -48,7 +50,8 @@ export default {
       textBeforeTitle: "This is",
       isModalVisible2: false,
       hover: false,
-      show_icons: false
+      show_icons: false,
+      selectedNodeChildrenCount: 0,
     };
   },
 
@@ -78,6 +81,7 @@ export default {
   methods: {
     onClick() {
       this.$emit("select", this.id);
+      this.$set(this, "selectedNodeChildrenCount", node.children.length);
     },
 
     onClickTitle() {
@@ -119,20 +123,35 @@ export default {
   border-color: #ebebeb;
   border-width: 1px;
   border-radius: 4px;
-  display: inline-block;
+  display: flex;
+
   cursor: pointer;
 
-  .title {
+  .left-side-list{
+    width: 30%;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .children-count-list{
+    margin-left: 20px;
+
+  }
+
+  .center-side-list {
+    width:40%;
     // margin-top: 90px;
+    display: flex;
+    justify-content: center;
     font-size: 18px;
     text-align: center;
     cursor: pointer;
   }
-  .content {
-    margin-top: 30%;
-    text-align: right;
-    color: #333333;
-    cursor: pointer;
+
+  .right-side-list{
+    width:30%;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 .selected {

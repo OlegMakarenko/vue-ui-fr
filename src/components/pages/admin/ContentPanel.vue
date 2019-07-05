@@ -5,8 +5,8 @@
         <ControlPanel @onInfoClick="onInfoClick" @changeView="changeDeviceComponentView"/>
       </div>
 
-      <input name="textfield" type="text" value="ID:" v-model="selectedId">
-      <input type="text" v-model="selectedTitle">
+      <!-- <input type="text" v-model="selectedId">
+      <input type="text" v-model="selectedTitle"> -->
       <div class="content-panel-view">
         <!-- <ModalC v-show="isModalVisible2" @close="closeModal2"/> -->
         <component
@@ -18,13 +18,15 @@
           :key="node.name"
           :id="node.id"
           :selectedId="selectedId"
+          :childrenCount="node.children ? node.children.length: null"
+          :data="node.data"
           @open="onComponentOpen"
-          @select="onComponentSelect"
+          @select="onComponentSelect(node)"
           @click="onComponentSelect2"/>
       </div>
     </div>
     <div class="info-panel">
-      <InfoPanel v-if="isInfoPanel"/>
+      <InfoPanel v-if="isInfoPanel" :title="selectedTitle" :id="selectedId" :childrenCount="selectedNodeChildrenCount"/>
     </div>
   </div>
 </template>
@@ -57,7 +59,8 @@ export default {
       deviceComponentView: "ComponentTile",
       selectedId: null,
       selectedTitle: null,
-      isInfoPanel: false
+      isInfoPanel: false,
+      selectedNodeChildrenCount: 0,
     };
   },
 
@@ -66,8 +69,11 @@ export default {
       this.$set(this, "deviceComponentView", changedView); // this.deviceComponentView = changedView;
     },
 
-    onComponentSelect(id) {
-      this.$set(this, "selectedId", id);
+    onComponentSelect(node) {
+      this.$set(this, "selectedId", node.id);
+      console.log(node)
+      if(node.children)
+      this.$set(this, "selectedNodeChildrenCount", node.children.length);
     },
 
     onComponentSelect2(title){

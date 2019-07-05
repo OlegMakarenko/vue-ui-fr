@@ -4,15 +4,15 @@
             Регулятор в пристройке<br><br><br>
             Щиток
         </div>
-        
+
         <div class="display_settings">
             <button class="display_button">Фото</button>
             <button class="display_button">Цвет</button>
         </div>
-        
+
         <div class="settings_content">
             <button class="settings_button">Режим работы</button>
-            <button class="settings_button">Совметный доступ</button>
+            <button class="settings_button">Совмеcтный доступ</button>
             <button class="settings_button">Прошивка</button>
             <button class="settings_button">Дополнительные настройки</button>
         </div>
@@ -23,7 +23,7 @@
 <script>
 
 export default {
-    
+
     data(){
         return{
             isDeviceHaveVisible: false,
@@ -58,7 +58,7 @@ export default {
 }
 
 .settings_header{
-  width: 100%; 
+  width: 100%;
   height: 10%;
   text-align: center;
 }

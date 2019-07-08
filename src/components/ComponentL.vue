@@ -15,7 +15,8 @@
               cursor: pointer;"
       ></i>
       <div class="children-count-list" v-if="childrenCount">Вложения: {{childrenCount}}</div>
-      <div  v-if="isTemperature"><i class="fa fa-thermometer" style="font-size:24px;color:#333333"></i> {{temperature}}</div>
+      <i  v-if="isTemperature" class="fa fa-thermometer thermometer-list"></i>
+      <div  v-if="isTemperature" style="margin-left: 5px;"> {{temperature}}</div>
     </div>
 
     <ModalC v-show="isModalVisible2" @close="closeModal2"/>
@@ -89,9 +90,9 @@ export default {
   },
 
   methods: {
-    onClick() {
+    onClick(node) {
       this.$emit("select", this.id);
-      this.$set(this, "selectedNodeChildrenCount", node.children.length);
+      this.$set(this, "selectedNodeChildrenCount", node.children);
     },
 
     onClickTitle() {
@@ -134,7 +135,6 @@ export default {
   border-width: 1px;
   border-radius: 4px;
   display: flex;
-
   cursor: pointer;
 
   .left-side-list{
@@ -145,17 +145,22 @@ export default {
 
   .children-count-list{
     margin-left: 20px;
-
   }
 
   .center-side-list {
     width:40%;
-    // margin-top: 90px;
     display: flex;
     justify-content: center;
     font-size: 18px;
     text-align: center;
     cursor: pointer;
+  }
+
+  .thermometer-list{
+    font-size:24px;
+    color:#333333; 
+    margin-left: 20px; 
+    align-items: stretch;
   }
 
   .right-side-list{

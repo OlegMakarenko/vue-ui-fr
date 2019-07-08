@@ -49,13 +49,15 @@
                     class="group_btn">По графику</button>
 
             <button class="group_btn" style="width:20%;">Ручной</button>
-
+            
             <div class="input_value">
                 <input class="all_input" type="text" v-model="title_1">
                 <input class="all_input" type="text" v-model="title_2">
                 <input class="all_input" type="text" v-model="title_3">
             </div>
+            
         </div>
+        
     </div>
 </div>
 </template>
@@ -229,11 +231,13 @@ export default {
 }
 
 .input_value{
-    margin-top: 5%;
+    width: 100%;
+    margin-top: 4%;
+    margin-left: 93px;
 }
 
 .all_input{
-    width:20%; 
+    width:21.1%; 
     height: 23px;
     margin-right: 5px;
     color: #c0d3ef;

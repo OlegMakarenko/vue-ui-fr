@@ -145,14 +145,14 @@ export default {
 
   .tile-body {
     width: 100%;
-    height: 70px;
+    height: 85px;
     display: flex;
     justify-content: center;
     font-size: 18px;
   }
   .tile-footer {
     width: 100%;
-    height: 60px;
+    height: 35px;
     color: #333333;
   }
 

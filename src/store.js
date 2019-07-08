@@ -94,6 +94,19 @@ export default  new Vuex.Store({
                 context.dispatch(payload[i].topic, payload[i].data)
             }
         },
+
+        ADD_GROUP: () => {
+            console.log("group added");
+        },
+
+        NODE_RENAME: () => {
+            console.log("renamed node");
+        },
+
+        NODE_SELECTED: (context, payload) => {
+             console.log("Selected node: ")
+        },
+
         doLogIn: (context, payload) => {
             context.commit("SET_AUTH_TOKEN", payload.token)
         },

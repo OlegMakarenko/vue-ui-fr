@@ -43,6 +43,7 @@ export default {
 
   methods:{
     editTitle() {
+      this.$store.dispatch("NODE_RENAME");
         this.$prompt('Пожалуйста введите новое имя', 'Подсказка', {
           confirmButtonText: 'Применить',
           cancelButtonText: 'Отмена',

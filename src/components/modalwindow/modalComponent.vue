@@ -143,14 +143,16 @@ export default {
     cursor: pointer;
     color: #666;
     background: transparent;
+    float:right;
+    margin-right: 9px;
     /* display: flex; */
-    margin-left: 42%;
+    /* margin-left: 42%; */
     /* position: absolute; */
     /* right: 20px; */
 }
 
 .close{
-    width: 100%;
+    width: 73%;
     position: absolute;
     /* float: right; */
     /* top: 20px; */

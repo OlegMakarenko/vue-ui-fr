@@ -9,13 +9,13 @@
     <div class="left-side-list">
       <i
         :class="iconClass"
-        style="float:left; 
+         style="float:left;
               color: grey;
-              font-size: 20px; 
+              font-size: 20px;
               cursor: pointer;"
       ></i>
       <div class="children-count-list" v-if="childrenCount">Вложения: {{childrenCount}}</div>
-      <div class="children-count-list" v-if="childrenCount">Температура: {{childrenCount}}</div>
+      <div  v-if="isTemperature"><i class="fa fa-thermometer" style="font-size:24px;color:#333333"></i> {{temperature}}</div>
     </div>
 
     <ModalC v-show="isModalVisible2" @close="closeModal2"/>
@@ -28,9 +28,9 @@
       <i
         class="el-icon-s-tools"
         @click="showModal2"
-        style="float:right; 
+        style="float:right;
                color: grey;
-               font-size: 20px; 
+               font-size: 20px;
                cursor: pointer;"
       ></i>
     </div>
@@ -41,7 +41,7 @@
 import ModalC from "../components/modalwindow/modalComponent.vue";
 
 export default {
-  props: ["title", "content", "selectedId", "selectedTitle", "id", "type", 'childrenCount'],
+  props: ["title", "content", "selectedId", "selectedTitle", "id", "type", 'childrenCount', 'data'],
   created() {},
   mounted() {},
 
@@ -75,6 +75,16 @@ export default {
     iconClass() {
       if (this.type === "device") return "el-icon-odometer";
       if (this.type === "folder") return "el-icon-folder";
+    },
+
+    isTemperature(){
+      if(!this.data)  return false;
+      if(this.data.temperature === 'undefined' || this.data.temperature == null) return false;
+      return true;
+    },
+
+    temperature(){
+      return this.data.temperature;
     }
   },
 

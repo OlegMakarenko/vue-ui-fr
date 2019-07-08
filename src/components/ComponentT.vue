@@ -5,36 +5,29 @@
     v-on:click="onClickTitle"
     @dblclick="onDblclick"
     :class="{selected: isSelected}">
+
     <div class="tile-header">
-      <i
-        :class="iconClass"
-        style="float:left; 
-              color: grey;
-              font-size: 20px; 
-              cursor: pointer;"
+      <i :class="iconClass"
       ></i>
-      <div v-if="isSelected">
+      <div
+        v-if="isSelected">
       <i
         class="el-icon-s-tools"
         @click="showModal2"
-        style="float:right; 
-               color: grey;
-               font-size: 20px; 
-               cursor: pointer;"
       ></i>
     </div>
-
+        <ModalC v-show="isModalVisible2" @close="closeModal2"/>
     </div>
 
-
-    <ModalC v-show="isModalVisible2" @close="closeModal2"/>
 
     <div class="tile-body">
       <div>{{computedTitle}}</div>
     </div>
 
-    <div v-if="isTemperature">Температура: {{temperature}}</div>
-    <div class="tile-footer" v-if="childrenCount">Вложения: {{childrenCount}}</div>
+    <div class="tile-footer">
+      <div  v-if="isTemperature"><i class="fa fa-thermometer" style="font-size:24px;color:#333333"></i> {{temperature}}</div>
+      <div  v-if="childrenCount">Вложения: {{childrenCount}}</div>
+    </div>
   </div>
 </template>
 
@@ -52,6 +45,7 @@ export default {
       isModalVisible2: false,
       hover: false,
       show_icons: false,
+      selectedNodeChildrenCount: 0,
     };
   },
 
@@ -137,29 +131,31 @@ export default {
   border-radius: 4px;
   display: inline-block;
   cursor: pointer;
+}
+
 
   .tile-header{
+    color: #606266;
+    font-size: 20px;
     width: 100%;
-    height: 50px;
+    height: 70px;
     display: flex;
     justify-content: space-between;
   }
 
   .tile-body {
     width: 100%;
-    height: 100px;
-    display: table-cell; 
-    vertical-align: middle;
+    height: 70px;
+    display: flex;
+    justify-content: center;
     font-size: 18px;
-    cursor: pointer;
   }
   .tile-footer {
-    width:100%;
-    height: 50px;
-    flex-direction: column;
+    width: 100%;
+    height: 60px;
     color: #333333;
   }
-}
+
 .selected {
   background: #ebeef5;
 }

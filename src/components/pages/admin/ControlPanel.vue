@@ -93,6 +93,7 @@ export default {
     },
 
     onAddGroupClick() {
+      this.$store.dispatch("ADD_GROUP");
        this.$prompt('Введите имя добавляемой группы', 'Добавить группу', {
           confirmButtonText: 'Применить',
           cancelButtonText: 'Отмена',

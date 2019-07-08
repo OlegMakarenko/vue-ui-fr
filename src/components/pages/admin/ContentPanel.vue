@@ -72,6 +72,9 @@ export default {
     onComponentSelect(node) {
       this.$set(this, "selectedId", node.id);
       console.log(node)
+      
+      this.$store.dispatch("NODE_SELECTED");
+
       if(node.children)
       this.$set(this, "selectedNodeChildrenCount", node.children.length);
     },

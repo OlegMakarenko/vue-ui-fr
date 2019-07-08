@@ -11,8 +11,8 @@
             </div>
 
         <div class="schedule_header">
-            <div>Регулятор в пристройке</div>
-            <div style="margin-top:16px;">Расписание</div>
+            <div style="text-align: center">Регулятор в пристройке</div>
+            <div style="margin-top:16px; text-align: center">Расписание</div>
         </div>
 
 
@@ -233,8 +233,6 @@ export default {
     width: 100%;
     padding: 0;
     margin: 0;
-    /* display: table-header-group; */
-    /* align-self: center; */
 }
 
 .oneinput_schedule{
@@ -248,6 +246,7 @@ export default {
 }
 
 .schedule_day1{
+    margin-left: 7%;
     margin-top:12px;
     width: 100%;
 }

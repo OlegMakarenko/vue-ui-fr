@@ -23,13 +23,13 @@
 
         <div class="main_input">
             <button class="button_p" @click="counter -= 1">
-                <p style="font-size:40px; color: white; margin-top: 25%;">-</p>
+                <p style="font-size:40px; color: white; margin-top: 40%;">-</p>
             </button>
 
             <p class="counter_p">{{counter}}<span style="font-size: 50px">{{'&#8451'}}</span></p>
             
             <button class="button_m" @click="counter += 1">
-                <p style="font-size:40px; color: white; margin-top: 25%;">+</p>
+                <p style="font-size:40px; color: white; margin-top: 40%;">+</p>
             </button>
         </div>
 
@@ -140,7 +140,6 @@ export default {
     float: right;
 }
 
-
 .right_side{
     width: 10%;
     height: 100%;
@@ -150,7 +149,9 @@ export default {
 }
 
 .scute_info{
-    margin-left: 86%;
+    margin-left: 86.5%;
+    /* float: right; */
+    /* margin-right: 10px; */
     display: flex;
     color: #565656;
     font-size: 25px;

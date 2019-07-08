@@ -21,7 +21,7 @@
 
 
     <div class="tile-body">
-      <div>{{computedTitle}}</div>
+      <div class="text-body">{{computedTitle}}</div>
     </div>
 
     <div class="tile-footer">
@@ -133,7 +133,6 @@ export default {
   cursor: pointer;
 }
 
-
   .tile-header{
     color: #606266;
     font-size: 20px;
@@ -150,6 +149,11 @@ export default {
     justify-content: center;
     font-size: 18px;
   }
+
+  .text-body{
+    margin-top: 15px;
+  }
+
   .tile-footer {
     width: 100%;
     height: 35px;

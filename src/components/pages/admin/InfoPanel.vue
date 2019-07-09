@@ -4,21 +4,34 @@
       <!-- the right side where we have Device manager info-->
       <div class="right-side-menu">
         <div class="info-title">
-        <h3
+        <h3 
           style="font-size: 18px;
                  font-weight: 500;"
-        >{{title}}</h3>
+        >{{infoPanel.name}}</h3>
           <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
         </div>
         
 
-        <p class="description" v-if="childrenCount">
-          Вложения: {{childrenCount}}
+        <p class="description" v-if="infoPanel.childrenCount">
+            Вложения: {{infoPanel.childrenCount}}
         </p>
 
         <p
-          class="description">
-          Активность: {{activity}}
+          class="description" 
+          v-if="typeof infoPanel.activity !== 'undefined' && infoPanel.activity !== null">
+            Активность: {{infoPanel.activity}}
+        </p>
+
+        <p 
+          class="description" 
+          v-if="typeof infoPanel.info !== 'undefined' && infoPanel.info !== null">
+            Информация: {{infoPanel.info}}
+        </p>
+
+        <p 
+          class="description" 
+          v-if="typeof infoPanel.temp !== 'undefined' && infoPanel.temp !== null">
+            Температура: {{infoPanel.temp}}
         </p>
 
         <p
@@ -33,14 +46,20 @@
 
 <script>
 export default {
-  props:['title', 'id', 'childrenCount'],
   
+  computed:{
+    infoPanel(){
+      return this.$store.getters.infoPanelData;
+    }
+  },
+
   data(){
     return{
 
     }
   },
 
+  
   methods:{
     editTitle() {
       this.$store.dispatch("NODE_RENAME");

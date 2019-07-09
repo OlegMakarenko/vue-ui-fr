@@ -29,7 +29,7 @@ export default {
     onClick(id) {
       this.$store.dispatch("OPEN_NODE", {
         nodeId: id,
-        treeId: 1
+        treeId: 1,
       });
     }
   }

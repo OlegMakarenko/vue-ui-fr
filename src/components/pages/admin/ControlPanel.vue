@@ -16,6 +16,13 @@
           @click="onAddGroupClick"
           size="mini"
         >Добавить группу</el-button>
+
+      <el-button
+          class="btn_add_group"
+          icon="el-icon-delete"
+          @click="onAddGroupClick"
+          size="mini"
+        >Удалить</el-button>
       </el-col>
 
       <el-col :span="8">

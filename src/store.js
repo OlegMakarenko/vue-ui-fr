@@ -1,6 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
+import { Notification } from 'element-ui';  
 
 Vue.use(Vuex);
 
@@ -17,7 +18,14 @@ export default  new Vuex.Store({
         tree2Data: [],
         content: [],
         path: [],
-        isLoading: false
+        isLoading: false,
+        infoPanelData: {
+            name: ' ',
+            activity: "None",
+            childrenCount: null,
+            info: "No info",
+            temp: null
+        }
     },
 
     getters:{
@@ -27,7 +35,8 @@ export default  new Vuex.Store({
         tree2Data: state => state.tree2Data,
         content: state => state.content,
         path: state => state.path,
-        isLoading: state => state.isLoading
+        isLoading: state => state.isLoading,
+        infoPanelData: state => state.infoPanelData,
     },
 
     mutations:{
@@ -51,6 +60,14 @@ export default  new Vuex.Store({
         path:(state, data) => {
             Vue.set(state, "path", data);
         },
+        infoPanelData: (state, data) => {
+            console.log("infoPanelData", data)
+            Vue.set(state.infoPanelData, "name", data.name);
+            Vue.set(state.infoPanelData, "activity", data.data.activity);
+            Vue.set(state.infoPanelData, "childrenCount", data.children.length);
+            Vue.set(state.infoPanelData, "info", data.data.info);
+            Vue.set(state.infoPanelData, "temp", data.data.temperature);
+        }
     },
 
     actions:{
@@ -70,29 +87,30 @@ export default  new Vuex.Store({
                     .then(res => context.dispatch("PROCESS_RESPONSE", res.data))
             });
         },
+
         OPEN_NODE: (context, payload) => {
-            //context.commit("isLoading", true);
-            console.log({
-                treeId: payload.treeId, 
-                nodeId: payload.nodeId
-             })
             axios.post(context.state.http_endpoint + "/open_node", {
                 topic:"open_node",
                 data: {
                        treeId: payload.treeId, 
-                       nodeId: payload.nodeId
-                    }
+                       nodeId: payload.nodeId,
+                    },
+                
             })
-                .then(res => context.dispatch("PROCESS_RESPONSE", res.data))
+                .then(res => context.dispatch("PROCESS_RESPONSE", res.data)
+                .then(content => context.commit("infoPanelData", content.find( el => el.topic=="doSetContent").data)));
         },
+
         PROCESS_RESPONSE: (context, payload) => {
-    
+            return new Promise((resolve, reject) => {
                 context.commit("isLoading", false);
            
-            for(var i in payload){
-                console.log(payload);
-                context.dispatch(payload[i].topic, payload[i].data)
-            }
+                for(var i in payload){
+                    console.log(payload);
+                    context.dispatch(payload[i].topic, payload[i].data)
+                }
+                resolve(payload);
+            })
         },
 
         ADD_GROUP: () => {
@@ -100,11 +118,35 @@ export default  new Vuex.Store({
         },
 
         NODE_RENAME: () => {
-            console.log("renamed node");
+            axios.post(context.state.http_endpoint + "/rename_node", {
+                topic:"rename_node",
+                data: {
+                       treeId: payload.treeId, 
+                       nodeId: payload.nodeId,
+                       name: payload.name,
+                    },
+                
+            })
+                .then(res => context.dispatch("PROCESS_RESPONSE", res.data)
+                .then(content => context.commit("infoPanelData", content.find( el => el.topic=="doSetContent").data)));
+        },
+
+        NODE_DELETE: () => {
+            axios.post(context.state.http_endpoint + "/delete_node", {
+                topic:"delete_node",
+                data: {
+                       treeId: payload.treeId, 
+                       nodeId: payload.nodeId,
+                    },
+                
+            })
+                .then(res => context.dispatch("PROCESS_RESPONSE", res.data)
+                .then(content => context.commit("infoPanelData", content.find( el => el.topic=="doSetContent").data)));
         },
 
         NODE_SELECTED: (context, payload) => {
-             console.log("Selected node: ")
+             console.log("Selected node:")
+             context.commit("infoPanelData", payload)
         },
 
         doLogIn: (context, payload) => {
@@ -115,10 +157,17 @@ export default  new Vuex.Store({
                 context.commit(key, payload[key])
         },
         doSetContent: (context, payload) => {
+            console.log("Content", payload)
                 context.commit("content", payload)
         },
         doSetPath: (context, payload) => {
             context.commit("path", payload)
+        },
+        doNotification: (context, payload) => {
+            Notification.error({
+                title: 'Error',
+                message: 'This is an error message'
+              });
         }
     }
 });

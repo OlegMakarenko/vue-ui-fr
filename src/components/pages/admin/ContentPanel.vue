@@ -26,7 +26,10 @@
       </div>
     </div>
     <div class="info-panel">
-      <InfoPanel v-if="isInfoPanel" :title="selectedTitle" :id="selectedId" :childrenCount="selectedNodeChildrenCount"/>
+      <InfoPanel v-if="isInfoPanel" 
+                 :title="selectedTitle" 
+                 :id="selectedId" 
+                 :childrenCount="selectedNodeChildrenCount"/>
     </div>
   </div>
 </template>
@@ -72,9 +75,9 @@ export default {
     onComponentSelect(node) {
       this.$set(this, "selectedId", node.id);
       console.log(node)
-      
-      this.$store.dispatch("NODE_SELECTED");
 
+      this.$store.dispatch("NODE_SELECTED", node);
+      
       if(node.children)
       this.$set(this, "selectedNodeChildrenCount", node.children.length);
     },

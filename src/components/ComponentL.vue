@@ -140,6 +140,7 @@ export default {
   .left-side-list{
     width: 30%;
     display: flex;
+    color: #606266;
     justify-content: flex-start;
   }
 
@@ -154,11 +155,12 @@ export default {
     font-size: 18px;
     text-align: center;
     cursor: pointer;
+    color: #606266;
   }
 
   .thermometer-list{
     font-size:24px;
-    color:#333333; 
+    color:#606266; 
     margin-left: 20px; 
     align-items: stretch;
   }

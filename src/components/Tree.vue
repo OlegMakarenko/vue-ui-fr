@@ -86,7 +86,7 @@ export default {
       console.log(node);
       this.$store.dispatch("OPEN_NODE", {
         nodeId: node.id,
-        treeId: this.id
+        treeId: this.id,
       });
     }
   }

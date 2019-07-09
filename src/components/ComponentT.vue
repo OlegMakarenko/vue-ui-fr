@@ -25,11 +25,11 @@
     </div>
 
     <div class="tile-footer">
-      <div  v-if="isTemperature"><i class="fa fa-thermometer" style="font-size:24px;color:#333333"></i> {{temperature}}</div>
+      <div  v-if="isTemperature"><i class="fa fa-thermometer" style="font-size:24px;color:#606266"></i> {{temperature}}</div>
       <div  v-if="childrenCount">Вложения: {{childrenCount}}</div>
     </div>
   </div>
-</template>
+</template> 
 
 <script>
 import ModalC from "../components/modalwindow/modalComponent.vue";
@@ -148,6 +148,7 @@ export default {
     display: flex;
     justify-content: center;
     font-size: 18px;
+    color: #606266;
   }
 
   .text-body{
@@ -157,7 +158,7 @@ export default {
   .tile-footer {
     width: 100%;
     height: 35px;
-    color: #333333;
+    color: #606266;
   }
 
 .selected {

@@ -35,7 +35,8 @@ export default {
 body {
   margin: 0;
   overflow: hidden;
-  font-family: "Roboto";
+  font-family: "Helvetica";
+  font-size: 17px;
     height: 100vh;
     width: 100vw;
   #app {

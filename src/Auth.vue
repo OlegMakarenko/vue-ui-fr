@@ -6,9 +6,16 @@
           <div class="auth-header-content">
            
             <div class="header-text">
-              <div class="header-brand">LOGO</div>
-              <div class="header-info">
-                Slogan of company
+              <div class="header-brand">
+                <img
+                  class="brand"
+                  src="../src/components/pages/admin/vega.jpg"
+                  alt="fractal"
+                  style="
+                  margin-top: 12px;
+                  width: 180px;"
+                  height="35"
+                />
               </div>
             </div>
           </div>
@@ -20,7 +27,7 @@
           <el-form :model="authForm" ref="authForm">
             <el-form-item>
               <el-row class="auth-label">
-              Log in
+                Авторизация
               </el-row>
             </el-form-item>
 
@@ -46,7 +53,10 @@
             </el-form-item>
             
             <el-form-item>
-              <el-button class="auth-button" type="primary" @click="submitForm('authForm')">Log in</el-button> 
+              <el-button 
+                class="auth-button" 
+                type="primary" 
+                @click="submitForm('authForm')">Войти</el-button> 
             </el-form-item>
 
           </el-form>

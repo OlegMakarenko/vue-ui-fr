@@ -1,6 +1,7 @@
 <template>
   <div id="app" v-loading="$store.getters.isLoading">
     <el-container v-if="!isLoggedIn" class="container">
+      <!-- <Register/> -->
       <Auth/>
     </el-container>
     <Admin v-else/>
@@ -10,6 +11,7 @@
 <script>
 
 import Auth from './Auth'
+import Register from './Register'
 import Admin from './components/pages/admin/Admin.vue'
 
 
@@ -17,6 +19,7 @@ export default {
   name: 'app',
   components: {
     Auth,
+    Register,
     Admin
   },
 

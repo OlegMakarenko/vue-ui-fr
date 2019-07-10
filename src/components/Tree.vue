@@ -25,9 +25,8 @@
             <i v-if="node.data.type=='device'" class="el-icon-odometer"></i>
             <span>{{node.data.name}}</span>
           </span>
-
           <span class="tree-node-edit">
-            <i class="el-icon-edit"></i>
+            <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
           </span>
         </span>
       </el-tree>
@@ -39,6 +38,13 @@
 export default {
   label: "lside",
   props: ["treeData", "id", "isDraggable"],
+
+  computed:{
+    infoPanel(){
+      return this.$store.getters.infoPanelData;
+    }
+  },
+
   data() {
     return {};
   },
@@ -88,7 +94,22 @@ export default {
         nodeId: node.id,
         treeId: this.id,
       });
-    }
+    },
+
+    editTitle() {
+        this.$prompt('Пожалуйста введите новое имя', 'Подсказка', {
+          confirmButtonText: 'Применить',
+          cancelButtonText: 'Отмена',
+          inputValidator: function(value){return value.length},
+        }).then(({ value }) => {
+          this.$store.dispatch("NODE_RENAME", {nodeId: this.infoPanel.id, name: value});
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Редактирование отменено '
+          });
+        });
+      }
   }
 };
 </script>

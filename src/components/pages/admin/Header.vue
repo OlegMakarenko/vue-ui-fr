@@ -14,8 +14,8 @@
     </div> -->
 
     <div class="right-side-header">
-      <el-badge :value="2" class="item" style="margin-top:6px;">
-       <i style="font-size: 25px; color: grey;" class="el-icon-message-solid"></i>
+      <el-badge :value="0" class="item" style="margin-top:6px;">
+       <i style="font-size: 25px; color: grey; cursor: pointer;" class="el-icon-message-solid"></i>
       </el-badge>
 
       <i style="cursor: pointer;

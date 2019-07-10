@@ -14,16 +14,19 @@
           class="btn_add_group"
           icon="el-icon-folder"
           @click="onAddGroupClick"
+          :infoPanel="infoPanel"
           size="mini"
+          v-if="allowaddGroup"
         >Добавить группу</el-button>
-
-      <el-button
-          class="btn_add_group"
-          icon="el-icon-delete"
-          @click="onAddGroupClick"
+      
+        <el-button 
+          class="btn_add_group" 
+          icon="el-icon-delete" 
           size="mini"
-        >Удалить</el-button>
+          @click="onDelete"
+          >Удалить</el-button>
       </el-col>
+
 
       <el-col :span="8">
         <i class="el-icon-info button-right-side" @click="onInfoClick"></i>
@@ -71,12 +74,35 @@ export default {
   computed: {
     path() {
       return this.$store.getters.path;
+    },
+
+    infoPanel(){
+      return this.$store.getters.infoPanelData;
+    },
+    allowaddGroup(){
+      return this.$store.getters.content.type === 'folder';
     }
   },
 
   methods: {
     addNewDevice() {},
     addNewGroup() {},
+
+    onDelete(){
+        this.$confirm('Вы действительно хотите удалить "' + this.$store.getters.selectedNode.name + '"?', 'Удаление', {
+          confirmButtonText: 'Удалить',
+          cancelButtonText: 'Отмена',
+          type: 'warning'
+        }).then(() => {
+          this.$store.dispatch("NODE_DELETE");
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Удаление отменено'
+          });          
+        });
+      },
+
     changeDeviceComponentView() {
       if (this.currentView === "ComponentTile") {
         this.currentView = "ComponentList";

@@ -37,6 +37,7 @@ export default  new Vuex.Store({
         path: state => state.path,
         isLoading: state => state.isLoading,
         infoPanelData: state => state.infoPanelData,
+        selectedNode: state => state.infoPanelData,
     },
 
     mutations:{
@@ -67,6 +68,7 @@ export default  new Vuex.Store({
             Vue.set(state.infoPanelData, "childrenCount", data.children.length);
             Vue.set(state.infoPanelData, "info", data.data.info);
             Vue.set(state.infoPanelData, "temp", data.data.temperature);
+            Vue.set(state.infoPanelData, "id", data.id);
         }
     },
 
@@ -117,11 +119,11 @@ export default  new Vuex.Store({
             console.log("group added");
         },
 
-        NODE_RENAME: () => {
+        NODE_RENAME: (context, payload) => {
             axios.post(context.state.http_endpoint + "/rename_node", {
                 topic:"rename_node",
                 data: {
-                       treeId: payload.treeId, 
+                       treeId: 1, 
                        nodeId: payload.nodeId,
                        name: payload.name,
                     },
@@ -131,12 +133,12 @@ export default  new Vuex.Store({
                 .then(content => context.commit("infoPanelData", content.find( el => el.topic=="doSetContent").data)));
         },
 
-        NODE_DELETE: () => {
+        NODE_DELETE: (context) => {
             axios.post(context.state.http_endpoint + "/delete_node", {
                 topic:"delete_node",
                 data: {
-                       treeId: payload.treeId, 
-                       nodeId: payload.nodeId,
+                       treeId: 1, 
+                       nodeId: context.getters.selectedNode.id,
                     },
                 
             })

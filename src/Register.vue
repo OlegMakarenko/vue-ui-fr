@@ -27,39 +27,63 @@
         </el-form-item>
 
         <el-form-item>
-          <el-input v-model="registerForm.name" placeholder="Введите ваше Имя" type="text"></el-input>
+          <el-input prop="name"
+            v-model="registerForm.name"
+            auto-complete="on"
+            @keyup.13.native="submitForm('registerForm')" 
+            placeholder="Введите ваше Имя" 
+            type="text">
+          </el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-input
+          <el-input prop="secondName"
             v-model="registerForm.secondName"
+            auto-complete="on"
+            @keyup.13.native="submitForm('registerForm')" 
             placeholder="Введите вашу Фамилию"
             type="text"
           ></el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-input
+          <el-input prop="phoneNumber"
             v-model="registerForm.phoneNumber"
+            auto-complete="on"
+            @keyup.13.native="submitForm('registerForm')" 
             placeholder="Введите ваш номер телефона"
-            type="text"
-          ></el-input>
+            type="text">
+          </el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-input v-model="registerForm.email" placeholder="Введите ваш e-mail" type="email"></el-input>
+          <el-input prop="email"
+            v-model="registerForm.email" 
+            auto-complete="on"
+            @keyup.13.native="submitForm('registerForm')" 
+            placeholder="Введите ваш e-mail" 
+            type="email">
+            </el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-input v-model="registerForm.password" placeholder="Введите пароль" type="password"></el-input>
+          <el-input prop="password"
+            v-model="registerForm.password" 
+            auto-complete="on"
+            @keyup.13.native="submitForm('registerForm')" 
+            placeholder="Введите пароль" 
+            type="password">
+            </el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-input
+          <el-input prop="secondPassword"
             v-model="registerForm.secondPassword"
+            auto-complete="on"
+            @keyup.13.native="submitForm('registerForm')" 
             placeholder="Повторите введеный пароль"
-            type="password"
-          ></el-input>
+            type="password">
+          </el-input>
         </el-form-item>
 
         <el-form-item>
@@ -103,13 +127,14 @@ export default {
           form.model.password &&
           form.model.secondPassword
         )
-          this.auth(
-            form.model.name,
-            form.model.secondName,
-            form.model.email,
-            form.model.password,
-            form.model.secondPassword
-          );
+          // this.auth(
+          //   form.model.name,
+          //   form.model.secondName,
+          //   form.model.email,
+          //   form.model.password,
+          //   form.model.secondPassword
+          // )
+          ;
         else if (!form.model.name) {
           this.$notify.error({
             title: `Ошибка регистрации`,
@@ -124,7 +149,7 @@ export default {
             type: "error"
           });
         }
-        if (!form.model.phonbeNumber) {
+        if (!form.model.phoneNumber) {
           this.$notify.error({
             title: `Ошибка регистрации`,
             message: "Пожалуйста введите ваш номер телефона",
@@ -203,7 +228,6 @@ export default {
 .form-wrapper > form {
   width: 350px;
   max-width: 350px;
-
   z-index: 1000;
 }
 

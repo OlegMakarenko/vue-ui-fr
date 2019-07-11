@@ -32,7 +32,7 @@ export default {
 <style scoped>
 .left-side-menu {
   line-height: 2;
-  width: 20%;
+  width: 300px;
   min-height: 100vh;
   float: left;
   background-color: #ebeef5;

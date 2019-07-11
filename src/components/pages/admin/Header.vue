@@ -14,15 +14,14 @@
     </div> -->
 
     <div class="right-side-header">
-      <el-badge :value="0" class="item" style="margin-top:6px;">
-       <i style="font-size: 25px; color: grey; cursor: pointer;" class="el-icon-message-solid"></i>
+      <el-badge :value="0" class="item" style="margin-top:5px;">
+       <i style="font-size: 28px; color: #909399; cursor: pointer;" class="el-icon-message-solid"></i>
       </el-badge>
 
-      <i style="cursor: pointer;
-                margin-top: 2.5px; 
-                font-size: 31px; 
-                color: grey;"
-        class="fa fa-user-circle-o"></i>
+        <el-avatar  size="medium "
+          style="cursor: pointer; background: #909399" 
+          icon="el-icon-user-solid">
+        </el-avatar>
     </div>
 
     
@@ -59,7 +58,7 @@ export default {};
     display: flex;
     justify-content: space-between;
     //padding-right: 65px;
-    margin-top: 15px;
+    margin-top: 12px;
     color: #9e9e9e;
   }
 }

@@ -2,9 +2,7 @@
   <div class="auth-page">
     <nav class="auth-header">
       <el-row :gutter="20" type="flex" justify="center">
-        
           <div class="auth-header-content">
-           
             <div class="header-text">
               <div class="header-brand">
                 <img
@@ -19,60 +17,80 @@
               </div>
             </div>
           </div>
-        
       </el-row>
     </nav>
     
-        <div class="form-wrapper">
-          <el-form :model="authForm" ref="authForm">
+    <div class="form-wrapper" v-if="authVisible">
+      <el-form :model="authForm" ref="authForm">
+        <el-form-item>
+          <el-row class="auth-label">
+            Авторизация
+          </el-row>
+        </el-form-item>
+
+        <el-form-item prop="email">
+          <el-input 
+            placeholder="email" 
+            type="email" 
+            v-model="authForm.email" 
+            auto-complete="on"
+            @keyup.13.native="submitForm('authForm')"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item prop="password">
+          <el-input 
+            placeholder="password" 
+            type="password" 
+            v-model="authForm.password" 
+            auto-complete="off"
+            @keyup.13.native="submitForm('authForm')"
+          >
+          </el-input>
+        </el-form-item>
+
+        <el-row :gutter="20" style="display: flex">
+          <el-col>
             <el-form-item>
-              <el-row class="auth-label">
-                Авторизация
-              </el-row>
-            </el-form-item>
-
-            <el-form-item prop="email">
-              <el-input 
-                placeholder="email" 
-                type="email" 
-                v-model="authForm.email" 
-                auto-complete="on"
-                @keyup.13.native="submitForm('authForm')"
-              ></el-input>
-            </el-form-item>
-
-            <el-form-item prop="password">
-              <el-input 
-                placeholder="password" 
-                type="password" 
-                v-model="authForm.password" 
-                auto-complete="off"
-                @keyup.13.native="submitForm('authForm')"
-              >
-              </el-input>
-            </el-form-item>
+          <el-button 
+            class="auth-button" 
+            type="primary" 
+            @click="submitForm('authForm')">Войти</el-button> 
+        </el-form-item></el-col>
+          <el-col><el-form-item>
+          <el-button 
+            class="register-button" 
             
-            <el-form-item>
-              <el-button 
-                class="auth-button" 
-                type="primary" 
-                @click="submitForm('authForm')">Войти</el-button> 
-            </el-form-item>
+            @click="showRegister"
+            >Регистрация</el-button> 
+        </el-form-item></el-col>
+        </el-row>
+        
+        <!-- <div style="display: flex;">
+        
 
-          </el-form>
-        </div>
-      </div>
-
+        
+        </div> -->
+      </el-form>
+    </div>
+    <registerForm v-else v-show="registerVisible"/>
+  </div>
 </template>
 
 <script>
-
+import registerForm from './Register'
 
 export default  {
+
+  components:{
+    registerForm
+  },
 
   data() 
   {
     return {
+      authVisible: true,
+      registerVisible: true,
       authForm: 
       {
         email: "",
@@ -112,7 +130,6 @@ export default  {
 
     auth(email, password) 
     {
-
       this.$store.dispatch("LOG_IN", { email, password })
         .catch(err => 
           this.$notify.error({
@@ -122,6 +139,12 @@ export default  {
           })
         ) 
     },
+
+    showRegister(){
+      if(this.authVisible = false){
+        this.registerVisible = false;
+      }
+    }
   }
 }
 </script>
@@ -223,5 +246,11 @@ export default  {
 
 .auth-button{
   width: 100%;
+}
+
+.register-button{
+  width: 100%;
+  background: white;
+  color: #66b1ff;
 }
 </style>

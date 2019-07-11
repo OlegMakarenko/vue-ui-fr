@@ -26,7 +26,7 @@
             <span>{{node.data.name}}</span>
           </span>
           <span class="tree-node-edit">
-            <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
+            <i v-if="node.data.type!=='isRoot'" class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
           </span>
         </span>
       </el-tree>

@@ -1,8 +1,26 @@
 <template>
   <div id="app" v-loading="$store.getters.isLoading">
-    <el-container v-if="!isLoggedIn" class="container">
-      <!-- <Register/> -->
+    <el-container v-if="!isLoggedIn" class="container">  
       <Auth/>
+      <!-- <Register/> -->
+      <!-- <div style="
+        margin-top: 34%;
+        margin-left: 40.5%;
+        position: absolute;
+        width: 100%; 
+        height: 10%; 
+        z-index:1001; 
+        display: flex;">
+        <el-button 
+          class="auth-button"
+          style="z-index:1001; 
+          width: 350px; 
+          height: 40px; 
+          displat: flex;
+          justify-content: center"
+          type="primary">Регистрация
+        </el-button>
+      </div> -->
     </el-container>
     <Admin v-else/>
   </div>

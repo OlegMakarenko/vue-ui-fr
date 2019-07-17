@@ -19,6 +19,7 @@
         :allow-drag="allowDrag"
         label="name"
       >
+
         <span class="tree-node" slot-scope="{ node, data }">
           <!-- node, data-->
           <span>
@@ -28,12 +29,47 @@
             <span>{{node.data.name}}</span>
           </span>
           <span class="tree-node-edit">
-            <!-- <i v-if="node.data.type!=='isRoot'" class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i> -->
-            <!-- {{infoPanel.childrenCount}} -->
+            <!-- <i v-if="node.data.type!=Лщд='isRoot'" class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i> -->
+            {{infoPanel.childrenCount}}
           </span>
         </span>
       </el-tree>
     </div>
+
+    <!-- <div class="tree-style2">
+      <el-tree style="background: white"
+        :data="treeData"
+        node-key="id"
+        :default-expanded-keys="[0]"
+        @node-drag-start="handleDragStart"
+        @node-drag-enter="handleDragEnter"
+        @node-drag-leave="handleDragLeave"
+        @node-drag-over="handleDragOver"
+        @node-drag-end="handleDragEnd"
+        @node-drop="handleDrop"
+        :expand-on-click-node="false"
+        @node-click="onNodeClick"
+        draggable
+        :allow-drop="allowDrop"
+        :allow-drag="allowDrag"
+        label="name"
+      >
+
+        <span class="tree-node" slot-scope="{ node, data }">
+          <span>
+            <i v-if="node.data.type=='folder'" class="el-icon-folder"></i>
+            
+            <i v-if="node.data.type=='device'" class="el-icon-odometer"></i>
+            <span>{{node.data.name}}</span>
+          </span>
+          <span class="tree-node-edit">
+            {{infoPanel.childrenCount}}
+          </span>
+        </span>
+      </el-tree>
+    </div> -->
+
+
   </div>
 </template>
 
@@ -124,9 +160,12 @@ export default {
 
 .tree-node {
   display: flex;
-
   justify-content: space-between;
   width: 100%;
+}
+
+.tree-style2{
+  margin-top: 60px;
 }
 
 .tree-node-edit {

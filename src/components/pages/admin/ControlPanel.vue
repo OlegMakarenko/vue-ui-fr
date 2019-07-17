@@ -159,7 +159,7 @@ export default {
       float: right;
       background-color: white;
       border: none;
-      color: grey;
+      color: grey;margin-top: 5px;
       cursor: pointer;
       font-size: 24px;
       outline: none;
@@ -170,6 +170,7 @@ export default {
       background-color: white;
       border: none;
       color: grey;
+      margin-top: 5px;
       cursor: pointer;
       font-size: 24px;
       outline: none;
@@ -183,6 +184,14 @@ export default {
       color: grey;
       cursor: pointer;
       font-size: 24px;
+    }
+
+    .btn_add_device{
+      font-size: 14px;
+    }
+
+    .btn_add_group {
+      font-size:14px;
     }
   }
 }

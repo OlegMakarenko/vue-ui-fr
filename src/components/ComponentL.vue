@@ -126,13 +126,13 @@ export default {
 
 <style lang="scss" scoped>
 .component-list {
-  width: 90%;
+  width: 91.5%;
   height: 20px;
   margin: 15.7px;
   padding: 17px;
   border-style: solid;
   border-color: #ebebeb;
-  border-width: 1px;
+  border-width: 2px;
   border-radius: 4px;
   display: flex;
   cursor: pointer;

@@ -6,16 +6,22 @@
                  role="dialog"
                  aria-labelledby="modalTitle"
                  aria-describedby="modalDescription">
-                    
-                    <div class="close">
-                        <button type="button"
-                                class="btn-close2"
-                                @click="close"
-                                aria-label="Close modal">x
-                        </button>
+                 <div class="header-text-modal">
+                     <h1 style="font-size: 30px; color: #666;">
+                         Настройки 
+                     </h1>
+                        <div class="close">
+                            <button type="button"
+                                    class="btn-close2"
+                                    @click="close"
+                                    aria-label="Close modal">x
+                            </button>
                     </div>
+                 </div>
+                    
+                    
 
-                    <div class="left_side_tabs">
+                    <!-- <div class="left_side_tabs">
                         <button style="outline: none; background: transparent;"
                                 v-for="tab in tabs" 
                                 :key="tab" 
@@ -23,7 +29,7 @@
                                 :class="['tab-btn', {active: selected === tab}]">{{tab}}
                         </button>
 
-                    </div>
+                    </div> -->
 
                         <component class="modal-tab" :is="selected"/>
                  
@@ -35,11 +41,11 @@
 
 <script>
 
-import tab1 from '../tabs/tab1_scute'
-import tab2 from '../tabs/tab2_events'
-import tab3 from '../tabs/tab3_graph'
-import tab4 from '../tabs/tab4_shedule'
-import tab5 from '../tabs/tab5_settings'
+// import tab1 from '../tabs/tab1_scute'
+// import tab2 from '../tabs/tab2_events'
+// import tab3 from '../tabs/tab3_graph'
+// import tab4 from '../tabs/tab4_shedule'
+// import tab5 from '../tabs/tab5_settings'
 
 export default {
     name: 'modal',
@@ -54,13 +60,13 @@ export default {
         };
     },
 
-    components:{
-            tab1,
-            tab2,
-            tab3,
-            tab4,
-            tab5
-    },
+    // components:{
+    //         tab1,
+    //         tab2,
+    //         tab3,
+    //         tab4,
+    //         tab5
+    // },
 
 
     methods: {
@@ -142,6 +148,7 @@ export default {
     font-size: 35px;
     cursor: pointer;
     color: #666;
+    outline: none;
     background: transparent;
     float:right;
     margin-right: 9px;
@@ -151,13 +158,19 @@ export default {
     /* right: 20px; */
 }
 
+.header-text-modal{
+    width: 100%;
+    height: 10%;
+    text-align: center;
+}
+
 .close{
-    width: 73%;
+    /* display: flex; */
     position: absolute;
-    /* float: right; */
-    /* top: 20px; */
-    /* right: 10px; */
-    /* left: 200px; */
+    float: right;
+    top: 60px;
+    right: 200px;
+    left: 10px;
 }
 
 </style>

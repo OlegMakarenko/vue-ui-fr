@@ -11,34 +11,43 @@
           <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
         </div>
         
+        <div v-if="infoPanel.childrenCount" style="width:96.5%;height: 8%;margin-top: 15px;margin-left: 10px; border-bottom: 2px solid #d0d0d0">
+          <p class="description" >
+              Вложения: {{infoPanel.childrenCount}}
+          </p>
+        </div>
 
-        <p class="description" v-if="infoPanel.childrenCount">
-            Вложения: {{infoPanel.childrenCount}}
-        </p>
+        <div  v-if="typeof infoPanel.activity !== 'undefined' && infoPanel.activity !== null" 
+        style="width:96.5%;height: 10%;margin-top: 6px;margin-left: 10px; border-bottom: 2px solid #d0d0d0">
+          <p
+            class="description" >
+              Активность: {{infoPanel.activity}}
+          </p></div>
 
-        <p
-          class="description" 
-          v-if="typeof infoPanel.activity !== 'undefined' && infoPanel.activity !== null">
-            Активность: {{infoPanel.activity}}
-        </p>
+        <div v-if="typeof infoPanel.info !== 'undefined' && infoPanel.info !== null" 
+        style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 10px; border-bottom: 2px solid #d0d0d0">
+          <p 
+            class="description" 
+            >
+              Информация: {{infoPanel.info}}
+          </p>
+        </div>
 
+        <div v-if="typeof infoPanel.temp !== 'undefined' && infoPanel.temp !== null"
+        style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 10px; border-bottom: 2px solid #d0d0d0">
         <p 
-          class="description" 
-          v-if="typeof infoPanel.info !== 'undefined' && infoPanel.info !== null">
-            Информация: {{infoPanel.info}}
-        </p>
-
-        <p 
-          class="description" 
-          v-if="typeof infoPanel.temp !== 'undefined' && infoPanel.temp !== null">
+          class="description">
             Температура: {{infoPanel.temp}}
-        </p>
+        </p></div>
 
-        <p
+        <div style="width:96.5%;height: 14%;margin-top: 7px;margin-left: 10px; border-bottom: 2px solid #d0d0d0">
+          <p
           class="description">
           В этом пункте меню Вы можете подключать 
           устройства к своей учетной записи
         </p>
+        </div>
+        
       </div>
     </transition>
   </div>
@@ -83,10 +92,13 @@ export default {
 <style lang="scss" scoped>
 .info-panel {
   height: 100%;
-  padding-top: 40px;
-  // padding-left: 10px;
+  padding-top: 5px;
   padding-right: 20px;
   width: 300px;
+  border-top: 1.5px solid #d0d0d0;
+  border-left: 1.5px solid #d0d0d0;
+  border-right: 1.5px solid #d0d0d0;
+  border-radius: 15px 15px 0px 0px;
   .slide-fade-enter-active {
     transition: all 0.2s ease;
   }
@@ -105,6 +117,7 @@ export default {
     width: 100%;
     height: 100%;
     float: right;
+    border-radius: 20px;
     // text-align: center;
     display: flex;
     flex-direction: column;
@@ -121,6 +134,8 @@ export default {
   }
 
   .info-title{
+    margin-left: 10px;
+    border-bottom: 2px solid #d0d0d0;
     align-items: center;
     display: flex;
     justify-content: space-between;

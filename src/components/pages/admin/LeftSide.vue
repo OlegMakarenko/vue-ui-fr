@@ -35,7 +35,11 @@ export default {
   width: 300px;
   min-height: 100vh;
   float: left;
-  background-color: #ebeef5;
+  background-color: white;
+  border-top: 1.5px solid #d0d0d0;
+  border-left: 1.5px solid #d0d0d0;
+  border-right: 1.5px solid #d0d0d0;
+  border-radius: 15px 15px 0px 0px;
   display: block;
   text-align: center;
 }

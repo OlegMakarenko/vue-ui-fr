@@ -127,7 +127,7 @@ export default {
   padding: 17px;
   border-style: solid;
   border-color: #ebebeb;
-  border-width: 1px;
+  border-width: 2px;
   border-radius: 4px;
   display: inline-block;
   cursor: pointer;

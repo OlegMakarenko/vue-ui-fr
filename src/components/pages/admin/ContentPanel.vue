@@ -62,7 +62,7 @@ export default {
       deviceComponentView: "ComponentTile",
       selectedId: null,
       selectedTitle: null,
-      isInfoPanel: false,
+      isInfoPanel: true,
       selectedNodeChildrenCount: 0,
     };
   },
@@ -112,6 +112,12 @@ export default {
     flex-direction: column;
     height: 100%;
     padding: 20px;
+    border-top: 1.5px solid #d0d0d0;
+    border-left: 1.5px solid #d0d0d0;
+    border-right: 1.5px solid #d0d0d0;
+    border-radius: 15px 15px 0px 0px;
+    margin-left: 5px;
+    margin-right: 5px;
 
     .control-panel {
       flex: 0 0 auto;

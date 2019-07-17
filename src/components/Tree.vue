@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tree-style">
-      <el-tree
+      <el-tree style="background: white"
         :data="treeData"
         node-key="id"
         :default-expanded-keys="[0]"
@@ -131,5 +131,6 @@ export default {
 
 .el-tree-node__content {
   height: 50px;
+  background-color: white;
 }
 </style>

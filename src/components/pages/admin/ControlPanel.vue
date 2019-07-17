@@ -1,6 +1,6 @@
 <template>
   <div class="control-panel">
-    <el-row type="flex" justify="space-between">
+    <el-row type="flex" justify="space-between" style="border-bottom: 2px solid #d0d0d0; margin-bottom: 10px;">
       <el-col>
         <el-button
           class="btn_add_device"
@@ -29,16 +29,16 @@
 
 
       <el-col :span="8">
-        <i class="el-icon-info button-right-side" @click="onInfoClick"></i>
+        <!-- <i class="el-icon-info button-right-side" @click="onInfoClick"></i> -->
 
         <i
           id="button-icon-minus"
-          class="el-icon-minus"
+          class="el-icon-s-fold"
           v-if="currentView == 'ComponentTile'"
           @click="changeDeviceComponentView"
         ></i>
 
-        <i id="button-icon-grid" class="el-icon-s-grid" v-else @click="changeDeviceComponentView"></i>
+        <i id="button-icon-grid" class="el-icon-menu" v-else @click="changeDeviceComponentView"></i>
       </el-col>
     </el-row>
 
@@ -157,7 +157,6 @@ export default {
 
     #button-icon-minus {
       float: right;
-      margin-right: 15px;
       background-color: white;
       border: none;
       color: grey;
@@ -168,7 +167,6 @@ export default {
 
     #button-icon-grid {
       float: right;
-      margin-right: 15px;
       background-color: white;
       border: none;
       color: grey;

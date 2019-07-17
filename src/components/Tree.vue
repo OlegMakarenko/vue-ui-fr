@@ -36,7 +36,7 @@
       </el-tree>
     </div>
 
-    <!-- <div class="tree-style2">
+    <div class="tree-style2">
       <el-tree style="background: white"
         :data="treeData"
         node-key="id"
@@ -67,7 +67,7 @@
           </span>
         </span>
       </el-tree>
-    </div> -->
+    </div>
 
 
   </div>

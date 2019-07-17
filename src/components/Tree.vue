@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="tree-style">
+      <!-- <div style="border-bottom: 1px solid #eee"></div> -->
       <el-tree style="background: white"
         :data="treeData"
         node-key="id"
@@ -22,11 +23,13 @@
           <!-- node, data-->
           <span>
             <i v-if="node.data.type=='folder'" class="el-icon-folder"></i>
+            
             <i v-if="node.data.type=='device'" class="el-icon-odometer"></i>
             <span>{{node.data.name}}</span>
           </span>
           <span class="tree-node-edit">
-            <i v-if="node.data.type!=='isRoot'" class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
+            <!-- <i v-if="node.data.type!=='isRoot'" class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i> -->
+            <!-- {{infoPanel.childrenCount}} -->
           </span>
         </span>
       </el-tree>
@@ -121,6 +124,7 @@ export default {
 
 .tree-node {
   display: flex;
+
   justify-content: space-between;
   width: 100%;
 }
@@ -131,6 +135,7 @@ export default {
 
 .el-tree-node__content {
   height: 50px;
+  margin-top: 10%;
   background-color: white;
 }
 </style>

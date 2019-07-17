@@ -124,8 +124,8 @@ export default {
     }
 
     .content-panel-view {
-      flex: 1 1 auto;
-      //display: flex;
+      // flex: 1 1 auto;
+      display: flex;
       //justify-content: space-around;
       flex-wrap: wrap;
     }

@@ -147,8 +147,6 @@ import addGroup from '../modalwindow/creategroup/modalAddGroup.vue'
 
 import breadcrumb from '../breadcrumb.vue'
 
-
-
 export default {
 
     components: {

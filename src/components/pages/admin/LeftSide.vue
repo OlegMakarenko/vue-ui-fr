@@ -2,8 +2,9 @@
   <div>
     <div class="left-side-menu">
       <Tree 
-        :treeData="tree1Data" 
-        :id="1" 
+        :treeDataOne="tree1Data" 
+        :treeDataTwo="tree2Data"
+        :id="0"
         class="tree_view"/>
     </div>
   </div>
@@ -24,6 +25,10 @@ export default {
   computed: {
     tree1Data() {
       return this.$store.getters.tree1Data;
+    },
+
+    tree2Data() {
+      return this.$store.getters.tree2Data;
     }
   }
 };

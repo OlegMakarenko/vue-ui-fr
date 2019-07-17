@@ -3,7 +3,7 @@
     <div class="tree-style">
       <!-- <div style="border-bottom: 1px solid #eee"></div> -->
       <el-tree style="background: white"
-        :data="treeData"
+        :data="treeDataOne"
         node-key="id"
         :default-expanded-keys="[0]"
         @node-drag-start="handleDragStart"
@@ -38,7 +38,7 @@
 
     <div class="tree-style2">
       <el-tree style="background: white"
-        :data="treeData"
+        :data="treeDataTwo"
         node-key="id"
         :default-expanded-keys="[0]"
         @node-drag-start="handleDragStart"
@@ -76,7 +76,7 @@
 <script>
 export default {
   label: "lside",
-  props: ["treeData", "id", "isDraggable"],
+  props: ["treeDataOne", "treeDataTwo", "id", "isDraggable"],
 
   computed:{
     infoPanel(){

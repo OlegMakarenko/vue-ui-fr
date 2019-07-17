@@ -55,6 +55,9 @@ export default  new Vuex.Store({
         tree1Data:(state, data) => {
             Vue.set(state, "tree1Data", data);
         },
+        tree2Data:(state, data)=>{
+            Vue.set(state, "tree2Data", data)
+        },
         content:(state, data) => {
             Vue.set(state, "content", data);
         },

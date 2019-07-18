@@ -54,7 +54,7 @@ export default {
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
 
 body {
-
+  // background-color: #F2F6FC;
   margin: 0;
   overflow: hidden;
   font-family: "Helvetica";
@@ -64,7 +64,7 @@ body {
   #app {
     height: 100vh;
     width: 100vw;
-
+    
     .container{
       height: 100vh;
     }

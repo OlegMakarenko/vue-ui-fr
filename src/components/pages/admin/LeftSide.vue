@@ -6,7 +6,6 @@
         :treeDataTwo="2"
         :id="1"
         class="tree_view"/>
-      <div style="width:93%;height:1%;margin-left: 10px; border-bottom: 1px solid #d0d0d0"></div>
       <Tree
       :treeDataOne="1" 
         :treeDataTwo="tree2Data"
@@ -46,11 +45,8 @@ export default {
   width: 300px;
   min-height: 100vh;
   float: left;
-  background-color: white;
+  background-color: #ccdbf2;
   border-top: 1.5px solid #d0d0d0;
-  border-left: 1.5px solid #d0d0d0;
-  border-right: 1.5px solid #d0d0d0;
-  border-radius: 15px 15px 0px 0px;
   display: block;
   text-align: center;
 }

@@ -1,5 +1,6 @@
 <template>
   <div class="content-panel">
+
     <div class="content-panel-container">
       <div class="control-panel">
         <ControlPanel @onInfoClick="onInfoClick" @changeView="changeDeviceComponentView"/>
@@ -25,6 +26,7 @@
           @click="onComponentSelect2"/>
       </div>
     </div>
+
     <div class="info-panel">
       <InfoPanel v-if="isInfoPanel" 
                  :title="selectedTitle" 
@@ -111,13 +113,10 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 20px;
+    // padding: 20px;
     border-top: 1.5px solid #d0d0d0;
     border-left: 1.5px solid #d0d0d0;
-    border-right: 1.5px solid #d0d0d0;
-    border-radius: 15px 15px 0px 0px;
-    margin-left: 5px;
-    margin-right: 5px;
+    background-color: white;
 
     .control-panel {
       flex: 0 0 auto;

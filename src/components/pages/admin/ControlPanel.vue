@@ -1,10 +1,11 @@
 <template>
   <div class="control-panel">
-    <el-row type="flex" justify="space-between" style="border-bottom: 1px solid #d0d0d0; margin-bottom: 10px;">
-      <el-col>
+    <el-row type="flex" justify="space-between">
+      <el-col class="manage_buttons">
         <el-button
           class="btn_add_device"
           type="primary"
+          style="background-color: #7092be; border: #7092be"
           icon="el-icon-plus"
           @click="onAddDeviceClick"
           size="mini"
@@ -24,6 +25,7 @@
           class="btn_add_device"
           type="primary"
           icon="el-icon-plus"
+          style="background-color: #7092be; border: #7092be"
           @click="onAddDeviceClick"
           size="mini"
           v-if="allowaddGroup =! allowaddGroup"
@@ -35,10 +37,7 @@
           size="mini"
           @click="onDelete"
           >Удалить</el-button>
-      </el-col>
 
-
-      <el-col :span="8">
         <!-- <i class="el-icon-info button-right-side" @click="onInfoClick"></i> -->
 
         <i
@@ -49,11 +48,11 @@
         ></i>
 
         <i id="button-icon-grid" class="el-icon-menu" v-else @click="changeDeviceComponentView"></i>
+      
+      <Breadcrumb class="bread-crumb" :path="path"/>
+      
       </el-col>
-    </el-row>
 
-    <el-row>
-      <Breadcrumb :path="path"/>
     </el-row>
     <ModalAddDevice v-if="showAddDevice" @close="onAddDeviceClose"/>
 
@@ -164,46 +163,68 @@ export default {
   background-color: white;
 
   .el-row {
-    padding-bottom: 15px;
+    padding-bottom: 5px;
 
-    #button-icon-minus {
-      float: right;
-      background-color: white;
-      border: none;
-      color: grey;
-      margin-top: 5px;
-      cursor: pointer;
-      font-size: 24px;
-      outline: none;
-    }
+    .manage_buttons{
+      width: 100%;
+      height: 75px;
+      border-bottom: 1.5px solid #d0d0d0;
+      align-content: space-around;
+    
+      #button-icon-minus {
+        float: right;
+        background-color: white;
+        border: none;
+        color: grey;
+        margin-top: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        margin-top: 25px;
+        font-size: 24px;
+        outline: none;
+      }
 
-    #button-icon-grid {
-      float: right;
-      background-color: white;
-      border: none;
-      color: grey;
-      margin-top: 5px;
-      cursor: pointer;
-      font-size: 24px;
-      outline: none;
-    }
+      #button-icon-grid {
+        float: right;
+        background-color: white;
+        border: none;
+        color: grey;
+        margin-top: 5px;
+        cursor: pointer;
+        font-size: 24px;
+        margin-top: 25px;
+        margin-right: 10px;
+        outline: none;
+      }
 
-    .button-right-side {
-      float: right;
-      margin-right: 15px;
-      background-color: white;
-      border: none;
-      color: grey;
-      cursor: pointer;
-      font-size: 24px;
-    }
+      .button-right-side {
+        float: right;
+        margin-right: 15px;
+        background-color: white;
+        border: none;
+        color: grey;
+        cursor: pointer;
+        font-size: 24px;
+      }
 
-    .btn_add_device{
-      font-size: 14px;
-    }
+      .btn_add_device{
+        font-size: 14px;
+        height: 30px;
+        margin-top: 20px;
+        margin-left: 10px;
+      }
 
-    .btn_add_group {
-      font-size:14px;
+      .btn_add_group {
+        font-size:14px;
+        height: 30px;
+        margin-top: 20px;
+        margin-left: 10px;
+      }
+
+      .bread-crumb{
+        margin-top: 7px;
+        margin-left: 11px;
+      }
     }
   }
 }

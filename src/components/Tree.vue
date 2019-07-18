@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div >
     <div class="tree-style">
       <!-- <div style="border-bottom: 1px solid #eee"></div> -->
-      <el-tree style="background: white"
+      <el-tree style="background-color: white; border: 2px solid #d0d0d0"
         :data="treeDataOne"
         node-key="id"
         :default-expanded-keys="[0]"
@@ -30,7 +30,7 @@
           </span>
           <span class="tree-node-edit">
             <!-- <i v-if="node.data.type!=Лщд='isRoot'" class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i> -->
-            <!-- {{infoPanel.childrenCount}} --> 2
+            <!-- {{infoPanel.childrenCount}} -->
           </span>
         </span>
       </el-tree>
@@ -38,8 +38,8 @@
     </div>
 
 
-    <div class="tree-style2">
-      <el-tree style="background: white"
+    <div class="tree-style2" >
+      <el-tree style="background-color: white; border: 2px solid #d0d0d0"
         :data="treeDataTwo"
         node-key="id"
         :default-expanded-keys="[0]"
@@ -157,7 +157,7 @@ export default {
 
 <style scoped>
 .el-tree {
-  background-color: #ebeef5;
+  background-color: white;
 }
 
 .tree-node {
@@ -166,8 +166,13 @@ export default {
   width: 100%;
 }
 
+.tree-style{
+background-color: white;
+}
+
 .tree-style2{
   margin-top:20px;
+  background-color: white;
 }
 
 .tree-node-edit {
@@ -178,5 +183,8 @@ export default {
   height: 50px;
   margin-top: 10%;
   background-color: white;
+  width: 293px;
 }
+
+
 </style>

@@ -9,7 +9,6 @@
         >{{infoPanel.name}}</h3>
         
           <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
-        <div style="border-bottom: 1px solid #d0d0d0; width:100%; align-self: flex-end"></div>
         </div>
 
 
@@ -98,8 +97,7 @@ export default {
   width: 300px;
   border-top: 1.5px solid #d0d0d0;
   border-left: 1.5px solid #d0d0d0;
-  border-right: 1.5px solid #d0d0d0;
-  border-radius: 15px 15px 0px 0px;
+  background-color: white;  
   .slide-fade-enter-active {
     transition: all 0.2s ease;
   }

@@ -35,17 +35,12 @@ export default {};
 <style lang="scss" scoped>
 .top {
   background-color: #ffffff;
-  margin-bottom: 5px;
   height: 60px;
   /* padding-top: 15px; */
   padding-bottom: 0px;
   padding-left: 30px;
   padding-right: 30px;
   overflow: auto;
-  border-bottom: 1.5px solid #d0d0d0;
-  border-left: 1.5px solid #d0d0d0;
-  border-right: 1.5px solid #d0d0d0;
-  border-radius: 0px 0px 15px 15px;
   display: flex;
   justify-content: space-between;
 

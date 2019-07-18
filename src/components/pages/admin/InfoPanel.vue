@@ -9,25 +9,25 @@
         >{{infoPanel.name}}</h3>
         
           <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
-        <div style="border-bottom: 2px solid #d0d0d0; width:100%; align-self: flex-end"></div>
+        <div style="border-bottom: 1px solid #d0d0d0; width:100%; align-self: flex-end"></div>
         </div>
 
 
-        <div v-if="infoPanel.childrenCount" style="width:96.5%;height: 8%;margin-top: 15px;margin-left: 15px; border-bottom: 2px solid #d0d0d0">
+        <div v-if="infoPanel.childrenCount" style="width:96.5%;height: 8%;margin-top: 15px;margin-left: 15px; border-bottom: 1px solid #d0d0d0">
           <p class="description" >
               Вложения: {{infoPanel.childrenCount}}
           </p>
         </div>
 
         <div  v-if="typeof infoPanel.activity !== 'undefined' && infoPanel.activity !== null" 
-        style="width:96.5%;height: 10%;margin-top: 6px;margin-left: 15px; border-bottom: 2px solid #d0d0d0">
+        style="width:96.5%;height: 10%;margin-top: 6px;margin-left: 15px; border-bottom: 1px solid #d0d0d0">
           <p
             class="description" >
               Активность: {{infoPanel.activity}}
           </p></div>
 
         <div v-if="typeof infoPanel.info !== 'undefined' && infoPanel.info !== null" 
-        style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 15px; border-bottom: 2px solid #d0d0d0">
+        style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 15px; border-bottom: 1px solid #d0d0d0">
           <p 
             class="description" 
             >
@@ -36,13 +36,13 @@
         </div>
 
         <div v-if="typeof infoPanel.temp !== 'undefined' && infoPanel.temp !== null"
-        style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 15px; border-bottom: 2px solid #d0d0d0">
+        style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 15px; border-bottom: 1px solid #d0d0d0">
         <p 
           class="description">
             Температура: {{infoPanel.temp}}
         </p></div>
 
-        <div style="width:96.5%;height: 14%;margin-top: 7px;margin-left: 15px; border-bottom: 2px solid #d0d0d0">
+        <div style="width:96.5%;height: 14%;margin-top: 7px;margin-left: 15px; border-bottom: 1px solid #d0d0d0">
           <p
           class="description">
           В этом пункте меню Вы можете подключать 

@@ -22,7 +22,7 @@
         </el-button>
       </div> -->
     </el-container>
-    <Admin v-else/>
+          <Admin v-else/>
   </div>
 </template>
 

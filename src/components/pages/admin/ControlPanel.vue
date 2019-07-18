@@ -1,6 +1,6 @@
 <template>
   <div class="control-panel">
-    <el-row type="flex" justify="space-between" style="border-bottom: 2px solid #d0d0d0; margin-bottom: 10px;">
+    <el-row type="flex" justify="space-between" style="border-bottom: 1px solid #d0d0d0; margin-bottom: 10px;">
       <el-col>
         <el-button
           class="btn_add_device"

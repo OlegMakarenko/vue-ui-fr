@@ -128,7 +128,7 @@ export default {
   border-style: solid;
   border-color: #ebebeb;
   border-width: 2px;
-  border-radius: 4px;
+  border-radius: 8px;
   display: inline-block;
   cursor: pointer;
 }

@@ -30,11 +30,13 @@
           </span>
           <span class="tree-node-edit">
             <!-- <i v-if="node.data.type!=Лщд='isRoot'" class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i> -->
-            {{infoPanel.childrenCount}}
+            <!-- {{infoPanel.childrenCount}} --> 2
           </span>
         </span>
       </el-tree>
+      
     </div>
+
 
     <div class="tree-style2">
       <el-tree style="background: white"
@@ -63,7 +65,7 @@
             <span>{{node.data.name}}</span>
           </span>
           <span class="tree-node-edit">
-            {{infoPanel.childrenCount}}
+            <!-- {{infoPanel.childrenCount}} -->2
           </span>
         </span>
       </el-tree>
@@ -165,7 +167,7 @@ export default {
 }
 
 .tree-style2{
-  margin-top: 60px;
+  margin-top:20px;
 }
 
 .tree-node-edit {

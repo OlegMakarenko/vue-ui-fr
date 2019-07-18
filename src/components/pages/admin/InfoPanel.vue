@@ -4,28 +4,30 @@
       <!-- the right side where we have Device manager info-->
       <div class="right-side-menu">
         <div class="info-title">
-        <h3 
-          style="font-size: 18px;
+        <h3 style="font-size: 18px;
                  font-weight: 500;"
         >{{infoPanel.name}}</h3>
-          <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
-        </div>
         
-        <div v-if="infoPanel.childrenCount" style="width:96.5%;height: 8%;margin-top: 15px;margin-left: 10px; border-bottom: 2px solid #d0d0d0">
+          <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
+        <div style="border-bottom: 2px solid #d0d0d0; width:100%; align-self: flex-end"></div>
+        </div>
+
+
+        <div v-if="infoPanel.childrenCount" style="width:96.5%;height: 8%;margin-top: 15px;margin-left: 15px; border-bottom: 2px solid #d0d0d0">
           <p class="description" >
               Вложения: {{infoPanel.childrenCount}}
           </p>
         </div>
 
         <div  v-if="typeof infoPanel.activity !== 'undefined' && infoPanel.activity !== null" 
-        style="width:96.5%;height: 10%;margin-top: 6px;margin-left: 10px; border-bottom: 2px solid #d0d0d0">
+        style="width:96.5%;height: 10%;margin-top: 6px;margin-left: 15px; border-bottom: 2px solid #d0d0d0">
           <p
             class="description" >
               Активность: {{infoPanel.activity}}
           </p></div>
 
         <div v-if="typeof infoPanel.info !== 'undefined' && infoPanel.info !== null" 
-        style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 10px; border-bottom: 2px solid #d0d0d0">
+        style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 15px; border-bottom: 2px solid #d0d0d0">
           <p 
             class="description" 
             >
@@ -34,20 +36,19 @@
         </div>
 
         <div v-if="typeof infoPanel.temp !== 'undefined' && infoPanel.temp !== null"
-        style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 10px; border-bottom: 2px solid #d0d0d0">
+        style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 15px; border-bottom: 2px solid #d0d0d0">
         <p 
           class="description">
             Температура: {{infoPanel.temp}}
         </p></div>
 
-        <div style="width:96.5%;height: 14%;margin-top: 7px;margin-left: 10px; border-bottom: 2px solid #d0d0d0">
+        <div style="width:96.5%;height: 14%;margin-top: 7px;margin-left: 15px; border-bottom: 2px solid #d0d0d0">
           <p
           class="description">
           В этом пункте меню Вы можете подключать 
           устройства к своей учетной записи
         </p>
         </div>
-        
       </div>
     </transition>
   </div>
@@ -92,7 +93,7 @@ export default {
 <style lang="scss" scoped>
 .info-panel {
   height: 100%;
-  padding-top: 5px;
+  padding-top: 7.5px;
   padding-right: 20px;
   width: 300px;
   border-top: 1.5px solid #d0d0d0;
@@ -134,11 +135,12 @@ export default {
   }
 
   .info-title{
-    margin-left: 10px;
-    border-bottom: 2px solid #d0d0d0;
+    height: 8%;
+    margin-left: 15px;
     align-items: center;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .description{

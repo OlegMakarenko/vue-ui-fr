@@ -3,8 +3,14 @@
     <div class="left-side-menu">
       <Tree 
         :treeDataOne="tree1Data" 
+        :treeDataTwo="2"
+        :id="1"
+        class="tree_view"/>
+      <div style="width:93%;height:1%;margin-left: 10px; border-bottom: 2px solid #d0d0d0"></div>
+      <Tree
+      :treeDataOne="1" 
         :treeDataTwo="tree2Data"
-        :id="0"
+        :id="2"
         class="tree_view"/>
     </div>
   </div>

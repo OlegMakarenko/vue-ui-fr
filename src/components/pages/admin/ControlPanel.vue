@@ -8,9 +8,10 @@
           icon="el-icon-plus"
           @click="onAddDeviceClick"
           size="mini"
-        >Подключить устройство</el-button>
+          v-if="allowaddGroup"
+          >Добавить устройство в группу</el-button>
 
-        <el-button
+          <el-button
           class="btn_add_group"
           icon="el-icon-folder"
           @click="onAddGroupClick"
@@ -18,6 +19,15 @@
           size="mini"
           v-if="allowaddGroup"
         >Добавить группу</el-button>
+
+        <el-button
+          class="btn_add_device"
+          type="primary"
+          icon="el-icon-plus"
+          @click="onAddDeviceClick"
+          size="mini"
+          v-if="allowaddGroup =! allowaddGroup"
+          >Подключить устройство</el-button>
       
         <el-button 
           class="btn_add_group" 
@@ -81,7 +91,7 @@ export default {
     },
     allowaddGroup(){
       return this.$store.getters.content.type === 'folder';
-    }
+    },
   },
 
   methods: {
@@ -151,6 +161,7 @@ export default {
 .control-panel {
   width: 100%;
   height: 100%;
+  background-color: white;
 
   .el-row {
     padding-bottom: 15px;
@@ -159,7 +170,8 @@ export default {
       float: right;
       background-color: white;
       border: none;
-      color: grey;margin-top: 5px;
+      color: grey;
+      margin-top: 5px;
       cursor: pointer;
       font-size: 24px;
       outline: none;

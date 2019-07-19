@@ -5,7 +5,7 @@
         <el-button
           class="btn_add_device"
           type="primary"
-          style="background-color: #7092be; border: #7092be"
+          style="background-color: #828386; border: #7092be"
           icon="el-icon-plus"
           @click="onAddDeviceClick"
           size="mini"
@@ -25,15 +25,15 @@
           class="btn_add_device"
           type="primary"
           icon="el-icon-plus"
-          style="background-color: #7092be; border: #7092be"
+          style="background-color: #828386; border: #7092be"
           @click="onAddDeviceClick"
           size="mini"
           v-if="allowaddGroup =! allowaddGroup"
           >Подключить устройство</el-button>
-      
-        <el-button 
-          class="btn_add_group" 
-          icon="el-icon-delete" 
+
+        <el-button
+          class="btn_add_group"
+          icon="el-icon-delete"
           size="mini"
           @click="onDelete"
           >Удалить</el-button>
@@ -48,9 +48,9 @@
         ></i>
 
         <i id="button-icon-grid" class="el-icon-menu" v-else @click="changeDeviceComponentView"></i>
-      
+
       <Breadcrumb class="bread-crumb" :path="path"/>
-      
+
       </el-col>
 
     </el-row>
@@ -108,7 +108,7 @@ export default {
           this.$message({
             type: 'info',
             message: 'Удаление отменено'
-          });          
+          });
         });
       },
 
@@ -149,7 +149,7 @@ export default {
           this.$message({
             type: 'info',
             message: 'Редактирование отменено '
-          });       
+          });
         });
       }
     },
@@ -170,7 +170,7 @@ export default {
       height: 75px;
       border-bottom: 1.5px solid #d0d0d0;
       align-content: space-around;
-    
+
       #button-icon-minus {
         float: right;
         background-color: white;

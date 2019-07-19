@@ -2,12 +2,12 @@
   <div class="top">
     <img
       class="brand"
-      src="./vega.jpg"
+      src="./vega.png"
       alt="fractal"
       style="float: left;
-             margin-top: 12px;"
+             margin-top: 10px;"
       width="180"
-      height="35"
+      height="45"
     >
     <!-- <div class="header-text">
       <div class="header-brand">Fractal</div>
@@ -19,12 +19,12 @@
       </el-badge>
 
         <el-avatar  size="medium "
-          style="cursor: pointer; background: #909399" 
+          style="cursor: pointer; background: #909399"
           icon="el-icon-user-solid">
         </el-avatar>
     </div>
 
-    
+
   </div>
 </template>
 

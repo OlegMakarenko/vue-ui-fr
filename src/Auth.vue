@@ -7,19 +7,19 @@
               <div class="header-brand">
                 <img
                   class="brand"
-                  src="../src/components/pages/admin/vega.jpg"
+                  src="../src/components/pages/admin/vega.png"
                   alt="fractal"
                   style="
-                  margin-top: 12px;
-                  width: 180px;"
-                  height="35"
+                  margin-top: 6px;
+                  width: 200px;"
+                  height="55"
                 />
               </div>
             </div>
           </div>
       </el-row>
     </nav>
-    
+
     <div class="form-wrapper" v-if="authVisible">
       <el-form :model="authForm" ref="authForm">
         <el-form-item>
@@ -29,20 +29,20 @@
         </el-form-item>
 
         <el-form-item prop="email">
-          <el-input 
-            placeholder="email" 
-            type="email" 
-            v-model="authForm.email" 
+          <el-input
+            placeholder="email"
+            type="email"
+            v-model="authForm.email"
             auto-complete="on"
             @keyup.13.native="submitForm('authForm')"
           ></el-input>
         </el-form-item>
 
         <el-form-item prop="password">
-          <el-input 
-            placeholder="password" 
-            type="password" 
-            v-model="authForm.password" 
+          <el-input
+            placeholder="password"
+            type="password"
+            v-model="authForm.password"
             auto-complete="off"
             @keyup.13.native="submitForm('authForm')"
           >
@@ -52,24 +52,24 @@
         <el-row :gutter="20" style="display: flex">
           <el-col>
             <el-form-item>
-          <el-button 
-            class="auth-button" 
-            type="primary" 
-            @click="submitForm('authForm')">Войти</el-button> 
+          <el-button
+            class="auth-button"
+            type="primary"
+            @click="submitForm('authForm')">Войти</el-button>
         </el-form-item></el-col>
           <el-col><el-form-item>
-          <el-button 
-            class="register-button" 
-            
+          <el-button
+            class="register-button"
+
             @click="showRegister"
-            >Регистрация</el-button> 
+            >Регистрация</el-button>
         </el-form-item></el-col>
         </el-row>
-        
-        <!-- <div style="display: flex;">
-        
 
-        
+        <!-- <div style="display: flex;">
+
+
+
         </div> -->
       </el-form>
     </div>
@@ -86,58 +86,58 @@ export default  {
     registerForm
   },
 
-  data() 
+  data()
   {
     return {
       authVisible: true,
       registerVisible: true,
-      authForm: 
+      authForm:
       {
         email: "",
         password: ""
       }
     };
   },
-  
-  methods: 
+
+  methods:
   {
-    submitForm(formName) 
-    {  
+    submitForm(formName)
+    {
 
       const form = this.$refs[formName];
 
-      form.validate((isValid) => 
+      form.validate((isValid) =>
       {
-        if (isValid && form.model.email && form.model.password) 
+        if (isValid && form.model.email && form.model.password)
           this.auth(form.model.email, form.model.password);
         else
-          if (!form.model.email) 
+          if (!form.model.email)
           {
             this.$notify.error({
-              title: `Failed to log in`, 
-              message: "Please enter your email address", 
+              title: `Failed to log in`,
+              message: "Please enter your email address",
               type:"error"
             });
           }
           else
           this.$notify.error({
-            title: `Failed to log in`, 
-            message: "Please enter your password", 
+            title: `Failed to log in`,
+            message: "Please enter your password",
             type:"error"
           });
       });
     },
 
-    auth(email, password) 
+    auth(email, password)
     {
       this.$store.dispatch("LOG_IN", { email, password })
-        .catch(err => 
+        .catch(err =>
           this.$notify.error({
-            title: `Failed to log in`, 
-            message: err.message, 
+            title: `Failed to log in`,
+            message: err.message,
             type:"error"
           })
-        ) 
+        )
     },
 
     showRegister(){
@@ -194,7 +194,7 @@ export default  {
 .form-wrapper > form {
   width: 350px;
   max-width: 350px;
-  
+
   z-index: 1000;
 }
 

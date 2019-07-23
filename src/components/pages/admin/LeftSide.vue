@@ -1,23 +1,32 @@
 <template>
   <div>
-    <div class="left-side-menu">
-      <div style="margin-top: 20px">
-        <el-tabs type="card" v-model="activeName" @tab-click="handleClick" class="tabs">
-          <el-tab-pane label="Устройства" name="first">
+    <div class="left-side-menu" id="colorSwitch">
+      <div style="margin-top: 20px; flex: 1 1 auto;">
+        <el-tabs type="card" v-model="activeName" @tab-click="handleClick" class="tabs"> 
+          <el-button
+          class="porfile-system"
+          type="primary"
+          size="mini"
+          >Профиль и системные функции</el-button>
+
+          <el-divider></el-divider>
+
+          <el-tab-pane label="Устройства" name="first" class="tab-tree1">
             <Tree
-              :treeDataOne="tree1Data"
-              :treeDataTwo="2"
-              :id="1"
-              class="tree_view"/></el-tab-pane>
-          <el-tab-pane label="Группы" name="second">
-            <Tree
-              :treeDataOne="1"
-              :treeDataTwo="tree2Data"
+              :treeData="tree2Data"
               :id="2"
-              class="tree_view"/></el-tab-pane>
-          <el-tab-pane label="Профили и системные функции" name="third"></el-tab-pane>
-        </el-tabs>
+              class="tree_view"/>
+            </el-tab-pane>
+          <el-tab-pane label="Группы" name="second" class="tab-tree1">
+            <Tree  
+              :treeData="tree1Data"
+              :id="1"
+              class="tree_view"/>
+          </el-tab-pane>
+        </el-tabs>        
       </div>
+      <div style="height: 150px; width: 300px; background-color: #8a999f; flex: 0 0 auto;">
+     </div>
     </div>
   </div>
 </template>
@@ -61,18 +70,18 @@ export default {
   float: left;
   background-color: #f5f9fc;
   border-top: 1.5px solid #d0d0d0;
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
 
-.tree_view {
-
+.profile-system{
+  font-size: 14px;
+  height: 30px;
 }
 
 .tabs{
-  margin-top: 15px;
   margin-left: 15px;
   margin-right: 15px;
 }
-
 </style>

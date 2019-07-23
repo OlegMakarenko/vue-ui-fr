@@ -2,8 +2,8 @@
   <div >
     <div class="tree-style">
       <!-- <div style="border-bottom: 1px solid #eee"></div> -->
-      <el-tree style="background-color: #f5f9fc"
-        :data="treeDataOne"
+      <el-tree style="background-color: #f5f9fc;"
+        :data="treeData"
         node-key="id"
         :default-expanded-keys="[0]"
         @node-drag-start="handleDragStart"
@@ -29,46 +29,13 @@
             <span>{{node.data.name}}</span>
           </span>
           <span class="tree-node-edit">
-            <!-- <i v-if="node.data.type!=Лщд='isRoot'" class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i> -->
-            <!-- {{infoPanel.childrenCount}} -->
+            <!-- <i v-if="node.data.type!=='isRoot'" class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i> -->
+            <!-- {{infoPanel.childrenCount}} --> <div style="height: 10px; width:10px; background-color: green; border-radius: 50%">
+            </div>
           </span>
         </span>
       </el-tree>
 
-    </div>
-
-
-    <div class="tree-style2" >
-      <el-tree style="background-color: #f5f9fc"
-        :data="treeDataTwo"
-        node-key="id"
-        :default-expanded-keys="[0]"
-        @node-drag-start="handleDragStart"
-        @node-drag-enter="handleDragEnter"
-        @node-drag-leave="handleDragLeave"
-        @node-drag-over="handleDragOver"
-        @node-drag-end="handleDragEnd"
-        @node-drop="handleDrop"
-        :expand-on-click-node="false"
-        @node-click="onNodeClick"
-        draggable
-        :allow-drop="allowDrop"
-        :allow-drag="allowDrag"
-        label="name"
-      >
-
-        <span class="tree-node" slot-scope="{ node, data }">
-          <span>
-            <i v-if="node.data.type=='folder'" class="el-icon-folder"></i>
-
-            <i v-if="node.data.type=='device'" class="el-icon-odometer"></i>
-            <span>{{node.data.name}}</span>
-          </span>
-          <span class="tree-node-edit">
-            <!-- {{infoPanel.childrenCount}} -->2
-          </span>
-        </span>
-      </el-tree>
     </div>
 
 
@@ -78,7 +45,7 @@
 <script>
 export default {
   label: "lside",
-  props: ["treeDataOne", "treeDataTwo", "id", "isDraggable"],
+  props: ["treeData", "id", "isDraggable"],
 
   computed:{
     infoPanel(){
@@ -177,6 +144,7 @@ background-color: white;
 
 .tree-node-edit {
   padding-right: 10px;
+  padding-top: 12px;
 }
 
 .el-tree-node__content {

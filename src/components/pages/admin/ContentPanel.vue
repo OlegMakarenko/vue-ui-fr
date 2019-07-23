@@ -107,6 +107,7 @@ export default {
 .content-panel {
   display: flex;
   height: 100%;
+  
 
   .content-panel-container {
     flex: 1 1 auto;
@@ -123,10 +124,11 @@ export default {
     }
 
     .content-panel-view {
-      // flex: 1 1 auto;
-      display: flex;
-      //justify-content: space-around;
+      flex: 1 1 auto;
+      // display: flex;
+      // justify-content: space-around;
       flex-wrap: wrap;
+      overflow: auto;
     }
   }
 

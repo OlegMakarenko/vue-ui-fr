@@ -9,6 +9,17 @@ const exampleFetchAPI = (endpoint, body) =>
     new Promise((resolve, reject)=>
         resolve({auth_token: "This is JWT"}) );
 
+function colorPick(){
+    var colorSwitch = document.getElementById('colorSwitch');
+    var bakcgroundColor = colorSwitch.style.backgroundColor;
+
+    if(bakcgroundColor === '#6ab1c7'){
+        colorSwitch.style.backgroundColor = '#8a999f';
+    } else {
+        colorSwitch.style.backgroundColor = '#6ab1c7';
+    }
+}
+
 export default  new Vuex.Store({
     state:{
         auth_token: null,
@@ -173,6 +184,10 @@ export default  new Vuex.Store({
                 title: 'Error',
                 message: 'This is an error message'
               });
+        },
+
+        COLOR_SWITCH:(context)=>{
+            colorPick(context)
         }
     }
 });

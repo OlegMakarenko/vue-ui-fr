@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router' 
-//import VueTouch from 'vue-touch'
 import ElementUI from 'element-ui'
-import "element-ui/lib/theme-chalk/index.css";
+import "./style/theme/index.css"
+//import VueTouch from 'vue-touch'
+// import "element-ui/lib/theme-chalk/index.css";
+
 
 
 import store from './store'

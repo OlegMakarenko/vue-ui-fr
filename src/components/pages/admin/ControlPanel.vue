@@ -5,7 +5,6 @@
         <el-button
           class="btn_add_device"
           type="primary"
-          style="background-color: #8a999f; border: #7092be"
           icon="el-icon-plus"
           @click="onAddDeviceClick"
           size="mini"
@@ -25,7 +24,6 @@
           class="btn_add_device"
           type="primary"
           icon="el-icon-plus"
-          style="background-color: #8a999f; border: #7092be"
           @click="onAddDeviceClick"
           size="mini"
           v-if="allowaddGroup =! allowaddGroup"
@@ -37,6 +35,12 @@
           size="mini"
           @click="onDelete"
           >Удалить</el-button>
+<!-- 
+          <el-button
+          class="btn_add_group"
+          size="mini"
+          @click="colorSw"
+          >Изменить фон</el-button> -->
 
         <!-- <i class="el-icon-info button-right-side" @click="onInfoClick"></i> -->
 
@@ -97,6 +101,10 @@ export default {
     addNewDevice() {},
     addNewGroup() {},
 
+    colorSw(){
+      this.$store.dispatch('COLOR_SWITCH')
+    },
+
     onDelete(){
         this.$confirm('Вы действительно хотите удалить "' + this.$store.getters.selectedNode.name + '"?', 'Удаление', {
           confirmButtonText: 'Удалить',
@@ -151,7 +159,7 @@ export default {
             message: 'Редактирование отменено '
           });
         });
-      }
+      },
     },
 }
 </script>
@@ -167,9 +175,9 @@ export default {
 
     .manage_buttons{
       width: 100%;
-      height: 75px;
       border-bottom: 1.5px solid #d0d0d0;
       align-content: space-around;
+      padding: 20px;
 
       #button-icon-minus {
         float: right;
@@ -178,8 +186,6 @@ export default {
         color: grey;
         margin-top: 5px;
         cursor: pointer;
-        margin-right: 10px;
-        margin-top: 25px;
         font-size: 24px;
         outline: none;
       }
@@ -192,8 +198,6 @@ export default {
         margin-top: 5px;
         cursor: pointer;
         font-size: 24px;
-        margin-top: 25px;
-        margin-right: 10px;
         outline: none;
       }
 
@@ -210,20 +214,15 @@ export default {
       .btn_add_device{
         font-size: 14px;
         height: 30px;
-        margin-top: 20px;
-        margin-left: 10px;
       }
 
       .btn_add_group {
         font-size:14px;
         height: 30px;
-        margin-top: 20px;
-        margin-left: 10px;
       }
 
       .bread-crumb{
-        margin-top: 7px;
-        margin-left: 11px;
+        margin-top: 20px;
       }
     }
   }

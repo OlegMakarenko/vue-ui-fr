@@ -15,11 +15,11 @@
 
     <div class="right-side-header">
       <el-badge :value="0" class="item" style="margin-top:5px;">
-       <i style="font-size: 28px; color: #909399; cursor: pointer;" class="el-icon-message-solid"></i>
+       <i style="font-size: 28px; color: #8a999f; cursor: pointer;" class="el-icon-message-solid"></i>
       </el-badge>
 
         <el-avatar  size="medium "
-          style="cursor: pointer; background: #909399"
+          style="cursor: pointer; background: #8a999f"
           icon="el-icon-user-solid">
         </el-avatar>
     </div>
@@ -34,7 +34,7 @@ export default {};
 
 <style lang="scss" scoped>
 .top {
-  background-color: #ffffff;
+  background-color: #f5f9fc;
   height: 60px;
   /* padding-top: 15px; */
   padding-bottom: 0px;
@@ -47,7 +47,7 @@ export default {};
 
   .header-brand {
     font-size: 27px;
-    color: #565656;
+    color: #f5f9fc;
   }
 
   .right-side-header{
@@ -57,7 +57,7 @@ export default {};
     justify-content: space-between;
     //padding-right: 65px;
     margin-top: 12px;
-    color: #9e9e9e;
+    color: #f5f9fc;
   }
 }
 </style>

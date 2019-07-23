@@ -28,9 +28,9 @@
     </div>
 
     <div class="info-panel">
-      <InfoPanel v-if="isInfoPanel" 
-                 :title="selectedTitle" 
-                 :id="selectedId" 
+      <InfoPanel v-if="isInfoPanel"
+                 :title="selectedTitle"
+                 :id="selectedId"
                  :childrenCount="selectedNodeChildrenCount"/>
     </div>
   </div>
@@ -79,7 +79,7 @@ export default {
       console.log(node)
 
       this.$store.dispatch("NODE_SELECTED", node);
-      
+
       if(node.children)
       this.$set(this, "selectedNodeChildrenCount", node.children.length);
     },
@@ -116,7 +116,7 @@ export default {
     // padding: 20px;
     border-top: 1.5px solid #d0d0d0;
     border-left: 1.5px solid #d0d0d0;
-    background-color: white;
+    background-color: #f5f9fc;
 
     .control-panel {
       flex: 0 0 auto;

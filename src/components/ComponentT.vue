@@ -29,7 +29,7 @@
       <div  v-if="childrenCount">Вложения: {{childrenCount}}</div>
     </div>
   </div>
-</template> 
+</template>
 
 <script>
 import ModalC from "../components/modalwindow/modalComponent.vue";
@@ -131,6 +131,7 @@ export default {
   border-radius: 8px;
   display: inline-block;
   cursor: pointer;
+  background-color: white;
 }
 
   .tile-header{

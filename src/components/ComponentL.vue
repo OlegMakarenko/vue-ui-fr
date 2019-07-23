@@ -136,6 +136,7 @@ export default {
   border-radius: 8px;
   display: flex;
   cursor: pointer;
+  background-color: white;
 
   .left-side-list{
     width: 30%;
@@ -160,8 +161,8 @@ export default {
 
   .thermometer-list{
     font-size:24px;
-    color:#606266; 
-    margin-left: 20px; 
+    color:#606266;
+    margin-left: 20px;
     align-items: stretch;
   }
 

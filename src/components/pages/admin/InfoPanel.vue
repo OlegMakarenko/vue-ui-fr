@@ -7,7 +7,7 @@
         <h3 style="font-size: 18px;
                  font-weight: 500;"
         >{{infoPanel.name}}</h3>
-        
+
           <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
         </div>
 
@@ -18,17 +18,17 @@
           </p>
         </div>
 
-        <div  v-if="typeof infoPanel.activity !== 'undefined' && infoPanel.activity !== null" 
+        <div  v-if="typeof infoPanel.activity !== 'undefined' && infoPanel.activity !== null"
         style="width:96.5%;height: 10%;margin-top: 6px;margin-left: 15px; border-bottom: 1px solid #d0d0d0">
           <p
             class="description" >
               Активность: {{infoPanel.activity}}
           </p></div>
 
-        <div v-if="typeof infoPanel.info !== 'undefined' && infoPanel.info !== null" 
+        <div v-if="typeof infoPanel.info !== 'undefined' && infoPanel.info !== null"
         style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 15px; border-bottom: 1px solid #d0d0d0">
-          <p 
-            class="description" 
+          <p
+            class="description"
             >
               Информация: {{infoPanel.info}}
           </p>
@@ -36,7 +36,7 @@
 
         <div v-if="typeof infoPanel.temp !== 'undefined' && infoPanel.temp !== null"
         style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 15px; border-bottom: 1px solid #d0d0d0">
-        <p 
+        <p
           class="description">
             Температура: {{infoPanel.temp}}
         </p></div>
@@ -44,7 +44,7 @@
         <div style="width:96.5%;height: 14%;margin-top: 7px;margin-left: 15px; border-bottom: 1px solid #d0d0d0">
           <p
           class="description">
-          В этом пункте меню Вы можете подключать 
+          В этом пункте меню Вы можете подключать
           устройства к своей учетной записи
         </p>
         </div>
@@ -55,7 +55,7 @@
 
 <script>
 export default {
-  
+
   computed:{
     infoPanel(){
       return this.$store.getters.infoPanelData;
@@ -68,10 +68,10 @@ export default {
     }
   },
 
-  
+
   methods:{
     editTitle() {
-      
+
         this.$prompt('Пожалуйста введите новое имя', 'Подсказка', {
           confirmButtonText: 'Применить',
           cancelButtonText: 'Отмена',
@@ -82,7 +82,7 @@ export default {
           this.$message({
             type: 'info',
             message: 'Редактирование отменено '
-          });       
+          });
         });
       }
   },
@@ -97,7 +97,7 @@ export default {
   width: 300px;
   border-top: 1.5px solid #d0d0d0;
   border-left: 1.5px solid #d0d0d0;
-  background-color: white;  
+  background-color: #f5f9fc;
   .slide-fade-enter-active {
     transition: all 0.2s ease;
   }
@@ -120,7 +120,7 @@ export default {
     // text-align: center;
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: #f5f9fc;
   }
 
   .device_input {
@@ -148,4 +148,3 @@ export default {
   }
 }
 </style>
-

@@ -5,7 +5,7 @@
         <el-button
           class="btn_add_device"
           type="primary"
-          style="background-color: #828386; border: #7092be"
+          style="background-color: #8a999f; border: #7092be"
           icon="el-icon-plus"
           @click="onAddDeviceClick"
           size="mini"
@@ -25,7 +25,7 @@
           class="btn_add_device"
           type="primary"
           icon="el-icon-plus"
-          style="background-color: #828386; border: #7092be"
+          style="background-color: #8a999f; border: #7092be"
           @click="onAddDeviceClick"
           size="mini"
           v-if="allowaddGroup =! allowaddGroup"
@@ -160,7 +160,7 @@ export default {
 .control-panel {
   width: 100%;
   height: 100%;
-  background-color: white;
+  background-color: #f5f9fc;
 
   .el-row {
     padding-bottom: 5px;
@@ -173,7 +173,7 @@ export default {
 
       #button-icon-minus {
         float: right;
-        background-color: white;
+        background-color: #f5f9fc;
         border: none;
         color: grey;
         margin-top: 5px;
@@ -186,7 +186,7 @@ export default {
 
       #button-icon-grid {
         float: right;
-        background-color: white;
+        background-color: #f5f9fc;
         border: none;
         color: grey;
         margin-top: 5px;

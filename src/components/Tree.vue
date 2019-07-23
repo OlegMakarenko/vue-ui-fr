@@ -2,7 +2,7 @@
   <div >
     <div class="tree-style">
       <!-- <div style="border-bottom: 1px solid #eee"></div> -->
-      <el-tree style="background-color: white; border: 2px solid #d0d0d0"
+      <el-tree style="background-color: #f5f9fc"
         :data="treeDataOne"
         node-key="id"
         :default-expanded-keys="[0]"
@@ -24,7 +24,7 @@
           <!-- node, data-->
           <span>
             <i v-if="node.data.type=='folder'" class="el-icon-folder"></i>
-            
+
             <i v-if="node.data.type=='device'" class="el-icon-odometer"></i>
             <span>{{node.data.name}}</span>
           </span>
@@ -34,12 +34,12 @@
           </span>
         </span>
       </el-tree>
-      
+
     </div>
 
 
     <div class="tree-style2" >
-      <el-tree style="background-color: white; border: 2px solid #d0d0d0"
+      <el-tree style="background-color: #f5f9fc"
         :data="treeDataTwo"
         node-key="id"
         :default-expanded-keys="[0]"
@@ -60,7 +60,7 @@
         <span class="tree-node" slot-scope="{ node, data }">
           <span>
             <i v-if="node.data.type=='folder'" class="el-icon-folder"></i>
-            
+
             <i v-if="node.data.type=='device'" class="el-icon-odometer"></i>
             <span>{{node.data.name}}</span>
           </span>

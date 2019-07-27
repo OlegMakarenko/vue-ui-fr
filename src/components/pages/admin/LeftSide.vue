@@ -4,7 +4,7 @@
       <div style="margin-top: 20px; flex: 1 1 auto;">
         <el-tabs type="card" v-model="activeName" @tab-click="handleClick" class="tabs"> 
           <el-button
-          class="porfile-system"
+          class="profile-system"
           type="primary"
           size="mini"
           >Профиль и системные функции</el-button>

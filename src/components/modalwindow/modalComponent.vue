@@ -1,72 +1,69 @@
 <template>
-<transition name="modal-fade">
-    <div class="modal-mask-component">
-        <div class="modal-backdrop-component">
-            <div class="modal-component"
-                 role="dialog"
-                 aria-labelledby="modalTitle"
-                 aria-describedby="modalDescription">
-                 <div class="header-text-modal">
-                     <h1 style="font-size: 30px; color: #666;">
-                         Настройки 
-                     </h1>
-                        <div class="close">
-                            <button type="button"
-                                    class="btn-close2"
-                                    @click="close"
-                                    aria-label="Close modal">x
-                            </button>
-                    </div>
-                 </div>
-                    
-                    
+    <transition name="modal-component-fade">
+        <div class="modal-mask-component-manage">
+            <div class="modal-backdrop-component-manage">
+                <div class="modal-component-manage"
+                    role="dialog"
+                    aria-labelledby="modalTitle"
+                    aria-describedby="modalDescription">
 
-                    <!-- <div class="left_side_tabs">
-                        <button style="outline: none; background: transparent;"
-                                v-for="tab in tabs" 
-                                :key="tab" 
-                                @click="selected = tab;"
-                                :class="['tab-btn', {active: selected === tab}]">{{tab}}
+                    <div class="header-text-modal">
+                        Настройки
+                        <button type="button"
+                                class="close-modal"
+                                @click="close"
+                                aria-label="Close modal">x
                         </button>
+                    </div>
+                    
+                    <div class="tab-manager">
+                        <div class="tab-buttons">
+                            <el-button @click="controlClick">Управление</el-button>
+                            <el-button @click="eventClick">События</el-button>
+                            <el-button @click="graphicClick">Графики</el-button>
+                            <el-button @click="scheduleClick">Расписание</el-button>
+                            <el-button @click="settingsClick">Настройки</el-button>
+                        </div>
 
-                    </div> -->
-
-                        <component class="modal-tab" :is="selected"/>
-                 
+                        <controlTab v-if="controlTabVisible"/>
+                        <eventTab v-if="eventTabVisible"/>
+                        <graphicTab v-if="graphicTabVisible"/>
+                        <scheduleTab v-if="scheduleTabVisible"/>
+                        <settingsTab v-if="settingsTabVisible"/>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</transition>
+    </transition>
 </template>
 
 <script>
-
-// import tab1 from '../tabs/tab1_scute'
-// import tab2 from '../tabs/tab2_events'
-// import tab3 from '../tabs/tab3_graph'
-// import tab4 from '../tabs/tab4_shedule'
-// import tab5 from '../tabs/tab5_settings'
+import controlTab from './modal_component_tab/Control.vue'
+import eventTab from './modal_component_tab/Event.vue'
+import graphicTab from './modal_component_tab/Graphic.vue'
+import scheduleTab from './modal_component_tab/Schedule.vue'
+import settingsTab from './modal_component_tab/Settings.vue'
 
 export default {
     name: 'modal',
 
     data(){
         return{
-            tabs: ["tab1", "tab2", "tab3", "tab4", "tab5"],
-
-            selected:"tab1",
-            
-            num: '1',
+            controlTabVisible: false,
+            eventTabVisible: false,
+            graphicTabVisible: false,
+            scheduleTabVisible: false,
+            settingsTabVisible: false
         };
     },
 
-    // components:{
-    //         tab1,
-    //         tab2,
-    //         tab3,
-    //         tab4,
-    //         tab5
-    // },
+    components:{
+        controlTab,
+        eventTab,
+        graphicTab,
+        scheduleTab,
+        settingsTab
+    },
 
 
     methods: {
@@ -76,12 +73,62 @@ export default {
         close(){
             this.$emit('close');
         },
+
+        controlClick(){
+            if(this.controlTabVisible === false){
+                this.controlTabVisible = true
+                this.eventTabVisible = false
+                this.graphicTabVisible = false
+                this.scheduleTabVisible = false
+                this.settingsTabVisible = false
+            } 
+        },
+
+        eventClick(){
+            if(this.eventTabVisible === false){
+                this.eventTabVisible = true
+                this.controlTabVisible = false
+                this.graphicTabVisible = false
+                this.scheduleTabVisible = false
+                this.settingsTabVisible = false
+            }
+        },
+
+        graphicClick(){
+            if(this.graphicTabVisible === false){
+                this.graphicTabVisible = true
+                this.controlTabVisible = false
+                this.eventTabVisible = false
+                this.scheduleTabVisible = false
+                this.settingsTabVisible = false
+            } 
+        },
+
+        scheduleClick(){
+            if(this.scheduleTabVisible === false){
+                this.scheduleTabVisible = true
+                this.graphicTabVisible = false
+                this.eventTabVisible = false
+                this.controlTabVisible = false
+                this.settingsTabVisible = false
+            }
+        },
+
+        settingsClick(){
+            if(this.settingsTabVisible === false){
+                this.settingsTabVisible = true
+                this.eventTabVisible = false
+                this.controlTabVisible = false
+                this.graphicTabVisible = false
+                this.scheduleTabVisible = false
+            }
+        }
     }
 }
 </script>
 
 <style>
-.modal-mask-component{
+.modal-mask-component-manage{
     position: fixed;
     top: 0;
     left: 0;
@@ -89,73 +136,26 @@ export default {
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
     display: table;
+    z-index: 2;
 }
 
-.modal-backdrop-component{
+.modal-backdrop-component-manage{
     width: 100%;
-    height: 90%;
-    /* position: fixed; */
-    margin-top: 3.5%;
-    margin-left: 10%;
-    /* display: flex;    */
-    /* justify-content: center; */
+    height: 100%;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
     cursor: default;
 }
 
-.modal-component{
-    /* margin-top: 5%; */
-    /* padding: 15px; */
+.modal-component-manage{
     width: 80%;
-    height: 90%;
+    height: 80%;
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: none;
     cursor: default;
-}
-
-.left_side_tabs{
-    width:  10%; 
-    height: 100%;
-    position: absolute;
-    float: left;
-}
-
-.tab-btn{
-    width: 100%;
-    height: 16.2%;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-
-.modal-tab{
-    flex: 1 auto auto;
-}
-
-.allp{
-    margin-top: 0;
-    font-size: 13px;
-    text-align: center; 
-}
-
-.active{
-    border-right: 3px solid blue;
-    outline: none;
-}
-
-.btn-close2{
-    border: none;
-    font-size: 35px;
-    cursor: pointer;
-    color: #666;
-    outline: none;
-    background: transparent;
-    float:right;
-    margin-right: 9px;
-    /* display: flex; */
-    /* margin-left: 42%; */
-    /* position: absolute; */
-    /* right: 20px; */
 }
 
 .header-text-modal{
@@ -164,13 +164,47 @@ export default {
     text-align: center;
 }
 
-.close{
-    /* display: flex; */
-    position: absolute;
-    float: right;
-    top: 60px;
-    right: 200px;
-    left: 10px;
+.allp{
+    margin-top: 0;
+    font-size: 13px;
+    text-align: center; 
 }
 
+.tab-manager{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.tab-buttons{
+    width: 200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.el-button+.el-button {
+    margin-left: 0px;
+}
+
+.close-modal{
+    display: flex;
+    float:right;
+    font-size: 35px;
+    color: #666;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: transparent;
+    margin-right: 20px;
+}
+
+.modal-component-fade-enter, .modal-component-fade-leave-active{
+    opacity: 0;
+}
+
+.modal-component-fade-enter-active, .modal-component-fade-leave-active{
+    transition: opacity .5s ease
+}
 </style>

@@ -108,13 +108,11 @@ export default {
   display: flex;
   height: 100%;
   
-
   .content-panel-container {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     height: 100%;
-    // padding: 20px;
     border-top: 1.5px solid #d0d0d0;
     border-left: 1.5px solid #d0d0d0;
     background-color: #f5f9fc;
@@ -124,11 +122,12 @@ export default {
     }
 
     .content-panel-view {
-      flex: 1 1 auto;
+      // flex: 1 1 auto;
       display: flex;
-      // justify-content: space-around;
+      justify-content: space-evenly;
       flex-wrap: wrap;
       overflow: auto;
+      padding: 20px;
     }
   }
 

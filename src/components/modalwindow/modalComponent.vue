@@ -6,16 +6,6 @@
                     role="dialog"
                     aria-labelledby="modalTitle"
                     aria-describedby="modalDescription">
-
-                    <div class="header-text-modal">
-                        Настройки
-                        <button type="button"
-                                class="close-modal"
-                                @click="close"
-                                aria-label="Close modal">x
-                        </button>
-                    </div>
-                    
                     <div class="tab-manager">
                         <div class="tab-buttons">
                             <el-button @click="controlClick">Управление</el-button>
@@ -24,12 +14,19 @@
                             <el-button @click="scheduleClick">Расписание</el-button>
                             <el-button @click="settingsClick">Настройки</el-button>
                         </div>
+                        
 
                         <controlTab v-if="controlTabVisible"/>
                         <eventTab v-if="eventTabVisible"/>
                         <graphicTab v-if="graphicTabVisible"/>
                         <scheduleTab v-if="scheduleTabVisible"/>
                         <settingsTab v-if="settingsTabVisible"/>
+                        
+                        <button type="button"
+                                class="close-modal"
+                                @click="close"
+                                aria-label="Close modal">x
+                        </button>
                     </div>
                 </div>
             </div>
@@ -172,8 +169,10 @@ export default {
 
 .tab-manager{
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     text-align: center;
 }
 
@@ -191,13 +190,14 @@ export default {
 .close-modal{
     display: flex;
     float:right;
+    height: 10px;
     font-size: 35px;
     color: #666;
     border: none;
     outline: none;
     cursor: pointer;
     background: transparent;
-    margin-right: 20px;
+    /* margin-right: 20px; */
 }
 
 .modal-component-fade-enter, .modal-component-fade-leave-active{

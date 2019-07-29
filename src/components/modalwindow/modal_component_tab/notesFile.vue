@@ -1,13 +1,8 @@
 <template>
-  <div class="event-panel">
-
-    <div class="event-panel-container">
-      <div class="event-control-panel">
-          Настройки 
-          <i class="el-icon-info scute-info" @click="eventRightSide = !eventRightSide"></i>
-      </div>
-      <div class="event-panel-view">
-          <el-table
+<div class="event-manager">
+    <div class="event-center-side" >
+        <div class="event-content">
+            <el-table
                 :data="tableData"
                 max-height="450">
 
@@ -29,30 +24,29 @@
                     prop="event">
                 </el-table-column>
             </el-table>
-      </div>
+        
+        </div>
+        <i class="el-icon-info event-info" @click="eventRightSide = !eventRightSide"></i>
+            <div class="event-right-side" v-if="eventRightSide">
+                <p>123123123123123</p>
+                <p>123123123123123</p>
+                <br>
+                <br>
+                <hr>
+                <p>123123123123123</p>
+                <p>123123123123123</p>
+            </div>
     </div>
-
-    <div class="event-info-panel" v-if="eventRightSide">
-        Какая-то информация
-    </div>
-  </div>
+</div>
 </template>
 
 <script>
-
-
 export default {
-  components: {
 
-  },
+    data(){
+        return{
+            eventRightSide: false,
 
-  computed: {
-
-  },
-
-  data() {
-    return {
-            eventRightSide: true,
             tableData:[{
                 date: '21:13 06.03.19',
                 event: 'Пользователь',
@@ -78,52 +72,51 @@ export default {
                 event: 'Регулятор',
                 eventMsg: 'Повышение температуры'
             }]
-    };
-  },
+        }
+    },
 
-  methods: {
-    
-  }
-};
+    methods:{
+        
+    }
+}
 </script>
 
-<style lang="scss" scoped>
-.event-panel {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  
-  .event-panel-container {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
+<style scoped>
+
+.event-manager{
+    width: 100%;
     height: 100%;
-    width: 90%;
-
-    .event-control-panel {
-      flex: 0 0 auto;
-    }
-
-    .scute-info{
-        float: right;
-        cursor: pointer 
-    }
-
-    .event-panel-view {
-      flex: 1 1 auto;
-      display: flex;
-      justify-content: space-evenly;
-      flex-wrap: wrap;
-      overflow: auto;
-      padding: 20px;
-    }
-  }
-
-  .event-info-panel {
-    flex: 0 0 auto;
-    width: 10%;
-    word-wrap:break-word;
-    border-left: 1px solid #a1adb2;
-  }
 }
+
+.event-content{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    padding: 20px;
+}
+
+.event-center-side{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.event-right-side{
+    width: 10%;
+    height: 100%;
+    border-left: 1px solid #666;
+    float: right;
+    word-wrap: break-word;
+}
+
+.event-info{
+    float: right;
+    display: flex;
+    color: #565656;
+    font-size: 25px;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
 </style>
+

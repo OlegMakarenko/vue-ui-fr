@@ -3,13 +3,11 @@
 
     <div class="event-panel-container">
       <div class="event-control-panel">
-          Настройки 
-          <i class="el-icon-info scute-info" @click="eventRightSide = !eventRightSide"></i>
+          События <button class="button-close" @click="onClick">x</button>
       </div>
       <div class="event-panel-view">
           <el-table
-                :data="tableData"
-                max-height="450">
+                :data="tableData">
 
                 <el-table-column type="expand">
                     <template slot-scope="props">
@@ -18,13 +16,13 @@
                 </el-table-column>
 
                 <el-table-column 
-                    width="400" 
+                    width="350" 
                     label="Время события"
                     prop="date">
                 </el-table-column>
 
                 <el-table-column 
-                    width="400" 
+                    width="350" 
                     label="Причина события" 
                     prop="event">
                 </el-table-column>
@@ -32,8 +30,10 @@
       </div>
     </div>
 
-    <div class="event-info-panel" v-if="eventRightSide">
-        Какая-то информация
+    <div class="event-info-panel">
+        <div class="info-part1">Какая-то информация</div>
+        <el-divider></el-divider>
+        <div class="info-part2">Какая-то информация</div>
     </div>
   </div>
 </template>
@@ -82,7 +82,9 @@ export default {
   },
 
   methods: {
-    
+    onClick(){
+      this.$emit('buttonClick')
+    }
   }
 };
 </script>
@@ -102,6 +104,16 @@ export default {
 
     .event-control-panel {
       flex: 0 0 auto;
+      
+      .button-close{
+        font-size: 30px;
+        color: #a1adb2;
+        border: none;
+        outline: none;
+        background: transparent;
+        cursor: pointer;
+        float: right;
+      }
     }
 
     .scute-info{
@@ -121,9 +133,21 @@ export default {
 
   .event-info-panel {
     flex: 0 0 auto;
-    width: 10%;
+    display: flex;
+    width: 15%;
     word-wrap:break-word;
-    border-left: 1px solid #a1adb2;
+    border-left: 1px solid #DCDFE6;    
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .info-part1{
+      width: 100%;
+    }
+
+    .info-part2{
+      width: 100%;
+    }
   }
 }
 </style>

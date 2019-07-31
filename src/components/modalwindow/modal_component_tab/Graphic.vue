@@ -3,8 +3,7 @@
 
     <div class="graphic-panel-container">
       <div class="graphic-control-panel">
-          Настройки 
-          <i class="el-icon-info graphic-info" @click="graphicRightSide = !graphicRightSide"></i>
+          График <button class="button-close" @click="onClick">x</button>
       </div>
       <div class="graphic-panel-view">
           <div class="graphic-button">
@@ -44,8 +43,10 @@
       </div>
     </div>
 
-    <div class="graphic-info-panel" v-if="graphicRightSide">
-        Какая-то информация
+    <div class="graphic-info-panel">
+        <div class="info-part1">Какая-то информация</div>
+        <el-divider></el-divider>
+        <div class="info-part2">Какая-то информация</div>
     </div>
   </div>
 </template>
@@ -116,6 +117,10 @@ export default {
           this.showbpower = this.button14power;
       }
     },
+
+    onClick(){
+      this.$emit('buttonClick')
+    }
   }
 };
 </script>
@@ -135,6 +140,16 @@ export default {
 
     .graphic-control-panel {
       flex: 0 0 auto;
+      
+      .button-close{
+        font-size: 30px;
+        color: #a1adb2;
+        border: none;
+        outline: none;
+        background: transparent;
+        cursor: pointer;
+        float: right;
+      }
     }
 
     .graphic-info{
@@ -167,6 +182,8 @@ export default {
             background-color: #a1adb2;
             border: none;
             border-radius: 4px;
+            outline: none;
+            cursor: pointer;
             }
 
             .switch_button_graph{
@@ -192,6 +209,8 @@ export default {
             text-align: center;
             word-wrap: break-word;
             border-radius: 4px 0px 0px 4px;
+            outline: none;
+            cursor: pointer;
             }
 
             .graph_off_btn_temp{
@@ -204,6 +223,8 @@ export default {
             text-align: center;
             word-wrap: break-word;
             border-radius: 4px 0px 0px 4px;
+            outline: none;
+            cursor: pointer;
             }
 
             .graph_on_btn_default{
@@ -216,6 +237,8 @@ export default {
             text-align: center;
             word-wrap: break-word;
             border-left: none;
+            outline: none;
+            cursor: pointer;
             }
 
             .graph_off_btn_default{
@@ -228,6 +251,8 @@ export default {
             text-align: center;
             word-wrap: break-word;
             border-left: none;
+            outline: none;
+            cursor: pointer;
             }
 
             .graph_on_btn_default-r{
@@ -240,7 +265,9 @@ export default {
             text-align: center;
             word-wrap: break-word;
             border-left: none;
-            border-radius: 0px 4px 4px 0px;            
+            border-radius: 0px 4px 4px 0px;           
+            outline: none;
+            cursor: pointer; 
             }
 
             .graph_off_btn_default-r{
@@ -254,6 +281,8 @@ export default {
             word-wrap: break-word;
             border-left: none;
             border-radius: 0px 4px 4px 0px;
+            outline: none;
+            cursor: pointer;
             }
         }
     }
@@ -261,9 +290,21 @@ export default {
 
   .graphic-info-panel {
     flex: 0 0 auto;
-    width: 10%;
+    display: flex;
+    width: 15%;
     word-wrap:break-word;
-    border-left: 1px solid #a1adb2;
+    border-left: 1px solid #DCDFE6;    
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .info-part1{
+      width: 100%;
+    }
+
+    .info-part2{
+      width: 100%;
+    }
   }
 }
 </style>

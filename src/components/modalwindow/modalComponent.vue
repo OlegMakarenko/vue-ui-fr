@@ -8,25 +8,42 @@
                     aria-describedby="modalDescription">
                     <div class="tab-manager">
                         <div class="tab-buttons">
-                            <el-button @click="controlClick">Управление</el-button>
-                            <el-button @click="eventClick">События</el-button>
-                            <el-button @click="graphicClick">Графики</el-button>
-                            <el-button @click="scheduleClick">Расписание</el-button>
-                            <el-button @click="settingsClick">Настройки</el-button>
-                        </div>
-                        
+                            <el-button 
+                                class="tab-buttons-group" 
+                                @click="controlClick" 
+                                icon="el-icon-s-platform">
+                            </el-button>
 
-                        <controlTab v-if="controlTabVisible"/>
-                        <eventTab v-if="eventTabVisible"/>
-                        <graphicTab v-if="graphicTabVisible"/>
-                        <scheduleTab v-if="scheduleTabVisible"/>
-                        <settingsTab v-if="settingsTabVisible"/>
-                        
-                        <button type="button"
-                                class="close-modal"
-                                @click="close"
-                                aria-label="Close modal">x
-                        </button>
+                            <el-button 
+                                class="tab-buttons-group" 
+                                @click="eventClick" 
+                                icon="el-icon-document">
+                            </el-button>
+                            
+                            <el-button 
+                                class="tab-buttons-group" 
+                                @click="settingsClick" 
+                                icon="el-icon-s-tools">
+                            </el-button>
+
+                            <el-button 
+                                class="tab-buttons-group" 
+                                @click="graphicClick" 
+                                icon="el-icon-data-line">
+                            </el-button>
+
+                            <el-button 
+                                class="tab-buttons-group" 
+                                @click="scheduleClick" 
+                                icon="el-icon-date">
+                            </el-button>
+
+                        </div>
+                        <controlTab @buttonClick="close" v-if="controlTabVisible"/>
+                        <eventTab @buttonClick="close" v-if="eventTabVisible"/>
+                        <graphicTab @buttonClick="close" v-if="graphicTabVisible"/>
+                        <scheduleTab @buttonClick="close" v-if="scheduleTabVisible"/>
+                        <settingsTab @buttonClick="close" v-if="settingsTabVisible"/>
                     </div>
                 </div>
             </div>
@@ -183,21 +200,13 @@ export default {
     flex-direction: column;
 }
 
-.el-button+.el-button {
-    margin-left: 0px;
+.tab-buttons-group{
+    height: 100%;
+    font-size: 45px;
 }
 
-.close-modal{
-    display: flex;
-    float:right;
-    height: 10px;
-    font-size: 35px;
-    color: #666;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background: transparent;
-    /* margin-right: 20px; */
+.el-button+.el-button {
+    margin-left: 0px;
 }
 
 .modal-component-fade-enter, .modal-component-fade-leave-active{

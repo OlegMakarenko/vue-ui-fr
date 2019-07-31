@@ -3,12 +3,15 @@
 
     <div class="control-panel-container">
       <div class="control-content-panel">
-          Настройки 
-          <i class="el-icon-info scute-info" @click="scuteRightSide = !scuteRightSide"></i>
+          Управление <button class="button-close" @click="onClick">x</button>
       </div>
       <div class="control-panel-view">
             <div class="input-number">
-                <el-input-number v-model="inputNum" :min="1" :max="50"></el-input-number>
+              <div class="inpunt-number-control">
+                <el-input-number v-model="inputNum"></el-input-number>
+                <el-slider v-model="inputNum" :max="50"></el-slider>
+              </div>
+                
             </div>
 
             <div class="control-manage-buttons">
@@ -25,16 +28,38 @@
                 </el-radio-group>
 
                 <div class="control-input">
-                    <el-input class="input" size="mini"></el-input>
-                    <el-input class="input" size="mini"></el-input>
-                    <el-input class="input" size="mini"></el-input>
+                    <el-input class="input" size="mini" placeholder="A = 3мKa"></el-input>
+                    <el-input class="input" size="mini" placeholder="V = 12.5 B"></el-input>
+                    <el-input class="input" size="mini" placeholder="P = 0.4 кВт/час"></el-input>
                 </div>
             </div>
+            
+      </div>
+      
+      <div class="control-footer">
+        <div class="control-switch-button">
+          <div>
+            <h style="font-size: 18px;">Режим отъезда</h>
+            <el-switch v-model="leaveButton"></el-switch>
+          </div>
+
+          <div>
+            <h style="font-size: 18px;">Обогрев</h>
+            <el-switch v-model="heatingButton"></el-switch>
+          </div>
+
+          <div>
+            <h style="font-size: 18px;">Охлаждение</h>
+            <el-switch v-model="coolingButton"></el-switch>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="control-info-panel" v-if="scuteRightSide">
-        Какая-то информация
+    <div class="control-info-panel">
+        <div class="info-part1">Статус Сети:</div>
+        <el-divider></el-divider>
+        <div class="info-part2">Какая-то информация</div>
     </div>
   </div>
 </template>
@@ -53,25 +78,32 @@ export default {
 
   data() {
     return {
-        scuteRightSide: true,
-        showbscute: null,
-        button11scute: 'btn11',
-        button21scute: 'btn21',
-        selectedComponent: null,
-        inputNum: 1,
-        radio1: 'В сети',
-        radioButton: 'Ручной'
+      scuteRightSide: true,
+      showbscute: null,
+      button11scute: 'btn11',
+      button21scute: 'btn21',
+      selectedComponent: null,
+      inputNum: 1,
+      radio1: 'В сети',
+      radioButton: 'Ручной',
+      leaveButton: false,
+      heatingButton: false,
+      coolingButton: false
     };
   },
 
   methods: {
     switchButtonsScute(){
-            if (this.showbscute == this.button11scute) {
-                this.showbscute = this.button21scute;
-            } else {
-                this.showbscute = this.button11scute;
-            }
-        },
+        if (this.showbscute == this.button11scute) {
+            this.showbscute = this.button21scute;
+        } else {
+            this.showbscute = this.button11scute;
+        }
+    },
+
+    onClick(){
+      this.$emit('buttonClick')
+    }
   }
 };
 </script>
@@ -91,6 +123,16 @@ export default {
 
     .control-content-panel {
       flex: 0 0 auto;
+      
+      .button-close{
+        font-size: 30px;
+        color: #a1adb2;
+        border: none;
+        outline: none;
+        background: transparent;
+        cursor: pointer;
+        float: right;
+      }
     }
 
     .control-panel-view {
@@ -107,15 +149,20 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+        
+          .inpunt-number-control{
+            width: 100%;
+            margin-left: 15px;
+          }
       }
 
       .control-manage-buttons{
-          width: 60%;
+          width: 50%;
           height: 100px;
           display: flex;
           flex-wrap: wrap;
           align-items: center;
-          justify-content: space-evenly;    
+          justify-content: space-around;    
             
             .scute-on-btn{
                 width: 20%; 
@@ -149,23 +196,45 @@ export default {
                 width: 80%;
 
                 .input{
-                    width: 100px;
+                    width: 120px;
                 }
             }
         }
+    }
+
+    .control-footer{
+      width: 100%;
+      height: 30px;
+      display: flex;
+      align-items: center;
+        
+        .control-switch-button{
+        display:flex;
+        width: 100%;
+        justify-content: space-around;
+      }
     }
 }
 
   .control-info-panel {
     flex: 0 0 auto;
-    width: 10%;
+    display: flex;
+    width: 15%;
     word-wrap:break-word;
-    border-left: 1px solid #a1adb2;    
-  }
+    border-left: 1px solid #DCDFE6;    
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
-  .scute-info{
-      float: right;
-      cursor: pointer;
+    .info-part1{
+      width: 100%;
+      font-size: 18px;
+    }
+
+    .info-part2{
+      width: 100%;
+      font-size: 18px;
+    }
   }
 }
 </style>

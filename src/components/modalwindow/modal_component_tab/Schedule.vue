@@ -3,8 +3,7 @@
 
     <div class="schedule-panel-container">
       <div class="schedule-control-panel">
-          Настройки 
-          <i class="el-icon-info schedule-info" @click="scheduleRightSide = !scheduleRightSide"></i>
+          Расписание <button class="button-close" @click="onClick">x</button>
       </div>
       <div class="schedule-panel-view">
           <div class="schedule-content">
@@ -95,8 +94,10 @@
       </div>
     </div>
 
-    <div class="schedule-info-panel" v-if="scheduleRightSide">
-        Какая-то информация
+    <div class="schedule-info-panel">
+        <div class="info-part1">Какая-то информация</div>
+        <el-divider></el-divider>
+        <div class="info-part2">Какая-то информация</div>
     </div>
   </div>
 </template>
@@ -218,6 +219,10 @@ export default {
             this.showb7 = this.button17;
         }
     },
+
+    onClick(){
+      this.$emit('buttonClick')
+    }
   }
 };
 </script>
@@ -238,6 +243,16 @@ export default {
     .schedule-control-panel {
       flex: 0 0 auto;
 
+      .button-close{
+        font-size: 30px;
+        color: #a1adb2;
+        border: none;
+        outline: none;
+        background: transparent;
+        cursor: pointer;
+        float: right;
+      }
+
       .schedule-info{
           float: right;
           cursor: pointer;
@@ -251,7 +266,7 @@ export default {
       flex-wrap: wrap;
       overflow: auto;
       padding: 20px;
-      
+
         .schedule-content{
             width: 100%;
         }
@@ -305,9 +320,21 @@ export default {
 
   .schedule-info-panel {
     flex: 0 0 auto;
-    width: 10%;
+    display: flex;
+    width: 15%;
     word-wrap:break-word;
-    border-left: 1px solid #a1adb2;
+    border-left: 1px solid #DCDFE6;    
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .info-part1{
+      width: 100%;
+    }
+
+    .info-part2{
+      width: 100%;
+    }
   }
 }
 </style>

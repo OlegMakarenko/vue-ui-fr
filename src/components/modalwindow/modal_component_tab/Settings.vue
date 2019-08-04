@@ -3,7 +3,13 @@
 
     <div class="settings-panel-container">
       <div class="settings-control-panel">
-          Настройки <button class="button-close" @click="onClick">x</button>
+        <div class="settings-control-header">
+          Настройка 
+        </div>
+
+        <div class="settings-button-header">
+          <button class="button-close" @click="onClick">x</button>
+        </div>
       </div>
       <div class="settings-panel-view">
         <div class="settings-config">
@@ -12,26 +18,28 @@
 
             <div class="config-line1">
               <div class="config-termo">
-                <span class="span-text-termo">Тип терморегулятора</span>
-                <el-switch 
-                  v-model="typeThermo"
-                  inactive-text="1"
-                  active-text="2">
-                </el-switch>
+                <span class="span-text-termo">Тип управления</span>
+                  <el-switch 
+                    v-model="heatCold"
+                    inactive-text="Н"
+                    active-text="О">
+                  </el-switch>
               </div>
 
               <div class="contact-type">
                 <span class="span-type">Тип контакта</span>
-                <el-switch 
-                  v-model="contactType"
-                  inactive-text="З"
-                  active-text="Р">
-                </el-switch></div>
+                  <el-switch 
+                    v-model="contactType"
+                    inactive-text="З"
+                    active-text="Р">
+                  </el-switch>
+              </div>
             </div>
 
             <div class="config-line2">
               <div class="config-hysteresis">
-                
+                Гистерезис
+                <div class="hysterio">
                   <el-slider 
                     style="width: 60%;" 
                     :format-tooltip="formatTooltip" 
@@ -43,15 +51,7 @@
                     size="mini" 
                     v-model="hysteresis">
                   </el-input>
-              </div>
-              
-              <div class="control-type">
-                <span class="span-type">Тип управления</span>
-                <el-switch 
-                  v-model="heatCold"
-                  inactive-text="Н"
-                  active-text="О">
-                </el-switch>
+                </div>
               </div>
             </div>
           </div>
@@ -59,6 +59,21 @@
 
         <div class="mode-operation">
           Режимы работы
+          <div class="mode-content">
+            <div class="select-sensor">
+              Терморегулирование по выбранному датчику
+              <el-switch 
+                  v-model="modeSensor">
+                </el-switch>
+            </div>
+
+            <div class="shim-mode">
+              Терморегулирование в аварийном режиме "ШИМ"
+              <el-switch 
+                  v-model="modeShim">
+                </el-switch>
+            </div>
+          </div>
         </div>
 
         <div class="settings-common">
@@ -84,7 +99,23 @@
       </div>
     </div>
     <div class="settings-info-panel">
-        <div class="info-part1">Какая-то информация</div>
+        <div class="info-part1">
+          <div class="info-content">
+            All HUB кухня
+            </div>
+            
+            <div class="info-content">
+            Тип: LTC090
+            </div>
+            
+            <div class="info-content">
+            Версия прошивки: 123456789
+            </div>
+
+            <div class="info-content">
+            Тип терморегулятора: 1
+            </div>
+        </div>
         <el-divider></el-divider>
         <div class="info-part2">Какая-то информация</div>
     </div>
@@ -109,6 +140,8 @@ export default {
       typeThermo: false,
       heatCold: false,
       contactType: false,
+      modeSensor: false,
+      modeShim: false,
       color: '#409EFF',
       dropdown: true,
       hysteresis: 10,
@@ -160,15 +193,28 @@ export default {
 
     .settings-control-panel {
       flex: 0 0 auto;
+      border-bottom: 1px solid #DCDFE6;
+      display: flex;
+
+      .settings-control-header{
+        width: 96%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
       
-      .button-close{
-        font-size: 30px;
-        color: #a1adb2;
-        border: none;
-        outline: none;
-        background: transparent;
-        cursor: pointer;
-        float: right;
+      .settings-button-header{
+        width:4%;
+
+        .button-close{
+          font-size: 30px;
+          color: #a1adb2;
+          border: none;
+          outline: none;
+          background: transparent;
+          cursor: pointer;
+          float: right;
+        }
       }
     }
 
@@ -223,8 +269,17 @@ export default {
             .config-hysteresis{
               width: 45%;
               display: flex;
-              align-items: center;
-              justify-content: space-between;
+              flex-direction: column;
+              text-align: left;
+              // align-items: center;
+              // justify-content: space-between;
+
+              .hysterio{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              }
             }
 
             .control-type{
@@ -242,6 +297,32 @@ export default {
         width: 100%;
         height: 32%;
         border-bottom: 1px solid #DCDFE6;
+
+        .mode-content{
+          width: 100%;
+          height: 88%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          .select-sensor{
+            width: 100%;
+            height: 45%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+
+          .shim-mode{
+            width: 100%;
+            height: 45%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+          }
+        }
       }
 
       .settings-common{
@@ -294,11 +375,23 @@ export default {
     flex-direction: column;
 
     .info-part1{
-      width: 100%;
+       width: 100%;
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 16px;
+
+      .info-content{
+        width: 95%;
+        height: 25%;
+        text-align:left;
+      }
     }
 
     .info-part2{
       width: 100%;
+      height: 50%;
     }
   }
 }

@@ -1,52 +1,76 @@
 <template>
   <div class="graphic-panel">
-
     <div class="graphic-panel-container">
       <div class="graphic-control-panel">
-          График <button class="button-close" @click="onClick">x</button>
-      </div>
-      <div class="graphic-panel-view">
-          <div class="graphic-button">
-          <button class="graph_button_data">21.12.2018 - 03.03.2019</button>
-        <div class="graph_button_group">
-            <div class="switch_button_graph">
-            <button class="graph_on_btn_temp" @click="switchButtonsTemp" v-if="showbtemp == button11temp">
-                Температура
-            </button>
-            <button class="graph_off_btn_temp" @click="switchButtonsTemp" v-else>
-                Температура
-            </button>
-
-            <button class="graph_on_btn_default" @click="switchButtonsVolt" v-if="showbvolt == button12volt">
-                Напряжение
-            </button>
-            <button class="graph_off_btn_default" @click="switchButtonsVolt" v-else>
-                Напряжение
-            </button>
-
-            <button class="graph_on_btn_default" @click="switchButtonsAmper" v-if="showbamper == button13amper">
-                Ток
-            </button>
-            <button class="graph_off_btn_default" @click="switchButtonsAmper" v-else>
-                Ток
-            </button>
-
-            <button class="graph_on_btn_default-r" @click="switchButtonsPower" v-if="showbpower == button14power">
-                Мощность
-            </button>
-            <button class="graph_off_btn_default-r" @click="switchButtonsPower" v-else>
-                Мощность
-            </button>
-            </div>
+        <div class="graphic-control-header">
+        График 
         </div>
+
+        <div class="graphic-button-header">
+          <button class="button-close" @click="onClick">x</button>
+        </div>
+      </div>
+
+      <div class="graphic-panel-view">
+        <div class="graphic-panel-content">
+          <div class="graphic-date-picker">
+            Дата:
+            <div>
+             <el-date-picker
+                v-model="value2"
+                type="datetimerange"
+                :picker-options="pickerOptions"
+                range-separator="-"
+                start-placeholder="Start"
+                end-placeholder="End"
+                align="right">
+              </el-date-picker>
+            </div>
+          </div>
+
+          <div class="graphic-param">
+            Параметр
+            <div class="graphic-param-content">
+              <el-select
+                v-model="value2"
+                multiple
+                collapse-tags
+                placeholder="Select">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+
+              <el-button icon="el-icon-delete" circle></el-button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="graphic-info-panel">
-        <div class="info-part1">Какая-то информация</div>
+      <div class="info-part1">
+        <div class="info-content">
+          All HUB кухня
+        </div>
+        
+        <div class="info-content">
+          Тип: LTC090
+        </div>
+        
+        <div class="info-content">
+          Версия прошивки: 123456789
+        </div>
+
+        <div class="info-content">
+          Тип терморегулятора: 1
+        </div>
+      </div>
         <el-divider></el-divider>
-        <div class="info-part2">Какая-то информация</div>
+      <div class="info-part2">Какая-то информация</div>
     </div>
   </div>
 </template>
@@ -67,57 +91,56 @@ export default {
     return {
         graphicRightSide: true,
 
-        showbtemp: null, //showing buttons on-off
-        button11temp: 'btn11',
-        button21temp: 'btn21',
+        options: [{
+          value: 'Option1',
+          label: 'Option1'
+        }, {
+          value: 'Option2',
+          label: 'Option2'
+        }, {
+          value: 'Option3',
+          label: 'Option3'
+        }, {
+          value: 'Option4',
+          label: 'Option4'
+        }, {
+          value: 'Option5',
+          label: 'Option5'
+        }],
+        value2: [],
 
-        showbvolt: null,
-        button12volt: 'btn12',
-        button22volt: 'btn22',
-
-        showbamper: null,
-        button13amper: 'btn13',
-        button23amper: 'btn23',
-
-        showbpower: null,
-        button14power: 'btn14',
-        button24power: 'btn24'
+        pickerOptions: {
+          shortcuts: [{
+            text: 'Last week',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: 'Last month',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: 'Last 3 months',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        value2: ''
     }
   },
 
   methods: {
-    switchButtonsTemp(){
-      if (this.showbtemp == this.button11temp) {
-          this.showbtemp = this.button21temp;
-      } else {
-          this.showbtemp = this.button11temp;
-      }
-    },
-
-    switchButtonsVolt(){
-      if (this.showbvolt == this.button12volt) {
-          this.showbvolt = this.button22volt;
-      } else {
-          this.showbvolt = this.button12volt;
-      }
-    },
-
-    switchButtonsAmper(){
-      if (this.showbamper == this.button13amper) {
-          this.showbamper = this.button23amper;
-      } else {
-          this.showbamper = this.button13amper;
-      }
-    },
-
-    switchButtonsPower(){
-      if (this.showbpower == this.button14power) {
-          this.showbpower = this.button24power;
-      } else {
-          this.showbpower = this.button14power;
-      }
-    },
-
     onClick(){
       this.$emit('buttonClick')
     }
@@ -140,21 +163,29 @@ export default {
 
     .graphic-control-panel {
       flex: 0 0 auto;
-      
-      .button-close{
-        font-size: 30px;
-        color: #a1adb2;
-        border: none;
-        outline: none;
-        background: transparent;
-        cursor: pointer;
-        float: right;
-      }
-    }
+      border-bottom: 1px solid #DCDFE6;
+      display: flex;
 
-    .graphic-info{
-        float: right;
-        cursor: pointer;
+      .graphic-control-header{
+        width: 96%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .graphic-button-header{
+        width:4%;
+
+        .button-close{
+          font-size: 30px;
+          color: #a1adb2;
+          border: none;
+          outline: none;
+          background: transparent;
+          cursor: pointer;
+          float: right;
+        }
+      }
     }
 
     .graphic-panel-view {
@@ -165,126 +196,36 @@ export default {
       overflow: auto;
       padding: 20px;
 
-        .graphic-button{
-          height: 20%;
-          width: 100%;
+      .graphic-panel-content{
+        width :100%;
+        height: 10%;
+        display: flex; 
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+
+        .graphic-date-picker{
+          width: 50%;
           display: flex;
-          align-items: center;
-          justify-content: space-evenly;
-      
-            .graph_button_data{
-            width: 35%;
-            height: 70%;
-            float: left;
-            justify-content: baseline;
-            font-size: 15px;
-            color: white;
-            background-color: #a1adb2;
-            border: none;
-            border-radius: 4px;
-            outline: none;
-            cursor: pointer;
-            }
-
-            .switch_button_graph{
-            width:100%;
-            height:100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            }
-
-            .graph_button_group{
-            width: 47%;
-            height:100%;
-            }
-
-            .graph_on_btn_temp{
-            width: 22%;
-            height: 70%;
-            font-size: 13px;
-            color: white;
-            background-color: #a1adb2;
-            border: 1px solid #a1adb2;
-            text-align: center;
-            word-wrap: break-word;
-            border-radius: 4px 0px 0px 4px;
-            outline: none;
-            cursor: pointer;
-            }
-
-            .graph_off_btn_temp{
-            width: 22%;
-            height: 70%;
-            font-size: 13px;
-            color: #a1adb2;
-            background-color: white;
-            border: 1px solid #a1adb2;
-            text-align: center;
-            word-wrap: break-word;
-            border-radius: 4px 0px 0px 4px;
-            outline: none;
-            cursor: pointer;
-            }
-
-            .graph_on_btn_default{
-            width: 22%;
-            height: 70%;
-            font-size: 13px;
-            color: white;
-            background-color: #a1adb2;
-            border: 1px solid #a1adb2;
-            text-align: center;
-            word-wrap: break-word;
-            border-left: none;
-            outline: none;
-            cursor: pointer;
-            }
-
-            .graph_off_btn_default{
-            width: 22%;
-            height: 70%;
-            font-size: 13px;
-            color: #a1adb2;
-            background-color: white;
-            border: 1px solid #a1adb2;
-            text-align: center;
-            word-wrap: break-word;
-            border-left: none;
-            outline: none;
-            cursor: pointer;
-            }
-
-            .graph_on_btn_default-r{
-            width: 22%;
-            height: 70%;
-            font-size: 13px;
-            color: white;
-            background-color: #a1adb2;
-            border: 1px solid #a1adb2;
-            text-align: center;
-            word-wrap: break-word;
-            border-left: none;
-            border-radius: 0px 4px 4px 0px;           
-            outline: none;
-            cursor: pointer; 
-            }
-
-            .graph_off_btn_default-r{
-            width: 22%;
-            height: 70%;
-            font-size: 13px;
-            color: #a1adb2;
-            background-color: white;
-            border: 1px solid #a1adb2;
-            text-align: center;
-            word-wrap: break-word;
-            border-left: none;
-            border-radius: 0px 4px 4px 0px;
-            outline: none;
-            cursor: pointer;
-            }
+          flex-direction: column;
+          text-align: left;
+          font-size: 16px;
         }
+
+        .graphic-param{
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          text-align: left;
+          font-size: 16px;
+
+          .graphic-param-content{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          }
+        }
+      }
     }
   }
 
@@ -300,10 +241,22 @@ export default {
 
     .info-part1{
       width: 100%;
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 16px;
+
+      .info-content{
+        width: 95%;
+        height: 25%;
+        text-align:left;
+      }
     }
 
     .info-part2{
       width: 100%;
+      height: 50%;
     }
   }
 }

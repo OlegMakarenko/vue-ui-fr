@@ -19,7 +19,6 @@
                                 @click="eventClick" 
                                 icon="el-icon-document">
                             </el-button>
-                            
                             <el-button 
                                 class="tab-buttons-group" 
                                 @click="settingsClick" 

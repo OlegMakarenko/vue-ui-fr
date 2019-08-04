@@ -3,7 +3,13 @@
 
     <div class="schedule-panel-container">
       <div class="schedule-control-panel">
-          Расписание <button class="button-close" @click="onClick">x</button>
+         <div class="schedule-control-header">
+          Расписание 
+        </div>
+
+        <div class="schedule-button-header">
+          <button class="button-close" @click="onClick">x</button>
+        </div>
       </div>
       <div class="schedule-panel-view">
           <div class="schedule-content">
@@ -91,11 +97,62 @@
                 <input type="button" class="twoinput-schedule" v-model="input_temp2_7">
             </div>
         </div>
+        <div class="schedule-departure">
+            Отъезд
+            <div class="departure-content">
+                <h style="float:left; font-size: 12px;">Температура</h>
+            <br>
+                <div class="input-number-control">
+                    <div style="width: 50%">
+                        <el-slider
+                            :max="50"
+                            v-model="value"
+                            show-input>
+                        </el-slider>
+                    </div>
+                </div>
+
+                <div class="schedule-buttons">
+                <el-button>24 часа</el-button>
+                <el-button>Неделя</el-button>
+                <el-button>Месяц</el-button>
+            </div>
+            
+            <h style="float:left; font-size: 12px;">Выберите период</h>
+            <br>
+             <div class="block">
+                <el-date-picker
+                v-model="value1"
+                type="datetimerange"
+                range-separator="До"
+                start-placeholder="Start date"
+                end-placeholder="End date">
+                </el-date-picker>
+            </div>
+            </div>
+            
+        </div>
       </div>
     </div>
 
     <div class="schedule-info-panel">
-        <div class="info-part1">Какая-то информация</div>
+        <div class="info-part1">
+            <div class="info-content">
+            All HUB кухня
+            </div>
+            
+            <div class="info-content">
+            Тип: LTC090
+            </div>
+            
+            <div class="info-content">
+            Версия прошивки: 123456789
+            </div>
+
+            <div class="info-content">
+            Тип терморегулятора: 1
+            </div>
+        </div>
         <el-divider></el-divider>
         <div class="info-part2">Какая-то информация</div>
     </div>
@@ -117,6 +174,7 @@ export default {
   data() {
     return {
         scheduleRightSide: true,
+        value: 0,
 
         showb: null, //showing buttons day1
         button11: 'btn11',
@@ -166,6 +224,35 @@ export default {
         input_day7: 'ВС',
         input_temp1_7: '28*C',
         input_temp2_7: '28*C',
+
+        pickerOptions: {
+          shortcuts: [{
+            text: 'Last week',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: 'Last month',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: 'Last 3 months',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        value1: '',
     };
   },
 
@@ -241,21 +328,29 @@ export default {
     width: 90%;
 
     .schedule-control-panel {
-      flex: 0 0 auto;
+     flex: 0 0 auto;
+      border-bottom: 1px solid #DCDFE6;
+      display: flex;
 
-      .button-close{
-        font-size: 30px;
-        color: #a1adb2;
-        border: none;
-        outline: none;
-        background: transparent;
-        cursor: pointer;
-        float: right;
+      .schedule-control-header{
+        width: 96%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
+      
+      .schedule-button-header{
+        width:4%;
 
-      .schedule-info{
-          float: right;
+        .button-close{
+          font-size: 30px;
+          color: #a1adb2;
+          border: none;
+          outline: none;
+          background: transparent;
           cursor: pointer;
+          float: right;
+        }
       }
     }
 
@@ -269,10 +364,11 @@ export default {
 
         .schedule-content{
             width: 100%;
+            height: 60%;
         }
 
         .oneinput-schedule{
-            height:40px; 
+            height:20px; 
             width:40px;
             font-size: 20px;
             border: 1px solid #a1adb2;
@@ -288,7 +384,7 @@ export default {
 
         .schedule-on-btn{
             width: 250px;
-            height: 45px;
+            height: 25px;
             font-size: 20px;
             color: white;
             background-color: #a1adb2;
@@ -298,7 +394,7 @@ export default {
 
         .schedule-off-btn{
             width: 250px;
-            height: 45px;
+            height: 25px;
             font-size: 20px;
             color: #a1adb2;
             background-color: white;
@@ -307,13 +403,41 @@ export default {
         }
 
         .twoinput-schedule{
-            height: 45px;
+            height: 25px;
             width: 200px;
             font-size: 20px;
             border: 1px solid #a1adb2;
             background-color: #a1adb2;
             color: white;
             text-align: center;
+        }
+
+        .schedule-departure{
+            width: 100%;
+            height: 40%;
+
+            .departure-content{
+                width: 100%;
+                height: 90%;
+                    
+                    .input-number-control{
+                        width: 100%;
+                        height: 30%;
+                        margin-left: 15px;
+                    }
+                
+                .schedule-buttons{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                }
+
+                .block{
+                    display: flex;
+                    justify-content: flex-start;
+                }
+            }
         }
     }
   }
@@ -330,10 +454,22 @@ export default {
 
     .info-part1{
       width: 100%;
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 16px;
+
+      .info-content{
+        width: 95%;
+        height: 25%;
+        text-align:left;
+      }
     }
 
     .info-part2{
       width: 100%;
+      height: 50%;
     }
   }
 }

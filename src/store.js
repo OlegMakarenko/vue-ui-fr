@@ -23,7 +23,7 @@ function colorPick(){
 export default  new Vuex.Store({
     state:{
         auth_token: null,
-        http_endpoint: "http://95.216.185.195:8101",
+        http_endpoint: "http://95.217.9.204:8101",
         currentDeviceList: [],
         tree1Data: [],
         tree2Data: [],

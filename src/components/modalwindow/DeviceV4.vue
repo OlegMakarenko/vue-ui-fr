@@ -1,165 +1,247 @@
 <template>
-<transition name="modal-fade-device">
-    <div class="modal-backdrop-device">
-        <div class="modal-device" 
-             role="dialog" 
-             aria-labelledby="modalTitle"
-             aria-describedby="modalDescription">
-             <div class="content_device">
-                 <p style="text-align: center; margin-top: 0;">
-                    Подключение WI-FI терморегулятора через браузер на ПК
-                </p>
-                <div class="top_tabs">
-                    <button 
-                        style="outline: none; background: transparent; background: #ccc; cursor: pointer"
-                        v-for="step in deviceTabs" 
-                        :key="step" 
-                        @click="selectedTab = step;"
-                        :class="['top-tab-btn', {active_device_v4: selectedTab === step}]">{{step}}
-                    </button>
-                </div>
-                <component :is="selectedTab"/>
-            <button class="btn-device-left" @click="close" style="cursor: pointer;">Назад</button>
-            <button class="btn-device-right" style="cursor: pointer;">Вперед</button>
-             </div>
+    <transition name="modal-device-vega-fade">
+        <div class="modal-mask-device-vega-manage">
+            <div class="modal-backdrop-device-vega-manage">
+                <div class="modal-device-vega-manage"
+                    role="dialog"
+                    aria-labelledby="modalTitle"
+                    aria-describedby="modalDescription">
+                            
+                    <div class="tab-manager">
+                        <div class="modal-device-vega-content">
+                    
+                    <div class="modal-device-vega-header">
+                        <div class="modal-device-vega-name">
+                            Подключение Wi-Fi терморегулятора через браузер на ПК
+                        </div>
+                        <div class="modal-device-vega-button">
+                            <button @click="onClick">x</button>
+                        </div>
+                    </div>
 
-        <!-- <el-button style="margin-top: 12px; width: 100px;" @click="next">Next step</el-button> -->
+                    <div class="modal-device-vega-body">
+                        <div class="device-vega-body-content">
+                            Для аксессуара устройства выберите тип подключаемого устройства
+                        </div>
+
+                        <div class="device-vega-body-button">
+
+                        </div>
+                    </div>
+                    
+                    <div class="modal-device-vega-footer">
+                        <div>
+                            После выбора типа акссесуара Вам будут показаны
+                            соотвотствующие шаги подключения его в учетную
+                            запись.
+                        </div>
+                    </div>
+
+                    <deviceVega v-if="vegaVisible" @buttonClick="close"/>
+                </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
     </transition>
 </template>
 
 <script>
-
-import step1 from '../modalwindow/thermostat_add_tabs/tab1_step1.vue'
-import step2 from '../modalwindow/thermostat_add_tabs/tab2_step2.vue'
-import step3 from '../modalwindow/thermostat_add_tabs/tab3_step3.vue'
-import step4 from '../modalwindow/thermostat_add_tabs/tab4_step4.vue'
 
 export default {
     name: 'modal',
 
     data(){
         return{
-            deviceTabs: ['step1', 'step2', 'step3', 'step4'],
-
-            selectedTab: 'step1',
-
         };
     },
 
     components:{
-        step1,
-        step2,
-        step3,
-        step4
     },
 
-    methods: {
-        handleClick(tab, event){
-            console.log(tab, event);
-        },
 
+    methods: {
+        handleChange(value){
+            console.log(value);
+        },
         close(){
             this.$emit('close');
-        }
+        },
+
+        controlClick(){
+            if(this.controlTabVisible === false){
+                this.controlTabVisible = true
+                this.eventTabVisible = false
+                this.graphicTabVisible = false
+                this.scheduleTabVisible = false
+                this.settingsTabVisible = false
+            } 
+        },
+
+        eventClick(){
+            if(this.eventTabVisible === false){
+                this.eventTabVisible = true
+                this.controlTabVisible = false
+                this.graphicTabVisible = false
+                this.scheduleTabVisible = false
+                this.settingsTabVisible = false
+            }
+        },
+
+        graphicClick(){
+            if(this.graphicTabVisible === false){
+                this.graphicTabVisible = true
+                this.controlTabVisible = false
+                this.eventTabVisible = false
+                this.scheduleTabVisible = false
+                this.settingsTabVisible = false
+            } 
+        },
+
+        scheduleClick(){
+            if(this.scheduleTabVisible === false){
+                this.scheduleTabVisible = true
+                this.graphicTabVisible = false
+                this.eventTabVisible = false
+                this.controlTabVisible = false
+                this.settingsTabVisible = false
+            }
+        },
+
+        settingsClick(){
+            if(this.settingsTabVisible === false){
+                this.settingsTabVisible = true
+                this.eventTabVisible = false
+                this.controlTabVisible = false
+                this.graphicTabVisible = false
+                this.scheduleTabVisible = false
+            }
+        },
+        onClick(){
+            this.$emit('buttonClick')
+        },
     }
 }
 </script>
 
-<style scoped>
-
-.allp{
-    text-align: center; 
-    margin-top: 0;
-    font-size: 13px;
-}
-
-.modal-backdrop-device{
-    margin-top: -11%;
-    margin-left: -15%;
-    height: 60vh;
-    width: 70%;
+<style>
+.modal-mask-device-vega-manage{
     position: fixed;
-    display: flex;
-    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: table;
+    z-index: 2;
 }
 
-.modal-device{
-    margin-top: 0px;
-    padding: 15px;
-    width: 65%;
+.modal-backdrop-device-vega-manage{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+.modal-device-vega-manage{
+    width: 55%;
+    height: 65%;
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
-    overflow-x: auto;
+    overflow-x: none;
+    cursor: default;
+    padding: 10px;
+}
+
+.modal-device-vega-content{
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+
 }
 
-.content_device{
+.modal-device-vega-header{
     width: 100%;
-    height: 100%;
-}
-
-.top_tabs{
-    width:  2.5%; 
-    height: 4%;
-    margin-left: 32%;
-    /* position: fixed; */
+    height: 10%;
     display: flex;
-    flex-direction: row;
-    /* float: left; */
+
 }
 
-.top-tab-btn{
-    width: 100%;
-    height: 100%;
-    border-radius: 200px;
-    margin-left: 30px;
+.modal-device-vega-name{
+    width: 96%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #606266;
+}
+
+.modal-device-vega-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.vega-button-close{
+    font-size: 30px;
+    color: #a1adb2;
     border: none;
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* align-items: stretch; */
-}
-
-.btn-blue{
-    margin-top: 37%;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
     float: right;
-    color: white;
-    background: #6f92be;
-    border: 1px solid #6f92be;
-    border-radius: 2px;
 }
 
-.btn-device-left{
-    /* margin-top: 37%; */
-    float: left;
-    border: 1px solid #6f92be;
-    border-radius: 2px;
-    background: #6f92be;
-    color: White;
+.modal-device-vega-body{
+    width: 100%;
+    height: 80%;
+    color: #606266;
 }
 
-.btn-device-right{
-    /* margin-top: 37%; */
-    float: right;
-    border: 1px solid #6f92be;
-    border-radius: 2px;
-    background: #6f92be; 
-    /* position: fixed; */
-    color: White;
+.device-vega-body-content{
+    width: 100%;
+    height: 10%;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #606266;
 }
 
-.active_device_v4{
-    background-color: #6f92be;
-    /* border-right:1px solid red; */
+.device-vega-body-button{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.modal-fade-device-enter, .modal-fade-device-leave-active{
+.modal-device-vega-footer{
+    width: 100%;
+    height: 10%;  
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #606266;
+}
+
+.allp{
+    margin-top: 0;
+    font-size: 13px;
+    text-align: center; 
+}
+
+.modal-device-vega-fade-enter, .modal-device-vega-fade-leave-active{
     opacity: 0;
 }
 
-.modal-fade-device-enter-active, .modal-fade-device-leave-active{
+.modal-device-vega-fade-enter-active, .modal-device-vega-fade-leave-active{
     transition: opacity .5s ease
 }
 </style>

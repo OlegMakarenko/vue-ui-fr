@@ -6,7 +6,7 @@
           class="btn_add_device"
           type="primary"
           icon="el-icon-plus"
-          @click="onAddDeviceClick"
+          @click="addGroupClick"
           size="mini"
           v-if="allowaddGroup"
           >Добавить устройство в группу</el-button>
@@ -58,21 +58,24 @@
       </el-col>
 
     </el-row>
-    <ModalAddDevice v-if="showAddDevice" @close="onAddDeviceClose"/>
+    <!-- <ModalAddDevice v-if="showAddDevice" @close="onAddDeviceClose"/> -->
 
-    <ModalAddGroup v-if="showAddGroup" @close="onAddGroupClose"/>
+    <ModalAddGroup v-if="showAddGroup" @close="addGroupClose"/>
+
+    <addDeviceModal v-if="showAddDevice"  @close="onAddDeviceClose"/>
   </div>
 </template>
 
 <script>
 import Breadcrumb from "../../Breadcrumb.vue";
-import ModalAddDevice from "../../modalwindow/systemdevice/modalAddDevice.vue";
+// import ModalAddDevice from "../../modalwindow/systemdevice/modalAddDevice.vue";
 import ModalAddGroup from "../../modalwindow/creategroup/modalAddGroup.vue";
+import addDeviceModal from "../../modalwindow/ModalW.vue"
 
 export default {
   components: {
     Breadcrumb,
-    ModalAddDevice,
+    addDeviceModal,
     ModalAddGroup
   },
 
@@ -140,6 +143,14 @@ export default {
 
     onAddDeviceClose() {
       this.showAddDevice = false;
+    },
+
+    addGroupClick() {
+      this.showAddGroup = true;
+    },
+
+    addGroupClose() {
+      this.showAddGroup = false;
     },
 
     onAddGroupClick() {

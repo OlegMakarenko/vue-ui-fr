@@ -1,95 +1,87 @@
 <template>
-<transition name="modal-fade">
-    <!--Modal window for adding accessorises-->
-    <div class="modal-mask">
-    <div class="modal-backdrop">
+<transition name="modal-device-fade">
+    <div class="modal-mask-device-manage">
+        <div class="modal-backdrop-device-manage">
+            <div class="modal-device-manage"
+                role="dialog"
+                aria-labelledby="modalTitle"
+                aria-describedby="modalDescription">
+                <div class="modal-device-content">
+                    
+                    <div class="modal-device-header">
+                        <div class="modal-device-name">
+                            Подключение аксессуара
+                        </div>
+                        <div class="modal-device-button">
+                            <button class="button-close" @click="close">x</button>
+                        </div>
+                    </div>
 
-        <div class="modal"
-             role="dialog"
-             aria-labelledby="modalTitle"
-             aria-describedby="modalDescription">
-             <div>
-                <button type="button"
-                    class="btn-close"
-                    @click="close"
-                    aria-label="Close modal">x
-                </button>
-                
-                <p style="text-align: center;
-                      font-size: 22px;
-                      margin-top: 20px;">Подключение аксессуара</p>
-                <p style="text-align: center;
-                      font-size: 20px;
-                      margin-top: 5px;">Для аксессуара устройства выберите тип подключаемого устройства</p>      
-            </div>
+                    <div class="modal-device-body">
+                        <div class="device-body-content">
+                            Для аксессуара устройства выберите тип подключаемого устройства
+                        </div>
 
-            <div>
-                <button class="center-btn" @click="showDeviceV4">Аксессуар VEGA 4</button>
-                    <DeviceV4 v-show="isDeviceV4Visible" @close="closeDeviceV4"/>
-                <button class="center-btn2">Аксессуар VEGA 1S</button>
+                        <div class="device-body-button">
+                            <el-button class="button-vega" @click="deviceVegaClick">Аксессуар VEGA 4</el-button>
+                            <el-button class="button-vega">Аксессуар VEGA 1S</el-button>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-device-footer">
+                        <div>
+                            После выбора типа акссесуара Вам будут показаны
+                            соотвотствующие шаги подключения его в учетную
+                            запись.
+                        </div>
+                    </div>
+
+                    <deviceVega v-if="vegaVisible" @buttonClick="close"/>
+                </div>
             </div>
-                <p style="text-align: center;
-                      font-size: 20px;
-                      margin-top: 15px;">После выбора типа акссесуара Вам будут показаны
-                                        соотвотствующие шаги подключения его в учетную
-                                        запись.</p>
-            <!-- <div>
-                <button type="button"
-                    class="btn-blue"
-                    @click="close"
-                    aria-label="Close modal">Add device
-                </button>
-            </div> -->
         </div>
-    </div>
     </div>
 </transition>
 </template>
 
 <script>
-
-import DeviceV4 from './DeviceV4'
+import deviceVega from './DeviceV4'
 
 export default {
     name: 'modal',
 
-    components:{
-        DeviceV4
-    },
-
     data(){
         return{
-            isDeviceV4Visible: false,
-
-            activeName: 'first'
+            vegaVisible: false
         };
     },
 
-    methods: {
-        showDeviceV4(){
-            this.isDeviceV4Visible = true;
-        },
-
-        closeDeviceV4(){
-            this.isDeviceV4Visible = false;
-        },
-
-        close(){
-            this.$emit('close');
-        },
+    components:{
+        deviceVega
     },
+
+
+    methods: {
+        handleChange(value){
+            console.log(value);
+        },
+        close(){
+           this.vegaVisible = false
+        },
+
+        deviceVegaClick(){
+            this.vegaVisible = true
+        },
+
+        deviceVegaClose(){
+            this.vegaVisible = false
+        }
+    }
 }
 </script>
 
-<style scoped>
-
-.allp{
-    margin-top: 0;
-    font-size: 13px;
-    text-align: center; 
-}
-
-.modal-mask{
+<style>
+.modal-mask-device-manage{
     position: fixed;
     top: 0;
     left: 0;
@@ -97,74 +89,121 @@ export default {
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
     display: table;
+    z-index: 2;
 }
 
-.modal-backdrop{
-    width: 80%;
-    height: 70vh;
-    position: fixed;
+.modal-backdrop-device-manage{
+    width: 100%;
+    height: 100%;
     display: flex;
+    flex: 1 1 auto;
+    align-items: center;
     justify-content: center;
+    cursor: default;
 }
 
-.modal{
-    margin-top: 13%;
-    margin-left: 20%;
-    padding: 15px;
+.modal-device-manage{
     width: 50%;
+    height: 60%;
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
-    /* overflow-x: auto; */
+    overflow-x: none;
+    cursor: default;
+    padding: 10px;
+}
+
+.allp{
+    margin-top: 0;
+    font-size: 13px;
+    text-align: center; 
+}
+
+.modal-device-content{
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+
 }
 
-.btn-close{
-    border: none;
-    font-size: 35px;
-    cursor: pointer;
-    /* font-weight: bold; */
-    color: #666;
-    background: transparent;
+.modal-device-header{
+    width: 100%;
+    height: 10%;
     display: flex;
-    position: fixed;
-    /* top: 160px; */
-    /* margin-top: 0px; */
-    margin-left: 38%;
-}
-.center-btn{
-    float: left;
-    margin-left: 90px;
-    width: 170px;
-    height: 90px;
-    font-size: 22px; 
-    text-align: center;
-    cursor: pointer;
-    background-color: #ccdbee;
-    border-radius: 15px;
-    border: none;
-    display: block;
+
 }
 
-.center-btn2{
-    float: right;
-    margin-right: 90px;
-    width: 170px;
-    height: 90px;
+.modal-device-name{
+    width: 96%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 22px;
-    text-align: center;
-    cursor: pointer; 
-    background-color: #ccdbee;
-    border-radius: 15px;
-    border: none;
-    display: block;
+    color: #606266;
 }
 
-.modal-fade-enter, .modal-fade-leave-active{
+.modal-device-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button-close{
+    font-size: 30px;
+    color: #a1adb2;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    float: right;
+}
+
+.modal-device-body{
+    width: 100%;
+    height: 80%;
+    color: #606266;
+}
+
+.device-body-content{
+    width: 100%;
+    height: 10%;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #606266;
+}
+
+.device-body-button{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.button-vega{
+    height: 120px;
+    width: 200px;
+    font-size: 18px;
+}
+
+.modal-device-footer{
+    width: 100%;
+    height: 10%;  
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #606266;
+}
+
+.modal-device-fade-enter, .modal-device-fade-leave-active{
     opacity: 0;
 }
 
-.modal-fade-enter-active, .modal-fade-leave-active{
+.modal-device-fade-enter-active, .modal-device-fade-leave-active{
     transition: opacity .5s ease
 }
 </style>

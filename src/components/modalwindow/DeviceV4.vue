@@ -9,36 +9,28 @@
                             
                     <div class="tab-manager">
                         <div class="modal-device-vega-content">
-                    
-                    <div class="modal-device-vega-header">
-                        <div class="modal-device-vega-name">
-                            Подключение Wi-Fi терморегулятора через браузер на ПК
-                        </div>
-                        <div class="modal-device-vega-button">
-                            <button @click="onClick">x</button>
-                        </div>
-                    </div>
+                            <div class="modal-device-vega-header">
+                                <div class="modal-device-vega-name">
+                                    Подключение Wi-Fi терморегулятора через браузер на ПК
+                                </div>
+                                <div class="modal-device-vega-button">
+                                    <button class="vega-button-close" @click="onClick">x</button>
+                                </div>
+                            </div>
 
-                    <div class="modal-device-vega-body">
-                        <div class="device-vega-body-content">
-                            Для аксессуара устройства выберите тип подключаемого устройства
-                        </div>
+                            <div class="modal-device-vega-body">
+                                <div class="vega-top-tabs">
+                                    <el-steps style="width: 400px;" align-center :active="active"  finish-status="success">
+                                        <el-step></el-step>
+                                        <el-step></el-step>
+                                        <el-step></el-step>
+                                        <el-step></el-step>
 
-                        <div class="device-vega-body-button">
-
+                                    </el-steps>
+                                </div>
+                                 <component :is="selectedTab" @buttonNext="next" @buttonBack="back"/>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="modal-device-vega-footer">
-                        <div>
-                            После выбора типа акссесуара Вам будут показаны
-                            соотвотствующие шаги подключения его в учетную
-                            запись.
-                        </div>
-                    </div>
-
-                    <deviceVega v-if="vegaVisible" @buttonClick="close"/>
-                </div>
                     </div>
                 </div>
             </div>
@@ -47,16 +39,29 @@
 </template>
 
 <script>
+import step1 from '../modalwindow/thermostat_add_tabs/tab1_step1.vue'
+import step2 from '../modalwindow/thermostat_add_tabs/tab2_step2.vue'
+import step3 from '../modalwindow/thermostat_add_tabs/tab3_step3.vue'
+import step4 from '../modalwindow/thermostat_add_tabs/tab4_step4.vue'
+
 
 export default {
     name: 'modal',
 
     data(){
         return{
+            deviceTabs: ['step1', 'step2', 'step3', 'step4'],
+            selectedTab: 'step1',
+            active:0,
+            stepVisible: false,
         };
     },
 
     components:{
+        step1,
+        step2,
+        step3,
+        step4
     },
 
 
@@ -67,59 +72,46 @@ export default {
         close(){
             this.$emit('close');
         },
-
-        controlClick(){
-            if(this.controlTabVisible === false){
-                this.controlTabVisible = true
-                this.eventTabVisible = false
-                this.graphicTabVisible = false
-                this.scheduleTabVisible = false
-                this.settingsTabVisible = false
-            } 
-        },
-
-        eventClick(){
-            if(this.eventTabVisible === false){
-                this.eventTabVisible = true
-                this.controlTabVisible = false
-                this.graphicTabVisible = false
-                this.scheduleTabVisible = false
-                this.settingsTabVisible = false
-            }
-        },
-
-        graphicClick(){
-            if(this.graphicTabVisible === false){
-                this.graphicTabVisible = true
-                this.controlTabVisible = false
-                this.eventTabVisible = false
-                this.scheduleTabVisible = false
-                this.settingsTabVisible = false
-            } 
-        },
-
-        scheduleClick(){
-            if(this.scheduleTabVisible === false){
-                this.scheduleTabVisible = true
-                this.graphicTabVisible = false
-                this.eventTabVisible = false
-                this.controlTabVisible = false
-                this.settingsTabVisible = false
-            }
-        },
-
-        settingsClick(){
-            if(this.settingsTabVisible === false){
-                this.settingsTabVisible = true
-                this.eventTabVisible = false
-                this.controlTabVisible = false
-                this.graphicTabVisible = false
-                this.scheduleTabVisible = false
-            }
-        },
         onClick(){
             this.$emit('buttonClick')
         },
+        next() {
+            if (this.active < 3) this.active++;
+
+            switch(this.active){
+                case 0:
+                    this.selectedTab = 'step1';
+                    break;
+                case 1:
+                    this.selectedTab = 'step2';
+                    break;
+                case 2:
+                    this.selectedTab = 'step3';
+                    break;
+                case 3:
+                    this.selectedTab = 'step4'; 
+                    break;
+            }
+        },
+
+        back(){
+            if (this.active < 4) this.active--;
+
+            switch(this.active){
+                case 0:
+                    this.selectedTab = 'step1';
+                    break;
+                case 1:
+                    this.selectedTab = 'step2';
+                    break;
+                case 2:
+                    this.selectedTab = 'step3';
+                    break;
+                case 3:
+                    this.selectedTab = 'step4';
+                    break;
+            }
+        }
     }
 }
 </script>
@@ -131,7 +123,6 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, .5);
     display: table;
     z-index: 2;
 }
@@ -178,7 +169,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+    font-size: 20px;
     color: #606266;
 }
 
@@ -199,8 +190,21 @@ export default {
 
 .modal-device-vega-body{
     width: 100%;
-    height: 80%;
+    height: 90%;
     color: #606266;
+}
+
+.vega-top-tabs{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vega-step-button{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .device-vega-body-content{

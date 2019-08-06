@@ -1,43 +1,42 @@
 <template>
-<transition name="modal-device-fade">
-    <div class="modal-mask-device-manage">
-        <div class="modal-backdrop-device-manage">
-            <div class="modal-device-manage"
+<transition name="modal-device-wifi-wifi-fade">
+    <div class="modal-mask-device-wifi-manage">
+        <div class="modal-backdrop-device-wifi-manage">
+            <div class="modal-device-wifi-manage"
                 role="dialog"
                 aria-labelledby="modalTitle"
                 aria-describedby="modalDescription">
-                <div class="modal-device-content">
+                <div class="modal-device-wifi-content">
                     
-                    <div class="modal-device-header">
-                        <div class="modal-device-name">
-                            Подключение аксессуара
+                    <div class="modal-device-wifi-header">
+                        <div class="modal-device-wifi-name">
+                            Подключение устройства
                         </div>
-                        <div class="modal-device-button">
-                            <button class="button-close" @click="close">x</button>
+                        <div class="modal-device-wifi-button">
+                            <button class="button-close" @click="closeWifi">x</button>
                         </div>
                     </div>
 
-                    <div class="modal-device-body">
-                        <div class="device-body-content">
-                            Для аксессуара устройства выберите тип подключаемого устройства
+                    <div class="modal-device-wifi-body">
+                        <div class="device-wifi-body-content">
+                            Для подключения устройства выберите тип подключаемого устройства
                         </div>
 
-                        <div class="device-body-button">
-                            <el-button class="button-vega" @click="wifiClick">Аксессуар VEGA 4</el-button>
-                            <el-button class="button-vega">Аксессуар VEGA 1S</el-button>
+                        <div class="device-wifi-body-button">
+                            <el-button class="button-wifi-gsm" @click="deviceVegaClick">Wi-Fi терморегулятор</el-button>
+                            <el-button class="button-wifi-gsm">GSM терморегулятор</el-button>
                         </div>
                     </div>
                     
-                    <div class="modal-device-footer">
+                    <div class="modal-device-wifi-footer">
                         <div>
-                            После выбора типа акссесуара Вам будут показаны
+                            После выбора типа устройства Вам будут показаны
                             соотвотствующие шаги подключения его в учетную
                             запись.
                         </div>
                     </div>
 
-                    <modalWifi v-if="modalWifiVisible" @buttonClose="closeWifiModal"/>
-                    
+                    <deviceVega v-if="vegaVisible" @buttonClick="closeModal"/>
                 </div>
             </div>
         </div>
@@ -46,19 +45,19 @@
 </template>
 
 <script>
-import modalWifi from './modalWifi.vue'
+import deviceVega from './DeviceV4'
 
 export default {
     name: 'modal',
 
     data(){
         return{
-            modalWifiVisible: false,
+            vegaVisible: false
         };
     },
 
     components:{
-        modalWifi
+        deviceVega
     },
 
 
@@ -74,34 +73,34 @@ export default {
             this.$emit('close')
         },
 
-        wifiClick(){
-            this.modalWifiVisible = true
+        deviceVegaClick(){
+            this.vegaVisible = true
         },
 
-        wifiClose(){
-            this.modalWifiVisible = false
+        deviceVegaClose(){
+            this.vegaVisible = false
         },
 
-        closeWifiModal(){
-            this.modalWifiVisible = false
+        closeWifi(){
+            this.$emit('buttonClose')
         }
     }
 }
 </script>
 
 <style>
-.modal-mask-device-manage{
+.modal-mask-device-wifi-manage{
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, .5);
+    /* background-color: rgba(0, 0, 0, .5); */
     display: table;
     z-index: 2;
 }
 
-.modal-backdrop-device-manage{
+.modal-backdrop-device-wifi-manage{
     width: 100%;
     height: 100%;
     display: flex;
@@ -111,11 +110,11 @@ export default {
     cursor: default;
 }
 
-.modal-device-manage{
+.modal-device-wifi-manage{
     width: 50%;
     height: 60%;
     background: #ffffff;
-    box-shadow: 2px 2px 20px 1px;
+    /* box-shadow: 2px 2px 20px 1px; */
     overflow-x: none;
     cursor: default;
     padding: 10px;
@@ -127,7 +126,7 @@ export default {
     text-align: center; 
 }
 
-.modal-device-content{
+.modal-device-wifi-content{
     width: 100%;
     height: 100%;
     display: flex;
@@ -137,14 +136,14 @@ export default {
 
 }
 
-.modal-device-header{
+.modal-device-wifi-header{
     width: 100%;
     height: 10%;
     display: flex;
 
 }
 
-.modal-device-name{
+.modal-device-wifi-name{
     width: 96%;
     display: flex;
     align-items: center;
@@ -153,7 +152,7 @@ export default {
     color: #606266;
 }
 
-.modal-device-button{
+.modal-device-wifi-button{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -168,13 +167,13 @@ export default {
     float: right;
 }
 
-.modal-device-body{
+.modal-device-wifi-body{
     width: 100%;
     height: 80%;
     color: #606266;
 }
 
-.device-body-content{
+.device-wifi-body-content{
     width: 100%;
     height: 10%;
     font-size: 19px;
@@ -184,7 +183,7 @@ export default {
     color: #606266;
 }
 
-.device-body-button{
+.device-wifi-body-button{
     width: 100%;
     height: 90%;
     display: flex;
@@ -192,13 +191,13 @@ export default {
     align-items: center;
 }
 
-.button-vega{
+.button-wifi-gsm{
     height: 120px;
     width: 200px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
-.modal-device-footer{
+.modal-device-wifi-footer{
     width: 100%;
     height: 10%;  
     font-size: 19px;
@@ -208,11 +207,11 @@ export default {
     color: #606266;
 }
 
-.modal-device-fade-enter, .modal-device-fade-leave-active{
+.modal-device-wifi-fade-enter, .modal-device-wifi-fade-leave-active{
     opacity: 0;
 }
 
-.modal-device-fade-enter-active, .modal-device-fade-leave-active{
+.modal-device-wifi-fade-enter-active, .modal-device-wifi-fade-leave-active{
     transition: opacity .5s ease
 }
 </style>

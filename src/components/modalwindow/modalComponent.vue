@@ -193,13 +193,14 @@ export default {
 }
 
 .tab-buttons{
-    width: 200px;
+    width: 160px;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .tab-buttons-group{
+    width: 160px;
     height: 100%;
     font-size: 45px;
 }

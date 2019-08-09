@@ -100,7 +100,7 @@
         <div class="schedule-departure">
             Отъезд
             <div class="departure-content">
-                <h style="float:left; font-size: 12px;">Температура</h>
+                <h style="float:left; font-size: 12px;">Понизить температуру на: {{value+'°C'}}</h>
             <br>
                 <div class="input-number-control">
                     <div style="width: 50%">

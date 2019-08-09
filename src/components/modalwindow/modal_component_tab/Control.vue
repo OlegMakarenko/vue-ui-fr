@@ -11,50 +11,69 @@
         </div>
       </div>
       <div class="control-panel-view">
-        <div class="input-number">
+        <!-- <div class="input-number">
           <div class="inpunt-number-control">
             <div style="display: flex; flex-direction: column">
               <h style="font-size: 15px">Текущая</h>
-              <el-input-number style="width: 140px;" size="mini" v-model="inputNum"></el-input-number>
+              {{inputNum+'°C'}}
             </div>
 
             <i class="el-icon-bottom-right" style="color: darkturquoise; font-size: 30px; margin-top: 17px;"></i>
             
             <div style="display: flex; flex-direction: column">
-              <h style="font-size: 15px">Плановая</h>
-              <el-input-number style="width: 140px" size="mini" v-model="inputNum2"></el-input-number>
+              <h style="font-size: 15px">Заданная</h>
+              <el-input-number style="width: 140px" size="large" v-model="inputNum2"></el-input-number>
             </div>
             
           </div>
           <div style="width:100%; display: flex; justify-content: space-between; align-items: center">
             <el-slider style="width: 300px;" v-model="inputNum" :max="50"></el-slider>
-            <el-input 
-                    style="width: 50px;" 
-                    size="mini" 
-                    v-model="inputNum">
-                  </el-input>
+              {{inputNum+'°C'}}
           </div>
         </div>
 
         <div class="control-manage-buttons">
-          <el-radio-group style="margin-top: 11px;" v-model="radioButton" size="mini">
+          <el-radio-group v-model="radioButton" size="large">
             <el-radio-button label="Ручной"></el-radio-button>
-            <el-radio-button label="Программный"></el-radio-button>
+            <el-radio-button label="Расписание"></el-radio-button>
+            <el-radio-button label="Отъезд"></el-radio-button>
           </el-radio-group>
 
-          <div>
-            <el-button 
+          <el-button 
               style="margin-top: 11px;" 
-              size="mini" 
+              size="large" 
               type="primary"
               @click="innerVisible = true">Выбор датчиков</el-button>
+        </div> -->
+
+        <div class="control-header-content">
+          <div class="header-content-left">
+            <div class="left-top-content">
+              <span class="ltc-span">Текущая</span> 
+              <span class="ltc-span">Заданная</span>
+            </div>
+
+            <div class="left-center-content">
+              {{inputNum+'°C'}}
+               <i class="el-icon-bottom-right" style="color: darkturquoise; font-size: 25px;"></i>
+               <el-input-number style="width: 115px" size="medium" v-model="inputNum2"></el-input-number>
+            </div>
+            
+            <div class="left-bottom-content">
+               <el-slider style="width: 300px;" v-model="inputNum" :max="50"></el-slider>
+              {{inputNum+'°C'}}
+            </div>
+
           </div>
 
-            <div class="control-input">
-              Режим отъезда &nbsp
-              <el-switch 
-                v-model="leaveButton">
-              </el-switch>
+          <div class="header-content-right">
+            <div class="right-top-content">
+
+            </div>
+
+            <div class="right-center-content">
+              
+            </div>
           </div>
         </div>
       </div>
@@ -63,19 +82,22 @@
         <div class="control-footer-content">
           <div class="footer-content">
             <h style="font-size: 15px">Сила тока:</h>
-            <el-input style="width: 100px;" size="mini" v-model="amper"></el-input>
+            <el-input style="width: 100px;" size="medium" v-model="amper"></el-input>
           </div>
           <div class="footer-content"> 
-            <h style="font-size: 15px">Напряженность:</h>
-            <el-input style="width: 100px;" size="mini" v-model="voltage"></el-input>
+            <h style="font-size: 15px">Напряжение:</h>
+            <el-input style="width: 100px;" size="medium" v-model="voltage"></el-input>
           </div>
           <div class="footer-content">
             <h style="font-size: 15px">Потр. мощность:</h>
-            <el-input style="width: 100px;" size="mini" v-model="kilovatt" ></el-input>
+            <el-input style="width: 100px;" size="medium" v-model="kilovatt" ></el-input>
           </div>
           <div class="footer-content">
             <h style="font-size: 15px">Статус сети:</h>
-            <el-input style="width: 100px;" size="mini" v-model="status"></el-input>
+            <div class="footer-content-status">
+              <el-input style="width: 45%;" size="medium" v-model="status"></el-input>
+              <el-input style="width: 45%;" size="medium" v-model="statusHub"></el-input>
+            </div>
           </div>
         </div>
       </div>
@@ -117,7 +139,7 @@
                         align-items: center; 
                         justify-content: space-between">
               Тип проводного датчика температуры
-              <el-select size="mini" v-model="value" filterable placeholder="Выберите сопротивление">
+              <el-select size="large" v-model="value" filterable placeholder="Выберите сопротивление">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -132,7 +154,7 @@
                         align-items: center; 
                         justify-content: space-between">
               Выбрать доступный датчик / "RF" устройство
-              <el-select size="mini" v-model="availableValue" filterable placeholder="Выберите сопротивление">
+              <el-select size="large" v-model="availableValue" filterable placeholder="Выберите сопротивление">
                 <el-option
                   v-for="item in sensorOptions"
                   :key="item.availableValue"
@@ -169,10 +191,11 @@ export default {
       inputNum2: 22,
       // inputNum: "             "+22+"°",
       // inputNum2: "              "+24+"°",
-      amper: "     3 мКа",
-      voltage: "     12.5 В",
-      kilovatt: "  0.4 кВт • ч",
-      status: "      Wi-Fi",
+      amper: "    3 мКа",
+      voltage: "   12.5 В",
+      kilovatt: "0.4 кВт • ч",
+      status: "    Wi-Fi",
+      statusHub: ' ALL-HUB',
       radio1: 'В сети',
       radioButton: 'Программный',
       leaveButton: false,
@@ -295,43 +318,95 @@ export default {
       overflow: auto;
       padding: 20px;
 
-      .input-number{
-        width: 45%;
-        height:91px;
+      .control-header-content{
+        width: 100%;
+        height: 35%;
         display: flex;
-        flex-direction: column;
-        align-items: baseline;
+        flex-direction: row;
         justify-content: center;
-        
-        .inpunt-number-control{
-          display: flex;
-          justify-content:space-between;
-          align-items: center;
-          width: 100%;
-        }
-      }
+        align-items:center;
 
-      .control-manage-buttons{
-        width: 50%;
-        height: 100px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-around;
-
-        .control-input{
+        .header-content-left{
+          width: 50%;
+          height: 100%;
           display: flex;
-          justify-content: flex-start;
+          flex-direction: column;
+          justify-content: center;
           align-items:center;
-          width: 87%;
 
-          .input{
-              width: 120px;
+          .left-top-content{
+            width: 100%;
+            height: 20%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+
+            .ltc-span{
+              font-size: 15px;
+            }
+          }
+
+          .left-center-content{
+            width: 100%;
+            height: 30%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+          }
+
+          .left-bottom-content{
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
           }
         }
-      }
-    }
 
+        .header-content-right{
+          width: 50%;
+          height: 100%;
+        }
+      } 
+
+      // .input-number{
+      //   width: 45%;
+      //   height:30%;
+      //   display: flex;
+      //   flex-direction: column;
+      //   align-items: baseline;
+      //   justify-content: center;
+        
+      //   .inpunt-number-control{
+      //     display: flex;
+      //     justify-content:space-between;
+      //     align-items: center;
+      //     width: 100%;
+      //   }
+      // }
+
+      // .control-manage-buttons{
+      //   width: 50%;
+      //   height: 30%;
+      //   display: flex;
+      //   flex-wrap: wrap;
+      //   align-items: center;
+      //   justify-content: space-around;
+
+      //   .control-input{
+      //     display: flex;
+      //     justify-content: flex-start;
+      //     align-items:center;
+      //     width: 87%;
+
+      //     .input{
+      //         width: 120px;
+      //     }
+      //   }
+      // }
+    }
+  
   .control-footer{
     width: 100%;
     height: 60px;
@@ -345,9 +420,17 @@ export default {
       justify-content: space-around;
 
       .footer-content{
+        width:25%;
         display: flex; 
         flex-direction: column; 
-        align-items: center
+        align-items: center;
+
+        .footer-content-status{
+          display: flex; 
+          flex-direction: row; 
+          align-items: center;
+          justify-content: space-evenly;
+        }
       }
     }
   }

@@ -17,26 +17,6 @@
           <div class="config-content">
 
             <div class="config-line1">
-              <div class="config-termo">
-                <span class="span-text-termo">Тип управления</span>
-                  <el-switch 
-                    v-model="heatCold"
-                    inactive-text="Н"
-                    active-text="О">
-                  </el-switch>
-              </div>
-
-              <div class="contact-type">
-                <span class="span-type">Тип контакта</span>
-                  <el-switch 
-                    v-model="contactType"
-                    inactive-text="З"
-                    active-text="Р">
-                  </el-switch>
-              </div>
-            </div>
-
-            <div class="config-line2">
               <div class="config-hysteresis">
                 Гистерезис
                 <div class="hysterio">
@@ -53,6 +33,19 @@
                   </el-input>
                 </div>
               </div>
+
+              <div class="contact-type">
+                <span class="span-type">Тип контакта</span>
+                  <el-switch 
+                    v-model="contactType"
+                    inactive-text="З"
+                    active-text="Р">
+                  </el-switch>
+              </div>
+            </div>
+
+            <div class="config-line2">
+              
             </div>
           </div>
         </div>
@@ -60,6 +53,11 @@
         <div class="mode-operation">
           Режимы работы
           <div class="mode-content">
+            <el-button 
+              style="margin-top: 11px;" 
+              size="large" 
+              type="primary"
+              @click="innerVisible = true">Выбор датчиков</el-button>
             <div class="select-sensor">
               Терморегулирование по выбранному датчику
               <el-switch 
@@ -83,7 +81,7 @@
 
             <div class="settings-button-content">
               <span class="demonstration">Цвет устройства</span>
-              <el-color-picker v-model="color" size="mini"></el-color-picker>
+              <el-color-picker v-model="color" change :predefine="predefineColors" size="mini"></el-color-picker>
             </div>
 
             <div class="settings-button-content">
@@ -115,10 +113,55 @@
             <div class="info-content">
             Тип терморегулятора: 1
             </div>
+
+            <div class="info-content">
+            Тип управления: Н
+            </div>
         </div>
-        <el-divider></el-divider>
         <div class="info-part2">Какая-то информация</div>
     </div>
+
+    <el-dialog
+      width="40%"
+      title="Выбор датчиков и RF устройства"
+      :visible.sync="innerVisible"
+      append-to-body>
+        <div class="dialog-content">
+          <div style="height: 200px;">
+            <div style="height:50%; 
+                        display: flex; 
+                        align-items: center; 
+                        justify-content: space-between">
+              Тип проводного датчика температуры
+              <el-select size="large" v-model="value" filterable placeholder="Выберите сопротивление">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </div>
+
+            <div style="height:50%; 
+                        display: flex; 
+                        align-items: center; 
+                        justify-content: space-between">
+              Выбрать доступный датчик / "RF" устройство
+              <el-select size="large" v-model="availableValue" filterable placeholder="Выберите сопротивление">
+                <el-option
+                  v-for="item in sensorOptions"
+                  :key="item.availableValue"
+                  :label="item.sensorType"
+                  :value="item.availableValue">
+                </el-option>
+              </el-select>
+            </div>
+          </div>
+
+          <el-button type="primary" @click="innerVisible = false">Добавить выбранное</el-button>
+        </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -142,9 +185,20 @@ export default {
       contactType: false,
       modeSensor: false,
       modeShim: false,
-      color: '#409EFF',
+      color: '#e91e63',
       dropdown: true,
       hysteresis: 10,
+      innerVisible: false,
+
+      predefineColors: [
+          '#e91e63',
+          '#673ab7',
+          '#2196f3',
+          '#00bcd4',
+          '#4caf50',
+          '#cddc39',
+          '#ffc107',
+          '#ff5722',],
     };
   },
 
@@ -183,6 +237,19 @@ export default {
   display: flex;
   height: 100%;
   width: 100%;
+
+  .dialog-content{
+    display: flex;
+
+    .dialog-sensor-type{
+      display: flex;
+      height: 200px;
+    }
+
+    .dialog-available-type{
+      height: 50%;
+    }
+  }
   
   .settings-panel-container {
     flex: 1 1 auto;
@@ -245,6 +312,22 @@ export default {
             display: flex;
             justify-content: space-between;
 
+            .config-hysteresis{
+              width: 45%;
+              display: flex;
+              flex-direction: column;
+              text-align: left;
+              // align-items: center;
+              // justify-content: space-between;
+
+              .hysterio{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              }
+            }
+
             .config-termo{
               width: 45%;
               display: flex;
@@ -266,21 +349,7 @@ export default {
             display: flex;
             justify-content: space-between;
 
-            .config-hysteresis{
-              width: 45%;
-              display: flex;
-              flex-direction: column;
-              text-align: left;
-              // align-items: center;
-              // justify-content: space-between;
-
-              .hysterio{
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-              }
-            }
+            
 
             .control-type{
               width: 45%;
@@ -375,17 +444,20 @@ export default {
     flex-direction: column;
 
     .info-part1{
-       width: 100%;
+      width: 100%;
       height: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
       font-size: 16px;
+      border-bottom: 1px solid #DCDFE6;
 
       .info-content{
         width: 95%;
-        height: 25%;
+        height: 20%;
         text-align:left;
+        display: flex;
+        align-items: center;
       }
     }
 

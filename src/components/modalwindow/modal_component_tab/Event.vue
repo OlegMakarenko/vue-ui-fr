@@ -81,8 +81,11 @@
         <div class="info-content">
           Тип терморегулятора: 1
         </div>
+        
+        <div class="info-content">
+          Тип управления: Н
+        </div>
       </div>
-        <el-divider></el-divider>
       <div class="info-part2">Какая-то информация</div>
     </div>
   </div>
@@ -264,11 +267,14 @@ export default {
       flex-direction: column;
       align-items: center;
       font-size: 16px;
+      border-bottom: 1px solid #DCDFE6;
 
       .info-content{
         width: 95%;
-        height: 25%;
+        height: 20%;
         text-align:left;
+        display: flex;
+        align-items: center;
       }
     }
 

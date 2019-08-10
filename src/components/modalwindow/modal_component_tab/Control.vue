@@ -49,18 +49,27 @@
         <div class="control-header-content">
           <div class="header-content-left">
             <div class="left-top-content">
-              <span class="ltc-span">Текущая</span> 
-              <span class="ltc-span">Заданная</span>
+              <div class="ltc-left">Текущая</div> 
+              <div class="invisible-ltc"></div>
+              <div class="ltc-right">Заданная</div>
             </div>
 
             <div class="left-center-content">
-              {{inputNum+'°C'}}
-               <i class="el-icon-bottom-right" style="color: darkturquoise; font-size: 25px;"></i>
-               <el-input-number style="width: 115px" size="medium" v-model="inputNum2"></el-input-number>
+              <div class="lcc-left">
+                {{inputNum+'°C'}}
+              </div>
+
+              <div class="lcc-center">
+                <i class="el-icon-bottom-right" style="color: darkturquoise; font-size: 25px;"></i>
+              </div>
+
+              <div class="lcc-right">
+                <el-input-number style="width: 115px" size="medium" v-model="inputNum2"></el-input-number>
+              </div>
             </div>
             
             <div class="left-bottom-content">
-               <el-slider style="width: 300px;" v-model="inputNum" :max="50"></el-slider>
+              <el-slider style="width: 300px;" v-model="inputNum" :max="50"></el-slider>
               {{inputNum+'°C'}}
             </div>
 
@@ -68,11 +77,15 @@
 
           <div class="header-content-right">
             <div class="right-top-content">
-
+              <el-radio-group v-model="radioButton" size="large">
+                <el-radio-button label="Ручной"></el-radio-button>
+                <el-radio-button label="Расписание"></el-radio-button>
+                <el-radio-button label="Отъезд"></el-radio-button>
+              </el-radio-group>
             </div>
 
             <div class="right-center-content">
-              
+              <el-button @click="troubleButton">Аварийное отключение устройства</el-button>
             </div>
           </div>
         </div>
@@ -82,21 +95,21 @@
         <div class="control-footer-content">
           <div class="footer-content">
             <h style="font-size: 15px">Сила тока:</h>
-            <el-input style="width: 100px;" size="medium" v-model="amper"></el-input>
+            <input type="text" readonly class="input-footer" v-model="amper">
           </div>
           <div class="footer-content"> 
             <h style="font-size: 15px">Напряжение:</h>
-            <el-input style="width: 100px;" size="medium" v-model="voltage"></el-input>
+            <input type="text" readonly class="input-footer" v-model="voltage">
           </div>
           <div class="footer-content">
             <h style="font-size: 15px">Потр. мощность:</h>
-            <el-input style="width: 100px;" size="medium" v-model="kilovatt" ></el-input>
+            <input type="text" readonly class="input-footer" v-model="kilovatt">
           </div>
           <div class="footer-content">
             <h style="font-size: 15px">Статус сети:</h>
             <div class="footer-content-status">
-              <el-input style="width: 45%;" size="medium" v-model="status"></el-input>
-              <el-input style="width: 45%;" size="medium" v-model="statusHub"></el-input>
+              <input type="text" readonly class="input-footer-status" v-model="status">
+              <input type="text" readonly class="input-footer-status" v-model="statusHub">
             </div>
           </div>
         </div>
@@ -120,8 +133,11 @@
         <div class="info-content">
           Тип терморегулятора: 1
         </div>
+
+        <div class="info-content">
+          Тип управления: Н
+        </div>
       </div>
-      <el-divider></el-divider>
       <div class="info-part2">
 
       </div>
@@ -189,13 +205,11 @@ export default {
       selectedComponent: null,
       inputNum: 24,
       inputNum2: 22,
-      // inputNum: "             "+22+"°",
-      // inputNum2: "              "+24+"°",
-      amper: "    3 мКа",
-      voltage: "   12.5 В",
+      amper: "3 мКа",
+      voltage: "12.5 В",
       kilovatt: "0.4 кВт • ч",
-      status: "    Wi-Fi",
-      statusHub: ' ALL-HUB',
+      status: "Wi-Fi",
+      statusHub: 'ALL-HUB',
       radio1: 'В сети',
       radioButton: 'Программный',
       leaveButton: false,
@@ -253,6 +267,24 @@ export default {
         })
         .catch(_ => {});
     },
+
+    troubleButton() {
+        this.$confirm('Вы действительно хотите отключить устройство?', 'Внимание', {
+          confirmButtonText: 'Применить',
+          cancelButtonText: 'Отмена',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: 'Отключение устройства завершено'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Отключение устройства отменено'
+          });          
+        });
+      }
   }
 };
 </script>
@@ -340,8 +372,28 @@ export default {
             display: flex;
             align-items: flex-end;
             justify-content: space-around;
+            flex-direction: row;
 
-            .ltc-span{
+            .ltc-left{
+              width: 33%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 15px;
+            }
+
+            .invisible-ltc{
+              width: 30%;
+              height: 100%;
+            }
+
+            .ltc-right{
+              width: 36%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
               font-size: 15px;
             }
           }
@@ -351,7 +403,30 @@ export default {
             height: 30%;
             display: flex;
             align-items: center;
-            justify-content: space-around;
+            // justify-content: space-around;
+            flex-direction: row;
+
+            .lcc-left{
+              width: 33%;
+              height:100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .lcc-center{
+              width: 33%;
+              height:100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .lcc-right{
+              width: 33%;
+              height:100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
           }
 
           .left-bottom-content{
@@ -369,42 +444,6 @@ export default {
           height: 100%;
         }
       } 
-
-      // .input-number{
-      //   width: 45%;
-      //   height:30%;
-      //   display: flex;
-      //   flex-direction: column;
-      //   align-items: baseline;
-      //   justify-content: center;
-        
-      //   .inpunt-number-control{
-      //     display: flex;
-      //     justify-content:space-between;
-      //     align-items: center;
-      //     width: 100%;
-      //   }
-      // }
-
-      // .control-manage-buttons{
-      //   width: 50%;
-      //   height: 30%;
-      //   display: flex;
-      //   flex-wrap: wrap;
-      //   align-items: center;
-      //   justify-content: space-around;
-
-      //   .control-input{
-      //     display: flex;
-      //     justify-content: flex-start;
-      //     align-items:center;
-      //     width: 87%;
-
-      //     .input{
-      //         width: 120px;
-      //     }
-      //   }
-      // }
     }
   
   .control-footer{
@@ -425,11 +464,33 @@ export default {
         flex-direction: column; 
         align-items: center;
 
+        .input-footer{
+          width: 100px; 
+          height: 30px; 
+          text-align: center; 
+          border-radius: 4px; 
+          border: 1px solid #DCDFE6; 
+          outline: none;
+          color: #606266;
+          cursor: default;
+        }
+
         .footer-content-status{
           display: flex; 
           flex-direction: row; 
           align-items: center;
           justify-content: space-evenly;
+
+          .input-footer-status{
+          width: 40%; 
+          height: 30px; 
+          text-align: center; 
+          border-radius: 4px; 
+          border: 1px solid #DCDFE6; 
+          outline: none;
+          color: #606266;
+          cursor: default;
+          }
         }
       }
     }
@@ -451,11 +512,15 @@ export default {
       flex-direction: column;
       align-items: center;
       font-size: 16px;
+      border-bottom: 1px solid #DCDFE6;    
+
 
       .info-content{
         width: 95%;
-        height: 25%;
+        height: 20%;
         text-align:left;
+        display: flex;
+        align-items: center
       }
     }
 

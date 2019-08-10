@@ -62,11 +62,11 @@ export default {
 
     data(){
         return{
-            controlTabVisible: false,
+            controlTabVisible: true,
             eventTabVisible: false,
             graphicTabVisible: false,
             scheduleTabVisible: false,
-            settingsTabVisible: false
+            settingsTabVisible: false,
         };
     },
 
@@ -88,13 +88,18 @@ export default {
         },
 
         controlClick(){
-            if(this.controlTabVisible === false){
+            if(this.controlTabVisible === true){
+                this.eventTabVisible = false
+                this.graphicTabVisible = false
+                this.scheduleTabVisible = false
+                this.settingsTabVisible = false
+            } else if (this.controlTabVisible === false){
                 this.controlTabVisible = true
                 this.eventTabVisible = false
                 this.graphicTabVisible = false
                 this.scheduleTabVisible = false
                 this.settingsTabVisible = false
-            } 
+            }
         },
 
         eventClick(){

@@ -28,7 +28,10 @@
 
                                     </el-steps>
                                 </div>
-                                 <component :is="selectedTab" @buttonNext="next" @buttonBack="back"/>
+                                 <component 
+                                    :is="selectedTab" 
+                                    @buttonNext="next" 
+                                    @buttonBack="back"/>
                             </div>
                         </div>
                     </div>

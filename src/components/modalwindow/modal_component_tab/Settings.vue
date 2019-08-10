@@ -1,6 +1,5 @@
 <template>
   <div class="settings-panel">
-
     <div class="settings-panel-container">
       <div class="settings-control-panel">
         <div class="settings-control-header">
@@ -22,6 +21,8 @@
                 <div class="hysterio">
                   <el-slider 
                     style="width: 60%;" 
+                    :min="5"
+                    :max="50"
                     :format-tooltip="formatTooltip" 
                     v-model="hysteresis">
                   </el-slider>  
@@ -62,14 +63,14 @@
               Терморегулирование по выбранному датчику
               <el-switch 
                   v-model="modeSensor">
-                </el-switch>
+              </el-switch>
             </div>
 
             <div class="shim-mode">
               Терморегулирование в аварийном режиме "ШИМ"
               <el-switch 
                   v-model="modeShim">
-                </el-switch>
+              </el-switch>
             </div>
           </div>
         </div>
@@ -81,7 +82,12 @@
 
             <div class="settings-button-content">
               <span class="demonstration">Цвет устройства</span>
-              <el-color-picker v-model="color" change :predefine="predefineColors" size="mini"></el-color-picker>
+              <el-color-picker 
+                v-model="color" 
+                change 
+                :predefine="predefineColors" 
+                size="mini">
+              </el-color-picker>
             </div>
 
             <div class="settings-button-content">
@@ -90,7 +96,9 @@
             </div>
 
             <div class="settings-button-content">
-              <el-button @click="resetSet" size="small">Сбросить настройки</el-button>
+              <el-button @click="resetSet" size="small">
+                Сбросить настройки
+              </el-button>
             </div>
           </div>
         </div>
@@ -99,7 +107,7 @@
     <div class="settings-info-panel">
         <div class="info-part1">
           <div class="info-content">
-            All HUB кухня
+            {{infoPanel.name}}
             </div>
             
             <div class="info-content">
@@ -118,7 +126,9 @@
             Тип управления: Н
             </div>
         </div>
-        <div class="info-part2">Какая-то информация</div>
+        <div class="info-part2">
+          
+        </div>
     </div>
 
     <el-dialog
@@ -128,12 +138,18 @@
       append-to-body>
         <div class="dialog-content">
           <div style="height: 200px;">
-            <div style="height:50%; 
-                        display: flex; 
-                        align-items: center; 
-                        justify-content: space-between">
+            <div 
+              style="
+                height:50%; 
+                display: flex; 
+                align-items: center; 
+                justify-content: space-between">
               Тип проводного датчика температуры
-              <el-select size="large" v-model="value" filterable placeholder="Выберите сопротивление">
+              <el-select 
+                size="large" 
+                v-model="value" 
+                filterable 
+                placeholder="Выберите сопротивление">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -143,12 +159,18 @@
               </el-select>
             </div>
 
-            <div style="height:50%; 
-                        display: flex; 
-                        align-items: center; 
-                        justify-content: space-between">
+            <div 
+              style="
+                height:50%; 
+                display: flex; 
+                align-items: center; 
+                justify-content: space-between">
               Выбрать доступный датчик / "RF" устройство
-              <el-select size="large" v-model="availableValue" filterable placeholder="Выберите сопротивление">
+              <el-select 
+                size="large" 
+                v-model="availableValue2" 
+                filterable 
+                placeholder="Выберите сопротивление">
                 <el-option
                   v-for="item in sensorOptions"
                   :key="item.availableValue"
@@ -174,7 +196,9 @@ export default {
   },
 
   computed: {
-
+    infoPanel(){
+      return this.$store.getters.infoPanelData;
+    }
   },
 
   data() {
@@ -190,15 +214,47 @@ export default {
       hysteresis: 10,
       innerVisible: false,
 
+      sensorOptions: [{
+        availableValue: 'Option1',
+        sensorType: 'Wi-Fi'
+      }, {
+        availableValue: 'Option2',
+        sensorType: 'RF'
+      }, {
+        availableValue: 'Option3',
+        sensorType: 'RF Thermo'
+      }],
+
+      options: [{
+        value: 'Option1',
+        label: '4.7 кОм'
+      }, {
+        value: 'Option2',
+        label: '6.8 кОм'
+      }, {
+        value: 'Option3',
+        label: '10 кОм'
+      }, {
+        value: 'Option4',
+        label: '12 кОм'
+      }, {
+        value: 'Option5',
+        label: '14 кОм'
+      }],
+
       predefineColors: [
-          '#e91e63',
-          '#673ab7',
-          '#2196f3',
-          '#00bcd4',
-          '#4caf50',
-          '#cddc39',
-          '#ffc107',
-          '#ff5722',],
+        '#e91e63',
+        '#673ab7',
+        '#2196f3',
+        '#00bcd4',
+        '#4caf50',
+        '#cddc39',
+        '#ffc107',
+        '#ff5722',
+      ],
+
+      value: '',
+      availableValue2: '',
     };
   },
 

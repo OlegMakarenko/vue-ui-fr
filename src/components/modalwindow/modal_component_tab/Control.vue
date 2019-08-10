@@ -5,186 +5,156 @@
         <div class="control-control-header">
           Управление 
         </div>
-
         <div class="control-button-header">
-          <button class="button-close" @click="onClick">x</button>
+          <button 
+            class="button-close" 
+            @click="onClick">x</button>
         </div>
       </div>
-      <div class="control-panel-view">
-        <!-- <div class="input-number">
-          <div class="inpunt-number-control">
-            <div style="display: flex; flex-direction: column">
-              <h style="font-size: 15px">Текущая</h>
-              {{inputNum+'°C'}}
+    <div class="control-panel-view">
+      <div class="control-header-content">
+        <div class="header-content-left">
+          <div class="left-top-content">
+            <div class="ltc-left">
+              Текущая
+            </div> 
+            <div class="invisible-ltc"></div>
+            <div class="ltc-right">
+              Заданная
+            </div>
+          </div>
+
+          <div class="left-center-content">
+            <div class="lcc-left">
+              {{infoPanel.temp+'°C'}}
             </div>
 
-            <i class="el-icon-bottom-right" style="color: darkturquoise; font-size: 30px; margin-top: 17px;"></i>
-            
-            <div style="display: flex; flex-direction: column">
-              <h style="font-size: 15px">Заданная</h>
-              <el-input-number style="width: 140px" size="large" v-model="inputNum2"></el-input-number>
+            <div class="lcc-center">
+              <i class="el-icon-bottom-right" 
+                 style="color: darkturquoise; font-size: 25px;">
+              </i>
             </div>
-            
+
+            <div class="lcc-right">
+              <el-input-number 
+                style="width: 115px" 
+                size="medium" 
+                :min="0"
+                :max="50"
+                v-model="inputNum2">
+              </el-input-number>
+            </div>
           </div>
-          <div style="width:100%; display: flex; justify-content: space-between; align-items: center">
-            <el-slider style="width: 300px;" v-model="inputNum" :max="50"></el-slider>
-              {{inputNum+'°C'}}
+            
+          <div class="left-bottom-content">
+            <el-slider 
+              style="width: 300px;" 
+              v-model="infoPanel.temp" 
+              :max="50">
+            </el-slider>
+            {{infoPanel.temp+'°C'}}
           </div>
         </div>
 
-        <div class="control-manage-buttons">
-          <el-radio-group v-model="radioButton" size="large">
-            <el-radio-button label="Ручной"></el-radio-button>
-            <el-radio-button label="Расписание"></el-radio-button>
-            <el-radio-button label="Отъезд"></el-radio-button>
-          </el-radio-group>
-
-          <el-button 
-              style="margin-top: 11px;" 
-              size="large" 
-              type="primary"
-              @click="innerVisible = true">Выбор датчиков</el-button>
-        </div> -->
-
-        <div class="control-header-content">
-          <div class="header-content-left">
-            <div class="left-top-content">
-              <div class="ltc-left">Текущая</div> 
-              <div class="invisible-ltc"></div>
-              <div class="ltc-right">Заданная</div>
-            </div>
-
-            <div class="left-center-content">
-              <div class="lcc-left">
-                {{inputNum+'°C'}}
-              </div>
-
-              <div class="lcc-center">
-                <i class="el-icon-bottom-right" style="color: darkturquoise; font-size: 25px;"></i>
-              </div>
-
-              <div class="lcc-right">
-                <el-input-number style="width: 115px" size="medium" v-model="inputNum2"></el-input-number>
-              </div>
-            </div>
-            
-            <div class="left-bottom-content">
-              <el-slider style="width: 300px;" v-model="inputNum" :max="50"></el-slider>
-              {{inputNum+'°C'}}
-            </div>
-
+        <div class="header-content-right">
+          <div class="right-top-content">
+            <el-radio-group v-model="radioButton" size="large">
+              <el-radio-button label="Ручной"></el-radio-button>
+              <el-radio-button label="Расписание"></el-radio-button>
+              <el-radio-button label="Отъезд"></el-radio-button>
+            </el-radio-group>
           </div>
 
-          <div class="header-content-right">
-            <div class="right-top-content">
-              <el-radio-group v-model="radioButton" size="large">
-                <el-radio-button label="Ручной"></el-radio-button>
-                <el-radio-button label="Расписание"></el-radio-button>
-                <el-radio-button label="Отъезд"></el-radio-button>
-              </el-radio-group>
-            </div>
+          <div class="right-center-content">
+            <el-button style="width: 298px;" type="danger" @click="troubleButton">
+              Аварийное отключение устройства
+            </el-button>
 
-            <div class="right-center-content">
-              <el-button @click="troubleButton">Аварийное отключение устройства</el-button>
-            </div>
+            
           </div>
         </div>
       </div>
-      
+
       <div class="control-footer">
         <div class="control-footer-content">
           <div class="footer-content">
             <h style="font-size: 15px">Сила тока:</h>
-            <input type="text" readonly class="input-footer" v-model="amper">
+            <input 
+              type="text" 
+              readonly 
+              class="input-footer" 
+              v-model="amper">
           </div>
+
           <div class="footer-content"> 
             <h style="font-size: 15px">Напряжение:</h>
-            <input type="text" readonly class="input-footer" v-model="voltage">
+            <input 
+              type="text" 
+              readonly 
+              class="input-footer" 
+              v-model="voltage">
           </div>
+
           <div class="footer-content">
             <h style="font-size: 15px">Потр. мощность:</h>
-            <input type="text" readonly class="input-footer" v-model="kilovatt">
+            <input 
+              type="text" 
+              readonly 
+              class="input-footer" 
+              v-model="kilovatt">
           </div>
+
           <div class="footer-content">
             <h style="font-size: 15px">Статус сети:</h>
             <div class="footer-content-status">
-              <input type="text" readonly class="input-footer-status" v-model="status">
-              <input type="text" readonly class="input-footer-status" v-model="statusHub">
+              <input 
+                type="text" 
+                readonly 
+                class="input-footer-status" 
+                v-model="status">
+              <input 
+                type="text" 
+                readonly 
+                class="input-footer-status" 
+                v-model="statusHub">
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="control-info-panel">
-      <div class="info-part1">
-        <div class="info-content">
-          All HUB кухня
-        </div>
-        
-        <div class="info-content">
-          Тип: LTC090
-        </div>
-        
-        <div class="info-content">
-          Версия прошивки: 123456789
-        </div>
-
-        <div class="info-content">
-          Тип терморегулятора: 1
-        </div>
-
-        <div class="info-content">
-          Тип управления: Н
-        </div>
-      </div>
-      <div class="info-part2">
-
-      </div>
-    </div>
-
-    <el-dialog
-      width="40%"
-      title="Выбор датчиков и RF устройства"
-      :visible.sync="innerVisible"
-      append-to-body>
-        <div class="dialog-content">
-          <div style="height: 200px;">
-            <div style="height:50%; 
-                        display: flex; 
-                        align-items: center; 
-                        justify-content: space-between">
-              Тип проводного датчика температуры
-              <el-select size="large" v-model="value" filterable placeholder="Выберите сопротивление">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </div>
-
-            <div style="height:50%; 
-                        display: flex; 
-                        align-items: center; 
-                        justify-content: space-between">
-              Выбрать доступный датчик / "RF" устройство
-              <el-select size="large" v-model="availableValue" filterable placeholder="Выберите сопротивление">
-                <el-option
-                  v-for="item in sensorOptions"
-                  :key="item.availableValue"
-                  :label="item.sensorType"
-                  :value="item.availableValue">
-                </el-option>
-              </el-select>
-            </div>
-          </div>
-
-          <el-button type="primary" @click="innerVisible = false">Добавить выбранное</el-button>
-        </div>
-    </el-dialog>
   </div>
+
+  <div class="control-info-panel">
+    <div class="info-part1">
+      <div class="info-content">
+        <div class="control-info-panel-name">
+          {{infoPanel.name}}
+          <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
+        </div>
+      </div>
+      
+      <div class="info-content">
+        Тип: LTC090
+      </div>
+      
+      <div class="info-content">
+        Версия прошивки: 123456789
+      </div>
+
+      <div class="info-content">
+        Тип терморегулятора: 1
+      </div>
+
+      <div class="info-content">
+        Тип управления: Н
+      </div>
+    </div>
+
+    <div class="info-part2">
+
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -196,7 +166,9 @@ export default {
   },
 
   computed: {
-
+    infoPanel(){
+      return this.$store.getters.infoPanelData;
+    }
   },
 
   data() {
@@ -214,36 +186,8 @@ export default {
       radioButton: 'Программный',
       leaveButton: false,
       innerVisible: false,
-
-      options: [{
-          value: 'Option1',
-          label: '4.7 кОм'
-        }, {
-          value: 'Option2',
-          label: '6.8 кОм'
-        }, {
-          value: 'Option3',
-          label: '10 кОм'
-        }, {
-          value: 'Option4',
-          label: '12 кОм'
-        }, {
-          value: 'Option5',
-          label: '14 кОм'
-        }],
-        value: '',
-
-        sensorOptions: [{
-          availableValue: 'Option1',
-          sensorType: 'Wi-Fi'
-        }, {
-          availableValue: 'Option2',
-          sensorType: 'RF'
-        }, {
-          availableValue: 'Option3',
-          sensorType: 'RF Thermo'
-        }],
-        availableValue: ''
+      value: '',
+      availableValue: '',
     };
   },
 
@@ -269,22 +213,38 @@ export default {
     },
 
     troubleButton() {
-        this.$confirm('Вы действительно хотите отключить устройство?', 'Внимание', {
-          confirmButtonText: 'Применить',
-          cancelButtonText: 'Отмена',
-          type: 'warning'
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: 'Отключение устройства завершено'
-          });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: 'Отключение устройства отменено'
-          });          
+      this.$confirm('Вы действительно хотите отключить устройство?', 'Внимание', {
+        confirmButtonText: 'Применить',
+        cancelButtonText: 'Отмена',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: 'Отключение устройства завершено'
         });
-      }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: 'Отключение устройства отменено'
+        });          
+      });
+    },
+
+    editTitle() {
+      this.$prompt('Пожалуйста введите новое имя', 'Подсказка', {
+        confirmButtonText: 'Применить',
+        cancelButtonText: 'Отмена',
+        inputValidator: function(value){return value.length},
+      }).then(({ value }) => {
+        this.$store.dispatch("NODE_RENAME", {nodeId: this.infoPanel.id, name: value});
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: 'Редактирование отменено '
+        });
+      });
+    },
+
   }
 };
 </script>
@@ -294,19 +254,6 @@ export default {
   display: flex;
   height: 100%;
   width: 100%;
-
-  .dialog-content{
-    display: flex;
-
-    .dialog-sensor-type{
-      display: flex;
-      height: 200px;
-    }
-
-    .dialog-available-type{
-      height: 50%;
-    }
-  }
   
   .control-panel-container {
     flex: 1 1 auto;
@@ -345,7 +292,8 @@ export default {
     .control-panel-view {
       flex: 1 1 auto;
       display: flex;
-      justify-content: space-evenly;
+      flex-direction: column;
+      // justify-content: center;
       flex-wrap: wrap;
       overflow: auto;
       padding: 20px;
@@ -442,54 +390,70 @@ export default {
         .header-content-right{
           width: 50%;
           height: 100%;
+
+          .right-top-content{
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .right-center-content{
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
         }
       } 
-    }
-  
-  .control-footer{
-    width: 100%;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    border-top: 1px solid #DCDFE6;
-      
-      .control-footer-content{
-      display:flex;
-      width: 100%;
-      justify-content: space-around;
 
-      .footer-content{
-        width:25%;
-        display: flex; 
-        flex-direction: column; 
-        align-items: center;
-
-        .input-footer{
-          width: 100px; 
-          height: 30px; 
-          text-align: center; 
-          border-radius: 4px; 
-          border: 1px solid #DCDFE6; 
-          outline: none;
-          color: #606266;
-          cursor: default;
-        }
-
-        .footer-content-status{
-          display: flex; 
-          flex-direction: row; 
+        .control-footer{
+          width: 100%;
+          height: 60px;
+          display: flex;
           align-items: center;
-          justify-content: space-evenly;
+          border-bottom: 1px solid #DCDFE6;
+        
+        .control-footer-content{
+          display:flex;
+          width: 100%;
+          justify-content: space-around;
 
-          .input-footer-status{
-          width: 40%; 
-          height: 30px; 
-          text-align: center; 
-          border-radius: 4px; 
-          border: 1px solid #DCDFE6; 
-          outline: none;
-          color: #606266;
-          cursor: default;
+        .footer-content{
+          width:25%;
+          display: flex; 
+          flex-direction: column; 
+          align-items: center;
+
+          .input-footer{
+            width: 100px; 
+            height: 30px; 
+            text-align: center; 
+            border-radius: 4px; 
+            border: 1px solid #DCDFE6; 
+            outline: none;
+            color: #606266;
+            cursor: default;
+          }
+
+          .footer-content-status{
+            display: flex; 
+            flex-direction: row; 
+            align-items: center;
+            justify-content: space-evenly;
+
+            .input-footer-status{
+            width: 40%; 
+            height: 30px; 
+            text-align: center; 
+            border-radius: 4px; 
+            border: 1px solid #DCDFE6; 
+            outline: none;
+            color: #606266;
+            cursor: default;
+            }
           }
         }
       }
@@ -520,7 +484,14 @@ export default {
         height: 20%;
         text-align:left;
         display: flex;
-        align-items: center
+        align-items: center;
+
+        .control-info-panel-name{
+          flex: 1 1 auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
     }
 

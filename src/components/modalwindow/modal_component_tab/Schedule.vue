@@ -1,6 +1,5 @@
 <template>
   <div class="schedule-panel">
-
     <div class="schedule-panel-container">
       <div class="schedule-control-panel">
          <div class="schedule-control-header">
@@ -105,7 +104,8 @@
                 <div class="input-number-control">
                     <div style="width: 50%">
                         <el-slider
-                            :max="50"
+                            :min="5"
+                            :max="30"
                             v-model="value"
                             show-input>
                         </el-slider>
@@ -138,7 +138,7 @@
     <div class="schedule-info-panel">
         <div class="info-part1">
             <div class="info-content">
-            All HUB кухня
+            {{infoPanel.name}}
             </div>
             
             <div class="info-content">
@@ -157,7 +157,9 @@
             Тип управления: Н
             </div>
         </div>
-        <div class="info-part2">Какая-то информация</div>
+        <div class="info-part2">
+            
+        </div>
     </div>
   </div>
 </template>
@@ -171,7 +173,9 @@ export default {
   },
 
   computed: {
-
+    infoPanel(){
+        return this.$store.getters.infoPanelData;
+    }
   },
 
   data() {

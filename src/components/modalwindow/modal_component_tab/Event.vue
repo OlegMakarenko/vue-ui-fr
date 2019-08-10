@@ -39,7 +39,7 @@
         <div class="event-content">
           <el-table height="353px"
             :data="tableData"
-            style="width: 100%">
+            style="width: auto">
             <el-table-column
               prop="date"
               label="Время события"
@@ -67,7 +67,7 @@
     <div class="event-info-panel">
       <div class="info-part1">
         <div class="info-content">
-          All HUB кухня
+          {{infoPanel.name}}
         </div>
         
         <div class="info-content">
@@ -86,7 +86,9 @@
           Тип управления: Н
         </div>
       </div>
-      <div class="info-part2">Какая-то информация</div>
+      <div class="info-part2">
+        
+      </div>
     </div>
   </div>
 </template>
@@ -100,37 +102,41 @@ export default {
   },
 
   computed: {
-
+    infoPanel(){
+      console.log(this.$store.getters.infoPanelData);
+      return this.$store.getters.infoPanelData;
+    }
   },
 
   data() {
     return {
-            eventRightSide: true,
-            tableData:[{
-                date: '21:13 06.03.19',
-                event: 'Пользователь',
-                eventMsg: 'Переход в ручной режим'
-            },{
-                date: '01:15 05.04.19',
-                event: 'Регулятор',
-                eventMsg: 'Конец нагрева с 21*С на 24*С'
-            },{
-                date: '14:20 04.03.19',
-                event: 'Регулятор',
-                eventMsg: 'Начало нагрева с 21*С на 24*С'
-            },{
-                date: '18:33 03.03.19',
-                event: 'Пользователь',
-                eventMsg: 'Переход в режим по графику'
-            },{
-                date: '21:48 02.03.19',
-                event: 'Регулятор',
-                eventMsg: 'Повышение температуры'
-            },{
-                date: '21:48 02.03.19',
-                event: 'Регулятор',
-                eventMsg: 'Повышение температуры'
-            }]
+      eventRightSide: true,
+      tableData:[{
+          date: '21:13 06.03.19',
+          event: 'Пользователь',
+          eventMsg: 'Переход в ручной режим'
+      },{
+          date: '01:15 05.04.19',
+          event: 'Регулятор',
+          eventMsg: 'Конец нагрева с 21*С на 24*С'
+      },{
+          date: '14:20 04.03.19',
+          event: 'Регулятор',
+          eventMsg: 'Начало нагрева с 21*С на 24*С'
+      },{
+          date: '18:33 03.03.19',
+          event: 'Пользователь',
+          eventMsg: 'Переход в режим по графику'
+      },{
+          date: '21:48 02.03.19',
+          event: 'Регулятор',
+          eventMsg: 'Повышение температуры'
+      },{
+          date: '21:48 02.03.19',
+          event: 'Регулятор',
+          eventMsg: 'Повышение температуры'
+      }],
+      value2: '',
     };
   },
 

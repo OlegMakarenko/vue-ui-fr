@@ -71,20 +71,19 @@ export default {
 
   methods:{
     editTitle() {
-
-        this.$prompt('Пожалуйста введите новое имя', 'Подсказка', {
-          confirmButtonText: 'Применить',
-          cancelButtonText: 'Отмена',
-          inputValidator: function(value){return value.length},
-        }).then(({ value }) => {
-          this.$store.dispatch("NODE_RENAME", {nodeId: this.infoPanel.id, name: value});
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: 'Редактирование отменено '
-          });
+      this.$prompt('Пожалуйста введите новое имя', 'Подсказка', {
+        confirmButtonText: 'Применить',
+        cancelButtonText: 'Отмена',
+        inputValidator: function(value){return value.length},
+      }).then(({ value }) => {
+        this.$store.dispatch("NODE_RENAME", {nodeId: this.infoPanel.id, name: value});
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: 'Редактирование отменено '
         });
-      }
+      });
+    }
   },
 };
 </script>

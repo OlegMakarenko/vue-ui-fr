@@ -12,6 +12,7 @@
       <div
         v-if="isSelected">
       <i
+        v-if="iconSettings"
         class="el-icon-s-tools"
         @click="showModal2"
       ></i>
@@ -69,6 +70,11 @@ export default {
     iconClass() {
       if (this.type === "device") return "el-icon-odometer";
       if (this.type === "folder") return "el-icon-folder";
+    },
+
+    iconSettings(){
+      if (this.type === "device") return "el-icon-s-tools"
+      if (this.type === "folder") return false;
     },
 
     isTemperature(){

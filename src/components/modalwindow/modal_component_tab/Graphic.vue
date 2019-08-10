@@ -34,6 +34,7 @@
               <el-select
                 v-model="value2"
                 multiple
+                clearable
                 collapse-tags
                 placeholder="Select">
                 <el-option
@@ -54,7 +55,7 @@
     <div class="graphic-info-panel">
       <div class="info-part1">
         <div class="info-content">
-          All HUB кухня
+          {{infoPanel.name}}
         </div>
         
         <div class="info-content">
@@ -73,7 +74,9 @@
           Тип управления: Н
         </div>
       </div>
-      <div class="info-part2">Какая-то информация</div>
+      <div class="info-part2">
+        
+      </div>
     </div>
   </div>
 </template>
@@ -87,7 +90,9 @@ export default {
   },
 
   computed: {
-
+    infoPanel(){
+      return this.$store.getters.infoPanelData;
+    }
   },
 
   data() {

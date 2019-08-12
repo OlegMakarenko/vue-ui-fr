@@ -50,7 +50,8 @@
             <el-slider 
               style="width: 300px;" 
               v-model="infoPanel.temp" 
-              :max="50">
+              :max="50"
+              :show-tooltip="false">
             </el-slider>
             {{infoPanel.temp+'°C'}}
           </div>
@@ -59,7 +60,8 @@
             <el-slider 
               style="width: 300px;" 
               v-model="infoPanel.temp" 
-              :max="30">
+              :max="30"
+              :show-tooltip="false">
             </el-slider>
             {{infoPanel.temp+' Мин.'}}
           </div>

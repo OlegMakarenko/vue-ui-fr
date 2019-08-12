@@ -21,8 +21,6 @@
                 <div class="hysterio">
                   <el-slider 
                     style="width: 60%;" 
-                    :min="5"
-                    :max="50"
                     :format-tooltip="formatTooltip" 
                     v-model="hysteresis">
                   </el-slider>  

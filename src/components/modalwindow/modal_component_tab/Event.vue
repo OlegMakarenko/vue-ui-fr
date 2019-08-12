@@ -43,12 +43,12 @@
             <el-table-column
               prop="date"
               label="Время события"
-              width="200">
+              >
             </el-table-column>
             <el-table-column
               prop="event"
               label="Причина соытия"
-              width="200">
+              >
               <template slot-scope="scope">
                 <div slot="reference" class="event-wrapper">
                   <el-tag size="medium">{{ scope.row.event }}</el-tag>
@@ -259,7 +259,7 @@ export default {
   .event-info-panel {
     flex: 0 0 auto;
     display: flex;
-    width: 15%;
+    width: 200px;
     word-wrap:break-word;
     border-left: 1px solid #DCDFE6;    
     align-items: center;

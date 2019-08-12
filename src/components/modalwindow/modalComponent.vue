@@ -168,8 +168,8 @@ export default {
 }
 
 .modal-component-manage{
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: none;
@@ -198,14 +198,14 @@ export default {
 }
 
 .tab-buttons{
-    width: 160px;
+    width: 200px;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .tab-buttons-group{
-    width: 160px;
+    width: 200px;
     height: 100%;
     font-size: 45px;
 }

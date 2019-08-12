@@ -30,7 +30,7 @@
             </div>
 
             <div class="lcc-center">
-              <i class="el-icon-bottom-right" 
+              <i :class="tempView"
                  style="color: darkturquoise; font-size: 25px;">
               </i>
             </div>
@@ -46,13 +46,22 @@
             </div>
           </div>
             
-          <div class="left-bottom-content">
+          <div class="left-bottom-content" v-if="timePick">
             <el-slider 
               style="width: 300px;" 
               v-model="infoPanel.temp" 
               :max="50">
             </el-slider>
             {{infoPanel.temp+'°C'}}
+          </div>
+
+          <div class="left-bottom-content" v-else>
+            <el-slider 
+              style="width: 300px;" 
+              v-model="infoPanel.temp" 
+              :max="30">
+            </el-slider>
+            {{infoPanel.temp+' Мин.'}}
           </div>
         </div>
 
@@ -66,6 +75,15 @@
           </div>
 
           <div class="right-center-content">
+            <el-button 
+              style="width: 298px;"
+              :class="timePickClass"
+              @click="timePickFunc">
+                Режим работы без датчика
+            </el-button>
+          </div>
+
+          <div class="right-bottom-content">
             <el-button style="width: 298px;" type="danger" @click="troubleButton">
               Аварийное отключение устройства
             </el-button>
@@ -78,7 +96,7 @@
       <div class="control-footer">
         <div class="control-footer-content">
           <div class="footer-content">
-            <h style="font-size: 15px">Сила тока:</h>
+            <span style="font-size: 15px">Сила тока:</span>
             <input 
               type="text" 
               readonly 
@@ -87,7 +105,7 @@
           </div>
 
           <div class="footer-content"> 
-            <h style="font-size: 15px">Напряжение:</h>
+            <span style="font-size: 15px">Напряжение:</span>
             <input 
               type="text" 
               readonly 
@@ -96,7 +114,7 @@
           </div>
 
           <div class="footer-content">
-            <h style="font-size: 15px">Потр. мощность:</h>
+            <span style="font-size: 15px">Потр. мощность:</span>
             <input 
               type="text" 
               readonly 
@@ -105,7 +123,7 @@
           </div>
 
           <div class="footer-content">
-            <h style="font-size: 15px">Статус сети:</h>
+            <span style="font-size: 15px">Статус сети:</span>
             <div class="footer-content-status">
               <input 
                 type="text" 
@@ -168,6 +186,22 @@ export default {
   computed: {
     infoPanel(){
       return this.$store.getters.infoPanelData;
+    },
+
+    tempView(){
+      if (this.$store.getters.infoPanelData.temp > this.inputNum2){
+        return 'el-icon-bottom-right';
+      } else if (this.$store.getters.infoPanelData.temp < this.inputNum2){
+        return 'el-icon-top-right'
+      }
+    },
+
+    timePickClass(){
+      if(this.timePick == true){
+        return 'time-pick-white'
+      } else if (this.timePick == false){
+        return 'time-pick-grey'
+      }
     }
   },
 
@@ -175,7 +209,6 @@ export default {
     return {
       scuteRightSide: true,
       selectedComponent: null,
-      inputNum: 24,
       inputNum2: 22,
       amper: "3 мКа",
       voltage: "12.5 В",
@@ -184,22 +217,11 @@ export default {
       statusHub: 'ALL-HUB',
       radio1: 'В сети',
       radioButton: 'Программный',
-      leaveButton: false,
-      innerVisible: false,
-      value: '',
-      availableValue: '',
+      timePick: true,
     };
   },
 
   methods: {
-    switchButtonsScute(){
-        if (this.showbscute == this.button11scute) {
-            this.showbscute = this.button21scute;
-        } else {
-            this.showbscute = this.button11scute;
-        }
-    },
-
     onClick(){
       this.$emit('buttonClick')
     },
@@ -245,6 +267,11 @@ export default {
       });
     },
 
+    timePickFunc(){
+      console.log(' time picker button ' + this.timePick)
+      if(this.timePick == false) this.timePick = true
+        else if(this.timePick == true) this.timePick = false
+    }
   }
 };
 </script>
@@ -393,13 +420,30 @@ export default {
 
           .right-top-content{
             width: 100%;
-            height: 50%;
+            height: 20%;
             display: flex;
             justify-content: center;
             align-items: center;
           }
 
           .right-center-content{
+            width: 100%;
+            height: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .time-pick-white{
+              background-color: #ffffff;
+            }
+
+            .time-pick-grey{
+              background-color: #8A999F;
+              color: #ffffff;
+            }
+          }
+
+          .right-bottom-content{
             width: 100%;
             height: 50%;
             display: flex;
@@ -464,7 +508,7 @@ export default {
   .control-info-panel {
     flex: 0 0 auto;
     display: flex;
-    width: 15%;
+    width: 200px;
     word-wrap:break-word;
     border-left: 1px solid #DCDFE6;    
     flex-direction: column;

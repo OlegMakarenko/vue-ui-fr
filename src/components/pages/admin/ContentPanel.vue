@@ -109,7 +109,6 @@ export default {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    height: 100%;
     border-top: 1.5px solid #d0d0d0;
     border-left: 1.5px solid #d0d0d0;
     background-color: #f5f9fc;

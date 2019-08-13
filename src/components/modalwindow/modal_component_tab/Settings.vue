@@ -34,17 +34,24 @@
               </div>
 
               <div class="contact-type">
-                <span class="span-type">Тип контакта</span>
+                <div class="contact">
+                  <span class="span-type">Тип контакта</span>
                   <el-switch 
                     v-model="contactType"
                     inactive-text="З"
                     active-text="Р">
                   </el-switch>
-              </div>
-            </div>
+                </div>
 
-            <div class="config-line2">
-              
+                <div class="manage">
+                  <span class="span-type">Тип управления</span>
+                  <el-switch 
+                    v-model="manageType"
+                    inactive-text="Н"
+                    active-text="О">
+                  </el-switch>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -205,6 +212,7 @@ export default {
       typeThermo: false,
       heatCold: false,
       contactType: false,
+      manageType: false,
       modeSensor: false,
       modeShim: false,
       color: '#e91e63',
@@ -350,25 +358,27 @@ export default {
 
       .settings-config{
         width: 100%;
-        height: 32%;
-        border-bottom: 1px solid #DCDFE6;
+        height: 20%;
+        // border-bottom: 1px solid #DCDFE6;
 
         .config-content{
           width: 100%;
           height: 90%;
           display: flex;
           align-items: center;
-          justify-content: center;
+          // justify-content: center;
           flex-direction: column;
 
           .config-line1{
             width: 100%;
-            height: 50%;
+            height: 100%;
             display: flex;
             justify-content: space-between;
+            border-bottom: 1px solid #DCDFE6;
+
 
             .config-hysteresis{
-              width: 45%;
+              width: 40%;
               display: flex;
               flex-direction: column;
               text-align: left;
@@ -391,27 +401,26 @@ export default {
             }
 
             .contact-type{
-              width: 45%;
+              width: 60%;
               display: flex;
               align-items: center;
-              justify-content: space-between;
-            }
-          }
+              justify-content: center;
 
-          .config-line2{
-            width: 100%;
-            height: 50%;
-            display: flex;
-            justify-content: space-between;
+              .contact{
+                width: 50%;
+                height: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+              }
 
-            
-
-            .control-type{
-              width: 45%;
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              
+              .manage{
+                width: 50%;
+                height: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+              }
             }
           }
         }

@@ -38,7 +38,7 @@
         style="width:96.5%;height: 8%;margin-top: 7px;margin-left: 15px; border-bottom: 1px solid #d0d0d0">
         <p
           class="description">
-            Температура: {{infoPanel.temp}}
+            Температура: {{infoPanel.id}}
         </p></div>
 
         <div style="width:96.5%;height: 14%;margin-top: 7px;margin-left: 15px; border-bottom: 1px solid #d0d0d0">

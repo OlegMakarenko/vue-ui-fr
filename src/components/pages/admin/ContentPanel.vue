@@ -73,7 +73,7 @@ export default {
 
     onComponentSelect(node) {
       this.$set(this, "selectedId", node.id);
-      console.log(node)
+      console.log(node.id)
 
       this.$store.dispatch("NODE_SELECTED", node);
 

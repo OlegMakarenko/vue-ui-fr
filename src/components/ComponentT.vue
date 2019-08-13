@@ -27,7 +27,9 @@
 
     <div class="tile-footer">
       <div  v-if="isTemperature"><i class="fa fa-thermometer" style="font-size:24px;color:#606266"></i> {{temperature}}</div>
-      <div  v-if="childrenCount">Вложения: {{childrenCount}}</div>
+      <button></button>
+      <div  v-if="isTemperature"><i class="fa fa-thermometer" style="font-size:24px;color:#606266"></i> {{preassignedTemp}}</div>
+      <div class="tile-footer-count"  v-if="childrenCount">Вложения: {{childrenCount}}</div>
     </div>
   </div>
 </template>
@@ -47,6 +49,7 @@ export default {
       hover: false,
       show_icons: false,
       selectedNodeChildrenCount: 0,
+      preassignedTemp: 25,
     };
   },
 
@@ -60,6 +63,7 @@ export default {
     },
 
     isSelected() {
+      console.log(this.id)
       return this.selectedId == this.id;
     },
 
@@ -166,6 +170,17 @@ export default {
     width: 100%;
     height: 35px;
     color: #606266;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .tile-footer-count{
+      width: 100%;
+      height: 100%;
+      display:flex;
+      // justify-content: center;
+      align-items: center;
+    }
   }
 
 .selected {

@@ -69,10 +69,10 @@
 
         <div class="header-content-right">
           <div class="right-top-content">
-            <el-radio-group v-model="radioButton" size="large">
-              <el-radio-button label="Ручной"></el-radio-button>
-              <el-radio-button label="Расписание"></el-radio-button>
-              <el-radio-button label="Отъезд"></el-radio-button>
+            <el-radio-group style="width:400px" v-model="radioButton" size="large">
+              <el-radio-button label="Ручной">Ручной    </el-radio-button>
+              <el-radio-button label="Расписание">Расписание</el-radio-button>
+              <el-radio-button label="Отъезд">Отъезд</el-radio-button>
             </el-radio-group>
           </div>
 
@@ -86,8 +86,8 @@
           </div>
 
           <div class="right-bottom-content">
-            <el-button style="width: 298px;" type="danger" @click="troubleButton">
-              Аварийное отключение устройства
+            <el-button  type="danger" plain @click="troubleButton">
+              Аварийное отключение
             </el-button>
 
             
@@ -162,7 +162,7 @@
       </div>
 
       <div class="info-content">
-        Тип терморегулятора: 1
+        Тип терморегулятора: {{infoPanel.id}}
       </div>
 
       <div class="info-content">
@@ -212,7 +212,7 @@ export default {
       scuteRightSide: true,
       selectedComponent: null,
       inputNum2: 22,
-      amper: "3 мКа",
+      amper: "3 мкА",
       voltage: "12.5 В",
       kilovatt: "0.4 кВт • ч",
       status: "Wi-Fi",

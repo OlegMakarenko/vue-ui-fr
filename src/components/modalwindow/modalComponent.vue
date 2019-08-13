@@ -60,6 +60,10 @@ import settingsTab from './modal_component_tab/Settings.vue'
 export default {
     name: 'modal',
 
+    computed:{
+        
+    },
+
     data(){
         return{
             controlTabVisible: true,
@@ -67,6 +71,7 @@ export default {
             graphicTabVisible: false,
             scheduleTabVisible: false,
             settingsTabVisible: false,
+            selectedId: null,
         };
     },
 

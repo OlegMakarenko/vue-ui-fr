@@ -117,7 +117,7 @@
             </div>
 
             <div class="info-content">
-            Тип терморегулятора: 1
+            Тип терморегулятора: {{infoPanel.id}}
             </div>
 
             <div class="info-content">
@@ -196,7 +196,7 @@ export default {
   computed: {
     infoPanel(){
       return this.$store.getters.infoPanelData;
-    }
+    },
   },
 
   data() {
@@ -211,6 +211,7 @@ export default {
       dropdown: true,
       hysteresis: 10,
       innerVisible: false,
+      slectedId: null,
 
       sensorOptions: [{
         availableValue: 'Option1',

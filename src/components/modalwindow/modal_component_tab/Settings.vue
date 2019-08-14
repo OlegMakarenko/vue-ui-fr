@@ -11,25 +11,75 @@
         </div>
       </div>
       <div class="settings-panel-view">
+        <div class="mode-operation">
+          Режимы работы
+          <div class="mode-content">
+            <div class="select-sensor">
+              <el-select
+                v-model="valueSensor2"
+                multiple
+                collapse-tags
+                style="width: 400px"
+                placeholder="Select">
+
+                <el-option
+                  v-for="item in optionsSensor"
+                  :key="item.valueSensor"
+                  :label="item.labelSensor"
+                  :value="item.valueSensor">
+                </el-option>
+
+              </el-select>
+              <el-button 
+                size="large" 
+                type="primary"
+                @click="innerVisible = true">
+                  Настройка датчиков
+              </el-button>
+            </div>
+
+            <div class="shim-mode">
+              <el-select
+                v-model="valueMode2"
+                style=" width: 400px"
+                placeholder="Select">
+                <el-option
+                  v-for="item in optionsMode"
+                  :key="item.valueMode"
+                  :label="item.labelMode"
+                  :value="item.valueMode">
+                </el-option>
+              </el-select>
+              <el-button 
+                size="large" 
+                type="primary">
+                  Настройка режимов
+              </el-button>
+            </div>
+          </div>
+        </div>
+
         <div class="settings-config">
           Настройка конфигурации
           <div class="config-content">
 
             <div class="config-line1">
               <div class="config-hysteresis">
-                Гистерезис
+                <div class="hysteresis-title">Гистерезис</div>
                 <div class="hysterio">
-                  <el-slider 
-                    style="width: 60%;" 
-                    :format-tooltip="formatTooltip" 
-                    v-model="hysteresis">
-                  </el-slider>  
+                  <div class="hysterio-content">
+                    <el-slider 
+                      style="width: 60%;" 
+                      :format-tooltip="formatTooltip" 
+                      v-model="hysteresis">
+                    </el-slider>  
 
-                  <el-input 
-                    style="width: 60px;" 
-                    size="mini" 
-                    v-model="hysteresis">
-                  </el-input>
+                    <el-input 
+                      style="width: 60px;" 
+                      size="mini" 
+                      v-model="hysteresis">
+                    </el-input>
+                  </div>
                 </div>
               </div>
 
@@ -52,54 +102,6 @@
                   </el-switch>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mode-operation">
-          Режимы работы
-          <div class="mode-content">
-            <div class="select-sensor">
-              <el-select
-                v-model="valueSensor2"
-                multiple
-                collapse-tags
-                style="margin-left: 20px; width: 400px"
-                placeholder="Select">
-
-                <el-option
-                  v-for="item in optionsSensor"
-                  :key="item.valueSensor"
-                  :label="item.labelSensor"
-                  :value="item.valueSensor">
-                </el-option>
-
-              </el-select>
-              <el-button 
-                size="large" 
-                type="primary"
-                @click="innerVisible = true">
-                  Настройка датчиков
-              </el-button>
-            </div>
-
-            <div class="shim-mode">
-              <el-select
-                v-model="valueMode2"
-                style="margin-left: 20px; width: 400px"
-                placeholder="Select">
-                <el-option
-                  v-for="item in optionsMode"
-                  :key="item.valueMode"
-                  :label="item.labelMode"
-                  :value="item.valueMode">
-                </el-option>
-              </el-select>
-              <el-button 
-                size="large" 
-                type="primary">
-                  Настройка режимов
-              </el-button>
             </div>
           </div>
         </div>
@@ -162,17 +164,20 @@
 
     <el-dialog
       width="40%"
-      title="Выбор датчиков и RF устройства"
+      title="Настройка датчиков"
       :visible.sync="innerVisible"
       append-to-body>
-        <div class="dialog-content">
-          <div style="height: 180px; padding: 0px 30px;" >
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center">
+          <div style="height: 250px; width: 80%; display: flex;  justify-content: flex-start; flex-direction: column;" >
             <div 
               style="
-                height:33%; 
+                height:30%; 
+                width: 100%;
+                margin-top: 0;
                 display: flex; 
                 align-items: center; 
-                justify-content: space-between">
+                justify-content: space-between;
+                font-size: 18px;">
               Датчик SM031
               <el-select 
                 size="small" 
@@ -190,32 +195,36 @@
 
             <div 
               style="
-                height:33%; 
+                height:30%; 
+                width: 100%;
                 display: flex; 
                 align-items: center; 
-                justify-content: space-between">
-              Датчик SM031
+                justify-content: space-between;
+                font-size: 18px;">
+              Датчик RF 12
               <el-select 
                 size="small" 
-                v-model="value" 
+                v-model="valuerf" 
                 filterable 
                 placeholder="Выберите сопротивление">
                 <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
+                  v-for="item in optionsRf"
+                  :key="item.valuerf"
+                  :label="item.labelrf"
+                  :value="item.valuerf">
                 </el-option>
               </el-select>
             </div>
 
             <div 
               style="
-                height:33%; 
+                height:30%; 
+                width: 100%;
                 display: flex; 
                 align-items: center; 
-                justify-content: space-between">
-              Датчик SM031
+                justify-content: space-between;
+                font-size: 18px;">
+              Датчик RF 12
               <el-select 
                 size="small" 
                 v-model="value" 
@@ -229,28 +238,9 @@
                 </el-option>
               </el-select>
             </div>
-            <!-- <div 
-              style="
-                height:50%; 
-                display: flex; 
-                align-items: center; 
-                justify-content: space-between">
-              Выбрать доступный датчик / "RF" устройство
-              <el-select 
-                size="large" 
-                v-model="availableValue2" 
-                filterable 
-                placeholder="Выберите сопротивление">
-                <el-option
-                  v-for="item in sensorOptions"
-                  :key="item.availableValue"
-                  :label="item.sensorType"
-                  :value="item.availableValue">
-                </el-option>
-              </el-select>
-            </div> -->
           </div>
           <div style=" 
+                width: 100%;
                 display: flex; 
                 align-items: center; 
                 justify-content: space-between">
@@ -291,16 +281,6 @@ export default {
       innerVisible: false,
       slectedId: null,
 
-      sensorOptions: [{
-        availableValue: 'Option1',
-        sensorType: 'Wi-Fi'
-      }, {
-        availableValue: 'Option2',
-        sensorType: 'RF'
-      }, {
-        availableValue: 'Option3',
-        sensorType: 'RF Thermo'
-      }],
 
       options: [{
         value: 'Option1',
@@ -317,6 +297,23 @@ export default {
       }, {
         value: 'Option5',
         label: '14 кОм'
+      }],
+
+      optionsRf: [{
+        valuerf: 'Option1',
+        labelrf: '4.7 кОм'
+      }, {
+        valuerf: 'Option2',
+        labelrf: '6.8 кОм'
+      }, {
+        valuerf: 'Option3',
+        labelrf: '10 кОм'
+      }, {
+        valuerf: 'Option4',
+        labelrf: '12 кОм'
+      }, {
+        valuerf: 'Option5',
+        labelrf: '14 кОм'
       }],
 
       optionsSensor: [{
@@ -355,6 +352,7 @@ export default {
       ],
 
       value: '',
+      valuerf: '',
       availableValue2: '',
     };
   },
@@ -479,11 +477,26 @@ export default {
               // align-items: center;
               // justify-content: space-between;
 
+              .hysteresis-title{
+                height: 30%;
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-start;
+              }
+
               .hysterio{
                 width: 100%;
+                height: 70%;
                 display: flex;
-                align-items: center;
-                justify-content: space-between;
+                align-items: flex-start;
+                // justify-content: space-between;
+
+                .hysterio-content{
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                }
               }
             }
 

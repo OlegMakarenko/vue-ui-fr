@@ -540,28 +540,6 @@ export default {
               color: #ffffff;
               transition: all .3s cubic-bezier(.645,.045,.355,1);
             }
-
-            .schedule-pick-white{
-              background-color: #ffffff;
-              transition: all .3s cubic-bezier(.645,.045,.355,1);
-            }
-
-            .schedule-pick-grey{
-              background-color: #8A999F;
-              color: #ffffff;
-              transition: all .3s cubic-bezier(.645,.045,.355,1);
-            }
-
-            .ongo-pick-white{
-              background-color: #ffffff;
-              transition: all .3s cubic-bezier(.645,.045,.355,1);
-            }
-
-            .ongo-pick-grey{
-              background-color: #8A999F;
-              color: #ffffff;
-              transition: all .3s cubic-bezier(.645,.045,.355,1);
-            }
           }
 
           .right-center-content{

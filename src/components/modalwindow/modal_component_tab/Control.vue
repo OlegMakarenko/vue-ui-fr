@@ -57,21 +57,21 @@
           <div class="left-bottom-content" v-if="timePick">
             <el-slider 
               style="width: 250px; margin-left: 10px;" 
-              v-model="infoPanel.temp" 
+              v-model="inputNum2" 
               :max="50"
               :show-tooltip="false">
             </el-slider>
-            {{infoPanel.temp+'°C'}}
+            {{inputNum2+'°C'}}
           </div>
 
           <div class="left-bottom-content" v-else>
             <el-slider 
               style="width: 250px; margin-left: 10px;" 
-              v-model="infoPanel.temp" 
+              v-model="inputNum2" 
               :max="30"
               :show-tooltip="false">
             </el-slider>
-            {{infoPanel.temp+' Мин.'}}
+            {{inputNum2+' Мин.'}}
           </div>
         </div>
 

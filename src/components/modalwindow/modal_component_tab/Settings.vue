@@ -166,16 +166,16 @@
       :visible.sync="innerVisible"
       append-to-body>
         <div class="dialog-content">
-          <div style="height: 200px;">
+          <div style="height: 180px; padding: 0px 30px;" >
             <div 
               style="
-                height:50%; 
+                height:33%; 
                 display: flex; 
                 align-items: center; 
                 justify-content: space-between">
-              Тип проводного датчика температуры
+              Датчик SM031
               <el-select 
-                size="large" 
+                size="small" 
                 v-model="value" 
                 filterable 
                 placeholder="Выберите сопротивление">
@@ -189,6 +189,47 @@
             </div>
 
             <div 
+              style="
+                height:33%; 
+                display: flex; 
+                align-items: center; 
+                justify-content: space-between">
+              Датчик SM031
+              <el-select 
+                size="small" 
+                v-model="value" 
+                filterable 
+                placeholder="Выберите сопротивление">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </div>
+
+            <div 
+              style="
+                height:33%; 
+                display: flex; 
+                align-items: center; 
+                justify-content: space-between">
+              Датчик SM031
+              <el-select 
+                size="small" 
+                v-model="value" 
+                filterable 
+                placeholder="Выберите сопротивление">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </div>
+            <!-- <div 
               style="
                 height:50%; 
                 display: flex; 
@@ -207,10 +248,15 @@
                   :value="item.availableValue">
                 </el-option>
               </el-select>
-            </div>
+            </div> -->
           </div>
-
-          <el-button type="primary" @click="innerVisible = false">Добавить выбранное</el-button>
+          <div style=" 
+                display: flex; 
+                align-items: center; 
+                justify-content: space-between">
+            <el-button size="medium" type="primary" @click="innerVisible = false">Сохранить</el-button>
+            <el-button size="medium"  @click="innerVisible = false">Отменить</el-button>
+          </div>
         </div>
     </el-dialog>
   </div>

@@ -69,28 +69,28 @@
 
         <div class="header-content-right">
           <div class="right-top-content">
-            <el-radio-group style="width:400px" v-model="radioButton" size="large">
-              <el-radio-button label="Ручной">Ручной    </el-radio-button>
-              <el-radio-button label="Расписание">Расписание</el-radio-button>
-              <el-radio-button label="Отъезд">Отъезд</el-radio-button>
+            <el-radio-group  style="width:400px;" v-model="radioButton" size="large">
+              <el-radio-button label="Ручной">&nbsp;&nbsp; Ручной &nbsp;&nbsp;</el-radio-button>
+              <el-radio-button label="Расписание">&nbsp;&nbsp; Расписание &nbsp;&nbsp;</el-radio-button>
+              <el-radio-button label="Отъезд">&nbsp;&nbsp; Отъезд &nbsp;&nbsp;</el-radio-button>
             </el-radio-group>
           </div>
 
           <div class="right-center-content">
             <el-button 
-              style="width: 298px;"
               :class="timePickClass"
               @click="timePickFunc">
                 Режим работы без датчика
             </el-button>
-          </div>
-
-          <div class="right-bottom-content">
             <el-button  type="danger" plain @click="troubleButton">
               Аварийное отключение
             </el-button>
+          </div>
 
-            
+          <div class="right-bottom-content">
+            <button class="handle-mode-button">{{handleMode}}</button>
+            <button class="schedule-mode-button">{{scheduleMode}}</button>
+            <button class="ongo-mode-button">{{ongoMode}}</button>
           </div>
         </div>
       </div>
@@ -217,23 +217,17 @@ export default {
       kilovatt: "0.4 кВт • ч",
       status: "Wi-Fi",
       statusHub: 'ALL-HUB',
-      radio1: 'В сети',
       radioButton: 'Программный',
       timePick: true,
+      handleMode: 'Ручной',
+      scheduleMode: 'Расписание',
+      ongoMode: 'Отъезд',
     };
   },
 
   methods: {
     onClick(){
       this.$emit('buttonClick')
-    },
-
-    handleClose(done) {
-      this.$confirm('Are you sure to close this dialog?')
-        .then(_ => {
-          done();
-        })
-        .catch(_ => {});
     },
 
     troubleButton() {
@@ -453,15 +447,31 @@ export default {
             display: flex;
             justify-content: center;
             align-items: center;
+
+            .handle-mode-button{
+              height: 40px;
+              width: 137px;
+            }
+
+            .schedule-mode-button{
+              height: 40px;
+              width: 137px;
+            }
+
+            .ongo-mode-button{
+              height: 40px;
+              width: 137px;
+            }
           }
         }
       } 
 
         .control-footer{
           width: 100%;
-          height: 60px;
+          height: 100px;
           display: flex;
           align-items: center;
+          border-top: 1px solid #DCDFE6;
           border-bottom: 1px solid #DCDFE6;
         
         .control-footer-content{

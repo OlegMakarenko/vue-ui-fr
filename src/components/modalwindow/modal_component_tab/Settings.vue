@@ -59,22 +59,6 @@
         <div class="mode-operation">
           Режимы работы
           <div class="mode-content">
-            <div>
-              <template>
-                <el-select
-                  size="large" 
-                  v-model="value1" 
-                  multiple placeholder="Select">
-                  <el-option
-                    v-for="item in selectionSensors"
-                    :key="item.label"
-                    :label="item.label"
-                    :value="item.label">
-                  </el-option>
-                </el-select>
-              </template>
-            </div>
-
             <el-button 
               style="margin-top: 11px;" 
               size="large" 
@@ -265,25 +249,6 @@ export default {
         label: '14 кОм'
       }],
 
-      
-      selectionSensors: [{
-          value: 'Датчик SM031',
-          label: 'Датчик SM031'
-        }, {
-          value: 'Датчик RF12',
-          label: 'Датчик RF12'
-        }, {
-          value: 'Датчик RF15',
-          label: 'Датчик RF15'
-        }, {
-          value: 'Датчик SM033',
-          label: 'Датчик SM033'
-        }, {
-          value: 'Датчик SM035',
-          label: 'Датчик SM035'
-        }],
-        value1: [],
-
       predefineColors: [
         '#e91e63',
         '#673ab7',
@@ -428,22 +393,27 @@ export default {
               }
             }
 
+
             .contact-type{
               width: 60%;
+              height: 100%;
               display: flex;
               align-items: center;
+              justify-content: center;
 
               .contact{
                 width: 50%;
-                height: 49%;
+                height: 50%;
                 display: flex;
+                align-items: center;
                 justify-content: space-evenly;
               }
 
               .manage{
                 width: 50%;
-                height: 49%;
+                height: 50%;
                 display: flex;
+                align-items: center;
                 justify-content: space-evenly;
               }
             }

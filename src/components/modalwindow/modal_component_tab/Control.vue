@@ -14,28 +14,36 @@
     <div class="control-panel-view">
       <div class="control-header-content">
         <div class="header-content-left">
-          <div class="left-top-content">
-            <div class="ltc-left">
+          <div class="left-top-content" v-if="timePick">
+            <div class="ltc-left" >
               Текущая
             </div> 
-            <div class="invisible-ltc"></div>
+            <div class="invisible-ltc" ></div >
             <div class="ltc-right">
               Заданная
             </div>
           </div>
 
-          <div class="left-center-content">
+          <div class="left-center-content" v-if="timePick">
             <div class="lcc-left">
               {{infoPanel.temp+'°C'}}
             </div>
 
             <div class="lcc-center">
-              <i :class="tempView"
-                 style="color: darkturquoise; font-size: 25px;">
-              </i>
+              <img
+                :class="tempView" 
+                class="up-down-heating"
+                v-if="iconDown" 
+                src="./heating-icon-down.png">
+
+              <img
+                :class="tempView" 
+                class="up-down-heating"
+                v-if="iconUp" 
+                src="./heating-icon-up.png">
             </div>
 
-            <div class="lcc-right">
+            <div class="lcc-right" v-if="timePick">
               <el-input-number 
                 style="width: 115px" 
                 size="medium" 
@@ -48,7 +56,7 @@
             
           <div class="left-bottom-content" v-if="timePick">
             <el-slider 
-              style="width: 300px;" 
+              style="width: 250px; margin-left: 10px;" 
               v-model="infoPanel.temp" 
               :max="50"
               :show-tooltip="false">
@@ -58,7 +66,7 @@
 
           <div class="left-bottom-content" v-else>
             <el-slider 
-              style="width: 300px;" 
+              style="width: 250px; margin-left: 10px;" 
               v-model="infoPanel.temp" 
               :max="30"
               :show-tooltip="false">
@@ -68,29 +76,26 @@
         </div>
 
         <div class="header-content-right">
+          <div class="invisible-header-content"></div>
           <div class="right-top-content">
-            <el-radio-group  style="width:400px;" v-model="radioButton" size="large">
-              <el-radio-button label="Ручной">&nbsp;&nbsp; Ручной &nbsp;&nbsp;</el-radio-button>
-              <el-radio-button label="Расписание">&nbsp;&nbsp; Расписание &nbsp;&nbsp;</el-radio-button>
-              <el-radio-button label="Отъезд">&nbsp;&nbsp; Отъезд &nbsp;&nbsp;</el-radio-button>
-            </el-radio-group>
+              <button :class="handleButtonClass" @click="handleFunc" class="handle-mode-button">Ручной</button>
+              <button :class="scheduleButtonClass" @click="scheduleFunc" class="schedule-mode-button">Распиание</button>
+              <button :class="ongoButtonClass" @click="ongoFunc" class="ongo-mode-button">Отъезд</button>
           </div>
 
           <div class="right-center-content">
             <el-button 
               :class="timePickClass"
-              @click="timePickFunc">
+              @click="timePickFunc" 
+              v-if="sensorVisible">
                 Режим работы без датчика
             </el-button>
-            <el-button  type="danger" plain @click="troubleButton">
+            <el-button 
+              type="danger" 
+              @click="troubleButton"
+              plain >
               Аварийное отключение
             </el-button>
-          </div>
-
-          <div class="right-bottom-content">
-            <button class="handle-mode-button">{{handleMode}}</button>
-            <button class="schedule-mode-button">{{scheduleMode}}</button>
-            <button class="ongo-mode-button">{{ongoMode}}</button>
           </div>
         </div>
       </div>
@@ -179,7 +184,6 @@
 
 <script>
 
-
 export default {
   components: {
 
@@ -192,9 +196,11 @@ export default {
 
     tempView(){
       if (this.$store.getters.infoPanelData.temp > this.inputNum2){
-        return 'el-icon-bottom-right';
+         this.iconUp = false;
+         this.iconDown = true;
       } else if (this.$store.getters.infoPanelData.temp < this.inputNum2){
-        return 'el-icon-top-right'
+        this.iconUp = true;
+        this.iconDown = false;
       }
     },
 
@@ -203,6 +209,30 @@ export default {
         return 'time-pick-white'
       } else if (this.timePick == false){
         return 'time-pick-grey'
+      }
+    },
+
+    handleButtonClass(){
+      if(this.handleMode == true){
+        return 'handle-pick-grey'
+      } else if (this.handleMode == false) {
+         return 'handle-pick-white'
+      }
+    },
+
+    scheduleButtonClass(){
+      if(this.scheduleMode == true){
+        return 'handle-pick-grey'
+      } else if (this.scheduleMode == false) {
+         return 'handle-pick-white'
+      }
+    },
+
+    ongoButtonClass(){
+      if(this.ongoMode == true){
+        return 'handle-pick-grey'
+      } else if (this.ongoMode == false) {
+         return 'handle-pick-white'
       }
     }
   },
@@ -219,9 +249,12 @@ export default {
       statusHub: 'ALL-HUB',
       radioButton: 'Программный',
       timePick: true,
-      handleMode: 'Ручной',
-      scheduleMode: 'Расписание',
-      ongoMode: 'Отъезд',
+      handleMode: true,
+      scheduleMode: false,
+      ongoMode: false,
+      sensorVisible: false,
+      iconUp: true,
+      iconDown: false
     };
   },
 
@@ -267,7 +300,36 @@ export default {
       console.log(' time picker button ' + this.timePick)
       if(this.timePick == false) this.timePick = true
         else if(this.timePick == true) this.timePick = false
-    }
+    },
+
+    handleFunc(){
+      if(this.handleMode == false){
+        this.handleMode = true
+        this.sensorVisible = true
+        this.scheduleMode = false
+        this.ongoMode = false
+      }
+    },
+
+    scheduleFunc(){
+      if(this.scheduleMode == false && this.timePick == true){
+        this.scheduleMode = true
+        this.sensorVisible = false
+        this.timePick == false
+        this.handleMode = false
+        this.ongoMode = false
+      }
+    },
+
+    ongoFunc(){
+      if(this.ongoMode == false && this.timePick == true){
+        this.ongoMode = true
+        this.sensorVisible = false
+        this.timePick == false
+        this.handleMode = false
+        this.scheduleMode = false
+      }
+    },
   }
 };
 </script>
@@ -339,7 +401,7 @@ export default {
 
           .left-top-content{
             width: 100%;
-            height: 20%;
+            height: 10%;
             display: flex;
             align-items: flex-end;
             justify-content: space-around;
@@ -371,7 +433,7 @@ export default {
 
           .left-center-content{
             width: 100%;
-            height: 30%;
+            height: 25%;
             display: flex;
             align-items: center;
             // justify-content: space-around;
@@ -390,6 +452,11 @@ export default {
               display: flex;
               align-items: center;
               justify-content: center;
+
+              .up-down-heating{
+                width: 35px;
+                height: 35px;
+              }
             }
             .lcc-right{
               width: 33%;
@@ -402,7 +469,7 @@ export default {
 
           .left-bottom-content{
             width: 100%;
-            height: 50%;
+            height: 65%;
             display: flex;
             flex-direction: row;
             justify-content: space-around;
@@ -414,19 +481,94 @@ export default {
           width: 50%;
           height: 100%;
 
+          .invisible-header-content{
+            width:100%;
+            height: 10%;
+          }
+
           .right-top-content{
             width: 100%;
-            height: 20%;
+            height: 25%;
             display: flex;
             justify-content: center;
             align-items: center;
+
+            .handle-mode-button{
+              height: 40px;
+              width: 143px;
+              background-color: #ffffff;
+              border: 1px solid #DCDFE6;
+              border-top-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+              color: #606266;
+              cursor: pointer;
+              outline: none;
+            }
+
+            .schedule-mode-button{
+              height: 40px;
+              width: 143px;
+              background-color: #ffffff;
+              border-top: 1px solid #DCDFE6;
+              border-bottom: 1px solid #DCDFE6;
+              border-left: none;
+              border-right: none;
+              color: #606266;
+              cursor: pointer;
+              outline: none;
+            }
+
+            .ongo-mode-button{
+              height: 40px;
+              width: 143px;
+              background-color: #ffffff;
+              border: 1px solid #DCDFE6;
+              border-top-right-radius: 4px;
+              border-bottom-right-radius: 4px;
+              color: #606266;
+              cursor: pointer;
+              outline: none;
+            }
+
+            .handle-pick-white{
+              background-color: #ffffff;
+              transition: all .3s cubic-bezier(.645,.045,.355,1);
+            }
+
+            .handle-pick-grey{
+              background-color: #8A999F;
+              color: #ffffff;
+              transition: all .3s cubic-bezier(.645,.045,.355,1);
+            }
+
+            .schedule-pick-white{
+              background-color: #ffffff;
+              transition: all .3s cubic-bezier(.645,.045,.355,1);
+            }
+
+            .schedule-pick-grey{
+              background-color: #8A999F;
+              color: #ffffff;
+              transition: all .3s cubic-bezier(.645,.045,.355,1);
+            }
+
+            .ongo-pick-white{
+              background-color: #ffffff;
+              transition: all .3s cubic-bezier(.645,.045,.355,1);
+            }
+
+            .ongo-pick-grey{
+              background-color: #8A999F;
+              color: #ffffff;
+              transition: all .3s cubic-bezier(.645,.045,.355,1);
+            }
           }
 
           .right-center-content{
             width: 100%;
-            height: 30%;
+            height: 65%;
             display: flex;
-            justify-content: center;
+            justify-content: space-evenly;
             align-items: center;
 
             .time-pick-white{
@@ -438,29 +580,6 @@ export default {
               background-color: #8A999F;
               color: #ffffff;
               transition: all .3s cubic-bezier(.645,.045,.355,1);
-            }
-          }
-
-          .right-bottom-content{
-            width: 100%;
-            height: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            .handle-mode-button{
-              height: 40px;
-              width: 137px;
-            }
-
-            .schedule-mode-button{
-              height: 40px;
-              width: 137px;
-            }
-
-            .ongo-mode-button{
-              height: 40px;
-              width: 137px;
             }
           }
         }

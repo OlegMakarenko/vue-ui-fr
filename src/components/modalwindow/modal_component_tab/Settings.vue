@@ -59,23 +59,47 @@
         <div class="mode-operation">
           Режимы работы
           <div class="mode-content">
-            <el-button 
-              style="margin-top: 11px;" 
-              size="large" 
-              type="primary"
-              @click="innerVisible = true">Выбор датчиков</el-button>
             <div class="select-sensor">
-              Терморегулирование по выбранному датчику
-              <el-switch 
-                  v-model="modeSensor">
-              </el-switch>
+              <el-select
+                v-model="valueSensor2"
+                multiple
+                collapse-tags
+                style="margin-left: 20px; width: 400px"
+                placeholder="Select">
+
+                <el-option
+                  v-for="item in optionsSensor"
+                  :key="item.valueSensor"
+                  :label="item.labelSensor"
+                  :value="item.valueSensor">
+                </el-option>
+
+              </el-select>
+              <el-button 
+                size="large" 
+                type="primary"
+                @click="innerVisible = true">
+                  Настройка датчиков
+              </el-button>
             </div>
 
             <div class="shim-mode">
-              Терморегулирование в аварийном режиме "ШИМ"
-              <el-switch 
-                  v-model="modeShim">
-              </el-switch>
+              <el-select
+                v-model="valueMode2"
+                style="margin-left: 20px; width: 400px"
+                placeholder="Select">
+                <el-option
+                  v-for="item in optionsMode"
+                  :key="item.valueMode"
+                  :label="item.labelMode"
+                  :value="item.valueMode">
+                </el-option>
+              </el-select>
+              <el-button 
+                size="large" 
+                type="primary">
+                  Настройка режимов
+              </el-button>
             </div>
           </div>
         </div>
@@ -248,6 +272,30 @@ export default {
         value: 'Option5',
         label: '14 кОм'
       }],
+
+      optionsSensor: [{
+          valueSensor: 'Option1',
+          labelSensor: 'Датчик SM031'
+        }, {
+          valueSensor: 'Option2',
+          labelSensor: 'Датчик RF 12'
+        }, {
+          valueSensor: 'Option3',
+          labelSensor: 'Датчик RF 12'
+        }],
+        valueSensor2: [],
+
+        optionsMode: [{
+          valueMode: 'Option1',
+          labelMode: 'По проводному датчику + RF беспроводной датчик'
+        }, {
+          valueMode: 'Option2',
+          labelMode: 'В режиме ШИМ'
+        }, {
+          valueMode: 'Option3',
+          labelMode: 'В режиме ШИМ + RF беспроводной датчик'
+        }],
+        valueMode2: [],
 
       predefineColors: [
         '#e91e63',

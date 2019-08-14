@@ -7,29 +7,49 @@
     :class="{selected: isSelected}">
 
     <div class="tile-header">
-      <i :class="iconClass"
-      ></i>
-      <div
-        v-if="isSelected">
-      <i
-        v-if="iconSettings"
-        class="el-icon-s-tools"
-        @click="showModal2"
-      ></i>
+      <div class="folder-odometer-icon">
+        <i :class="iconClass"></i>
+        <img src="./img13.jpg" style="width: 40px; height: 40px;" v-if="devicePicture">
+      </div>
+
+      <div class="computed-title">{{computedTitle}}</div>
+
+      <div class="icon-tool" v-if="isSelected">
+        <i v-if="iconSettings"
+          class="el-icon-s-tools"
+          @click="showModal2">
+        </i>
     </div>
         <ModalC v-show="isModalVisible2" @close="closeModal2"/>
     </div>
 
 
     <div class="tile-body">
-      <div class="text-body">{{computedTitle}}</div>
+      <div class="text-body">
+        {{computedTitle}}
+      </div>
+
+      <div class="temperature-content"  v-if="isTemperature">
+        <div class="temperature-output">
+          {{temperature+'°'}}
+        </div>
+        <div class="icon-right">
+          <i class="el-icon-right" style="color: #666"></i>
+        </div>
+        <div class="preassigned-output">
+          {{preassignedTemp+'°'}}
+        </div>
+      </div>
     </div>
 
     <div class="tile-footer">
-      <div  v-if="isTemperature"><i class="fa fa-thermometer" style="font-size:24px;color:#606266"></i> {{temperature}}</div>
-      <button></button>
-      <div  v-if="isTemperature"><i class="fa fa-thermometer" style="font-size:24px;color:#606266"></i> {{preassignedTemp}}</div>
-      <div class="tile-footer-count"  v-if="childrenCount">Вложения: {{childrenCount}}</div>
+      <div class="tile-footer-count" v-if="childrenCount">
+        Вложения: {{childrenCount}}
+      </div>
+
+      <div class="color-indicator">
+        <div v-if="indicatorVisible" class="indicator"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,8 +68,10 @@ export default {
       isModalVisible2: false,
       hover: false,
       show_icons: false,
+      devicePicture: false,
       selectedNodeChildrenCount: 0,
-      preassignedTemp: 25,
+      preassignedTemp: 30,
+
     };
   },
 
@@ -72,7 +94,7 @@ export default {
     },
 
     iconClass() {
-      if (this.type === "device") return "el-icon-odometer";
+      if (this.type === "device") return this.devicePicture = true;
       if (this.type === "folder") return "el-icon-folder";
     },
 
@@ -89,6 +111,11 @@ export default {
 
     temperature(){
       return this.data.temperature;
+    },
+
+    indicatorVisible(){
+      if (this.type === "device") return true;
+      if(this.type === "folder") return false;
     }
 
   },
@@ -145,41 +172,120 @@ export default {
 }
 
   .tile-header{
+    width: 100%;
+    height: 40px;
     color: #606266;
     font-size: 20px;
-    width: 100%;
-    height: 70px;
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
+
+    .folder-odometer-icon{
+      width: 20%;
+      height: 100%;
+    }
+
+    .computed-title{
+      width: 60%;
+      height: 100%;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      text-align: left;
+    }
+
+    .icon-tool{
+      width: 20%;
+      height: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
   }
 
   .tile-body {
     width: 100%;
-    height: 85px;
+    height: 120px;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+
     font-size: 18px;
     color: #606266;
   }
 
   .text-body{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 15px;
   }
 
-  .tile-footer {
+  .temperature-content{
+      width: 100%;
+      height: 60%;
+      font-size: 22px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+      .temperature-output{
+        width:40%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .icon-right{
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .preassigned-output{
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+    }
+
+  .tile-footer{
     width: 100%;
-    height: 35px;
+    height: 40px;
     color: #606266;
-    display:flex;
-    justify-content: space-between;
+    display: flex;
     align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
 
     .tile-footer-count{
-      width: 100%;
+      width: 50%;
       height: 100%;
       display:flex;
-      // justify-content: center;
-      align-items: center;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .color-indicator{
+      width:50%;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+
+
+      .indicator{
+        width: 50px;
+        height: 8px;
+        border: 1px solid #DCDFE6;
+        border-radius: 36px;
+        background-color: aqua;
+        margin: 5px;
+      }
     }
   }
 

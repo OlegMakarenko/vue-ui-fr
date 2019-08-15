@@ -79,7 +79,7 @@
           <div class="invisible-header-content"></div>
           <div class="right-top-content">
               <button :class="handleButtonClass" @click="handleFunc" class="handle-mode-button">Ручной</button>
-              <button :class="scheduleButtonClass" @click="scheduleFunc" class="schedule-mode-button">Распиание</button>
+              <button :class="scheduleButtonClass" @click="scheduleFunc" class="schedule-mode-button">Расписание</button>
               <button :class="ongoButtonClass" @click="ongoFunc" class="ongo-mode-button">Отъезд</button>
           </div>
 

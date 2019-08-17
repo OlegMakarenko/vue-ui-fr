@@ -7,33 +7,41 @@
     :class="{selected: isSelected}">
 
     <div class="left-side-list">
-      <i
-        :class="iconClass"
-         style="float:left;
-              color: grey;
-              font-size: 20px;
-              cursor: pointer;"
-      ></i>
+      <i :class="iconClass" class="left-side-icon"></i>
+        
+      <img src="./img13.jpg" style="width: 40px; height: 40px; display: flex;" v-if="devicePicture">
+
+      <div class="device-model" v-if="iconSettings">
+        LTC090
+      </div>
+
       <div class="children-count-list" v-if="childrenCount">Вложения: {{childrenCount}}</div>
-      <i  v-if="isTemperature" class="fa fa-thermometer thermometer-list"></i>
-      <div  v-if="isTemperature" style="margin-left: 5px;"> {{temperature}}</div>
+      <!-- <i  v-if="isTemperature" class="fa fa-thermometer thermometer-list"></i> -->
+      <!-- <div  v-if="isTemperature" style="margin-left: 5px;"> {{temperature}}</div> -->
     </div>
 
     <ModalC v-show="isModalVisible2" @close="closeModal2"/>
 
     <div class="center-side-list">
+      <div v-if="isTemperature">
+        {{temperature+'°'}}
+          <i class="el-icon-right" style="color: #666"></i>
+        {{preassignedTemp+'°'}}        
+      </div>
       <div>{{computedTitle}}</div>
     </div>
 
-    <div class="right-side-list" v-if="isSelected">
-      <i
-        class="el-icon-s-tools"
-        @click="showModal2"
-        style="float:right;
-               color: grey;
-               font-size: 20px;
-               cursor: pointer;"
-      ></i>
+    <div class="right-side-list">
+      <div class="right-side-icon" v-if="isSelected">
+        <i class="el-icon-s-tools"
+          @click="showModal2"
+          v-if="iconSettings">
+        </i>
+      </div>
+
+      <div class="color-indicator">
+        <div v-if="indicatorVisible" class="indicator"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -52,7 +60,9 @@ export default {
       isModalVisible2: false,
       hover: false,
       show_icons: false,
+      devicePicture: false,
       selectedNodeChildrenCount: 0,
+      preassignedTemp: 30,
     };
   },
 
@@ -74,8 +84,18 @@ export default {
     },
 
     iconClass() {
-      if (this.type === "device") return "el-icon-odometer";
+      if (this.type === "device") return this.devicePicture = true;      
       if (this.type === "folder") return "el-icon-folder";
+    },
+
+    iconSettings(){
+      if (this.type === "device") return "el-icon-s-tools"
+      if (this.type === "folder") return false;
+    },
+
+    indicatorVisible(){
+      if (this.type === "device") return true;
+      if(this.type === "folder") return false;
     },
 
     isTemperature(){
@@ -126,8 +146,8 @@ export default {
 
 <style lang="scss" scoped>
 .component-list {
-  width: 91.5%;
-  height: 20px;
+  width: 100%;
+  height: 40px;
   margin: 15.7px;
   padding: 17px;
   border-style: solid;
@@ -139,22 +159,38 @@ export default {
   background-color: white;
 
   .left-side-list{
-    width: 30%;
+    width: 25%;
     display: flex;
     color: #606266;
     justify-content: flex-start;
+    align-items: center;
+
+    .left-side-icon{
+      color: grey;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .device-model{
+      padding-left: 15px;
+      font-size: 13px;
+    }
   }
 
   .children-count-list{
-    margin-left: 20px;
+    margin-left: 10px;
+    font-size: 13px;
   }
 
   .center-side-list {
-    width:40%;
+    width:50%;
+    height: 100%;
     display: flex;
-    justify-content: center;
-    font-size: 18px;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row-reverse;
     text-align: center;
+    font-size: 18px;
     cursor: pointer;
     color: #606266;
   }
@@ -167,9 +203,41 @@ export default {
   }
 
   .right-side-list{
-    width:30%;
+    width:25%;
+    height: 100%;
     display: flex;
+    align-content: flex-end;
     justify-content: flex-end;
+    flex-direction: row;
+
+    .right-side-icon{
+      width: 85%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      color: grey;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .color-indicator{
+      width: 15%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+
+      .indicator{
+        width: 15px;
+        height: 15px;
+        border: 1px solid #DCDFE6;
+        border-radius: 360px;
+        background-color: aqua;
+        margin-right: 1px;
+      }
+    }
   }
 }
 .selected {

@@ -12,7 +12,10 @@
         <img src="./img13.jpg" style="width: 40px; height: 40px;" v-if="devicePicture">
       </div>
 
-      <div class="computed-title">{{computedTitle}}</div>
+      <div class="computed-title" v-if="iconSettings">
+        <!-- {{computedTitle}} -->
+        LTC090
+      </div>
 
       <div class="icon-tool" v-if="isSelected">
         <i v-if="iconSettings"
@@ -187,10 +190,11 @@ export default {
     .computed-title{
       width: 60%;
       height: 100%;
-      font-size: 15px;
+      font-size: 13px;
       display: flex;
       align-items: center;
       text-align: left;
+      padding-left: 15px;
     }
 
     .icon-tool{
@@ -279,8 +283,8 @@ export default {
 
 
       .indicator{
-        width: 50px;
-        height: 8px;
+        width: 45px;
+        height: 6px;
         border: 1px solid #DCDFE6;
         border-radius: 36px;
         background-color: aqua;

@@ -91,10 +91,11 @@
                 Режим работы без датчика
             </el-button>
             <el-button 
-              type="danger" 
+              type="info" 
               @click="troubleButton"
-              plain >
-              Аварийное отключение
+              plain 
+              style="width: 200px">
+              Спящий режим
             </el-button>
           </div>
         </div>
@@ -252,7 +253,7 @@ export default {
       handleMode: true,
       scheduleMode: false,
       ongoMode: false,
-      sensorVisible: false,
+      sensorVisible: true,
       iconUp: true,
       iconDown: false
     };

@@ -25,6 +25,34 @@ function colorPick(){
     }
 }
 
+ws.onopen = function(){
+    console.log("Соединение установлено");
+    ws.send("Соединение установлено");
+}
+
+ws.onclose = function(event) {
+    if (event.wasClean) {
+        console.log('Соединение закрыто чисто');
+        ws.send("Соединение закрыто чисто");
+    } else {
+        console.log('Обрыв соединения');
+        ws.send("Обрыв соединения");
+
+    }
+    console.log('Код: ' + event.code + ' причина: ' + event.reason);
+    ws.send("Обрыв соединения " + 'Код: ' + event.code + ' причина: ' + event.reason);
+};
+
+ws.onmessage = function(event) {
+    console.log("Получены данные " + event.data);
+    ws.send("Получены данные " + event.data);
+};
+
+ws.onerror = function(error) {
+    console.log("Ошибка " + error.message);
+    ws.send("Ошибка " + error.message);
+};
+
 export default  new Vuex.Store({
     state:{
         auth_token: null,
@@ -216,6 +244,10 @@ export default  new Vuex.Store({
 
         onAppLoad: (context, payload) => {
             context.commit("setFormat");
+
+            ws.onopen = function(){
+                alert('Succesfly')
+            }
         },
 
         getChart: (context, payload) => {

@@ -121,6 +121,8 @@
               </el-color-picker>
             </div>
 
+            <el-button @click="changeColor">Применить цвет</el-button>
+
             <div class="settings-button-content">
               <h style="font-size: 18px;">Блокировка кнопок</h>
               <el-switch v-model="blockButton"></el-switch>
@@ -382,6 +384,10 @@ export default {
 
     formatTooltip() {
       return this.hysteresis / 10;
+    },
+
+    changeColor(){
+     return document.body.style.backgroundColor('#673AB7')
     }
   }
 };

@@ -1,7 +1,12 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import Format from 'fractal-format-protocol';
 import axios from "axios"
 import { Notification } from 'element-ui';  
+
+const HTTP_BASE_URL = "https://fractal.tools";
+const WEB_SOCKET_ENDPOINT = "wss://fractal.tools/ws"
+const ws = new WebSocket(WEB_SOCKET_ENDPOINT);
 
 Vue.use(Vuex);
 
@@ -29,6 +34,7 @@ export default  new Vuex.Store({
         tree2Data: [],
         content: [],
         path: [],
+        instances: [],
         isLoading: false,
         infoPanelData: {
             name: ' ',
@@ -49,6 +55,14 @@ export default  new Vuex.Store({
         isLoading: state => state.isLoading,
         infoPanelData: state => state.infoPanelData,
         selectedNode: state => state.infoPanelData,
+
+        getInstance: state => payload => {
+            if(state.instances[payload.class] 
+            && state.instances[payload.class][payload.object])
+                return state.instances[payload.class][payload.object];
+            else
+                return null;
+        }
     },
 
     mutations:{
@@ -83,6 +97,16 @@ export default  new Vuex.Store({
             Vue.set(state.infoPanelData, "info", data.data.info);
             Vue.set(state.infoPanelData, "temp", data.data.temperature);
             Vue.set(state.infoPanelData, "id", data.id);
+        },
+
+        setFormat: (state) => {
+            const format = new Format({
+                WebSocketClient: ws,
+                httpClient: Axios,
+                httpBaseUrl: HTTP_BASE_URL,
+                instances: state.instances
+            });
+            state.format = format;
         }
     },
 
@@ -188,6 +212,37 @@ export default  new Vuex.Store({
 
         COLOR_SWITCH:(context)=>{
             colorPick(context)
+        },
+
+        onAppLoad: (context, payload) => {
+            context.commit("setFormat");
+        },
+
+        getChart: (context, payload) => {
+            const dateRangeComponent = context.getters.getInstance({
+                class: "DateRange",
+                object: "dateRange1"
+            });
+            const dropDownComponent = context.getters.getInstance({
+                class: "DropDown",
+                object: "dropDown5"
+            });
+            
+            const dateRange = dateRangeComponent.getValue;
+            const filters = dropDownComponent.getvalue;
+            
+            context.state.format.send({
+                method: "post",
+                url: "trends/chart",
+                path: "d1/d2",
+                class: "AnotherBackendService",
+                object: "someObject",
+                function: "trends/chart",
+                data: {
+                    dateRange,
+                    filters
+                }
+            })
         }
     }
 });

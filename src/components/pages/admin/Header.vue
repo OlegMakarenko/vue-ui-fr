@@ -8,6 +8,7 @@
              margin-top: 10px;"
       width="180"
       height="45"
+      ondragstart="return false;"
     >
     <!-- <div class="header-text">
       <div class="header-brand">Fractal</div>

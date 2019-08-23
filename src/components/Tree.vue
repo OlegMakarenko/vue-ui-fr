@@ -43,9 +43,12 @@
 </template>
 
 <script>
+import BaseComponent from './BaseComponent.vue'
 export default {
+  extends: BaseComponent,
+
   label: "lside",
-  props: ["treeData", "id", "isDraggable"],
+  props: [/*"treeData", */"id", "isDraggable"],
 
   computed:{
     infoPanel(){
@@ -54,12 +57,19 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      class: "Tree",
+      treeData: [],
+    };
   },
 
   components: {},
 
   methods: {
+    doSetData(data){
+      this.$set(this, "treeData", data)
+    },
+
     handleDragStart(node, ev) {
       console.log("drag start", node);
     },

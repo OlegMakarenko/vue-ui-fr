@@ -39,8 +39,9 @@ import InfoPanel from "./InfoPanel.vue";
 import ComponentTile from "../../ComponentT.vue";
 import ComponentList from "../../ComponentL.vue";
 import ModalSettings from "../../modalwindow/modalComponent.vue";
-
+import BaseComponent from '../../BaseComponent.vue'
 export default {
+  extends: BaseComponent,
   components: {
     ControlPanel,
     InfoPanel,
@@ -50,14 +51,16 @@ export default {
   },
 
   computed: {
-    content() {
+    /*content() {
       if (this.$store.getters.content)
         return this.$store.getters.content.children;
-    }
+    }*/
   },
 
   data() {
     return {
+      class: "ContentPanel",
+      content: [],
       deviceComponentView: "ComponentTile",
       selectedId: null,
       selectedTitle: null,
@@ -67,6 +70,10 @@ export default {
   },
 
   methods: {
+    doSetData(data){
+      this.$set(this, "content", data)
+    },
+
     changeDeviceComponentView(changedView) {
       this.$set(this, "deviceComponentView", changedView); // this.deviceComponentView = changedView;
     },

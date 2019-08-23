@@ -13,12 +13,14 @@
 
           <el-tab-pane label="Устройства" name="first" class="tab-tree1">
             <Tree
+              object="devicesTree"
               :treeData="tree2Data"
               :id="2"
               class="tree_view"/>
             </el-tab-pane>
           <el-tab-pane label="Группы" name="second" class="tab-tree1">
             <Tree  
+              object="groupsTree"
               :treeData="tree1Data"
               :id="1"
               class="tree_view"/>

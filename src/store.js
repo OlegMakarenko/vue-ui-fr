@@ -2,6 +2,7 @@ import Vue from "vue"
 import Vuex from "vuex"
 import Format from 'fractal-format-protocol';
 import axios from "axios"
+import requests from './store/requests'
 import { Notification } from 'element-ui';  
 
 const HTTP_BASE_URL = "https://fractal.tools";
@@ -62,7 +63,7 @@ export default  new Vuex.Store({
         tree2Data: [],
         content: [],
         path: [],
-        instances: [],
+        instances: {},
         isLoading: false,
         infoPanelData: {
             name: ' ',
@@ -70,7 +71,8 @@ export default  new Vuex.Store({
             childrenCount: null,
             info: "No info",
             temp: null
-        }
+        },
+        format: {},
     },
 
     getters:{
@@ -90,7 +92,7 @@ export default  new Vuex.Store({
                 return state.instances[payload.class][payload.object];
             else
                 return null;
-        }
+        },
     },
 
     mutations:{
@@ -128,17 +130,13 @@ export default  new Vuex.Store({
         },
 
         setFormat: (state) => {
-            const format = new Format({
-                WebSocketClient: ws,
-                httpClient: Axios,
-                httpBaseUrl: HTTP_BASE_URL,
-                instances: state.instances
-            });
-            state.format = format;
+            
         }
     },
 
     actions:{
+        ...requests,
+
         LOG_IN: (context, payload) => {
             
             return new Promise((resolve, reject)=>{
@@ -225,8 +223,10 @@ export default  new Vuex.Store({
                 context.commit(key, payload[key])
         },
         doSetContent: (context, payload) => {
-            console.log("Content", payload)
+            console.warn("Content", payload)
                 context.commit("content", payload)
+            setTimeout(()=>context.state.instances["ContentPanel"]["ContentPanel0"].doSetData(payload.children), 1000)
+            ;
         },
         doSetPath: (context, payload) => {
             context.commit("path", payload)
@@ -243,7 +243,13 @@ export default  new Vuex.Store({
         },
 
         onAppLoad: (context, payload) => {
-            context.commit("setFormat");
+            var format = new Format({
+                WebSocketClient: ws,
+                httpClient: axios,
+                httpBaseUrl: HTTP_BASE_URL,
+                instances: context.state.instances
+            });
+            Vue.set(context.state, "format", format)
 
             ws.onopen = function(){
                 alert('Succesfly')
@@ -275,6 +281,25 @@ export default  new Vuex.Store({
                     filters
                 }
             })
+        },
+
+        createComponent: (context, instance) => {
+            if(instance && instance.class){
+                var counter = 0;
+                let obj = "";
+                if(instance.object)
+                    obj = instance.object;
+                else
+                {
+                    if(context.state.instances[instance.class])
+                        counter = Object.keys(context.state.instances[instance.class]).length;
+                    obj = instance.class + counter;
+                }
+                if(!context.state.instances[instance.class])
+                    context.state.instances[instance.class] = {}
+                context.state.instances[instance.class][obj] = instance;
+            }
+            
         }
     }
 });

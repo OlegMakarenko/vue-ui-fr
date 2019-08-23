@@ -34,6 +34,9 @@ import Admin from './components/pages/admin/Admin.vue'
 
 
 export default {
+  mounted(){
+    this.$store.dispatch("onAppLoad");
+  },
   name: 'app',
   components: {
     Auth,

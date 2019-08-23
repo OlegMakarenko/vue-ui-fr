@@ -184,8 +184,10 @@
 </template>
 
 <script>
+import BaseComponent from '../../BaseComponent.vue'
 
 export default {
+  extends: BaseComponent,
   components: {
 
   },
@@ -240,6 +242,7 @@ export default {
 
   data() {
     return {
+      class: 'controlComponent',
       scuteRightSide: true,
       selectedComponent: null,
       inputNum2: 22,
@@ -288,7 +291,7 @@ export default {
         cancelButtonText: 'Отмена',
         inputValidator: function(value){return value.length},
       }).then(({ value }) => {
-        this.$store.dispatch("NODE_RENAME", {nodeId: this.infoPanel.id, name: value});
+        this.$store.dispatch("rename", {nodeId: this.infoPanel.id, name: value});
       }).catch(() => {
         this.$message({
           type: 'info',

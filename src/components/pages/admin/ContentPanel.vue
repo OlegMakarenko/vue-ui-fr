@@ -8,6 +8,7 @@
       <div class="content-panel-view">
         <!-- <ModalC v-show="isModalVisible2" @close="closeModal2"/> -->
         <component
+          object="deviceContent"
           v-for="node in content"
           :is="deviceComponentView"
           :title="node.name"
@@ -40,6 +41,7 @@ import ComponentTile from "../../ComponentT.vue";
 import ComponentList from "../../ComponentL.vue";
 import ModalSettings from "../../modalwindow/modalComponent.vue";
 import BaseComponent from '../../BaseComponent.vue'
+
 export default {
   extends: BaseComponent,
   components: {
@@ -80,7 +82,7 @@ export default {
 
     onComponentSelect(node) {
       this.$set(this, "selectedId", node.id);
-      console.log(node.id)
+      // console.log(node.id)
 
       this.$store.dispatch("NODE_SELECTED", node);
 

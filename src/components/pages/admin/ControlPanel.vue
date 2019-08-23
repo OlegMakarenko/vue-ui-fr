@@ -8,17 +8,19 @@
           icon="el-icon-plus"
           @click="addGroupClick"
           size="mini"
-          v-if="allowaddGroup"
+          v-if="manageButtons"
           >Добавить устройство в группу</el-button>
 
           <el-button
-          class="btn_add_group"
-          icon="el-icon-folder"
-          @click="onAddGroupClick"
-          :infoPanel="infoPanel"
-          size="mini"
-          v-if="allowaddGroup"
-        >Добавить группу</el-button>
+            class="btn_add_group"
+            icon="el-icon-folder"
+            @click="onAddGroupClick"
+            :infoPanel="infoPanel"
+            size="mini"
+            >  <!-- v-if="manageButtons" -->
+              Добавить группу
+          </el-button>         
+
 
         <el-button
           class="btn_add_device"
@@ -26,7 +28,7 @@
           icon="el-icon-plus"
           @click="onAddDeviceClick"
           size="mini"
-          v-if="allowaddGroup =! allowaddGroup"
+          v-if="manageButtons =! manageButtons"
           >Подключить устройство</el-button>
 
         <el-button
@@ -71,8 +73,10 @@ import Breadcrumb from "../../Breadcrumb.vue";
 // import ModalAddDevice from "../../modalwindow/systemdevice/modalAddDevice.vue";
 import ModalAddGroup from "../../modalwindow/creategroup/modalAddGroup.vue";
 import addDeviceModal from "../../modalwindow/ModalW.vue"
+import BaseComponent from '../../BaseComponent.vue'
 
 export default {
+  extends: BaseComponent,
   components: {
     Breadcrumb,
     addDeviceModal,
@@ -95,7 +99,7 @@ export default {
     infoPanel(){
       return this.$store.getters.infoPanelData;
     },
-    allowaddGroup(){
+    manageButtons(){
       return this.$store.getters.content.type === 'folder';
     },
   },
@@ -160,10 +164,7 @@ export default {
           cancelButtonText: 'Отмена',
           inputValidator: function(value){return value.length},
         }).then(({ value }) => {
-          this.$message({
-            type: 'success',
-            message: 'Новое имя группы: ' + value
-          });
+          this.$store.dispatch("addGroup", {nodeId: /*this.infoPanel.id*/ '0', name: value});
         }).catch(() => {
           this.$message({
             type: 'info',

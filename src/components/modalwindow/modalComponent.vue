@@ -66,6 +66,7 @@ export default {
 
     data(){
         return{
+            class: 'ModalComponent', 
             controlTabVisible: true,
             eventTabVisible: false,
             graphicTabVisible: false,

@@ -17,8 +17,7 @@
         draggable
         :allow-drop="allowDrop"
         :allow-drag="allowDrag"
-        label="name"
-      >
+        label="name">
 
         <span class="tree-node" slot-scope="{ node, data }">
           <!-- node, data-->

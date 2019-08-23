@@ -25,7 +25,23 @@ export default {
                 id: payload.nodeId
             }
         })
-    }
+    },
+
+    addGroup: (context, payload) => {
+        console.log("addGroup", payload)
+        context.state.format.send({
+            method: "post",
+            url: "admin/addGroup",
+            path: "d1/d2",
+            class: "AnotherBackendService",
+            object: "someObject",
+            function: "admin/addGroup",
+            data: {
+                name: payload.name,
+                id: '0'
+            }
+        })
+    },
 }
 
 

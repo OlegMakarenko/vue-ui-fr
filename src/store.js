@@ -225,7 +225,7 @@ export default  new Vuex.Store({
         doSetContent: (context, payload) => {
             console.warn("Content", payload)
                 context.commit("content", payload)
-            setTimeout(()=>context.state.instances["ContentPanel"]["ContentPanel0"].doSetData(payload.children), 1000)
+            setTimeout(()=>context.state.instances["ContentPanel"]["ContentPanel0"].doSetData(payload.children), 500)
             ;
         },
         doSetPath: (context, payload) => {

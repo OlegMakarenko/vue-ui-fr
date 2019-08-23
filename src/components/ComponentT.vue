@@ -18,7 +18,9 @@
       </div>
 
       <div class="icon-tool" v-if="isSelected">
-        <i v-if="iconSettings"
+        <i 
+          object="componentSettings"
+          v-if="iconSettings"
           class="el-icon-s-tools"
           @click="showModal2">
         </i>
@@ -88,7 +90,7 @@ export default {
     },
 
     isSelected() {
-      console.log(this.id)
+      // console.log(this.id)
       return this.selectedId == this.id;
     },
 
@@ -125,7 +127,7 @@ export default {
 
   methods: {
     onClick() {
-      console.log(this.data.temperature)
+      // console.log(this.data.temperature)
       this.$emit("select", this.id);
       // this.$set(this, "selectedNodeChildrenTemp", node.children.length);
     },

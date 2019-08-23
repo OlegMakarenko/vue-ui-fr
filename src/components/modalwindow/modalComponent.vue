@@ -38,11 +38,11 @@
                             </el-button>
 
                         </div>
-                        <controlTab @buttonClick="close" v-if="controlTabVisible"/>
-                        <eventTab @buttonClick="close" v-if="eventTabVisible"/>
-                        <graphicTab @buttonClick="close" v-if="graphicTabVisible"/>
-                        <scheduleTab @buttonClick="close" v-if="scheduleTabVisible"/>
-                        <settingsTab @buttonClick="close" v-if="settingsTabVisible"/>
+                        <controlTab @buttonClick="close" object="controlTab" v-if="controlTabVisible"/>
+                        <eventTab @buttonClick="close" object="eventTab" v-if="eventTabVisible"/>
+                        <graphicTab @buttonClick="close" object="graphicTab" v-if="graphicTabVisible"/>
+                        <scheduleTab @buttonClick="close" object="scheduleTab" v-if="scheduleTabVisible"/>
+                        <settingsTab @buttonClick="close" object="settingsTab" v-if="settingsTabVisible"/>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,6 @@ export default {
 
     data(){
         return{
-            class: 'ModalComponent', 
             controlTabVisible: true,
             eventTabVisible: false,
             graphicTabVisible: false,

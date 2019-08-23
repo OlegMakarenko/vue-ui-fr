@@ -255,11 +255,15 @@
 </template>
 
 <script>
-
-
 export default {
+  props: ['object'],
   components: {
 
+  },
+
+  mounted(){
+        this.$store.dispatch("createComponent", this);
+        console.warn('INSTANCES', this.$store.state.instances)
   },
 
   computed: {
@@ -270,6 +274,7 @@ export default {
 
   data() {
     return {
+      class: 'modalSettings',
       blockButton: false,
       typeThermo: false,
       heatCold: false,

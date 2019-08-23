@@ -82,11 +82,15 @@
 </template>
 
 <script>
-
-
 export default {
+  props: ['object'],
   components: {
 
+  },
+
+  mounted(){
+        this.$store.dispatch("createComponent", this);
+        console.warn('INSTANCES', this.$store.state.instances)
   },
 
   computed: {
@@ -97,7 +101,8 @@ export default {
 
   data() {
     return {
-        graphicRightSide: true,
+
+      class:'modalChart',
 
         options: [{
           value: 'Option1',

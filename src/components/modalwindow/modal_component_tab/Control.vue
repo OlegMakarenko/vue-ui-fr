@@ -188,9 +188,33 @@ import BaseComponent from '../../BaseComponent.vue'
 
 export default {
   extends: BaseComponent,
+
   components: {
 
   },
+  
+    data() {
+      return {
+        class: 'modalGeneral',
+  
+        scuteRightSide: true,
+        selectedComponent: null,
+        inputNum2: 22,
+        amper: "3 мкА",
+        voltage: "12.5 В",
+        kilovatt: "0.4 кВт • ч",
+        status: "Wi-Fi",
+        statusHub: 'ALL-HUB',
+        radioButton: 'Программный',
+        timePick: true,
+        handleMode: true,
+        scheduleMode: false,
+        ongoMode: false,
+        sensorVisible: true,
+        iconUp: true,
+        iconDown: false
+      };
+    },
 
   computed: {
     infoPanel(){
@@ -240,27 +264,6 @@ export default {
     }
   },
 
-  data() {
-    return {
-      class: 'controlComponent',
-      scuteRightSide: true,
-      selectedComponent: null,
-      inputNum2: 22,
-      amper: "3 мкА",
-      voltage: "12.5 В",
-      kilovatt: "0.4 кВт • ч",
-      status: "Wi-Fi",
-      statusHub: 'ALL-HUB',
-      radioButton: 'Программный',
-      timePick: true,
-      handleMode: true,
-      scheduleMode: false,
-      ongoMode: false,
-      sensorVisible: true,
-      iconUp: true,
-      iconDown: false
-    };
-  },
 
   methods: {
     onClick(){

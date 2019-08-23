@@ -299,7 +299,6 @@ export default  new Vuex.Store({
                     context.state.instances[instance.class] = {}
                 context.state.instances[instance.class][obj] = instance;
             }
-            
-        }
+        },
     }
 });

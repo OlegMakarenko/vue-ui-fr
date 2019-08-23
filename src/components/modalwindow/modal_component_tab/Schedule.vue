@@ -165,11 +165,15 @@
 </template>
 
 <script>
-
-
 export default {
+  props: ['object'],
   components: {
 
+  },
+
+  mounted(){
+        this.$store.dispatch("createComponent", this);
+        console.warn('INSTANCES', this.$store.state.instances)
   },
 
   computed: {
@@ -180,6 +184,8 @@ export default {
 
   data() {
     return {
+        class:'modalSChedule',
+
         scheduleRightSide: true,
         value: 0,
 

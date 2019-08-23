@@ -10,16 +10,13 @@
       height="45"
       ondragstart="return false;"
     >
-    <!-- <div class="header-text">
-      <div class="header-brand">Fractal</div>
-    </div> -->
 
     <div class="right-side-header">
       <el-badge :value="0" class="item" style="margin-top:5px;">
        <i style="font-size: 28px; color: #8a999f; cursor: pointer;" class="el-icon-message-solid"></i>
       </el-badge>
 
-        <el-avatar  size="medium "
+        <el-avatar size="medium"
           style="cursor: pointer; background: #8a999f"
           icon="el-icon-user-solid">
         </el-avatar>

@@ -21,7 +21,6 @@
           <el-tab-pane label="Группы" name="second" class="tab-tree1">
             <Tree  
               object="groupsTree"
-              v-if="treeGroupVisible"
               :treeData="tree1Data"
               :id="1"
               class="tree_view"/>

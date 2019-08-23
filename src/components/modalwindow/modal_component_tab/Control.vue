@@ -34,13 +34,13 @@
                 :class="tempView" 
                 class="up-down-heating"
                 v-if="iconDown" 
-                src="./heating-icon-down.png">
+                src="../../../icon/heating-icon-down.png">
 
               <img
                 :class="tempView" 
                 class="up-down-heating"
                 v-if="iconUp" 
-                src="./heating-icon-up.png">
+                src="../../../icon/heating-icon-up.png">
             </div>
 
             <div class="lcc-right" v-if="timePick">

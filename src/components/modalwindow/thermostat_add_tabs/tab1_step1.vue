@@ -5,7 +5,7 @@
         </div>
         
         <div class="tab1-body">
-            <img src="./waves.png" class="waves_image">
+            <img src="../../../icon/waves.png" class="waves_image">
 
         </div>
 

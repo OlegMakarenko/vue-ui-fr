@@ -7,7 +7,7 @@
               <div class="header-brand">
                 <img
                   class="brand"
-                  src="../src/components/pages/admin/vega.jpg"
+                  src="../src/icon/vega.jpg"
                   alt="fractal"
                   style="
                   margin-top: 6px;

@@ -12,7 +12,7 @@
             После этого у Вас на новой вкладке браузера откроется новая  
             страница подключения. Здесь вы сможете смотреть на дальнейшие 
             шаги и подсказки.
-            <img src="./waves.png" style="width: 150px; height: 80px; margin-top: 20px;">
+            <img src="../../../icon/waves.png" style="width: 150px; height: 80px; margin-top: 20px;">
 
         </div>
 

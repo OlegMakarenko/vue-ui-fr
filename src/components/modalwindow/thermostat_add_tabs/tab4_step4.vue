@@ -9,7 +9,7 @@
         </div>
         
         <div class="tab4-body">
-             <img src="./waves.png" style="width: 300px; height: 90px;">
+             <img src="../../../icon/waves.png" style="width: 300px; height: 90px;">
         </div>
 
         <div class="tab4-footer">

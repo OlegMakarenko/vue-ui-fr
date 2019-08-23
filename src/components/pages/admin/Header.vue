@@ -2,7 +2,7 @@
   <div class="top">
     <img
       class="brand"
-      src="./vega.png"
+      src="../../../icon/vega.png"
       alt="fractal"
       style="float: left;
              margin-top: 10px;"

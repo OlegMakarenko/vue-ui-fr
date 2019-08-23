@@ -8,7 +8,7 @@
         </div>
         
         <div class="tab3-body">
-             <img src="./waves.png" style="width: 300px; height: 120px;">
+             <img src="../../../icon/waves.png" style="width: 300px; height: 120px;">
         </div>
 
         <div class="tab3-footer">

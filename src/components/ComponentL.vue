@@ -9,7 +9,7 @@
     <div class="left-side-list">
       <i :class="iconClass" class="left-side-icon"></i>
         
-      <img src="./img13.jpg" style="width: 40px; height: 40px; display: flex;" v-if="devicePicture">
+      <img src="../icon/img13.jpg" style="width: 40px; height: 40px; display: flex;" v-if="devicePicture">
 
       <div class="device-model" v-if="iconSettings">
         LTC090

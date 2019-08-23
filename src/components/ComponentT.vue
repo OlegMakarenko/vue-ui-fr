@@ -9,7 +9,7 @@
     <div class="tile-header">
       <div class="folder-odometer-icon">
         <i :class="iconClass"></i>
-        <img src="./img13.jpg" style="width: 40px; height: 40px;" v-if="devicePicture" ondragstart="return false;">
+        <img src="../icon/img13.jpg" style="width: 40px; height: 40px;" v-if="devicePicture" ondragstart="return false;">
       </div>
 
       <div class="computed-title" v-if="iconSettings">

@@ -5,8 +5,8 @@ import axios from "axios"
 import requests from './store/requests'
 import { Notification } from 'element-ui';  
 
-const HTTP_BASE_URL = "https://fractal.tools";
-const WEB_SOCKET_ENDPOINT = "wss://fractal.tools/ws"
+const HTTP_BASE_URL = "http://pubgproxy.ddns.net";
+const WEB_SOCKET_ENDPOINT = "wss://pubgproxy.ddns.net"
 const ws = new WebSocket(WEB_SOCKET_ENDPOINT);
 
 Vue.use(Vuex);
@@ -26,33 +26,33 @@ function colorPick(){
     }
 }
 
-ws.onopen = function(){
-    console.log("Соединение установлено");
-    ws.send("Соединение установлено");
-}
+// ws.onopen = function(){
+//     console.log("Соединение установлено");
+//     ws.send("Соединение установлено");
+// }
 
-ws.onclose = function(event) {
-    if (event.wasClean) {
-        console.log('Соединение закрыто чисто');
-        ws.send("Соединение закрыто чисто");
-    } else {
-        console.log('Обрыв соединения');
-        ws.send("Обрыв соединения");
+// ws.onclose = function(event) {
+//     if (event.wasClean) {
+//         console.log('Соединение закрыто чисто');
+//         ws.send("Соединение закрыто чисто");
+//     } else {
+//         console.log('Обрыв соединения');
+//         ws.send("Обрыв соединения");
 
-    }
-    console.log('Код: ' + event.code + ' причина: ' + event.reason);
-    ws.send("Обрыв соединения " + 'Код: ' + event.code + ' причина: ' + event.reason);
-};
+//     }
+//     console.log('Код: ' + event.code + ' причина: ' + event.reason);
+//     ws.send("Обрыв соединения " + 'Код: ' + event.code + ' причина: ' + event.reason);
+// };
 
-ws.onmessage = function(event) {
-    console.log("Получены данные " + event.data);
-    ws.send("Получены данные " + event.data);
-};
+// ws.onmessage = function(event) {
+//     console.log("Получены данные " + event.data);
+//     ws.send("Получены данные " + event.data);
+// };
 
-ws.onerror = function(error) {
-    console.log("Ошибка " + error.message);
-    ws.send("Ошибка " + error.message);
-};
+// ws.onerror = function(error) {
+//     console.log("Ошибка " + error.message);
+//     ws.send("Ошибка " + error.message);
+// };
 
 export default  new Vuex.Store({
     state:{
@@ -63,7 +63,7 @@ export default  new Vuex.Store({
         tree2Data: [],
         content: [],
         path: [],
-        instances: {},
+        instances: [],
         isLoading: false,
         infoPanelData: {
             name: ' ',
@@ -93,6 +93,9 @@ export default  new Vuex.Store({
             else
                 return null;
         },
+
+        setFormat: state => state.instances,
+
     },
 
     mutations:{
@@ -128,10 +131,8 @@ export default  new Vuex.Store({
             Vue.set(state.infoPanelData, "temp", data.data.temperature);
             Vue.set(state.infoPanelData, "id", data.id);
         },
-
-        setFormat: (state) => {
-            
-        }
+        
+        setFormat: () => {}
     },
 
     actions:{
@@ -143,14 +144,26 @@ export default  new Vuex.Store({
                 context.commit("isLoading", true);
                 const body = JSON.stringify(payload);
                 
-                axios.post(context.state.http_endpoint + "/log_in", {
-                    topic:"log_in",
-                    data: {
-                           __email__: payload.email, 
-                           __password__: payload.password
+                axios.post(HTTP_BASE_URL + "/", {
+                    path:"accounts/user",
+                    calls: [{
+                        Auth: {
+                            a1: {
+                                Signin: {
+                                    __email__: payload.email,
+                                    __password__: payload.password,
+                                }
+                            }
                         }
+                    }]
+
+                    // data:{
+                    //     email: payload.email,
+                    //     password: payload.password //раньше объявляли таким путём
+                    // }
                 })
                     .then(res => context.dispatch("PROCESS_RESPONSE", res.data))
+                    resolve()
             });
         },
 
@@ -173,7 +186,7 @@ export default  new Vuex.Store({
            
                 for(var i in payload){
                     console.log(payload);
-                    context.dispatch(payload[i].topic, payload[i].data)
+                    context.dispatch(payload[i].path, payload[i].data)
                 }
                 resolve(payload);
             })
@@ -250,10 +263,6 @@ export default  new Vuex.Store({
                 instances: context.state.instances
             });
             Vue.set(context.state, "format", format)
-
-            ws.onopen = function(){
-                alert('Succesfly')
-            }
         },
 
         getChart: (context, payload) => {

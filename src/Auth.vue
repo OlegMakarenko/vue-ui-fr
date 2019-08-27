@@ -19,7 +19,6 @@
           </div>
       </el-row>
     </nav>
-
     <div class="form-wrapper" v-if="authVisible">
       <el-form :model="authForm" ref="authForm">
         <el-form-item>
@@ -60,17 +59,10 @@
           <el-col><el-form-item>
           <el-button
             class="register-button"
-
             @click="showRegister"
             >Регистрация</el-button>
         </el-form-item></el-col>
         </el-row>
-
-        <!-- <div style="display: flex;">
-
-
-
-        </div> -->
       </el-form>
     </div>
     <registerForm v-else v-show="registerVisible"/>
@@ -86,15 +78,17 @@ export default  {
     registerForm
   },
 
+  computed:{
+
+  },
+
   data()
   {
     return {
       authVisible: true,
       registerVisible: true,
-      authForm:
-      {
-        email: "",
-        password: ""
+      authForm:{
+        
       }
     };
   },
@@ -130,7 +124,7 @@ export default  {
 
     auth(email, password)
     {
-      this.$store.dispatch("LOG_IN", { email, password })
+      this.$store.dispatch("LOG_IN", {email, password})
         .catch(err =>
           this.$notify.error({
             title: `Failed to log in`,
@@ -138,6 +132,7 @@ export default  {
             type:"error"
           })
         )
+        console.warn('e-mail: ' + email, 'password: ' + password)
     },
 
     showRegister(){

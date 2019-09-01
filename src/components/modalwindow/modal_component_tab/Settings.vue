@@ -1,7 +1,7 @@
 <template>
   <div class="settings-panel">
     <div class="settings-panel-container">
-      <div class="settings-control-panel">
+      <!-- <div class="settings-control-panel">
         <div class="settings-control-header">
           Настройка 
         </div>
@@ -9,7 +9,7 @@
         <div class="settings-button-header">
           <button class="button-close" @click="onClick">x</button>
         </div>
-      </div>
+      </div> -->
       <div class="settings-panel-view">
         <div class="mode-operation">
           Режимы работы
@@ -422,7 +422,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
-    // width: 90%;
+    border-top: 1px solid #DCDFE6;
 
     .settings-control-panel {
       flex: 0 0 auto;
@@ -627,6 +627,7 @@ export default {
       flex-direction: column;
       align-items: center;
       font-size: 16px;
+      border-top: 1px solid #DCDFE6;
       border-bottom: 1px solid #DCDFE6;
 
       .info-content{

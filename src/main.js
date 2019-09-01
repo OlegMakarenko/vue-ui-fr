@@ -7,9 +7,6 @@ import "./style/theme/index.css"
 // import "element-ui/lib/theme-chalk/index.css";
 import locale from 'element-ui/lib/locale/lang/en'
 
-
-
-
 import store from './store'
 import routes from './routes'
 

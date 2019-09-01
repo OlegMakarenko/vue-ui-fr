@@ -11,41 +11,56 @@ export default {
         })
     },
 
-    // loggedIn: (context, payload) => {
-    //     context.state.format.send({
-    //         method: "post",
-    //         url: "/",
-    //         path: "accounts/user",
-    //         class: "AnotherBackendService",
-    //         object: "someObject",
-    //         function: [],
-    //         calls: [{
-    //             Auth: {
-    //                 a1: {
-    //                     Signin: {
-    //                         __email__: 'user77@gmail.com',
-    //                         __password__: 'password',
-    //                     }
-    //                 }
-    //             }
-    //         }]
-    //     })
-    // },
-
     rename: (context, payload) => {
         console.log("rename", payload)
         context.state.format.send({
-            method: "post",
-            url: [],
-            path: "d1/d2",
-            class: "AnotherBackendService",
-            object: "someObject",
-            function: [],
-            data: {
-                name: payload.name,
-                id: payload.nodeId
-            }
+            // method: "post",
+            // url: "",
+            // path: "d1/d2",
+            // class: "AnotherBackendService",
+            // object: "someObject",
+            // function: [],
+            // data: {
+            //     name: payload.name,
+            //     id: payload.nodeId
+            // }
+            path: "realtime/user",
+            calls: 
+            [
+                {
+                    Realtime: {
+                        realtime: {
+                            LastDeviceData: {
+                                sensId: payload.nodeId
+                            }
+                        }
+                    }
+                }
+            ]
+        
         })
+    },
+
+    getDeviceId: (context, payload) => {
+        context.state.format.send({
+            url: "/",
+            function: "realtime/user",
+            path: "realtime/user",
+            calls: 
+            [
+                {
+                    Realtime: {
+                        realtime: {
+                            LastDeviceData: {
+                                sensId: "d342f214"
+                            }
+                        }
+                    }
+                }
+            ]
+        })
+
+        console.log(payload)
     },
 
     addGroup: (context, payload) => {

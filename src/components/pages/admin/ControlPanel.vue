@@ -17,7 +17,8 @@
             @click="onAddGroupClick"
             :infoPanel="infoPanel"
             size="mini"
-            >  <!-- v-if="manageButtons" -->
+            v-if="manageButtons"
+            >
               Добавить группу
           </el-button>         
 

@@ -76,7 +76,7 @@ export default {
         cancelButtonText: 'Отмена',
         inputValidator: function(value){return value.length},
       }).then(({ value }) => {
-        this.$store.dispatch("rename", {nodeId: this.infoPanel.id, name: value});
+        this.$store.dispatch("rename", {sensId: this.infoPanel.id});
       }).catch(() => {
         this.$message({
           type: 'info',

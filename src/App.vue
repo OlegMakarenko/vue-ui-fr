@@ -18,6 +18,7 @@ export default {
   mounted(){
     this.$store.dispatch("onAppLoad");
   },
+
   name: 'app',
   components: {
     Auth,

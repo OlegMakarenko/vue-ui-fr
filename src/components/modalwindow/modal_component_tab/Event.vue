@@ -1,8 +1,7 @@
 <template>
   <div class="event-panel">
-
     <div class="event-panel-container">
-      <div class="event-control-panel">
+      <!-- <div class="event-control-panel">
         <div class="event-control-header">
           События 
         </div>
@@ -10,7 +9,7 @@
         <div class="event-button-header">
           <button class="button-close" @click="onClick">x</button>
         </div>
-      </div>
+      </div> -->
       <div class="event-panel-view">
 
         <div class="block">
@@ -39,6 +38,7 @@
         <div class="event-content">
           <el-table height="353px"
             :data="tableData"
+            @click="testEvent"
             style="width: auto">
             <el-table-column
               prop="date"
@@ -109,7 +109,12 @@ export default {
     infoPanel(){
       console.log(this.$store.getters.infoPanelData);
       return this.$store.getters.infoPanelData;
-    }
+    },
+
+    testEvent(){
+      this.$store.dispatch("EVENT")
+    },
+
   },
 
   data() {
@@ -142,7 +147,39 @@ export default {
           event: 'Регулятор',
           eventMsg: 'Повышение температуры'
       }],
-      value2: '',
+      value2: [],
+
+      pickerOptions: {
+      shortcuts: [{
+        text: 'Last week',
+        onClick(picker) {
+          const end = new Date();
+          const start = new Date();
+          start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+          picker.$emit('pick', [start, end]);
+          this.testEvent()
+        }
+      }, {
+        text: 'Last month',
+        onClick(picker) {
+          this.$store.dispatch("EVENT")
+          const end = new Date();
+          const start = new Date();
+          start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+          picker.$emit('pick', [start, end]);
+        }
+      }, {
+        text: 'Last 3 months',
+        onClick(picker) {
+          this.$store.dispatch("EVENT")
+          const end = new Date();
+          const start = new Date();
+          start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+          picker.$emit('pick', [start, end]);
+        }
+      }]
+    },
+    value2: ''
     };
   },
 
@@ -151,34 +188,7 @@ export default {
       this.$emit('buttonClick')
     },
 
-    pickerOptions: {
-          shortcuts: [{
-            text: 'Last week',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last month',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last 3 months',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
-        value2: ''
+    
   }
 };
 </script>
@@ -196,6 +206,7 @@ export default {
     flex-direction: column;
     height: 100%;
     width: 90%;
+    border-top: 1px solid #DCDFE6;
 
     .event-control-panel {
       flex: 0 0 auto;
@@ -279,6 +290,7 @@ export default {
       flex-direction: column;
       align-items: center;
       font-size: 16px;
+      border-top: 1px solid #DCDFE6;
       border-bottom: 1px solid #DCDFE6;
 
       .info-content{

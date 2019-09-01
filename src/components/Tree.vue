@@ -47,7 +47,7 @@ export default {
   extends: BaseComponent,
 
   label: "lside",
-  props: [/*"treeData", */"id", "isDraggable"],
+  props: ["treeData","id", "isDraggable"],
 
   computed:{
     infoPanel(){
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       class: "Tree",
-      treeData: [],
+      // treeData: [],
     };
   },
 

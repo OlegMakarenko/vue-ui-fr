@@ -6,36 +6,56 @@
                     role="dialog"
                     aria-labelledby="modalTitle"
                     aria-describedby="modalDescription">
+
+                    <div class="tab-header">
+                        <div class="tab-header-title">
+                            <span v-if="controlTabVisible">{{control}}</span>
+                            <span v-if="eventTabVisible">{{event}}</span>
+                            <span v-if="graphicTabVisible">{{graphic}}</span>
+                            <span v-if="scheduleTabVisible">{{schedule}}</span>
+                            <span v-if="settingsTabVisible">{{settings}}</span>
+                        </div>
+                        <div class="tab-header-close">
+                            <i class="el-icon-close tab-header-button" @click="close"></i>
+                        </div>
+                    </div>
+                    
                     <div class="tab-manager">
                         <div class="tab-buttons">
-                            <el-button 
-                                class="tab-buttons-group" 
-                                @click="controlClick" 
-                                icon="el-icon-s-platform">
-                            </el-button>
+                            <button 
+                                class="tab-buttons-group"
+                                :class="onFocusControl" 
+                                @click="controlClick"> 
+                                <i class="el-icon-s-platform"></i>
+                            </button>
 
-                            <el-button 
+                            <button
+                                :class="onFocusEvent"
                                 class="tab-buttons-group" 
-                                @click="eventClick" 
-                                icon="el-icon-document">
-                            </el-button>
-                            <el-button 
-                                class="tab-buttons-group" 
-                                @click="settingsClick" 
-                                icon="el-icon-s-tools">
-                            </el-button>
+                                @click="eventClick">
+                                <i class="el-icon-document"></i>
+                            </button> 
 
-                            <el-button 
+                            <button
+                                :class="onFocusSettings"
                                 class="tab-buttons-group" 
-                                @click="graphicClick" 
-                                icon="el-icon-data-line">
-                            </el-button>
+                                @click="settingsClick">
+                                <i class="el-icon-s-tools"></i>
+                            </button>
 
-                            <el-button 
+                            <button
+                                :class="onFocusGraphic"
                                 class="tab-buttons-group" 
-                                @click="scheduleClick" 
-                                icon="el-icon-date">
-                            </el-button>
+                                @click="graphicClick">
+                                <i class="el-icon-data-line"></i>
+                            </button>
+
+                            <button
+                                :class="onFocusSchedule"
+                                class="tab-buttons-group-end" 
+                                @click="scheduleClick">
+                                <i class="el-icon-date"></i>
+                            </button>
 
                         </div>
                         <controlTab @buttonClick="close" object="controlTab" v-if="controlTabVisible"/>
@@ -61,7 +81,46 @@ export default {
     name: 'modal',
 
     computed:{
-        
+        onFocusControl(){
+            if(this.controlTabVisible == true){
+                return 'pick-grey'
+            } else if (this.controlTabVisible == false) {
+                return 'pick-white'
+            }
+        },
+
+        onFocusEvent(){
+            if(this.eventTabVisible == true){
+                return 'pick-grey'
+            } else if (this.eventTabVisible == false) {
+                return 'pick-white'
+            }
+        },
+
+        onFocusGraphic(){
+            if(this.graphicTabVisible == true){
+                return 'pick-grey'
+            } else if (this.graphicTabVisible == false) {
+                return 'pick-white'
+            }
+        },
+
+        onFocusSchedule(){
+            if(this.scheduleTabVisible == true){
+                return 'pick-grey'
+            } else if (this.scheduleTabVisible == false) {
+                return 'pick-white'
+            }
+        },
+
+        onFocusSettings(){
+            if(this.settingsTabVisible == true){
+                return 'pick-grey'
+            } else if (this.settingsTabVisible == false) {
+                return 'pick-white'
+            }
+        },
+
     },
 
     data(){
@@ -72,6 +131,11 @@ export default {
             scheduleTabVisible: false,
             settingsTabVisible: false,
             selectedId: null,
+            control: 'Управление',
+            event: 'События',
+            graphic: 'График',
+            schedule: 'Расписание',
+            settings: 'Настройки'
         };
     },
 
@@ -88,8 +152,24 @@ export default {
         handleChange(value){
             console.log(value);
         },
+
         close(){
             this.$emit('close');
+        },
+
+        tabHeader(){
+            if(this.controlTabVisible === true){
+                this.eventTabVisible = false
+                this.graphicTabVisible = false
+                this.scheduleTabVisible = false
+                this.settingsTabVisible = false
+            } else if (this.controlTabVisible === false){
+                this.controlTabVisible = true
+                this.eventTabVisible = false
+                this.graphicTabVisible = false
+                this.scheduleTabVisible = false
+                this.settingsTabVisible = false
+            }
         },
 
         controlClick(){
@@ -193,9 +273,40 @@ export default {
     text-align: center; 
 }
 
+.tab-header{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-header-title{
+    width: 98%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tab-header-close{
+    width: 2%;
+    height: 100%;
+}
+
+.tab-header-button{
+    height: 100%;
+    width: 100%;
+    font-size: 28px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .tab-manager{
     width: 100%;
-    height: 100%;
+    height: 95%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -212,7 +323,35 @@ export default {
 .tab-buttons-group{
     width: 200px;
     height: 100%;
+    background-color: #ffffff;
+    color: #606266;
+    border: 1px solid #DCDFE6;    
     font-size: 45px;
+    cursor: pointer;
+    outline: none;
+    border-bottom: none;
+}
+
+.tab-buttons-group-end{
+    width: 200px;
+    height: 100%;
+    background-color: #ffffff;
+    color: #606266;
+    border: 1px solid #DCDFE6;    
+    font-size: 45px;
+    cursor: pointer;
+    outline: none;
+}
+
+.pick-white{
+    background-color: #ffffff;
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+}
+
+.pick-grey{
+    background-color: #8A999F;
+    color: #ffffff;
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
 }
 
 .el-button+.el-button {

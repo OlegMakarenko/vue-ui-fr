@@ -8,7 +8,7 @@
       <div class="content-panel-view">
         <!-- <ModalC v-show="isModalVisible2" @close="closeModal2"/> -->
         <component
-          object="deviceContent"
+          
           v-for="node in content"
           :is="deviceComponentView"
           :title="node.name"
@@ -21,7 +21,7 @@
           :data="node.data"
           @open="onComponentOpen"
           @select="onComponentSelect(node)"
-          @click="onComponentSelect2"/>
+          @click="onComponentSelect2"/> <!--object="deviceContent"-->
       </div>
     </div>
 
@@ -40,10 +40,10 @@ import InfoPanel from "./InfoPanel.vue";
 import ComponentTile from "../../ComponentT.vue";
 import ComponentList from "../../ComponentL.vue";
 import ModalSettings from "../../modalwindow/modalComponent.vue";
-import BaseComponent from '../../BaseComponent.vue'
+// import BaseComponent from '../../BaseComponent.vue'
 
 export default {
-  extends: BaseComponent,
+  // extends: BaseComponent,
   components: {
     ControlPanel,
     InfoPanel,
@@ -53,16 +53,16 @@ export default {
   },
 
   computed: {
-    /*content() {
+    content() {
       if (this.$store.getters.content)
         return this.$store.getters.content.children;
-    }*/
+    }
   },
 
   data() {
     return {
-      class: "ContentPanel",
-      content: [],
+      // class: "ContentPanel",
+      // content: [],
       deviceComponentView: "ComponentTile",
       selectedId: null,
       selectedTitle: null,
@@ -72,9 +72,9 @@ export default {
   },
 
   methods: {
-    doSetData(data){
-      this.$set(this, "content", data)
-    },
+    // doSetData(data){
+    //   this.$set(this, "content", data)
+    // },
 
     changeDeviceComponentView(changedView) {
       this.$set(this, "deviceComponentView", changedView); // this.deviceComponentView = changedView;

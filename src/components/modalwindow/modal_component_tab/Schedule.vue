@@ -1,7 +1,7 @@
 <template>
   <div class="schedule-panel">
     <div class="schedule-panel-container">
-      <div class="schedule-control-panel">
+      <!-- <div class="schedule-control-panel">
          <div class="schedule-control-header">
           Расписание 
         </div>
@@ -9,7 +9,8 @@
         <div class="schedule-button-header">
           <button class="button-close" @click="onClick">x</button>
         </div>
-      </div>
+      </div> -->
+
       <div class="schedule-panel-view">
           <div class="schedule-content">
             <div class="schedule-day1">
@@ -339,6 +340,8 @@ export default {
     flex-direction: column;
     height: 100%;
     width: 90%;
+    border-top: 1px solid #DCDFE6;
+
 
     .schedule-control-panel {
      flex: 0 0 auto;
@@ -472,6 +475,7 @@ export default {
       flex-direction: column;
       align-items: center;
       font-size: 16px;
+      border-top: 1px solid #DCDFE6;
       border-bottom: 1px solid #DCDFE6;    
 
 

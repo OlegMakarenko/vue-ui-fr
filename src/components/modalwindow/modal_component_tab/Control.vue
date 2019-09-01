@@ -1,7 +1,7 @@
 <template>
-  <div class="control-panel">
+  <div class="control-panel" v-if="visibleContentGunc">
     <div class="control-panel-container">
-      <div class="control-content-panel">
+      <!-- <div class="control-content-panel">
         <div class="control-control-header">
           Управление 
         </div>
@@ -10,7 +10,7 @@
             class="button-close" 
             @click="onClick">x</button>
         </div>
-      </div>
+      </div> -->
     <div class="control-panel-view">
       <div class="control-header-content">
         <div class="header-content-left">
@@ -26,7 +26,7 @@
 
           <div class="left-center-content" v-if="timePick">
             <div class="lcc-left">
-              {{infoPanel.temp+'°C'}}
+              {{temperature}}
             </div>
 
             <div class="lcc-center">
@@ -78,9 +78,20 @@
         <div class="header-content-right">
           <div class="invisible-header-content"></div>
           <div class="right-top-content">
-              <button :class="handleButtonClass" @click="handleFunc" class="handle-mode-button">Ручной</button>
-              <button :class="scheduleButtonClass" @click="scheduleFunc" class="schedule-mode-button">Расписание</button>
-              <button :class="ongoButtonClass" @click="ongoFunc" class="ongo-mode-button">Отъезд</button>
+              <button 
+                :class="handleButtonClass" 
+                @click="handleFunc" 
+                class="handle-mode-button">Ручной</button>
+
+              <button 
+                :class="scheduleButtonClass" 
+                @click="scheduleFunc" 
+                class="schedule-mode-button">Расписание</button>
+
+              <button 
+                :class="ongoButtonClass" 
+                @click="ongoFunc" 
+                class="ongo-mode-button">Отъезд</button>
           </div>
 
           <div class="right-center-content">
@@ -109,7 +120,7 @@
               type="text" 
               readonly 
               class="input-footer" 
-              v-model="amper">
+              v-model="power">
           </div>
 
           <div class="footer-content"> 
@@ -127,7 +138,7 @@
               type="text" 
               readonly 
               class="input-footer" 
-              v-model="kilovatt">
+              v-model="consPower">
           </div>
 
           <div class="footer-content">
@@ -160,7 +171,7 @@
       </div>
       
       <div class="info-content">
-        Тип: LTC090
+        Тип: LTC090 
       </div>
       
       <div class="info-content">
@@ -198,12 +209,7 @@ export default {
         class: 'modalGeneral',
   
         scuteRightSide: true,
-        selectedComponent: null,
         inputNum2: 22,
-        amper: "3 мкА",
-        voltage: "12.5 В",
-        kilovatt: "0.4 кВт • ч",
-        status: "Wi-Fi",
         statusHub: 'ALL-HUB',
         radioButton: 'Программный',
         timePick: true,
@@ -212,7 +218,8 @@ export default {
         ongoMode: false,
         sensorVisible: true,
         iconUp: true,
-        iconDown: false
+        iconDown: false,
+        contentVisible: true,
       };
     },
 
@@ -221,11 +228,44 @@ export default {
       return this.$store.getters.infoPanelData;
     },
 
+    visibleContentGunc(){
+      if(this.contentVisible == true)
+      return this.$store.dispatch("DEVICE_INFO")
+    },
+
+    consPower(){
+      if(this.contentVisible == true)
+      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.consPower + '  кВт • ч';
+    },
+
+    power(){
+      if(this.contentVisible == true)
+      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.power + ' мкА';
+    },
+
+    voltage(){
+      if(this.contentVisible == true)
+      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.voltage + ' В';
+    },
+
+    temperature(){
+      if(this.contentVisible == true)
+      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp + ' °C';
+    },
+
+    status(){
+      if(this.$store.getters.wsData.calls[0].Class.obj.Func.data.status == true){
+        return 'Wi-Fi'
+      } else if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.status == false){
+        return 'All-Hub'
+      }
+    },  
+
     tempView(){
-      if (this.$store.getters.infoPanelData.temp > this.inputNum2){
+      if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp > this.inputNum2){
          this.iconUp = false;
          this.iconDown = true;
-      } else if (this.$store.getters.infoPanelData.temp < this.inputNum2){
+      } else if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp < this.inputNum2){
         this.iconUp = true;
         this.iconDown = false;
       }
@@ -337,6 +377,10 @@ export default {
         this.scheduleMode = false
       }
     },
+
+    sendRequest(){
+      
+    }
   }
 };
 </script>
@@ -389,6 +433,7 @@ export default {
       flex-wrap: wrap;
       overflow: auto;
       padding: 20px;
+      border-top: 1px solid #DCDFE6;
 
       .control-header-content{
         width: 100%;
@@ -638,6 +683,7 @@ export default {
       flex-direction: column;
       align-items: center;
       font-size: 16px;
+      border-top: 1px solid #DCDFE6;
       border-bottom: 1px solid #DCDFE6;    
 
 

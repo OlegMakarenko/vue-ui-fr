@@ -49,6 +49,12 @@
             </div>
           </div>
         </div>
+
+        <!-- <Chart 
+          :object="historyChart"
+  		  	:toolbar="false"
+	    		:axesButton="false" /> -->
+
       </div>
     </div>
 
@@ -82,10 +88,12 @@
 </template>
 
 <script>
+// import Chart from '../../chart/Chart.vue'
+
 export default {
   props: ['object'],
   components: {
-
+    // Chart
   },
 
   mounted(){

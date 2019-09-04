@@ -529,7 +529,7 @@ export default  new Vuex.Store({
             return new Promise((resolve, reject) => {
                 context.commit("isLoading", false);
                 for(var i in payload){
-                    console.log(payload);
+                    // console.log(payload);
                     context.dispatch(payload[i].topic, payload[i].data)
                 }
                 resolve(payload);

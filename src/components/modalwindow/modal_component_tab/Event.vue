@@ -35,10 +35,12 @@
           </div>
         </div>
 
+        <!-- <button @click="testEvent"></button> -->
+
         <div class="event-content">
           <el-table height="353px"
             :data="tableData"
-            @click="testEvent"
+            
             style="width: auto">
             <el-table-column
               prop="date"
@@ -107,7 +109,7 @@ export default {
 
   computed: {
     infoPanel(){
-      console.log(this.$store.getters.infoPanelData);
+      // console.log(this.$store.getters.infoPanelData);
       return this.$store.getters.infoPanelData;
     },
 

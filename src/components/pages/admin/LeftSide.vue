@@ -7,7 +7,7 @@
           class="profile-system"
           type="primary"
           size="mini"
-          >Профиль и системные функции</el-button>
+          >Профиль и системные функции</el-button> <!--@click="getTreeData"-->
 
           <el-divider></el-divider>
 
@@ -59,7 +59,11 @@ export default {
 
     tree2Data() {
       return this.$store.getters.tree2Data;
-    }
+    },
+
+    getTreeData(){
+      return this.$store.dispatch('getTree');
+    },
   }
 };
 </script>

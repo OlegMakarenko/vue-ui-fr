@@ -10,10 +10,10 @@
           <button class="button-close" @click="onClick">x</button>
         </div>
       </div> -->
-      <div class="event-panel-view">
+      <div class="event-panel-view" >
 
         <div class="block">
-          <div class="date-picker">
+          <div class="date-picker" >
             <el-date-picker
               v-model="value2"
               type="datetimerange"
@@ -114,7 +114,7 @@ export default {
     },
 
     testEvent(){
-      this.$store.dispatch("EVENT")
+      this.$store.dispatch("EVENTS")
     },
 
   },

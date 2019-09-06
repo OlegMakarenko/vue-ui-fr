@@ -11,6 +11,51 @@ export default {
         })
     },
 
+    getDeviceInfo: (context, payload) => {
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "realtime/user",
+            class: "Realtime",
+            object: "realtime",
+            function: "LastDeviceData",
+            data: {
+                sensId: "d342f214"
+            }
+        })
+    },
+
+    getEventData:(context, payload) => {
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "events/user",
+            class: "EventManager",
+            object: "manager",
+            function: "GetEventsInTimePer",
+            data: {
+                eventsDateRange: []
+            }
+        })
+    },
+
+    chartData:(context, payload) => {
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "trends/user",
+            class: "Trends",
+            object: "trends",
+            function: "GetChart",
+            data: {
+                "trendsDate": [1484687, 484798798],
+                "trendsFilters": ["vega/asfdsf23 temperature"]
+            }
+        })
+
+        console.log("chartData", payload)
+    },
+
     rename: (context, payload) => {
         console.log("rename", payload)
         context.state.format.send({
@@ -39,28 +84,6 @@ export default {
             ]
         
         })
-    },
-
-    getDeviceId: (context, payload) => {
-        context.state.format.send({
-            url: "/",
-            function: "realtime/user",
-            path: "realtime/user",
-            calls: 
-            [
-                {
-                    Realtime: {
-                        realtime: {
-                            LastDeviceData: {
-                                sensId: "d342f214"
-                            }
-                        }
-                    }
-                }
-            ]
-        })
-
-        console.log(payload)
     },
 
     addGroup: (context, payload) => {

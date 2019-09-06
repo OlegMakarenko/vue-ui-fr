@@ -13,7 +13,7 @@
 
       <div class="graphic-panel-view">
         <div class="graphic-panel-content">
-          <div class="graphic-date-picker">
+          <div class="graphic-date-picker" v-if="getChartData">
             Дата:
             <div>
              <el-date-picker
@@ -50,10 +50,10 @@
           </div>
         </div>
 
-        <!-- <Chart 
+        <Chart 
           :object="historyChart"
   		  	:toolbar="false"
-	    		:axesButton="false" /> -->
+	    		:axesButton="false" />
 
       </div>
     </div>
@@ -88,12 +88,12 @@
 </template>
 
 <script>
-// import Chart from '../../chart/Chart.vue'
+import Chart from '../../chart/Chart.vue'
 
 export default {
   props: ['object'],
   components: {
-    // Chart
+    Chart
   },
 
   mounted(){
@@ -104,6 +104,10 @@ export default {
   computed: {
     infoPanel(){
       return this.$store.getters.infoPanelData;
+    },
+
+    getChartData(){
+      return this.$store.dispatch("TRENDS")
     }
   },
 
@@ -164,7 +168,7 @@ export default {
   methods: {
     onClick(){
       this.$emit('buttonClick')
-    }
+    },
   }
 };
 </script>

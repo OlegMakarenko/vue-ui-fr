@@ -1,8 +1,8 @@
 // import Vue from "vue"
 // import Vuex from "vuex"
-// 
+// import Format from 'fractal-format-protocol'
 // import axios from "axios"
-// // import requests from './store/requests'
+// import requests from './store/requests'
 // import { Notification } from 'element-ui';  
 
 // const HTTP_BASE_URL = "http://pubgproxy.ddns.net";
@@ -63,7 +63,7 @@
 //         tree2Data: [],
 //         content: [],
 //         path: [],
-//         // instances: [],
+//         instances: [],
 //         isLoading: false,
 //         infoPanelData: {
 //             name: ' ',
@@ -134,7 +134,7 @@
 //     },
 
 //     actions:{
-//         // ...requests,
+//         ...requests,
 
 //         LOG_IN: (context, payload) => {
             
@@ -163,6 +163,24 @@
 //                     .then(res => context.dispatch("PROCESS_RESPONSE", res.data))
 //                     resolve()
 //             });
+//         },
+
+//         getTree:(context, payload) => {
+//             axios.post(HTTP_BASE_URL + "/", {
+//                 "path": "devices/user",
+//                 "calls": 
+//                 [
+//                     {
+//                         "Devices": {
+//                             "devices": {
+//                                 "GetOwnerDevicesHierarchy": {
+//                                     "owner": 2
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 ]
+//             }).then(res => context.dispatch("PROCESS_RESPONSE", res.data))
 //         },
 
 //         OPEN_NODE: (context, payload) => {
@@ -242,7 +260,7 @@
 //         doSetContent: (context, payload) => {
 //             console.warn("Content", payload)
 //                 context.commit("content", payload)
-//             // setTimeout(()=>context.state.instances["ContentPanel"]["ContentPanel0"].doSetData(payload.children), 500);
+//             setTimeout(()=>context.state.instances["ContentPanel"]["ContentPanel0"].doSetData(payload.children), 500);
 //         },
 
 //         doSetPath: (context, payload) => {
@@ -259,15 +277,15 @@
 //             colorPick(context)
 //         },
 
-//         // onAppLoad: (context, payload) => {
-//         //     var format = new Format({
-//         //         WebSocketClient: ws,
-//         //         httpClient: axios,
-//         //         httpBaseUrl: HTTP_BASE_URL,
-//         //         instances: context.state.instances
-//         //     });
-//         //     Vue.set(context.state, "format", format)
-//         // },
+//         onAppLoad: (context, payload) => {
+//             var format = new Format({
+//                 WebSocketClient: ws,
+//                 httpClient: axios,
+//                 httpBaseUrl: HTTP_BASE_URL,
+//                 instances: context.state.instances
+//             });
+//             Vue.set(context.state, "format", format)
+//         },
 
 //         getChart: (context, payload) => {
 //             const dateRangeComponent = context.getters.getInstance({
@@ -296,25 +314,38 @@
 //             })
 //         },
 
-//         // createComponent: (context, instance) => {
-//         //     if(instance && instance.class){
-//         //         var counter = 0;
-//         //         let obj = "";
-//         //         if(instance.object)
-//         //             obj = instance.object;
-//         //         else
-//         //         {
-//         //             if(context.state.instances[instance.class])
-//         //                 counter = Object.keys(context.state.instances[instance.class]).length;
-//         //             obj = instance.class + counter;
-//         //         }
-//         //         if(!context.state.instances[instance.class])
-//         //             context.state.instances[instance.class] = {}
-//         //         context.state.instances[instance.class][obj] = instance;
-//         //     }
-//         // },
+//         createComponent: (context, instance) => {
+//             if(instance && instance.class){
+//                 var counter = 0;
+//                 let obj = "";
+//                 if(instance.object)
+//                     obj = instance.object;
+//                 else
+//                 {
+//                     if(context.state.instances[instance.class])
+//                         counter = Object.keys(context.state.instances[instance.class]).length;
+//                     obj = instance.class + counter;
+//                 }
+//                 if(!context.state.instances[instance.class])
+//                     context.state.instances[instance.class] = {}
+//                 context.state.instances[instance.class][obj] = instance;
+//             }
+//         },
 //     }
 // });
+
+//верхняя часть кода подключена полностью к беку Дарины, работает логин
+//так же используются realtime, events, trends, tree
+//но проверить их нельзя, т. к. нету вывода бека
+//суть вопроса, как выводить дерево Дарины.
+
+//-------------------------------------------
+
+//нижняя часть кода, работает на двух беках, на Дарины и Олега, запросы идут на сервер Дарины
+//вывод девайсов и дерева с бека Олега
+//здесь работают запросы такие как:
+//realtime, events, trends, tree
+//суть вопроса, как выводить дерево Дарины.
 
 import Vue from "vue"
 import Vuex from "vuex"
@@ -440,6 +471,14 @@ export default  new Vuex.Store({
         },
         wsData: (state, data) => {
             Vue.set(state.wsData, "data", data);
+        },
+
+        eventsData:(state, payload)=>{
+            console.log("eventsData ", payload)
+        },
+
+        chartData: (state, payload)=>{
+            console.log("chartData ", payload)
         }
     },
 
@@ -481,20 +520,36 @@ export default  new Vuex.Store({
             }
         },
 
-        EVENT: (context, payload) => {
+        TRENDS: (context, payload) => { //формируем запрос для трендов()
             axios.post(HTTP_BASE_URL + "/", {
-                calls: [
+                "path": "trends/user",
+                "calls": [{
+                    "Trends": {
+                        "trends": {
+                            "GetChart": {
+                                "trendsDate": [1484687, 484798798],
+                                "trendsFilters": ["vega/asfdsf23 temperature"]
+                            }
+                        }
+                    }
+                }]
+            }).then(res => context.dispatch("RESPONSE_REQUEST", res.data));
+        },
+
+        EVENTS:(context, payload) => { //формируем запрос для ивентов()
+            axios.post(HTTP_BASE_URL + "/", {
+                "path": "events/user",
+                "calls": [
                     {
-                      EventManager: {
-                        manager: {
-                          GetEventsInTimePer: {
-                            eventsDateRange: []
+                      "EventManager": {
+                        "manager": {
+                          "GetEventsInTimePer": {
+                            "eventsDateRange": []
                           }
                         }
                       }
                     }
-                  ],
-                  path: "events/user"                
+                  ],                    
             }).then(res => context.dispatch("RESPONSE_REQUEST", res.data));
         },
 
@@ -572,6 +627,7 @@ export default  new Vuex.Store({
              context.commit("infoPanelData", payload)
         },
 
+
         doLogIn: (context, payload) => {
             context.commit("SET_AUTH_TOKEN", payload.token)
         },
@@ -587,16 +643,19 @@ export default  new Vuex.Store({
         doSetPath: (context, payload) => {
             context.commit("path", payload)
         },
-        doNotification: (context, payload) => {
-            Notification.error({
-                title: 'Error',
-                message: 'This is an error message'
-              });
-        },
+
+        // doNotification: (context, payload) => {
+        //     Notification.error({
+        //         title: 'Error',
+        //         message: 'This is an error message'
+        //       });
+        // },
 
         COLOR_SWITCH:(context)=>{
             colorPick(context)
         },
+
+
 
         onAppLoad: (context, payload) => {
             var format = new Format({

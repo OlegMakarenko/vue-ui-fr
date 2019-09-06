@@ -106,7 +106,9 @@ export default {
   },
 
   methods: {
-    addNewDevice() {},
+    addNewDevice() {
+      
+    },
     addNewGroup() {},
 
     colorSw(){
@@ -143,6 +145,7 @@ export default {
     },
 
     onAddDeviceClick() {
+      this.$store.dispatch("getDeviceInfo");
       this.showAddDevice = true;
     },
 

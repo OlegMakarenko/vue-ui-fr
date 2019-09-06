@@ -207,7 +207,6 @@ export default {
     data() {
       return {
         class: 'modalGeneral',
-  
         scuteRightSide: true,
         inputNum2: 22,
         statusHub: 'ALL-HUB',
@@ -230,26 +229,22 @@ export default {
 
     visibleContentGunc(){
       if(this.contentVisible == true)
-      return this.$store.dispatch("DEVICE_INFO")
+        return this.$store.dispatch("DEVICE_INFO")
     },
 
     consPower(){
-      if(this.contentVisible == true)
       return this.$store.getters.wsData.calls[0].Class.obj.Func.data.consPower + '  кВт • ч';
     },
 
     power(){
-      if(this.contentVisible == true)
       return this.$store.getters.wsData.calls[0].Class.obj.Func.data.power + ' мкА';
     },
 
     voltage(){
-      if(this.contentVisible == true)
       return this.$store.getters.wsData.calls[0].Class.obj.Func.data.voltage + ' В';
     },
 
     temperature(){
-      if(this.contentVisible == true)
       return this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp + ' °C';
     },
 

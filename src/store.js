@@ -360,8 +360,6 @@ const HTTP_BASE_URL = "http://pubgproxy.ddns.net";
 const WEB_SOCKET_ENDPOINT = "ws://pubgproxy.ddns.net/ws"
 const ws = new WebSocket(WEB_SOCKET_ENDPOINT);
 
-const dataWs = null;
-
 ws.onopen = function(){
     console.log("Установлено соединение по WebSocket");
     ws.send("Соединение установлено");
@@ -408,6 +406,9 @@ export default  new Vuex.Store({
         currentDeviceList: [],
         tree1Data: [],
         tree2Data: [],
+
+        manageTree: [],
+
         content: [],
         path: [],
         instances: [],
@@ -428,6 +429,9 @@ export default  new Vuex.Store({
         currentDeviceList: state => state.currentDeviceList,
         tree1Data: state => state.tree1Data,
         tree2Data: state => state.tree2Data,
+        
+        manageTree: state => state.manageTree,
+
         content: state => state.content,
         path: state => state.path,
         isLoading: state => state.isLoading,
@@ -454,6 +458,24 @@ export default  new Vuex.Store({
         tree2Data:(state, data)=>{
             Vue.set(state, "tree2Data", data)
         },
+
+        manageTree:(state, data) =>{
+            Vue.set(state, "manageTree", data)
+        },
+
+        name:(state, payload)=>{
+            console.log("Name of tree", payload)
+        },
+
+        children:(state, payload)=>{
+            console.log("Children of tree", payload)
+        },
+
+        data:(state, data)=>{
+            console.log("data of tree", data)
+            Vue.set(state, "tree1Data", data)
+        },
+
         content:(state, data) => {
             Vue.set(state, "content", data);
         },
@@ -553,6 +575,24 @@ export default  new Vuex.Store({
             }).then(res => context.dispatch("RESPONSE_REQUEST", res.data));
         },
 
+        getManageTree:(context, payload) => { //формируем запрос для дерева йстройств()
+            axios.post(HTTP_BASE_URL + "/", {
+                "path": "devices/user",
+                "calls": 
+                [
+                    {
+                        "Devices": {
+                            "devices": {
+                                "GetOwnerDevicesHierarchy": {
+                                    "owner": 2
+                                }
+                            }
+                        }
+                    }
+                ]       
+            }).then(res => context.dispatch("RESPONSE_REQUEST", res.data)).then(context.commit("manageTree", payload));
+        },
+
         RESPONSE_REQUEST: (context, payload) => {
             return new Promise((resolve, reject) => {
                 const calls = payload.calls;
@@ -626,7 +666,6 @@ export default  new Vuex.Store({
             //  console.log("Selected node:")
              context.commit("infoPanelData", payload)
         },
-
 
         doLogIn: (context, payload) => {
             context.commit("SET_AUTH_TOKEN", payload.token)

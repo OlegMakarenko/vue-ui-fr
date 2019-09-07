@@ -7,6 +7,7 @@
           class="profile-system"
           type="primary"
           size="mini"
+          @click="getTreeData"
           >Профиль и системные функции</el-button> <!--@click="getTreeData"-->
 
           <el-divider></el-divider>
@@ -28,6 +29,7 @@
         </el-tabs>        
       </div>
       <div style="height: 150px; width: 300px; background-color: #8a999f; flex: 0 0 auto;">
+        {{tree1Data}}
      </div>
     </div>
   </div>
@@ -54,7 +56,7 @@ export default {
 
   computed: {
     tree1Data() {
-      return this.$store.getters.tree1Data;
+      return this.$store.getters.manageTree;
     },
 
     tree2Data() {
@@ -62,7 +64,7 @@ export default {
     },
 
     getTreeData(){
-      return this.$store.dispatch('getTree');
+      return this.$store.dispatch('getManageTree');
     },
   }
 };

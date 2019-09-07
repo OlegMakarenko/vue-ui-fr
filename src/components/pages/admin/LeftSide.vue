@@ -27,9 +27,10 @@
               class="tree_view"/>
           </el-tab-pane>
         </el-tabs>        
+        {{tree1Data}} <!--Проверка приходят ли данные-->
       </div>
       <div style="height: 150px; width: 300px; background-color: #8a999f; flex: 0 0 auto;">
-        {{tree1Data}}
+        
      </div>
     </div>
   </div>

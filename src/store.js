@@ -408,6 +408,7 @@ export default  new Vuex.Store({
         tree2Data: [],
 
         manageTree: [],
+        deviceInfo:{},
 
         content: [],
         path: [],
@@ -431,6 +432,7 @@ export default  new Vuex.Store({
         tree2Data: state => state.tree2Data,
         
         manageTree: state => state.manageTree,
+        deviceInfo: state => state.deviceInfo,
 
         content: state => state.content,
         path: state => state.path,
@@ -461,6 +463,10 @@ export default  new Vuex.Store({
 
         manageTree:(state, data) =>{
             Vue.set(state, "manageTree", data)
+        },
+
+        deviceInfo:(state, data) =>{
+            Vue.set(state, "deviceInfo", data)
         },
 
         name:(state, payload)=>{
@@ -575,22 +581,18 @@ export default  new Vuex.Store({
             }).then(res => context.dispatch("RESPONSE_REQUEST", res.data));
         },
 
-        getManageTree:(context, payload) => { //формируем запрос для дерева йстройств()
-            axios.post(HTTP_BASE_URL + "/", {
-                "path": "devices/user",
-                "calls": 
-                [
-                    {
-                        "Devices": {
-                            "devices": {
-                                "GetOwnerDevicesHierarchy": {
-                                    "owner": 2
-                                }
-                            }
-                        }
-                    }
-                ]       
-            }).then(res => context.dispatch("RESPONSE_REQUEST", res.data)).then(context.commit("manageTree", payload));
+        getManageTree:(context, payload) => { //формируем запрос для дерева устройств()
+            context.state.format.send({
+                method: "post",
+                url: "/",
+                path: "devices/user",
+                class: "Devices",
+                object: "devices",
+                function: "GetOwnerDevicesHierarchy",
+                data: {
+                    "owner": 2
+                }
+            }).then(res => context.commit("manageTree", res.data));
         },
 
         RESPONSE_REQUEST: (context, payload) => {

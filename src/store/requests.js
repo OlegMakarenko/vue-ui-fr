@@ -59,30 +59,16 @@ export default {
     rename: (context, payload) => {
         console.log("rename", payload)
         context.state.format.send({
-            // method: "post",
-            // url: "",
-            // path: "d1/d2",
-            // class: "AnotherBackendService",
-            // object: "someObject",
-            // function: [],
-            // data: {
-            //     name: payload.name,
-            //     id: payload.nodeId
-            // }
-            path: "realtime/user",
-            calls: 
-            [
-                {
-                    Realtime: {
-                        realtime: {
-                            LastDeviceData: {
-                                sensId: payload.nodeId
-                            }
-                        }
-                    }
-                }
-            ]
-        
+            method: "post",
+            url: "",
+            path: "d1/d2",
+            class: "AnotherBackendService",
+            object: "someObject",
+            function: [],
+            data: {
+                name: payload.name,
+                id: payload.nodeId
+            }
         })
     },
 
@@ -98,6 +84,21 @@ export default {
             data: {
                 name: payload.name,
                 id: '0'
+            }
+        })
+    },
+
+    getTreeData:(context, payload) => {
+        console.log("treeData ", payload)
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "devices/user",
+            class: "Devices",
+            object: "devices",
+            function: "GetOwnerDevicesHierarchy",
+            data: {
+                "owner": 2
             }
         })
     },

@@ -24,7 +24,7 @@
 
     <div class="center-side-list">
       <div v-if="isTemperature">
-        {{temperature+'°'}}
+        {{0+'°'}}
           <i class="el-icon-right" style="color: #666"></i>
         {{preassignedTemp+'°'}}        
       </div>
@@ -62,7 +62,7 @@ export default {
       show_icons: false,
       devicePicture: false,
       selectedNodeChildrenCount: 0,
-      preassignedTemp: 30,
+      preassignedTemp: 22,
     };
   },
 

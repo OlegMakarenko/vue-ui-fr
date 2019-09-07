@@ -10,10 +10,11 @@
           <button class="button-close" @click="onClick">x</button>
         </div>
       </div> -->
+      
 
       <div class="graphic-panel-view">
         <div class="graphic-panel-content">
-          <div class="graphic-date-picker" v-if="getChartData">
+          <div class="graphic-date-picker" >
             Дата:
             <div>
              <el-date-picker
@@ -49,13 +50,11 @@
             </div>
           </div>
         </div>
-
-        <Chart 
-          :object="historyChart"
-  		  	:toolbar="false"
-	    		:axesButton="false" />
-
       </div>
+      <Chart 
+          :object="pickerOptions"
+  		  	:toolbar="false"
+	    		:axesButton="false"/>
     </div>
 
     <div class="graphic-info-panel">
@@ -96,6 +95,10 @@ export default {
     Chart
   },
 
+  // created(){
+  //   this.$store.dispatch("TRENDS")
+  // },
+
   mounted(){
         this.$store.dispatch("createComponent", this);
         console.warn('INSTANCES', this.$store.state.instances)
@@ -105,10 +108,6 @@ export default {
     infoPanel(){
       return this.$store.getters.infoPanelData;
     },
-
-    getChartData(){
-      return this.$store.dispatch("TRENDS")
-    }
   },
 
   data() {
@@ -224,7 +223,7 @@ export default {
 
       .graphic-panel-content{
         width :100%;
-        height: 10%;
+        height: 100%;
         display: flex; 
         flex-direction: row;
         align-items: center;
@@ -258,7 +257,7 @@ export default {
   .graphic-info-panel {
     flex: 0 0 auto;
     display: flex;
-    width: 15%;
+    width: 200px;
     word-wrap:break-word;
     border-left: 1px solid #DCDFE6;    
     align-items: center;

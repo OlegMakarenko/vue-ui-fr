@@ -179,7 +179,8 @@
       </div>
 
       <div class="info-content">
-        Тип терморегулятора: {{infoPanel.id}}
+        Тип терморегулятора: 1
+        <!-- {{infoPanel.id}} -->
       </div>
 
       <div class="info-content">
@@ -199,6 +200,10 @@ import BaseComponent from '../../BaseComponent.vue'
 
 export default {
   extends: BaseComponent,
+
+  created(){
+    this.$store.dispatch("DEVICE_INFO")
+  },
 
   components: {
 
@@ -233,34 +238,34 @@ export default {
     },
 
     consPower(){
-      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.consPower + '  кВт • ч';
+      return this.$store.getters.wsData.Class + '  кВт • ч';
     },
 
     power(){
-      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.power + ' мкА';
+      return this.$store.getters.wsData.calls + ' мкА';
     },
 
     voltage(){
-      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.voltage + ' В';
+      return this.$store.getters.wsData.calls + ' В';
     },
 
     temperature(){
-      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp + ' °C';
+      return this.$store.getters.wsData.calls + ' °C';
     },
 
     status(){
-      if(this.$store.getters.wsData.calls[0].Class.obj.Func.data.status == true){
+      if(this.$store.getters.wsData.calls == true){
         return 'Wi-Fi'
-      } else if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.status == false){
+      } else if (this.$store.getters.wsData.calls == false){
         return 'All-Hub'
       }
     },  
 
     tempView(){
-      if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp > this.inputNum2){
+      if (this.$store.getters.wsData.calls > this.inputNum2){
          this.iconUp = false;
          this.iconDown = true;
-      } else if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp < this.inputNum2){
+      } else if (this.$store.getters.wsData.calls < this.inputNum2){
         this.iconUp = true;
         this.iconDown = false;
       }

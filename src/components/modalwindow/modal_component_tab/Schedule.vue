@@ -461,7 +461,7 @@ export default {
   .schedule-info-panel {
     flex: 0 0 auto;
     display: flex;
-    width: 15%;
+    width: 200px;
     word-wrap:break-word;
     border-left: 1px solid #DCDFE6;    
     align-items: center;

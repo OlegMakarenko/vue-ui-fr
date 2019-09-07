@@ -36,7 +36,7 @@
 
       <div class="temperature-content"  v-if="isTemperature">
         <div class="temperature-output">
-          {{temperature+'°'}}
+          {{0+'°'}}
         </div>
         <div class="icon-right">
           <i class="el-icon-right" style="color: #666"></i>
@@ -75,7 +75,7 @@ export default {
       show_icons: false,
       devicePicture: false,
       selectedNodeChildrenCount: 0,
-      preassignedTemp: 30,
+      preassignedTemp: 22,
 
     };
   },

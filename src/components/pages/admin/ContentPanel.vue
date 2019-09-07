@@ -54,8 +54,8 @@ export default {
 
   computed: {
     content() {
-      if (this.$store.getters.manageTree)
-        return this.$store.getters.manageTree.length;
+      if (this.$store.getters.content)
+        return this.$store.getters.content.children;
     }
   },
 

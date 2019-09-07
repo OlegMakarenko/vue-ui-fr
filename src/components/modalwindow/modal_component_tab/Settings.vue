@@ -30,6 +30,14 @@
                 </el-option>
 
               </el-select>
+              <el-select
+                v-model="valueSensor2"
+                multiple
+                collapse-tags
+                style="width: 200px"
+                placeholder="Select">
+              </el-select>
+
               <el-button 
                 size="large" 
                 type="primary"
@@ -49,6 +57,13 @@
                   :label="item.labelMode"
                   :value="item.valueMode">
                 </el-option>
+              </el-select>
+               <el-select
+                v-model="valueSensor2"
+                multiple
+                collapse-tags
+                style="width: 200px"
+                placeholder="Select">
               </el-select>
               <el-button 
                 size="large" 
@@ -121,7 +136,7 @@
               </el-color-picker>
             </div>
 
-            <el-button @click="changeColor">Применить цвет</el-button>
+            <!-- <el-button @click="changeColor">Применить цвет</el-button> -->
 
             <div class="settings-button-content">
               <h style="font-size: 18px;">Блокировка кнопок</h>
@@ -152,7 +167,8 @@
             </div>
 
             <div class="info-content">
-            Тип терморегулятора: {{infoPanel.id}}
+            Тип терморегулятора: 1
+            <!-- {{infoPanel.id}} -->
             </div>
 
             <div class="info-content">
@@ -613,7 +629,7 @@ export default {
   .settings-info-panel {
     display: flex;
     flex: 0 0 auto;
-    width: 15%;
+    width: 200px;
     word-wrap:break-word;
     border-left: 1px solid #DCDFE6;    
     align-items: center;

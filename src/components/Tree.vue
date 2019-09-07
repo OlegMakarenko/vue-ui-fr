@@ -47,7 +47,7 @@ export default {
   extends: BaseComponent,
 
   label: "lside",
-  props: [/*"treeData"*/,"id", "isDraggable"],
+  props: ["treeData","id", "isDraggable"],
 
   computed:{
     infoPanel(){
@@ -58,16 +58,16 @@ export default {
   data() {
     return {
       class: "Tree",
-      treeData: [],
+      // treeData: [],
     };
   },
 
   components: {},
 
   methods: {
-    doSetData(data){
-      this.$set(this, "treeData", data)
-    },
+    // doSetData(data){
+    //   this.$set(this, "treeData", data)
+    // },
 
     handleDragStart(node, ev) {
       console.log("drag start", node);

@@ -530,37 +530,39 @@ export default  new Vuex.Store({
         },
 
         DEVICE_INFO: (context, payload) => {
-            axios.post(HTTP_BASE_URL + "/", {
-                path:"realtime/user",
-                calls: [{
-                    Realtime: {
-                        realtime: {
-                            LastDeviceData: {
-                                sensId: "d342f214"
-                            }
-                        }
-                    }
-                }]
-            }).then(res => context.dispatch("RESPONSE_REQUEST", res.data));
+            context.state.format.send({
+                method: "post",
+                url: "/",
+                path: "realtime/user",
+                class: "Realtime",
+                object: "realtime",
+                function: "LastDeviceData",
+                data: {
+                    "sensId": 1
+                }
+            })
             ws.onmessage = function(event){
                 console.log('mememe ' + event.data);
-                context.state.wsData = JSON.parse(event.data);
+                context.state.wsData = event.data;
             }
         },
 
         TRENDS: (context, payload) => { //формируем запрос для трендов()
             axios.post(HTTP_BASE_URL + "/", {
                 "path": "trends/user",
-                "calls": [{
-                    "Trends": {
-                        "trends": {
-                            "GetChart": {
-                                "trendsDate": [1484687, 484798798],
-                                "trendsFilters": ["vega/asfdsf23 temperature"]
+                "calls": 
+                    [
+                        {
+                            "Trends": {
+                                "trends": {
+                                    "GetChart": {
+                                        "trendsDate": [1567781868, 1567882506],
+                                        "trendsFilters": ["vega/1 temperature"]
+                                    }
+                                }
                             }
                         }
-                    }
-                }]
+                    ]
             }).then(res => context.dispatch("RESPONSE_REQUEST", res.data));
         },
 
@@ -619,7 +621,7 @@ export default  new Vuex.Store({
                 
             })
                 .then(res => context.dispatch("PROCESS_RESPONSE", res.data)
-                .then(content => context.commit("infoPanelData", content.find( el => el.topic=="doSetContent").data)));
+                .then(content => context.commit("infoPanelData", content.find( el => el.topic=="doSetContent").data))); //еррор который делает дабл клик на компоненты
         },
 
         PROCESS_RESPONSE: (context, payload) => {

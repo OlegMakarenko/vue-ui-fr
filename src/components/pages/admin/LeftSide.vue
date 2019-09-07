@@ -2,32 +2,42 @@
   <div>
     <div class="left-side-menu" id="colorSwitch">
       <div style="margin-top: 20px; flex: 1 1 auto;">
-        <el-tabs type="card" v-model="activeName" @tab-click="handleClick" class="tabs"> 
+        
+          <div class="tree-button">
+            <button 
+                :class="handleButtonClass" 
+                @click="handleFunc" 
+                class="handle-mode-button">Устройства</button>
+
+              <button 
+                :class="scheduleButtonClass" 
+                @click="scheduleFunc" 
+                class="schedule-mode-button">Группы</button>
+          </div>
           <el-button
           class="profile-system"
           type="primary"
           size="mini"
           @click="getTreeData"
-          >Профиль и системные функции</el-button> <!--@click="getTreeData"-->
+          >Профиль и системные функции</el-button>
 
           <el-divider></el-divider>
 
-          <el-tab-pane label="Устройства" name="first" class="tab-tree1">
             <Tree
               object="devicesTree"
+              v-if="tree2DataVisible"
               :treeData="tree2Data"
               :id="2"
               class="tree_view"/>
-            </el-tab-pane>
-          <el-tab-pane label="Группы" name="second" class="tab-tree1">
+            
             <Tree  
+            v-if="tree1DataVisible"
               object="groupsTree"
               :treeData="tree1Data"
               :id="1"
               class="tree_view"/>
-          </el-tab-pane>
-        </el-tabs>        
-        {{tree1Data}} <!--Проверка приходят ли данные-->
+             
+        <!-- {{tree1Data}} Проверка приходят ли данные -->
       </div>
       <div style="height: 150px; width: 300px; background-color: #8a999f; flex: 0 0 auto;">
         
@@ -43,11 +53,33 @@ export default {
   data() {
     return {
       activeName: 'first',
+      tree2DataVisible: true,
+      tree1DataVisible: false,
+      handleMode: true,
+      scheduleMode: false,
     };
   },
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
+    },
+
+    handleFunc(){
+      if(this.handleMode == false){
+        this.handleMode = true
+        this.tree2DataVisible = true
+        this.tree1DataVisible = false
+        this.scheduleMode = false
+      }
+    },
+
+    scheduleFunc(){
+      if(this.scheduleMode == false){
+        this.scheduleMode = true
+        this.tree1DataVisible = true
+        this.tree2DataVisible = false
+        this.handleMode = false
+      }
     },
   },
 
@@ -57,7 +89,7 @@ export default {
 
   computed: {
     tree1Data() {
-      return this.$store.getters.manageTree;
+      return this.$store.getters.tree1Data;
     },
 
     tree2Data() {
@@ -66,6 +98,22 @@ export default {
 
     getTreeData(){
       return this.$store.dispatch('getManageTree');
+    },
+
+    handleButtonClass(){
+      if(this.handleMode == true){
+        return 'handle-pick-grey'
+      } else if (this.handleMode == false) {
+         return 'handle-pick-white'
+      }
+    },
+
+    scheduleButtonClass(){
+      if(this.scheduleMode == true){
+        return 'handle-pick-grey'
+      } else if (this.scheduleMode == false) {
+         return 'handle-pick-white'
+      }
     },
   }
 };
@@ -92,5 +140,38 @@ export default {
 .tabs{
   margin-left: 15px;
   margin-right: 15px;
+}
+
+.handle-mode-button{
+  height: 33px;
+  width: 117px;
+  background-color: #ffffff;
+  border: 1px solid #DCDFE6;
+  border-radius: 4px;
+  color: #606266;
+  cursor: pointer;
+  outline: none;
+}
+
+.schedule-mode-button{
+  height: 33px;
+  width: 117px;
+  background-color: #ffffff;
+  border: 1px solid #DCDFE6;
+  border-radius: 4px;
+  color: #606266;
+  cursor: pointer;
+  outline: none;
+}
+
+.handle-pick-white{
+  background-color: #ffffff;
+  transition: all .3s cubic-bezier(.645,.045,.355,1);
+}
+
+.handle-pick-grey{
+  background-color: #8A999F;
+  color: #ffffff;
+  transition: all .3s cubic-bezier(.645,.045,.355,1);
 }
 </style>

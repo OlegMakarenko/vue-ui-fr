@@ -57,10 +57,9 @@ export default {
         apexcharts: VueApexCharts,
     },
 
-    created()
-    {
-       //this.$store.dispatch(...)
-    },
+    // created(){
+    //    this.$store.dispatch("TRENDS")
+    // },
 
     data()
     {
@@ -68,6 +67,7 @@ export default {
             separateAxes: false,
             ready: true,
             _chartData: [],
+            chartData:[],
             class: "Chart"
         }
     },

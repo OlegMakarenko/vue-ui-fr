@@ -15,18 +15,68 @@
                 v-else 
                 style="text-align: center; position: absolute; height: 100%; width: 100%; right: 0px; font-weight: bold"
             >
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                width="100%" height="100%" viewBox="0 80 600 600" xml:space="preserve">
-                    <line fill="none" stroke="#F2F6FC" stroke-width="6" stroke-miterlimit="10" x1="128.074" y1="343.986" x2="253.912" y2="218.147"/>
-                    <line fill="none" stroke="#F2F6FC" stroke-width="6" stroke-miterlimit="10" x1="253.912" y1="218.147" x2="318.762" y2="282.997"/>
-                    <line fill="none" stroke="#F2F6FC" stroke-width="6" stroke-miterlimit="10" x1="318.762" y1="282.997" x2="471.446" y2="130.313"/>
+                <svg version="1.1" 
+                id="Layer_1" 
+                xmlns="http://www.w3.org/2000/svg" 
+                xmlns:xlink="http://www.w3.org/1999/xlink" 
+                x="0px" 
+                y="0px"
+                width="100%" 
+                height="100%" 
+                viewBox="0 80 600 600" 
+                xml:space="preserve">
+                    <line fill="none" 
+                        stroke="#F2F6FC" 
+                        stroke-width="6" 
+                        stroke-miterlimit="10" 
+                        x1="128.074" 
+                        y1="343.986" 
+                        x2="253.912" 
+                        y2="218.147"/>
+                    <line fill="none" 
+                        stroke="#F2F6FC" 
+                        stroke-width="6" 
+                        stroke-miterlimit="10" 
+                        x1="253.912" 
+                        y1="218.147" 
+                        x2="318.762" 
+                        y2="282.997"/>
+                    <line fill="none" 
+                        stroke="#F2F6FC" 
+                        stroke-width="6" 
+                        stroke-miterlimit="10" 
+                        x1="318.762" 
+                        y1="282.997" 
+                        x2="471.446" 
+                        y2="130.313"/>
                     <circle cx="128.073" fill="#F2F6FC" cy="343.986" r="6.712"/>
                     <circle cx="254.073" fill="#F2F6FC" cy="217.986" r="6.712"/>
                     <circle cx="319.073" fill="#F2F6FC" cy="282.986" r="6.712"/>
                     <circle cx="471.073" fill="#F2F6FC" cy="129.986" r="6.712"/>
-                    <line fill="none" stroke="#F2F6FC" stroke-width="6" stroke-miterlimit="10" x1="128.074" y1="470.986" x2="253.912" y2="371.147"/>
-                    <line fill="none" stroke="#F2F6FC" stroke-width="6" stroke-miterlimit="10" x1="253.912" y1="371.147" x2="318.762" y2="409.997"/>
-                    <line fill="none" stroke="#F2F6FC" stroke-width="6" stroke-miterlimit="10" x1="318.762" y1="409.997" x2="471.446" y2="296.313"/>
+                    <line fill="none" 
+                        stroke="#F2F6FC" 
+                        stroke-width="6" 
+                        stroke-miterlimit="10" 
+                        x1="128.074" 
+                        y1="470.986" 
+                        x2="253.912" 
+                        y2="371.147"/>
+                    <line fill="none" 
+                        stroke="#F2F6FC" 
+                        stroke-width="6" 
+                        stroke-miterlimit="10" 
+                        x1="253.912" 
+                        y1="371.147" 
+                        x2="318.762" 
+                        y2="409.997"/>
+                    <line fill="none" 
+                        stroke="#F2F6FC" 
+                        stroke-width="6" 
+                        stroke-miterlimit="10" 
+                        x1="318.762" 
+                        y1="409.997" 
+                        x2="471.446" 
+                        y2="296.313"/>
                     <circle cx="128.073" fill="#F2F6FC" cy="470.986" r="6.712"/>
                     <circle cx="254.073" fill="#F2F6FC" cy="370.986" r="6.712"/>
                     <circle cx="319.073" fill="#F2F6FC" cy="409.986" r="6.712"/>
@@ -50,16 +100,17 @@ import VueApexCharts from 'vue-apexcharts';
 import { setTimeout } from 'timers';
 
 export default {
-    props: ["object", "axesButton"],
+    props: ["object", "axesButton", "data"],
     
     components: 
     {
         apexcharts: VueApexCharts,
     },
 
-    // created(){
-    //    this.$store.dispatch("TRENDS")
-    // },
+    created(){
+      return this.$store.dispatch("getChart")
+        // this.$store.mutations.chartData
+    },
 
     data()
     {
@@ -67,7 +118,7 @@ export default {
             separateAxes: false,
             ready: true,
             _chartData: [],
-            chartData:[],
+            // chartData:[],
             class: "Chart"
         }
     },
@@ -80,8 +131,14 @@ export default {
             return chartData;
         },
 
+        // chartData(){
+        //     var chartData = this._chartData;
+        //     if(chartData && chartData.length && chartData.length > 1)
+        //         return chartData;
+        // },
+
         chartData(){
-            var chartData = this._chartData;
+            var chartData = this.data;
             if(chartData && chartData.length && chartData.length > 1)
                 return chartData;
         },
@@ -168,23 +225,15 @@ export default {
                     for(var key in chartData[i].value)
                         data.push([
                             getDate(chartData[0].value[key]),
-                            1*chartData[i].value[key]
+
+                            chartData[i].value[key] === null ? null : 1*chartData[i].value[key]
                         ]);
 
-                    var seriesType = 'line';
-                    if(chartData[i].chartType)
-                        seriesType = chartData[i].chartType;
-                    
-                    else
-                    {
-                        const settings = this.seriesSettings.find( f => f.prop == chartData[i].name);
-                        if (settings && settings.type)
-                            seriesType = settings.type;
-                    }   
+
 
                     series.push({
                         name: chartData[i].name,
-                        type: seriesType,
+                        type: "line",
                         data: data
                     });
                 }
@@ -206,12 +255,10 @@ export default {
             if(chartData && chartData[0])
             {
                 var dates = [];
-                if(chartData[0].type != "text")
+                
                     for(var key in chartData[0].value)
                         dates.push(getDate(chartData[0].value[key]));
-                else
-                    for(var key in chartData[0].value)
-                        dates.push("" + chartData[0].value[key]);
+          
 
                 return { 
                     type: "datetime",

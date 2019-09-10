@@ -15,28 +15,27 @@
           Режимы работы
           <div class="mode-content">
             <div class="select-sensor">
-              <el-select
-                v-model="valueSensor2"
-                multiple
-                collapse-tags
-                style="width: 400px"
-                placeholder="Select">
+              <div class="select-button-group">
+                <button 
+                  class="button-group-first"
+                  :class="firstButton" 
+                  @click="onClickFirst">
+                    Все датчики
+                </button>
+                <button 
+                  class="button-group-second"
+                  :class="secondButton" 
+                  @click="onClickSecond">
+                    Без датчика
+                  </button>
+                <button 
+                  class="button-group-third"
+                  :class="thirdButton" 
+                  @click="onClickThird">
+                    RF датчик
+                  </button>
+              </div>
 
-                <el-option
-                  v-for="item in optionsSensor"
-                  :key="item.valueSensor"
-                  :label="item.labelSensor"
-                  :value="item.valueSensor">
-                </el-option>
-
-              </el-select>
-              <el-select
-                v-model="valueSensor2"
-                multiple
-                collapse-tags
-                style="width: 200px"
-                placeholder="Select">
-              </el-select>
 
               <el-button 
                 size="large" 
@@ -47,29 +46,51 @@
             </div>
 
             <div class="shim-mode">
-              <el-select
-                v-model="valueMode2"
-                style=" width: 400px"
-                placeholder="Select">
-                <el-option
-                  v-for="item in optionsMode"
-                  :key="item.valueMode"
-                  :label="item.labelMode"
-                  :value="item.valueMode">
-                </el-option>
-              </el-select>
-               <el-select
-                v-model="valueSensor2"
-                multiple
-                collapse-tags
-                style="width: 200px"
-                placeholder="Select">
-              </el-select>
-              <el-button 
-                size="large" 
-                type="primary">
-                  Настройка режимов
-              </el-button>
+              <div class="input-group">
+                <div class="input-group-first" v-if="inputFirst">
+                  <div style="display: flex; flex-direction: row; width: 100%; height: 25%;">
+                    <div style="width: 50%; font-size: 16px; text-align: left;">
+                      Регулировка
+                    </div>
+
+                      <div style="width: 50%; font-size: 16px; text-align: left;">
+                        <span style="margin-left: 5px;">Отсечение</span>
+                      </div>
+                    </div>
+                  <div class="inputFirst">
+                    <el-select style="width: 49%"></el-select>
+                    <el-select style="width: 49%"></el-select>
+                  </div>
+                </div>
+
+                <div class="input-group-second" v-if="inputSecond">
+                  <div style="display: flex; flex-direction: row; width: 100%; height: 25%;">
+                    <div style="width: 50%; font-size: 16px; text-align: left;">
+                      Регулировка
+                    </div>
+                  </div>
+                  <div class="inputSecond">
+                    <el-select style="width: 100%"></el-select>
+                  </div>
+                </div>
+
+                <div class="input-group-third" v-if="inputThird">
+                  <div style="display: flex; flex-direction: row; width: 100%; height: 25%;">
+                    <div style="width: 50%; font-size: 16px; text-align: left;">
+                      Регулировка
+                    </div>
+
+                      <div style="width: 50%; font-size: 16px; text-align: left;">
+                        <span style="margin-left: 5px;">Отсечение</span>
+                      </div>
+                    </div>
+                  <div class="inputThird">
+                    <el-select style="width: 49%"></el-select>
+                    <el-select style="width: 49%"></el-select>
+                  </div>
+                </div>
+              </div>
+              <!-- все датчики 2 RF-provodnoy/ без датчика 1 / RF датчик 2-->
             </div>
           </div>
         </div>
@@ -286,6 +307,30 @@ export default {
     infoPanel(){
       return this.$store.getters.infoPanelData;
     },
+
+    firstButton(){
+      if(this.firstB == true){
+        return 'handle-pick-grey'
+      } else if (this.firstB == false) {
+         return 'handle-pick-white'
+      }
+    },
+
+    secondButton(){
+      if(this.secondB == true){
+        return 'handle-pick-grey'
+      } else if (this.secondB == false) {
+         return 'handle-pick-white'
+      }
+    },
+
+    thirdButton(){
+      if(this.thirdB == true){
+        return 'handle-pick-grey'
+      } else if (this.thirdB == false) {
+         return 'handle-pick-white'
+      }
+    },
   },
 
   data() {
@@ -303,6 +348,13 @@ export default {
       hysteresis: 10,
       innerVisible: false,
       slectedId: null,
+      firstB: true,
+      secondB: false,
+      thirdB: false,
+      inputFirst: true,
+      inputSecond: false,
+      inputThird: false,
+
 
 
       options: [{
@@ -409,7 +461,45 @@ export default {
 
     changeColor(){
      return document.body.style.backgroundColor('#673AB7')
-    }
+    },
+
+    onClickFirst(){
+      if(this.firstB == true && this.inputFirst == true){
+        this.secondB = false
+        this.thirdB = false
+        this.inputSecond = false
+        this.inputThird = false 
+      } else if (this.firstB === false && this.inputFirst == false){
+        this.firstB = true
+        this.inputFirst = true
+        this.secondB = false
+        this.thirdB = false
+        this.inputSecond = false
+        this.inputThird = false 
+      }
+    },
+
+    onClickSecond(){
+      if(this.secondB == false && this.inputSecond == false){
+        this.firstB = false
+        this.secondB = true
+        this.thirdB = false
+        this.inputFirst = false
+        this.inputSecond = true
+        this.inputThird = false 
+      }
+    },
+
+    onClickThird(){
+      if(this.thirdB == false && this.inputThird == false){
+        this.firstB = false
+        this.secondB = false
+        this.thirdB = true
+        this.inputFirst = false
+        this.inputSecond = false
+        this.inputThird = true 
+      }
+    },
   }
 };
 </script>
@@ -574,6 +664,62 @@ export default {
             display: flex;
             align-items: center;
             justify-content: space-between;
+
+            .select-button-group{
+              width: 50%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              .button-group-first{
+                height: 40px;
+                width: 33%;
+                background-color: #ffffff;
+                border: 1px solid #DCDFE6;
+                border-top-left-radius: 4px;
+                border-bottom-left-radius: 4px;
+                color: #606266;
+                cursor: pointer;
+                outline: none;
+              }
+
+              .button-group-second{
+                height: 40px;
+                width: 33%;
+                background-color: #ffffff;
+                border-top: 1px solid #DCDFE6;
+                border-bottom: 1px solid #DCDFE6;
+                border-left: none;
+                border-right: none;
+                color: #606266;
+                cursor: pointer;
+                outline: none;
+              }
+
+              .button-group-third{
+                height: 40px;
+                width: 33%;
+                background-color: #ffffff;
+                border: 1px solid #DCDFE6;
+                border-top-right-radius: 4px;
+                border-bottom-right-radius: 4px;
+                color: #606266;
+                cursor: pointer;
+                outline: none;
+              }
+
+              .handle-pick-white{
+                background-color: #ffffff;
+                transition: all .3s cubic-bezier(.645,.045,.355,1);
+              }
+
+              .handle-pick-grey{
+                background-color: #8A999F;
+                color: #ffffff;
+                transition: all .3s cubic-bezier(.645,.045,.355,1);
+              }
+            }
           }
 
           .shim-mode{
@@ -583,6 +729,74 @@ export default {
             align-items: center;
             justify-content: space-between;
 
+            .input-group{
+              width: 50%;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+            }
+
+            .input-group-first{
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              flex-direction: column;
+
+              .spanFirst{
+                width:100%; 
+                height:10%; 
+                display: flex; 
+                justify-content: flex-start; 
+                align-items: flex-start
+              }
+
+              .inputFirst{
+                width:100%; 
+                height: 75%; 
+                display: flex; 
+                justify-content: space-between; 
+                align-items: flex-start;
+              }
+            }
+
+            .input-group-second{
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              flex-direction: column;
+
+              .inputSecond{
+                width:100%; 
+                height: 75%; 
+                display: flex; 
+                justify-content: space-between; 
+                align-items: flex-start;
+              }
+
+            }
+
+            .input-group-third{
+              width: 100%;
+              height: 100%;
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              flex-direction: column;
+
+              .inputThird{
+                width:100%; 
+                height: 75%; 
+                display: flex; 
+                justify-content: space-between; 
+                align-items: flex-start;
+              }
+            }
           }
         }
       }

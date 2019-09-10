@@ -1,16 +1,6 @@
 <template>
-  <div class="control-panel" v-if="visibleContentGunc">
+  <div class="control-panel">
     <div class="control-panel-container">
-      <!-- <div class="control-content-panel">
-        <div class="control-control-header">
-          Управление 
-        </div>
-        <div class="control-button-header">
-          <button 
-            class="button-close" 
-            @click="onClick">x</button>
-        </div>
-      </div> -->
     <div class="control-panel-view">
       <div class="control-header-content">
         <div class="header-content-left">
@@ -47,9 +37,10 @@
               <el-input-number 
                 style="width: 115px" 
                 size="medium" 
+                @change="getTemperature"
                 :min="0"
                 :max="50"
-                v-model="inputNum2">
+                v-model="getTemperature">
               </el-input-number>
             </div>
           </div>
@@ -57,16 +48,18 @@
           <div class="left-bottom-content" v-if="timePick">
             <el-slider 
               style="width: 250px; margin-left: 10px;" 
-              v-model="inputNum2" 
+              v-model="getTemperature" 
               :max="50"
+              @change="getTemperature"
               :show-tooltip="false">
             </el-slider>
-            {{inputNum2+'°C'}}
+            {{getTemperature+'°C'}}
           </div>
 
           <div class="left-bottom-content" v-else>
             <el-slider 
-              style="width: 250px; margin-left: 10px;" 
+              style="width: 250px; margin-left: 10px;"
+              @click="onGraphicView" 
               v-model="inputNum2" 
               :max="30"
               :show-tooltip="false">
@@ -77,6 +70,7 @@
 
         <div class="header-content-right">
           <div class="invisible-header-content"></div>
+          
           <div class="right-top-content">
               <button 
                 :class="handleButtonClass" 
@@ -94,10 +88,18 @@
                 class="ongo-mode-button">Отъезд</button>
           </div>
 
+          <div class="rightc-content">
+          Реле <el-switch v-model="value1" 
+                     @change="getRelay"  
+                     active-text="Вкл"
+                     inactive-text="Выкл"></el-switch>
+          </div>
+
           <div class="right-center-content">
             <el-button 
               :class="timePickClass"
-              @click="timePickFunc" 
+              @click="timePickFunc"
+              v-on:click="redraw" 
               v-if="sensorVisible">
                 Режим работы без датчика
             </el-button>
@@ -156,8 +158,20 @@
                 v-model="statusHub">
             </div>
           </div>
+          
         </div>
       </div>
+      <div style="width: 100%; height: 60%; margin-left: -20px">
+        <Chart
+            :toolbar="false"
+            :axesButton="false"
+            :data="chartData"/>
+      </div>
+      
+      <!-- <div>
+        <h2>{{allPosts.title}}</h2>
+        <p>{{allPosts.body}}</p>
+      </div> -->
     </div>
   </div>
 
@@ -197,16 +211,24 @@
 
 <script>
 import BaseComponent from '../../BaseComponent.vue'
+import Chart from '../../chart/Chart'
+import {setTimeout} from 'timers'
 
 export default {
   extends: BaseComponent,
 
   created(){
-    this.$store.dispatch("DEVICE_INFO")
+    this.$store.dispatch("DEVICE_INFO");
+    this.$store.dispatch('getChartControl');
+    this.$store.dispatch("getTemperature");
+  },
+
+  mounted(){
+    this.$store.dispatch('getChartControl');
   },
 
   components: {
-
+    Chart
   },
   
     data() {
@@ -224,6 +246,8 @@ export default {
         iconUp: true,
         iconDown: false,
         contentVisible: true,
+        ready: true,
+        value1: true
       };
     },
 
@@ -232,40 +256,58 @@ export default {
       return this.$store.getters.infoPanelData;
     },
 
+     getTemperature:{
+      get(){
+        return this.$store.getters.temperature
+      },
+      set(value){
+        this.$store.commit("temperature", value)
+        this.$store.dispatch("getTemperature")
+      }
+    },
+
+    chartData(){
+      return this.$store.getters.chartData
+    },
+
+    allPosts(){
+      return this.$store.getters.allPosts;
+    },
+
     visibleContentGunc(){
       if(this.contentVisible == true)
         return this.$store.dispatch("DEVICE_INFO")
     },
 
     consPower(){
-      return this.$store.getters.wsData.Class + '  кВт • ч';
+      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.consPower + '  кВт • ч';
     },
 
     power(){
-      return this.$store.getters.wsData.calls + ' мкА';
+      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.power + ' мкА';
     },
 
     voltage(){
-      return this.$store.getters.wsData.calls + ' В';
+      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.voltage + ' В';
     },
 
     temperature(){
-      return this.$store.getters.wsData.calls + ' °C';
+      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp + ' °C';
     },
 
     status(){
-      if(this.$store.getters.wsData.calls == true){
+      if(this.$store.getters.wsData.calls[0].Class.obj.Func.data.status == true){
         return 'Wi-Fi'
-      } else if (this.$store.getters.wsData.calls == false){
+      } else if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.status == false){
         return 'All-Hub'
       }
     },  
 
     tempView(){
-      if (this.$store.getters.wsData.calls > this.inputNum2){
+      if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp > this.getTemperature){
          this.iconUp = false;
          this.iconDown = true;
-      } else if (this.$store.getters.wsData.calls < this.inputNum2){
+      } else if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp < this.getTemperature){
         this.iconUp = true;
         this.iconDown = false;
       }
@@ -301,13 +343,17 @@ export default {
       } else if (this.ongoMode == false) {
          return 'handle-pick-white'
       }
-    }
+    },
   },
 
 
   methods: {
     onClick(){
       this.$emit('buttonClick')
+    },
+
+    checkState(){
+      console.log("value of SWITCHER", this.value1)
     },
 
     troubleButton() {
@@ -341,6 +387,11 @@ export default {
           message: 'Редактирование отменено '
         });
       });
+    },
+
+    tempChange(value){
+      this.$store.commit("temperature", value)
+      this.$store.dispatch("getTemperature")
     },
 
     timePickFunc(){
@@ -378,8 +429,14 @@ export default {
       }
     },
 
-    sendRequest(){
-      
+    redraw(){
+        this.ready = false;
+        setTimeout(()=>{ this.ready = true }, 500);
+    },
+
+    
+    getRelay(){
+      this.$store.dispatch("getRelay")
     }
   }
 };
@@ -428,10 +485,11 @@ export default {
     .control-panel-view {
       flex: 1 1 auto;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       // justify-content: center;
       flex-wrap: wrap;
       overflow: auto;
+      overflow-x: hidden;
       padding: 20px;
       border-top: 1px solid #DCDFE6;
 
@@ -594,9 +652,17 @@ export default {
             }
           }
 
+          .rightc-content{
+            width: 100%;
+            height: 25%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+          }
+
           .right-center-content{
             width: 100%;
-            height: 65%;
+            height: 20%;
             display: flex;
             justify-content: space-evenly;
             align-items: center;

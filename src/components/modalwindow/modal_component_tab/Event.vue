@@ -1,28 +1,28 @@
 <template>
   <div class="event-panel">
     <div class="event-panel-container">
-      <!-- <div class="event-control-panel">
-        <div class="event-control-header">
-          События 
-        </div>
-
-        <div class="event-button-header">
-          <button class="button-close" @click="onClick">x</button>
-        </div>
-      </div> -->
       <div class="event-panel-view" >
-
         <div class="block">
           <div class="date-picker" >
-            <el-date-picker
-              v-model="value2"
-              type="datetimerange"
-              :picker-options="pickerOptions"
-              range-separator="-"
-              start-placeholder="Start"
-              end-placeholder="End"
-              align="right">
-            </el-date-picker>
+           
+            <div style="display: flex;
+                        flex-direction: column;
+                        text-align: left;
+                        font-size: 16px;
+                        margin-bottom:20px;">
+          Дата:
+             <el-date-picker
+                v-model="eventData"
+                @change="dataChange"
+                type="daterange"
+                align="right"
+                range-separator="To"
+                start-placeholder="Start date"
+                end-placeholder="End date"
+                :picker-options="pickerOptions"
+                value-format="timestamp">
+              </el-date-picker>
+            </div>
 
             <el-button icon="el-icon-delete" circle></el-button>
           </div>
@@ -35,30 +35,36 @@
           </div>
         </div>
 
-        <!-- <button @click="testEvent"></button> -->
-
         <div class="event-content">
-          <el-table height="353px"
-            :data="tableData"
+          <el-table height="500px"
             
-            style="width: auto">
+            :data="eventsDataOutput">
+
+            <!-- :data отвечает за прием сообщения с сервера -->
             <el-table-column
-              prop="date"
+              prop="datetime" 
               label="Время события"
-              >
-            </el-table-column>
-            <el-table-column
-              prop="event"
-              label="Причина соытия"
-              >
+              header
+              > 
+              <!-- prop отвечает за взятие переменной из сообщения -->
               <template slot-scope="scope">
                 <div slot="reference" class="event-wrapper">
-                  <el-tag size="medium">{{ scope.row.event }}</el-tag>
+                  {{ convertServerDate(scope.row.datetime) }}
                 </div>
               </template>
             </el-table-column>
             <el-table-column
-              prop="eventMsg"
+              prop="eventType"
+              label="Причина события"
+              >
+              <template slot-scope="scope">
+                <div slot="reference" class="event-wrapper">
+                  <el-tag size="medium">{{ scope.row.eventType.toUpperCase() }}</el-tag>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="description"
               label="Тип события">
             </el-table-column>
           </el-table>
@@ -96,15 +102,20 @@
 </template>
 
 <script>
+import { convertServerDate } from '../../../utils.js'
 export default {
   props: ['object'],
   components: {
 
   },
 
+  created(){
+    return this.$store.commit('eventsData')
+  },
+
   mounted(){
-        this.$store.dispatch("createComponent", this);
-        console.warn('INSTANCES', this.$store.state.instances)
+    this.$store.dispatch("createComponent", this);
+    console.warn('INSTANCES', this.$store.state.instances)
   },
 
   computed: {
@@ -113,10 +124,19 @@ export default {
       return this.$store.getters.infoPanelData;
     },
 
-    testEvent(){
-      this.$store.dispatch("EVENTS")
+    eventsDataOutput(){
+       return this.$store.getters.eventsData //вывод данных с сервера
     },
 
+    eventData:{
+      get() {
+        return this.$store.getters.eventsDateRange; //запрос на сервер и получение данных
+      },
+      set(value) {
+        this.$store.commit("eventsDateRange", value)
+        this.$store.dispatch("getEventData");
+      }
+    },
   },
 
   data() {
@@ -124,32 +144,6 @@ export default {
       class: 'modalEvent',
 
       eventRightSide: true,
-      tableData:[{
-          date: '21:13 06.03.19',
-          event: 'Пользователь',
-          eventMsg: 'Переход в ручной режим'
-      },{
-          date: '01:15 05.04.19',
-          event: 'Регулятор',
-          eventMsg: 'Конец нагрева с 21*С на 24*С'
-      },{
-          date: '14:20 04.03.19',
-          event: 'Регулятор',
-          eventMsg: 'Начало нагрева с 21*С на 24*С'
-      },{
-          date: '18:33 03.03.19',
-          event: 'Пользователь',
-          eventMsg: 'Переход в режим по графику'
-      },{
-          date: '21:48 02.03.19',
-          event: 'Регулятор',
-          eventMsg: 'Повышение температуры'
-      },{
-          date: '21:48 02.03.19',
-          event: 'Регулятор',
-          eventMsg: 'Повышение температуры'
-      }],
-      value2: [],
 
       pickerOptions: {
       shortcuts: [{
@@ -159,12 +153,10 @@ export default {
           const start = new Date();
           start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
           picker.$emit('pick', [start, end]);
-          this.testEvent()
         }
       }, {
         text: 'Last month',
         onClick(picker) {
-          this.$store.dispatch("EVENT")
           const end = new Date();
           const start = new Date();
           start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
@@ -173,7 +165,6 @@ export default {
       }, {
         text: 'Last 3 months',
         onClick(picker) {
-          this.$store.dispatch("EVENT")
           const end = new Date();
           const start = new Date();
           start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
@@ -190,7 +181,16 @@ export default {
       this.$emit('buttonClick')
     },
 
-    
+    dataChange(value){
+      this.$store.commit("eventsData", value);
+      this.$store.dispatch("getEventData");
+
+      console.warn("Event value == ", value)
+    },
+
+    convertServerDate(e){
+      return convertServerDate(e);
+    },
   }
 };
 </script>
@@ -257,8 +257,10 @@ export default {
 
         .date-picker{
           width: 55%;
+          height:100%;
           display: flex; 
           justify-content: space-between;
+          align-items: center;
         }
 
         .pagination{

@@ -1,4 +1,126 @@
 export default {
+    getChart: (context, payload) => {       
+        const trendsDate = context.getters.trendsDate;
+        var formattedDate = [];
+        if(trendsDate) {
+            formattedDate[0] = Math.round(trendsDate[0] / 1000);
+            formattedDate[1] = Math.round(trendsDate[1] / 1000);
+        }
+        else
+            formattedDate = [...trendsDate];
+        const trendsFilters = context.getters.trendsFilters;
+        
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "trends/user",
+            class: "Trends",
+            object: "trends",
+            function: "GetChart",
+            data: {
+                trendsDate: formattedDate,
+                trendsFilters
+            }
+        }).then(chartData => context.dispatch("RESPONSE_REQUEST", chartData.data))
+    },
+
+    getEventData:(context, payload) => {
+        const eventsDateRange = context.getters.eventsDateRange;
+        var formattedDate = [];
+        if(eventsDateRange) {
+            formattedDate[0] = Math.round(eventsDateRange[0] / 1000);
+            formattedDate[1] = Math.round(eventsDateRange[1] / 1000);
+        }
+        else
+            formattedDate = [...eventsDateRange];
+
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "events/user",
+            class: "EventManager",
+            object: "manager",
+            function: "GetEventsInTimePer",
+            data: {
+                eventsDateRange: formattedDate
+            }
+        }).then(eventsData => context.dispatch("RESPONSE_REQUEST", eventsData.data))
+    },
+
+    getTemperature:(context, payload) => {
+        // const sensorId = context.getters.sensorId;
+        const temperature = context.getters.temperature;
+
+        var formattedDate = [];
+        if(temperature) {
+            formattedDate[0] = Math.round(temperature[0] + 1);
+            formattedDate[1] = Math.round(temperature[1] + 1);
+        }
+        else
+            formattedDate = [...temperature];
+
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "mode-controller/user",
+            class: "ModeController",
+            object: "controller",
+            function: "setTemperature",
+            data: {
+            "object": "vega",
+            "sensorId": 1,
+            temperature
+            }
+        }).then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))
+    },
+
+    getRelay:(context, payload) => {
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "mode-controller/user",
+            class: "ModeController",
+            object: "controller",
+            function: "switchRelay",
+            data: {
+            "object": "vega",
+            "sensorId": 1,
+            "currentState": -1
+            }
+        }) 
+        // .then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))
+    },
+
+
+    getChartControl: (context, payload) => {
+        const trendsDate = context.getters.trendsDataControl
+        const trendsFilters = context.getters.trendsFiltersControl
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "trends/user",
+            class: "Trends",
+            object: "trends",
+            function: "GetChart",
+            data: {
+                trendsDate,
+                trendsFilters
+            }
+        }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
+    },
+
+    getFilterOptions:(context, payload) => {       
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "trends/user",
+            class: "Trends",
+            object: "trends",
+            function: "GetFiltrOptions",
+            data: {}
+        }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
+    },
+
     getTree: (context, payload) => {
         context.state.format.send({
             method: "post",
@@ -25,36 +147,7 @@ export default {
         })
     },
 
-    getEventData:(context, payload) => {
-        context.state.format.send({
-            method: "post",
-            url: "/",
-            path: "events/user",
-            class: "EventManager",
-            object: "manager",
-            function: "GetEventsInTimePer",
-            data: {
-                eventsDateRange: []
-            }
-        })
-    },
-
-    chartData:(context, payload) => {
-        context.state.format.send({
-            method: "post",
-            url: "/",
-            path: "trends/user",
-            class: "Trends",
-            object: "trends",
-            function: "GetChart",
-            data: {
-                "trendsDate": [1484687, 484798798],
-                "trendsFilters": ["vega/asfdsf23 temperature"]
-            }
-        })
-
-        console.log("chartData", payload)
-    },
+    
 
     rename: (context, payload) => {
         console.log("rename", payload)

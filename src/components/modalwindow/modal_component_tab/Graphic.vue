@@ -9,7 +9,8 @@
         <div class="graphic-button-header">
           <button class="button-close" @click="onClick">x</button>
         </div>
-      </div> -->
+      </div>                 :value="trendsDate"
+                @change="dateChange"-->
       
 
       <div class="graphic-panel-view">
@@ -18,13 +19,15 @@
             Дата:
             <div>
              <el-date-picker
-                v-model="value2"
-                type="datetimerange"
+                v-model="trendsDate"
+                type="daterange"
+                align="right"
+                range-separator="To"
+                start-placeholder="Start date"
+                end-placeholder="End date"
                 :picker-options="pickerOptions"
-                range-separator="-"
-                start-placeholder="Start"
-                end-placeholder="End"
-                align="right">
+                value-format="timestamp"
+                >
               </el-date-picker>
             </div>
           </div>
@@ -33,28 +36,33 @@
             Параметр
             <div class="graphic-param-content">
               <el-select
-                v-model="value2"
+                :value="trendsFilters"
+                @change="filterChange"
                 multiple
                 clearable
                 collapse-tags
                 placeholder="Select">
                 <el-option
-                  v-for="item in options"
+                  v-for="item in trendsFiltersOptions"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value">
                 </el-option>
               </el-select>
 
-              <el-button icon="el-icon-delete" circle></el-button>
+              
             </div>
           </div>
+          <el-button icon="el-icon-delete" circle class="clear-button"></el-button>
         </div>
       </div>
       <Chart 
           :object="pickerOptions"
-  		  	:toolbar="false"
-	    		:axesButton="false"/>
+  		  	:toolbar="true"
+	    		:axesButton="true"
+          :data="chartData"
+
+        />
     </div>
 
     <div class="graphic-info-panel">
@@ -100,38 +108,40 @@ export default {
   // },
 
   mounted(){
-        this.$store.dispatch("createComponent", this);
-        console.warn('INSTANCES', this.$store.state.instances)
+    this.$store.dispatch("getFilterOptions");
   },
 
   computed: {
     infoPanel(){
       return this.$store.getters.infoPanelData;
     },
+
+    chartData(){
+      return this.$store.getters.chartData;
+    },
+
+    trendsDate:{
+      get() {
+      return this.$store.getters.trendsDate;
+      },
+      set(value) {
+        this.$store.commit("trendsDate", value)
+        this.$store.dispatch("getChart");
+      }
+    },
+    
+    trendsFilters(){
+      return this.$store.getters.trendsFilters;
+    },
+
+    trendsFiltersOptions(){
+      return this.$store.getters.trendsFiltersOptions
+    }
   },
 
   data() {
     return {
-
       class:'modalChart',
-
-        options: [{
-          value: 'Option1',
-          label: 'Option1'
-        }, {
-          value: 'Option2',
-          label: 'Option2'
-        }, {
-          value: 'Option3',
-          label: 'Option3'
-        }, {
-          value: 'Option4',
-          label: 'Option4'
-        }, {
-          value: 'Option5',
-          label: 'Option5'
-        }],
-        value2: [],
 
         pickerOptions: {
           shortcuts: [{
@@ -167,6 +177,11 @@ export default {
   methods: {
     onClick(){
       this.$emit('buttonClick')
+    },
+
+    filterChange(value){
+      this.$store.commit("trendsFilters", value);
+      this.$store.dispatch("getChart");
     },
   }
 };
@@ -215,8 +230,7 @@ export default {
 
     .graphic-panel-view {
       flex: 1 1 auto;
-      display: flex;
-      justify-content: space-evenly;
+  
       flex-wrap: wrap;
       overflow: auto;
       padding: 20px;
@@ -227,28 +241,33 @@ export default {
         display: flex; 
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        
 
         .graphic-date-picker{
-          width: 50%;
           display: flex;
           flex-direction: column;
           text-align: left;
           font-size: 16px;
+          margin-right: 20px;
         }
 
         .graphic-param{
-          width: 50%;
+   
           display: flex;
           flex-direction: column;
           text-align: left;
           font-size: 16px;
+          margin-right: 20px;
 
           .graphic-param-content{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
           }
+        }
+
+        .clear-button{
+          margin-top: 15px;
         }
       }
     }

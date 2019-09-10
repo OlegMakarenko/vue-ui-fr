@@ -81,6 +81,14 @@ export default {
         this.handleMode = false
       }
     },
+
+    onNodeClick(node) {
+      console.log(node);
+      this.$store.dispatch("OPEN_NODE", {
+        nodeId: node.id,
+        treeId: this.id,
+      });
+    },
   },
 
   components: {

@@ -18,7 +18,7 @@
           class="profile-system"
           type="primary"
           size="mini"
-          @click="getTreeData"
+          @click="getTree"
           >Профиль и системные функции</el-button>
 
           <el-divider></el-divider>
@@ -89,6 +89,9 @@ export default {
         treeId: this.id,
       });
     },
+    getTree(){
+      this.$store.dispatch('getTree');
+    },
   },
 
   components: {
@@ -102,10 +105,6 @@ export default {
 
     tree2Data() {
       return this.$store.getters.tree2Data;
-    },
-
-    getTreeData(){
-      return this.$store.dispatch('getManageTree');
     },
 
     handleButtonClass(){

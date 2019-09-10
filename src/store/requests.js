@@ -124,13 +124,15 @@ export default {
     getTree: (context, payload) => {
         context.state.format.send({
             method: "post",
-            url: "admin/tree",
-            path: "d1/d2",
-            class: "AnotherBackendService",
-            object: "someObject",
-            function: "admin/tree",
-            data: {}
-        })
+            url: "/",
+            path: "devices/user",
+            class: "Devices",
+            object: "devices",
+            function: "GetGroupHierarchy",
+            data: {
+                "owner": 2
+            }
+        }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
     },
 
     getDeviceInfo: (context, payload) => {
@@ -177,21 +179,6 @@ export default {
             data: {
                 name: payload.name,
                 id: '0'
-            }
-        })
-    },
-
-    getTreeData:(context, payload) => {
-        console.log("treeData ", payload)
-        context.state.format.send({
-            method: "post",
-            url: "/",
-            path: "devices/user",
-            class: "Devices",
-            object: "devices",
-            function: "GetOwnerDevicesHierarchy",
-            data: {
-                "owner": 2
             }
         })
     },

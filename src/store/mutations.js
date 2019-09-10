@@ -32,18 +32,41 @@ export default {
         Vue.set(state, "deviceInfo", data)
     },
 
-    name:(state, payload)=>{
-        console.log("Name of tree", payload)
-    },
+    //мутации для запроса дерева ------------------------------
 
+    dataTree:(state, payload)=>{
+        state.dataTree = payload
+    },
+    
     children:(state, payload)=>{
-        console.log("Children of tree", payload)
+        state.children = payload
     },
 
-    data:(state, data)=>{
-        console.log("data of tree", data)
-        Vue.set(state, "tree1Data", data)
+    data:(state, payload)=>{
+        state.data = payload
     },
+
+    id:(state, payload)=>{
+        state.id = payload
+    },
+
+    isRoot:(state, payload)=>{
+       state.isRoot = payload
+    },
+
+    name:(state, payload)=>{
+        state.name = payload
+    },
+
+    owner:(state, payload)=>{
+        state.owner = payload
+    },
+
+    type:(state, payload)=>{
+        state.type = payload
+    },
+
+    //мутации для запроса дерева ------------------------------
 
     content:(state, data) => {
         Vue.set(state, "content", data);
@@ -111,7 +134,7 @@ export default {
     temperature:(state, payload) => {
         state.temperature = payload
     },
-    
+
     updatePosts(state, posts){
         state.posts = posts
     }

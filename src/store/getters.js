@@ -31,6 +31,19 @@ export default {
     sensorId: state => state.sensorId,
     temperature: state => state.temperature,
 
+    //TREEDATA
+
+    dataTree: state => state.dataTree,
+    children: state => state.children,
+    data: state => state.data,
+    id: state => state.id,
+    isRoot: state => state.isRoot,
+    name: state => state.name,
+    owner: state => state.owner,
+    type: state => state.type,
+
+    //TREEDATA
+
     content: state => state.content,
     path: state => state.path,
     isLoading: state => state.isLoading,

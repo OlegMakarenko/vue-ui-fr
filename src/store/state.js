@@ -24,6 +24,19 @@ export default {
     sensorId: [],
     temperature: [],
 
+    //TREEDATA
+
+    dataTree:[],
+    children:[],
+    data:[],
+    id:[],
+    isRoot:[],
+    name:[],
+    owner:[],
+    type:[],
+
+    //TREEDATA
+
     posts:[],
 
     content: [],

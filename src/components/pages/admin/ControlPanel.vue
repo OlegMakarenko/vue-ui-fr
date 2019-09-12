@@ -100,9 +100,10 @@ export default {
     infoPanel(){
       return this.$store.getters.infoPanelData;
     },
+    
     manageButtons(){
-      return this.$store.getters.content.type === 'folder';
-    },
+        return this.$store.getters.content.type === 'devices';
+      }
   },
 
   methods: {

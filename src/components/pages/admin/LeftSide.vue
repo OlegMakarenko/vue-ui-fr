@@ -6,19 +6,18 @@
           <div class="tree-button">
             <button 
                 :class="handleButtonClass" 
-                @click="handleFunc" 
+                @click="devicesFunction" 
                 class="handle-mode-button">Устройства</button>
 
               <button 
                 :class="scheduleButtonClass" 
-                @click="scheduleFunc" 
+                @click="groupFunction" 
                 class="schedule-mode-button">Группы</button>
           </div>
           <el-button
           class="profile-system"
           type="primary"
           size="mini"
-          @click="getTree"
           >Профиль и системные функции</el-button>
 
           <el-divider></el-divider>
@@ -50,6 +49,11 @@
 import Tree from "../../Tree.vue";
 
 export default {
+  
+  created(){
+    this.$store.dispatch('getTreeDevices');
+  },
+  
   data() {
     return {
       activeName: 'first',
@@ -64,8 +68,9 @@ export default {
       console.log(tab, event);
     },
 
-    handleFunc(){
+    devicesFunction(){
       if(this.handleMode == false){
+        this.$store.dispatch('getTreeDevices');
         this.handleMode = true
         this.tree2DataVisible = true
         this.tree1DataVisible = false
@@ -73,8 +78,9 @@ export default {
       }
     },
 
-    scheduleFunc(){
+    groupFunction(){
       if(this.scheduleMode == false){
+        this.$store.dispatch('getTreeGroup');
         this.scheduleMode = true
         this.tree1DataVisible = true
         this.tree2DataVisible = false
@@ -89,9 +95,6 @@ export default {
         treeId: this.id,
       });
     },
-    getTree(){
-      this.$store.dispatch('getTree');
-    },
   },
 
   components: {
@@ -100,11 +103,13 @@ export default {
 
   computed: {
     tree1Data() {
-      return this.$store.getters.tree1Data;
+      const objectToArray1 = [this.$store.getters.tree1Data]
+      return objectToArray1;
     },
 
     tree2Data() {
-      return this.$store.getters.tree2Data;
+      const objectToArray2 = [this.$store.getters.tree2Data]
+      return objectToArray2
     },
 
     handleButtonClass(){

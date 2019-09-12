@@ -4,6 +4,9 @@ export default {
     currentDeviceList: [],
     tree1Data: [],
     tree2Data: [],
+    node: [],
+    contentType: null,
+    relayState: [],
 
     manageTree: [],
     deviceInfo:{},
@@ -21,19 +24,28 @@ export default {
     trendsDataControl: [1567781868, 1567882506],
     trendsFiltersControl: ["vega/1 temperature"],
 
+    deviceData:{
+        power: null,
+        consPower: null,
+        temp: null,
+        voltage: null,
+        status: null,
+    },
+
     sensorId: [],
     temperature: [],
 
     //TREEDATA
 
-    dataTree:[],
-    children:[],
-    data:[],
-    id:[],
-    isRoot:[],
-    name:[],
-    owner:[],
-    type:[],
+    // dataTreeGroup:[],
+    // dataTreeDevices:[],
+    // children:[],
+    // data:[],
+    // id:[],
+    // isRoot:[],
+    // name:[],
+    // owner:[],
+    // type:[],
 
     //TREEDATA
 

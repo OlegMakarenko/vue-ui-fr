@@ -58,16 +58,16 @@ export default {
   data() {
     return {
       class: "Tree",
-      // treeData: [],
+      //treeData: [],
     };
   },
 
   components: {},
 
   methods: {
-    // doSetData(data){
-    //   this.$set(this, "treeData", data)
-    // },
+    doSetData(data){
+      this.$set(this, "treeData", data)
+    },
 
     handleDragStart(node, ev) {
       console.log("drag start", node);
@@ -105,12 +105,10 @@ export default {
     allowDrag2(draggingNode) {
       return draggingNode.data.name.indexOf("Диспетчер устройств") === -1;
     },
+    
     onNodeClick(node) {
       console.log(node);
-      this.$store.dispatch("OPEN_NODE", {
-        nodeId: node.id,
-        treeId: this.id,
-      });
+      this.$store.dispatch("OPEN_NODE", node)
     },
 
     editTitle() {

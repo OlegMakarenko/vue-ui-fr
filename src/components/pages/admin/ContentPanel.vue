@@ -3,25 +3,28 @@
 
     <div class="content-panel-container">
       <div class="control-panel">
-        <ControlPanel @onInfoClick="onInfoClick" @changeView="changeDeviceComponentView"/>
+        <ControlPanel 
+          @onInfoClick="onInfoClick" 
+          @changeView="changeDeviceComponentView"
+        />
       </div>
       <div class="content-panel-view">
         <!-- <ModalC v-show="isModalVisible2" @close="closeModal2"/> -->
         <component
-          
           v-for="node in content"
           :is="deviceComponentView"
           :title="node.name"
-          :type="node.type"
           :content="node.content"
           :key="node.name"
           :id="node.id"
           :selectedId="selectedId"
+          :type="node.type"
           :childrenCount="node.children ? node.children.length: null"
           :data="node.data"
           @open="onComponentOpen"
           @select="onComponentSelect(node)"
           @click="onComponentSelect2"/> <!--object="deviceContent"-->
+          <!-- :type="node.type" -->
       </div>
     </div>
 
@@ -54,9 +57,8 @@ export default {
 
   computed: {
     content() {
-      if (this.$store.getters.content)
-        return this.$store.getters.content.children;
-    }
+        return this.$store.getters.content;
+    },
   },
 
   data() {
@@ -72,9 +74,9 @@ export default {
   },
 
   methods: {
-    // doSetData(data){
-    //   this.$set(this, "content", data)
-    // },
+    doSetData(data){
+      this.$set(this, "content", data)
+    },
 
     changeDeviceComponentView(changedView) {
       this.$set(this, "deviceComponentView", changedView); // this.deviceComponentView = changedView;
@@ -87,19 +89,20 @@ export default {
       this.$store.dispatch("NODE_SELECTED", node);
 
       if(node.children)
-      this.$set(this, "selectedNodeChildrenCount", node.children.length);
+      this.$set(this, "selectedNodeChildrenCount", node.children);
     },
 
     onComponentSelect2(title){
       this.$set(this, "selectedTitle", title)
     },
 
-    onComponentOpen(id) {
-      this.$set(this, "selectedId", null);
-      this.$store.dispatch("OPEN_NODE", {
-        nodeId: id,
-        treeId: 1
-      });
+    onComponentOpen() {
+      // this.$set(this, "selectedId", null);
+      this.$store.dispatch("OPEN_NODE", node)
+      // this.$store.dispatch("OPEN_NODE", {
+      //   nodeId: id,
+      //   treeId: 1
+      // });
     },
 
     onInfoClick() {

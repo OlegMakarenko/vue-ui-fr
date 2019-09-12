@@ -75,6 +75,15 @@ export default {
     },
 
     getRelay:(context, payload) => {
+        const currentState = context.getters.relayState
+
+        var currentRelay;
+        if(currentState) {
+            currentRelay = Math.round(currentState);
+        }
+        else
+        currentRelay = Math.round(currentState);
+
         context.state.format.send({
             method: "post",
             url: "/",
@@ -85,7 +94,7 @@ export default {
             data: {
             "object": "vega",
             "sensorId": 1,
-            "currentState": -1
+            currentState:currentRelay,
             }
         }) 
         // .then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))
@@ -121,7 +130,7 @@ export default {
         }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
     },
 
-    getTree: (context, payload) => {
+    getTreeGroup: (context, payload) => {
         context.state.format.send({
             method: "post",
             url: "/",
@@ -132,7 +141,21 @@ export default {
             data: {
                 "owner": 2
             }
-        }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
+        }).then(dataTreeGroup => context.dispatch("RESPONSE_REQUEST", dataTreeGroup.data));
+    },
+
+    getTreeDevices: (context, payload) => {
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "devices/user",
+            class: "Devices",
+            object: "devices",
+            function: "GetOwnerDevicesHierarchy",
+            data: {
+                "owner": 2
+            }
+        }).then(dataTreeDevices => context.dispatch("RESPONSE_REQUEST", dataTreeDevices.data))
     },
 
     getDeviceInfo: (context, payload) => {
@@ -190,7 +213,7 @@ export default {
 ///Данные для запроса берутся с разных компонентов
 ///methods:{
 //     onLoad(){
-//         this.$store.dispatch("getTree")
+//         this.$store.dispatch("getTreeGroup")
 //     }
 // }
 ///Чтобы получить данныe из компонента context.getInstance({class: <name>, object: <name>}).getData();
@@ -202,6 +225,6 @@ export default {
 //     onclick(){
 //         var name = this.name;  //данные для запроса
 //         var id = this.id;        //данные для запроса
-//         this.$store.dispatch("rename", {neme, id})
+//         this.$store.dispatch("rename", {name, id})
 //     }
 // }

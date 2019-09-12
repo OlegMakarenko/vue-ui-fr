@@ -88,7 +88,8 @@ export default  {
       authVisible: true,
       registerVisible: true,
       authForm:{
-        
+        email: ' ',
+        password: ' '
       }
     };
   },

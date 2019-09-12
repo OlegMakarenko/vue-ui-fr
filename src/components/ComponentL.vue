@@ -20,7 +20,7 @@
       <!-- <div  v-if="isTemperature" style="margin-left: 5px;"> {{temperature}}</div> -->
     </div>
 
-    <ModalC v-show="isModalVisible2" @close="closeModal2"/>
+    <ModalC v-show="isModalVisible2" @close="closeModal2" :visibleControl="this.visibleControl"/>
 
     <div class="center-side-list">
       <div v-if="isTemperature">
@@ -63,6 +63,7 @@ export default {
       devicePicture: false,
       selectedNodeChildrenCount: 0,
       preassignedTemp: 22,
+      visibleControl: true,
     };
   },
 
@@ -135,6 +136,7 @@ export default {
 
     showModal2() {
       this.isModalVisible2 = true;
+      this.$store.dispatch("DEVICE_INFO");
     },
 
     closeModal2() {

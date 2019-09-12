@@ -10,20 +10,34 @@ const WEB_SOCKET_ENDPOINT = "ws://pubgproxy.ddns.net/ws"
 const ws = new WebSocket(WEB_SOCKET_ENDPOINT);
 
 export default {
-    LOG_IN: (context, payload) => {
-        return new Promise((resolve, reject)=>{
-            context.commit("isLoading", true);
-            const body = JSON.stringify(payload);
-            
-            axios.post(context.state.http_endpoint + "/log_in", {
-                topic:"log_in",
-                data: {
-                       __email__: payload.email, 
-                       __password__: payload.password
+        LOG_IN: (context, payload) => {
+            return new Promise((resolve, reject)=>{
+                context.commit("isLoading", true);
+                const body = JSON.stringify(payload);
+
+                context.state.format.send({
+                    method: "post",
+                    url: "/",
+                    path: "accounts/user",
+                    class: "Auth",
+                    object: "a1",
+                    function: "Signin",
+                    data: {
+                        __password__: payload.password,
+                        __email__: payload.email,
                     }
-            })
-                .then(res => context.dispatch("PROCESS_RESPONSE", res.data))
-        });
+                }) .then(res => context.dispatch("RESPONSE_REQUEST", res.data))
+                    resolve()
+                // axios.post(context.state.http_endpoint + "/log_in", {
+                //     topic:"log_in",
+                //     data: {
+                //            __email__: payload.email, 
+                //            __password__: payload.password
+                //         }
+                // })
+                //     .then(res => context.dispatch("PROCESS_RESPONSE", res.data))
+            }
+        );
     },
 
     DEVICE_INFO: (context, payload) => {
@@ -40,7 +54,22 @@ export default {
         })
         ws.onmessage = function(event){
             console.log('Realtime ' + event.data);
-            context.state.wsData = JSON.parse(event.data);
+            var wsData = JSON.parse(event.data);
+
+            var parsedData = {};
+            if(wsData 
+                && wsData.calls 
+                && wsData.calls[0] 
+                && wsData.calls[0].Class 
+                && wsData.calls[0].Class.obj
+                && wsData.calls[0].Class.obj.Func
+                && wsData.calls[0].Class.obj.Func.data
+            )
+            {
+                parsedData = wsData.calls[0].Class.obj.Func.data
+            }
+
+            context.commit("deviceData", parsedData);
         }
     },
 
@@ -62,8 +91,11 @@ export default {
 
     RESPONSE_REQUEST: (context, payload) => {
         return new Promise((resolve, reject) => {
-            const calls = payload.calls;
+
+            context.commit("isLoading", false);
             
+            const calls = payload.calls;
+
             for(var i in calls)
                 for(var c in calls[i])
                     for(var o in calls[i][c])
@@ -74,17 +106,17 @@ export default {
         })
     },
 
-    OPEN_NODE: (context, payload) => {
-        axios.post(context.state.http_endpoint + "/open_node", {
-            topic:"open_node",
-            data: {
-                   treeId: payload.treeId, 
-                   nodeId: payload.nodeId,
-                },
-            
-        })
-            .then(res => context.dispatch("PROCESS_RESPONSE", res.data)
-            .then(content => context.commit("infoPanelData", content.find( el => el.topic=="doSetContent").data))); //еррор который делает дабл клик на компоненты
+    OPEN_NODE: (context, node) => {
+
+        if(node.children.length){
+            context.commit('content', node.children)         
+        }       
+
+            console.warn('node clcick: ', node)
+    },
+
+    SWITCH_CONTENT: (context, payload) => {
+        context.commit('contentType', payload)
     },
 
     PROCESS_RESPONSE: (context, payload) => {

@@ -1,4 +1,4 @@
-<template>
+<template v-if="templateVisible">
   <div class="control-panel">
     <div class="control-panel-container">
     <div class="control-panel-view">
@@ -89,7 +89,8 @@
           </div>
 
           <div class="rightc-content">
-          Реле <el-switch v-model="value1" 
+          Реле <el-switch v-model="value1"
+                    :value="getRelay" 
                      @change="getRelay"  
                      active-text="Вкл"
                      inactive-text="Выкл"></el-switch>
@@ -165,7 +166,8 @@
         <Chart
             :toolbar="false"
             :axesButton="false"
-            :data="chartData"/>
+            :data="chartData"
+            v-if="chartVisible"/>
       </div>
       
       <!-- <div>
@@ -198,7 +200,7 @@
       </div>
 
       <div class="info-content">
-        Тип управления: Н
+        Тип управления: Н 
       </div>
     </div>
 
@@ -218,9 +220,9 @@ export default {
   extends: BaseComponent,
 
   created(){
-    this.$store.dispatch("DEVICE_INFO");
-    this.$store.dispatch('getChartControl');
-    this.$store.dispatch("getTemperature");
+    //  this.$store.dispatch("DEVICE_INFO");
+    //  this.$store.dispatch('getChartControl');
+     this.$store.dispatch("getTemperature");
   },
 
   mounted(){
@@ -236,7 +238,7 @@ export default {
         class: 'modalGeneral',
         scuteRightSide: true,
         inputNum2: 22,
-        statusHub: 'ALL-HUB',
+        statusHub: 'WI-FI',
         radioButton: 'Программный',
         timePick: true,
         handleMode: true,
@@ -247,7 +249,8 @@ export default {
         iconDown: false,
         contentVisible: true,
         ready: true,
-        value1: true
+        value1: 1,
+        chartVisible: true,
       };
     },
 
@@ -280,34 +283,38 @@ export default {
     },
 
     consPower(){
-      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.consPower + '  кВт • ч';
+      return this.$store.getters.deviceData.consPower + '  кВт • ч';
     },
 
     power(){
-      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.power + ' мкА';
+      return this.$store.getters.deviceData.power + ' мкА';
     },
 
     voltage(){
-      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.voltage + ' В';
+      return this.$store.getters.deviceData.voltage + ' В';
     },
 
     temperature(){
-      return this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp + ' °C';
+      return this.$store.getters.deviceData.temp + ' °C';
     },
 
     status(){
-      if(this.$store.getters.wsData.calls[0].Class.obj.Func.data.status == true){
-        return 'Wi-Fi'
-      } else if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.status == false){
-        return 'All-Hub'
-      }
+        return this.$store.getters.deviceData.status + ' дБм'
     },  
 
+    releState(){
+      if(this.$store.getters.deviceData.releState === 1){
+        return 0
+      } else if (this.$store.getters.deviceData.releState === 0){
+        return 0
+      }
+    },
+
     tempView(){
-      if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp > this.getTemperature){
+      if (this.$store.getters.deviceData.temp > this.getTemperature){
          this.iconUp = false;
          this.iconDown = true;
-      } else if (this.$store.getters.wsData.calls[0].Class.obj.Func.data.temp < this.getTemperature){
+      } else if (this.$store.getters.deviceData.temp < this.getTemperature){
         this.iconUp = true;
         this.iconDown = false;
       }
@@ -435,7 +442,8 @@ export default {
     },
 
     
-    getRelay(){
+    getRelay(value){
+      this.$store.commit("relayState", value)
       this.$store.dispatch("getRelay")
     }
   }

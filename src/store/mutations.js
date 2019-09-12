@@ -19,9 +19,21 @@ export default {
 
     tree1Data:(state, data) => {
         Vue.set(state, "tree1Data", data);
+        console.log(data)
     },
     tree2Data:(state, data)=>{
         Vue.set(state, "tree2Data", data)
+        console.log(data)
+    },
+
+    node:(state, payload)=>{
+        state.node = payload
+        console.log(data)
+    },
+
+    contentType:(state, payload)=>{
+        state.node = payload
+        console.log(data)
     },
 
     manageTree:(state, data) =>{
@@ -32,10 +44,22 @@ export default {
         Vue.set(state, "deviceInfo", data)
     },
 
+    deviceData: (state, data) =>{
+        Vue.set(state, "deviceData", data)
+    },
+
+    relayState:(state, payload)=>{
+        state.relayState = payload
+    },
+
     //мутации для запроса дерева ------------------------------
 
-    dataTree:(state, payload)=>{
-        state.dataTree = payload
+    dataTreeGroup:(state, payload)=>{
+        state.dataTreeGroup = payload
+    },
+
+    dataTreeDevices:(state, payload)=>{
+        state.dataTreeDevices = payload
     },
     
     children:(state, payload)=>{

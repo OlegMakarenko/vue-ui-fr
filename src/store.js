@@ -354,7 +354,6 @@ import actions from './store/actions'
 import state from './store/state'
 import getters from './store/getters'
 import mutations from './store/mutations'
-import utils from "./utils"
 import axios from "axios"
 import Format from 'fractal-format-protocol'
 import { Notification } from 'element-ui';
@@ -404,7 +403,7 @@ function colorPick(){
     }
 }
 
-export default  new Vuex.Store({
+export default new Vuex.Store({
     state:{
         ...state
     },
@@ -420,6 +419,5 @@ export default  new Vuex.Store({
     actions:{
         ...requests,
         ...actions,
-        ...utils,
     }
 });

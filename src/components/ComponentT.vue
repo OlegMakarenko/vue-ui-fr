@@ -25,7 +25,7 @@
           @click="showModal2">
         </i>
     </div>
-        <ModalC v-show="isModalVisible2" @close="closeModal2"/>
+        <ModalC v-show="isModalVisible2" @close="closeModal2"  :visibleControl="this.visibleControl"/>
     </div>
 
 
@@ -36,13 +36,13 @@
 
       <div class="temperature-content"  v-if="isTemperature">
         <div class="temperature-output">
-          {{0+'°'}}
+          {{temperature}}
         </div>
         <div class="icon-right">
           <i class="el-icon-right" style="color: #666"></i>
         </div>
         <div class="preassigned-output">
-          {{preassignedTemp+'°'}}
+          {{getTemperature+'°'}}
         </div>
       </div>
     </div>
@@ -64,8 +64,13 @@ import ModalC from "../components/modalwindow/modalComponent.vue";
 
 export default {
   props: ["title", "content", "selectedId", "selectedTitle", "id", "type", 'childrenCount', 'data'],
-  created() {},
-  mounted() {},
+  created() {
+     this.$store.dispatch("getTemperature");
+  },
+  mounted() {
+     this.$store.dispatch("getTemperature");
+
+  },
 
   data() {
     return {
@@ -76,7 +81,7 @@ export default {
       devicePicture: false,
       selectedNodeChildrenCount: 0,
       preassignedTemp: 22,
-
+      visibleControl: true,
     };
   },
 
@@ -109,17 +114,27 @@ export default {
     },
 
     isTemperature(){
-      if(!this.data)  return false;
-      if(this.data.temperature === 'undefined' || this.data.temperature == null) return false;
+      if(!this.type === "folder")  return false;
+      if(this.type === 'undefined' || this.type == null) return false;
       return true;
     },
 
     temperature(){
-      return this.data.temperature;
+      return this.$store.getters.deviceData.temp + '°';
+    },
+
+    getTemperature:{
+      get(){
+        return this.$store.getters.temperature
+      },
+      set(value){
+        this.$store.commit("temperature", value)
+        this.$store.dispatch("getTemperature")
+      }
     },
 
     indicatorVisible(){
-      if (this.type === "device") return true;
+      if(this.type === "device") return true;
       if(this.type === "folder") return false;
     }
 
@@ -130,6 +145,11 @@ export default {
       // console.log(this.data.temperature)
       this.$emit("select", this.id);
       // this.$set(this, "selectedNodeChildrenTemp", node.children.length);
+    },
+
+    tempChange(value){
+      this.$store.commit("temperature", value)
+      this.$store.dispatch("getTemperature")
     },
 
     onClickTitle() {
@@ -146,12 +166,17 @@ export default {
       this.show_icons = false;
     },
 
-    onDblclick() {
-      this.$emit("open", this.id);
+    onDblclick(node) {
+      console.log(node);
+        this.$store.dispatch("OPEN_NODE", {
+          nodeId: node.id,
+          treeId: this.id,
+        });
     },
 
     showModal2() {
       this.isModalVisible2 = true;
+      this.$store.dispatch("DEVICE_INFO");
     },
 
     closeModal2() {

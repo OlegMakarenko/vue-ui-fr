@@ -16,9 +16,9 @@
                 @change="dataChange"
                 type="daterange"
                 align="right"
-                range-separator="To"
-                start-placeholder="Start date"
-                end-placeholder="End date"
+                range-separator="До"
+                start-placeholder="Начальная дата"
+                end-placeholder="Конечная дата"
                 :picker-options="pickerOptions"
                 value-format="timestamp">
               </el-date-picker>
@@ -55,7 +55,7 @@
             </el-table-column>
             <el-table-column
               prop="eventType"
-              label="Причина события"
+              label="Тип события"
               >
               <template slot-scope="scope">
                 <div slot="reference" class="event-wrapper">
@@ -65,7 +65,7 @@
             </el-table-column>
             <el-table-column
               prop="description"
-              label="Тип события">
+              label="Описание">
             </el-table-column>
           </el-table>
         </div>
@@ -147,7 +147,7 @@ export default {
 
       pickerOptions: {
       shortcuts: [{
-        text: 'Last week',
+        text: 'Последняя неделя',
         onClick(picker) {
           const end = new Date();
           const start = new Date();
@@ -155,7 +155,7 @@ export default {
           picker.$emit('pick', [start, end]);
         }
       }, {
-        text: 'Last month',
+        text: 'Последний месяц',
         onClick(picker) {
           const end = new Date();
           const start = new Date();
@@ -163,7 +163,7 @@ export default {
           picker.$emit('pick', [start, end]);
         }
       }, {
-        text: 'Last 3 months',
+        text: 'Последние 3 месяца',
         onClick(picker) {
           const end = new Date();
           const start = new Date();

@@ -22,9 +22,9 @@
                 v-model="trendsDate"
                 type="daterange"
                 align="right"
-                range-separator="To"
-                start-placeholder="Start date"
-                end-placeholder="End date"
+                range-separator="До"
+                start-placeholder="Начальная дата"
+                end-placeholder="Конечная дата"
                 :picker-options="pickerOptions"
                 value-format="timestamp"
                 >
@@ -41,7 +41,7 @@
                 multiple
                 clearable
                 collapse-tags
-                placeholder="Select">
+                placeholder="Выбрать">
                 <el-option
                   v-for="item in trendsFiltersOptions"
                   :key="item.value"

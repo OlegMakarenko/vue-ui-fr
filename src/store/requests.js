@@ -40,8 +40,9 @@ export default {
             path: "events/user",
             class: "EventManager",
             object: "manager",
-            function: "GetEventsInTimePer",
+            function: "GetPagingEventsInTimePer",
             data: {
+                "eventsCurrentPage": 1,
                 eventsDateRange: formattedDate
             }
         }).then(eventsData => context.dispatch("RESPONSE_REQUEST", eventsData.data))
@@ -79,10 +80,10 @@ export default {
 
         var currentRelay;
         if(currentState) {
-            currentRelay = Math.round(currentState);
+            currentRelay = Math.round(currentState); // 1
         }
         else
-        currentRelay = Math.round(currentState);
+        currentRelay = Math.round(currentState); // 0
 
         context.state.format.send({
             method: "post",
@@ -94,10 +95,9 @@ export default {
             data: {
             "object": "vega",
             "sensorId": 1,
-            currentState:currentRelay,
+            currentState:currentRelay, //присвоение значения
             }
         }) 
-        // .then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))
     },
 
 

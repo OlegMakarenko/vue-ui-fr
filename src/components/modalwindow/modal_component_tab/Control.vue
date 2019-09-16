@@ -59,7 +59,6 @@
           <div class="left-bottom-content" v-else>
             <el-slider 
               style="width: 250px; margin-left: 10px;"
-              @click="onGraphicView" 
               v-model="inputNum2" 
               :max="30"
               :show-tooltip="false">

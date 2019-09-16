@@ -58,8 +58,22 @@
                       </div>
                     </div>
                   <div class="inputFirst">
-                    <el-select style="width: 49%"></el-select>
-                    <el-select style="width: 49%"></el-select>
+                    <el-select v-model="valueSelect" placeholder="Выбрать" style="width: 49%">
+                      <el-option 
+                        v-for="item in optionsGroup"
+                        :key="item.valueGroup"
+                        :label="item.labelGroup"
+                        :value="item.valueGroup">
+                      </el-option>
+                    </el-select> 
+                    <el-select v-model="valueSelect" placeholder="Выбрать" style="width: 49%">
+                      <el-option 
+                        v-for="item in optionsGroup"
+                        :key="item.valueGroup"
+                        :label="item.labelGroup"
+                        :value="item.valueGroup">
+                      </el-option>
+                    </el-select> 
                   </div>
                 </div>
 
@@ -70,7 +84,14 @@
                     </div>
                   </div>
                   <div class="inputSecond">
-                    <el-select style="width: 100%"></el-select>
+                    <el-select v-model="valueSelect" placeholder="Выбрать" style="width: 100%">
+                      <el-option 
+                        v-for="item in optionsGroup"
+                        :key="item.valueGroup"
+                        :label="item.labelGroup"
+                        :value="item.valueGroup">
+                      </el-option>
+                    </el-select>
                   </div>
                 </div>
 
@@ -85,8 +106,22 @@
                       </div>
                     </div>
                   <div class="inputThird">
-                    <el-select style="width: 49%"></el-select>
-                    <el-select style="width: 49%"></el-select>
+                    <el-select v-model="valueSelect" placeholder="Выбрать" style="width: 49%">
+                      <el-option 
+                        v-for="item in optionsGroup"
+                        :key="item.valueGroup"
+                        :label="item.labelGroup"
+                        :value="item.valueGroup">
+                      </el-option>
+                    </el-select>  
+                    <el-select v-model="valueSelect" placeholder="Выбрать" style="width: 49%">
+                      <el-option 
+                        v-for="item in optionsGroup"
+                        :key="item.valueGroup"
+                        :label="item.labelGroup"
+                        :value="item.valueGroup">
+                      </el-option>
+                    </el-select>
                   </div>
                 </div>
               </div>
@@ -355,6 +390,18 @@ export default {
       inputSecond: false,
       inputThird: false,
 
+      optionsGroup: [{
+          valueGroup: 'Датчик SM031',
+          labelGroup: 'Датчик SM031'
+        }, {
+          valueGroup: 'Датчик RF 12',
+          labelGroup: 'Датчик RF 12'
+        }, {
+          valueGroup: 'Датчик RF 12',
+          labelGroup: 'Датчик RF 12/1'
+        }],
+        valueGroup: '',
+
 
 
       options: [{
@@ -429,6 +476,7 @@ export default {
       value: '',
       valuerf: '',
       availableValue2: '',
+      valueSelect: ''
     };
   },
 

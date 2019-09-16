@@ -5,7 +5,7 @@ import Vuex from "vuex"
 
 Vue.use(Vuex);
 
-const HTTP_BASE_URL = "http://pubgproxy.ddns.net";
+const HTTP_BASE_URL = "http://pubgproxy.ddns.net/request";
 const WEB_SOCKET_ENDPOINT = "ws://pubgproxy.ddns.net/ws"
 const ws = new WebSocket(WEB_SOCKET_ENDPOINT);
 
@@ -113,6 +113,11 @@ export default {
         }       
 
             console.warn('node clcick: ', node)
+    },
+
+    SHOW_NODE: (context, node) => {
+        context.commit('content', node)            
+        console.warn('SHOW NODE CLICK: ', node)
     },
 
     SWITCH_CONTENT: (context, payload) => {

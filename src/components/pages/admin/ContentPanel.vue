@@ -132,7 +132,7 @@ export default {
     .content-panel-view {
       // flex: 1 1 auto;
       display: flex;
-      justify-content: space-evenly;
+      // justify-content: space-evenly;
       flex-wrap: wrap;
       overflow: auto;
       padding: 20px;

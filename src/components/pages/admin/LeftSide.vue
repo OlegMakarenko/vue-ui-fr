@@ -30,9 +30,10 @@
               class="tree_view"/>
             
             <Tree  
-            v-if="tree1DataVisible"
+              v-if="tree1DataVisible"
               object="groupsTree"
               :treeData="tree1Data"
+              :groupFunction="devicesFunction"
               :id="1"
               class="tree_view"/>
              
@@ -68,7 +69,7 @@ export default {
       console.log(tab, event);
     },
 
-    devicesFunction(){
+    devicesFunction(node){
       if(this.handleMode == false){
         this.$store.dispatch('getTreeDevices');
         this.handleMode = true
@@ -78,7 +79,7 @@ export default {
       }
     },
 
-    groupFunction(){
+    groupFunction(node){
       if(this.scheduleMode == false){
         this.$store.dispatch('getTreeGroup');
         this.scheduleMode = true
@@ -86,14 +87,6 @@ export default {
         this.tree2DataVisible = false
         this.handleMode = false
       }
-    },
-
-    onNodeClick(node) {
-      console.log(node);
-      this.$store.dispatch("OPEN_NODE", {
-        nodeId: node.id,
-        treeId: this.id,
-      });
     },
   },
 

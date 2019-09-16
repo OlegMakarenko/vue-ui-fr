@@ -78,6 +78,10 @@ export default  {
     registerForm
   },
 
+  created(){
+     this.$store.dispatch("DEVICE_INFO");
+  },
+
   computed:{
 
   },
@@ -88,8 +92,8 @@ export default  {
       authVisible: true,
       registerVisible: true,
       authForm:{
-        email: ' ',
-        password: ' '
+        email: '',
+        password: ''
       }
     };
   },
@@ -103,8 +107,10 @@ export default  {
 
       form.validate((isValid) =>
       {
-        if (isValid && form.model.email && form.model.password)
+        if (isValid && form.model.email && form.model.password){
           this.auth(form.model.email, form.model.password);
+          this.$store.dispatch("DEVICE_INFO") //getting device info then they load from Control.vue
+        }
         else
           if (!form.model.email)
           {

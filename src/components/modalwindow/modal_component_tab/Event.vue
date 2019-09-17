@@ -59,7 +59,11 @@
               >
               <template slot-scope="scope">
                 <div slot="reference" class="event-wrapper">
-                  <el-tag size="medium">{{ scope.row.eventType.toUpperCase() }}</el-tag>
+                  <el-tag 
+                    size="medium" 
+                    :type="scope.row.eventType === 'normal' ? 'primary': 'danger'">
+                      {{ scope.row.eventType.toUpperCase() }}
+                  </el-tag>
                 </div>
               </template>
             </el-table-column>

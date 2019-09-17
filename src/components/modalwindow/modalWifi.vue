@@ -110,6 +110,18 @@ export default {
     cursor: default;
 }
 
+@-moz-document url-prefix() {
+  .modal-backdrop-device-wifi-manage {
+    width: 100%;
+    height: 63.5em;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    cursor: default;  
+  }
+}
+
 .modal-device-wifi-manage{
     width: 50%;
     height: 60%;

@@ -111,6 +111,17 @@ export default {
     cursor: default;
 }
 
+@-moz-document url-prefix() {
+  .modal-backdrop-device-manage {    
+    width: 100%;
+    height: 63em;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    cursor: default;}
+}
+
 .modal-device-manage{
     width: 50%;
     height: 60%;

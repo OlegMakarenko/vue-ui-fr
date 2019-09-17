@@ -425,7 +425,7 @@ function getDate(rawDate){
 
 .chart {
     width: 100%;
-    height: 100%;
+    height: 90%;
     padding:5px;
     .chart-canvas{
         width: 100%;

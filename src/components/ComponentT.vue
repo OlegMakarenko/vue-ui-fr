@@ -38,8 +38,18 @@
         <div class="temperature-output">
           {{temperature}}
         </div>
-        <div class="icon-right">
-          <i class="el-icon-right" style="color: #666"></i>
+        <div class="icon-view">
+          <img
+            :class="tempView" 
+            class="up-down-heating"
+            v-if="iconDown" 
+            src="../icon/heating-icon-down.png">
+
+          <img
+            :class="tempView" 
+            class="up-down-heating"
+            v-if="iconUp" 
+            src="../icon/heating-icon-up.png">
         </div>
         <div class="preassigned-output">
           {{getTemperature+'°'}}
@@ -82,6 +92,8 @@ export default {
       selectedNodeChildrenCount: 0,
       preassignedTemp: 22,
       visibleControl: true,
+      iconUp: true,
+      iconDown: false,
     };
   },
 
@@ -117,6 +129,16 @@ export default {
       if(!this.type === "folder")  return false;
       if(this.type === 'undefined' || this.type == null) return false;
       return true;
+    },
+
+    tempView(){
+      if (this.$store.getters.deviceData.temp > this.getTemperature){
+         this.iconUp = false;
+         this.iconDown = true;
+      } else if (this.$store.getters.deviceData.temp < this.getTemperature){
+        this.iconUp = true;
+        this.iconDown = false;
+      }
     },
 
     temperature(){
@@ -189,7 +211,7 @@ export default {
 <style lang="scss" scoped>
 .component-tile {
   width: 200px;
-  height: 200px;
+  height: 160px;
   margin: 15.7px;
   padding: 17px;
   border-style: solid;
@@ -235,7 +257,7 @@ export default {
 
   .tile-body {
     width: 100%;
-    height: 120px;
+    height: 100px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -269,11 +291,16 @@ export default {
         justify-content: flex-end;
       }
 
-      .icon-right{
+      .icon-view{
         width: 20%;
         display: flex;
         align-items: center;
         justify-content: center;
+
+        .up-down-heating{
+          width: 25px;
+          height: 25px;
+        }
       }
 
       .preassigned-output{
@@ -286,7 +313,7 @@ export default {
 
   .tile-footer{
     width: 100%;
-    height: 40px;
+    height: 20px;
     color: #606266;
     display: flex;
     align-items: center;
@@ -315,7 +342,7 @@ export default {
         border: 1px solid #DCDFE6;
         border-radius: 36px;
         background-color: aqua;
-        margin: 5px;
+        // margin: 5px;
       }
     }
   }

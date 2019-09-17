@@ -36,7 +36,7 @@
         </div>
 
         <div class="event-content">
-          <el-table height="500px"
+          <el-table class="event-content-table"
             
             :data="eventsDataOutput">
 
@@ -66,6 +66,11 @@
             <el-table-column
               prop="description"
               label="Описание">
+            </el-table-column>
+            <el-table-column
+              width="150px"
+              prop="source"
+              label="Устройство">
             </el-table-column>
           </el-table>
         </div>
@@ -272,7 +277,13 @@ export default {
 
       .event-content{
         width: 99.9%;
-        height: 100%;
+        height: 85%;
+
+        .event-content-table{
+          width: 100%;
+          height: 65vh;
+          overflow: auto;
+        }
       }
     }
   }

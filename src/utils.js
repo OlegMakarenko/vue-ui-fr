@@ -2,7 +2,7 @@ export function convertServerDate(unixTime) {
 
     var date = new Date(unixTime * 1000);
     var hour = date.getHours();
-    var day = date.getDay();
+    var day = date.getDate();
     var month = date.getMonth();
     var min = "0" + date.getMinutes();
     var sec = "0" + date.getSeconds();

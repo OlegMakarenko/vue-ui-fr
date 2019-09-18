@@ -143,7 +143,7 @@ export default {
 @-moz-document url-prefix() {
   .modal-backdrop-device-vega-manage {
     width: 100%;
-    height: 63.5em;
+    height: 57em;
     display: flex;
     flex: 1 1 auto;
     align-items: center;
@@ -160,6 +160,18 @@ export default {
     overflow-x: none;
     cursor: default;
     padding: 10px;
+}
+
+@-moz-document url-prefix() {
+  .modal-device-vega-manage {
+    width: 55%;
+    height: 37em;
+    background: #ffffff;
+    box-shadow: 2px 2px 20px 1px;
+    overflow-x: none;
+    cursor: default;
+    padding: 10px;
+  }
 }
 
 .modal-device-vega-content{

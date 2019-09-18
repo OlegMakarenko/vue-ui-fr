@@ -63,7 +63,44 @@
                         <graphicTab @buttonClick="close" object="graphicTab" v-if="graphicTabVisible"/>
                         <scheduleTab @buttonClick="close" object="scheduleTab" v-if="scheduleTabVisible"/>
                         <settingsTab @buttonClick="close" object="settingsTab" v-if="settingsTabVisible"/>
+                <div class="modal-info-panel">
+                    <div class="info-part1">
+                        <div class="info-content">
+                            <div class="control-info-panel-name">
+                                <span class="info-content-span" style="font-size:18px; font-weight: bold;">
+                                    {{infoPanel.name}}
+                                </span>                             
+                                <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="info-content">
+                            <span class="info-content-span">
+                                Тип: LTC090 
+                            </span> 
+                        </div>
+                        
+                        <div class="info-content">
+                            <span class="info-content-span">
+                                Версия прошивки: 123456789
+                            </span> 
+                        </div>
+
+                        <div class="info-content">
+                            <span class="info-content-span">
+                                Тип терморегулятора: 1
+                            </span> 
+                        </div>
+
+                        <div class="info-content">
+                            <span class="info-content-span">
+                                Тип управления: Н 
+                            </span> 
+                        </div>
                     </div>
+                </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -81,6 +118,10 @@ export default {
     name: 'modal',
 
     computed:{
+         infoPanel(){
+            return this.$store.getters.infoPanelData;
+        },
+
         onFocusControl(){
             if(this.controlTabVisible == true){
                 return 'pick-grey'
@@ -155,6 +196,21 @@ export default {
 
         close(){
             this.$emit('close');
+        },
+
+        editTitle() {
+            this.$prompt('Пожалуйста введите новое имя', 'Подсказка', {
+                confirmButtonText: 'Применить',
+                cancelButtonText: 'Отмена',
+                inputValidator: function(value){return value.length},
+            }).then(({ value }) => {
+                this.$store.dispatch("rename", {nodeId: this.infoPanel.id, name: value});
+            }).catch(() => {
+                this.$message({
+                type: 'info',
+                message: 'Редактирование отменено '
+                });
+            });
         },
 
         tabHeader(){
@@ -323,6 +379,8 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     text-align: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .tab-buttons{
@@ -354,6 +412,46 @@ export default {
     cursor: pointer;
     outline: none;
 }
+
+.modal-info-panel{
+    display: flex;
+    width: 15%;
+    word-wrap:break-word;
+    border-left: 1px solid #DCDFE6;    
+    flex-direction: column;
+}
+
+.info-part1{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+    border-top: 1px solid #DCDFE6;
+    border-bottom: 1px solid #DCDFE6;    
+}
+
+
+.info-content{
+    width: 100%;
+    height: 20%;
+    text-align:left;
+    display: flex;
+    align-items: center;
+}
+
+.control-info-panel-name{
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-content-span{
+    margin-left: 5px;
+}
+
 
 .pick-white{
     background-color: #ffffff;

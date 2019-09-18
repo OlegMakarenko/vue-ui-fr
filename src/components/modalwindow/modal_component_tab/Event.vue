@@ -80,33 +80,6 @@
         </div>
       </div>
     </div>
-
-    <div class="event-info-panel">
-      <div class="info-part1">
-        <div class="info-content">
-          {{infoPanel.name}}
-        </div>
-        
-        <div class="info-content">
-          Тип: LTC090
-        </div>
-        
-        <div class="info-content">
-          Версия прошивки: 123456789
-        </div>
-
-        <div class="info-content">
-          Тип терморегулятора: 1
-        </div>
-        
-        <div class="info-content">
-          Тип управления: Н
-        </div>
-      </div>
-      <div class="info-part2">
-        
-      </div>
-    </div>
   </div>
 </template>
 
@@ -128,11 +101,6 @@ export default {
   },
 
   computed: {
-    infoPanel(){
-      // console.log(this.$store.getters.infoPanelData);
-      return this.$store.getters.infoPanelData;
-    },
-
     eventsDataOutput(){
        return this.$store.getters.eventsData //вывод данных с сервера
     },
@@ -289,41 +257,6 @@ export default {
           overflow: auto;
         }
       }
-    }
-  }
-
-  .event-info-panel {
-    flex: 0 0 auto;
-    display: flex;
-    width: 200px;
-    word-wrap:break-word;
-    border-left: 1px solid #DCDFE6;    
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    .info-part1{
-      width: 100%;
-      height: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 16px;
-      border-top: 1px solid #DCDFE6;
-      border-bottom: 1px solid #DCDFE6;
-
-      .info-content{
-        width: 95%;
-        height: 20%;
-        text-align:left;
-        display: flex;
-        align-items: center;
-      }
-    }
-
-    .info-part2{
-      width: 100%;
-      height: 50%;
     }
   }
 }

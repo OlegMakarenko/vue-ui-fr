@@ -168,43 +168,6 @@
             :data="chartData"
             v-if="chartVisible"/>
       </div>
-      
-      <!-- <div>
-        <h2>{{allPosts.title}}</h2>
-        <p>{{allPosts.body}}</p>
-      </div> -->
-    </div>
-  </div>
-
-  <div class="control-info-panel">
-    <div class="info-part1">
-      <div class="info-content">
-        <div class="control-info-panel-name">
-          {{infoPanel.name}}
-          <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
-        </div>
-      </div>
-      
-      <div class="info-content">
-        Тип: LTC090 
-      </div>
-      
-      <div class="info-content">
-        Версия прошивки: 123456789
-      </div>
-
-      <div class="info-content">
-        Тип терморегулятора: 1
-        <!-- {{infoPanel.id}} -->
-      </div>
-
-      <div class="info-content">
-        Тип управления: Н 
-      </div>
-    </div>
-
-    <div class="info-part2">
-
     </div>
   </div>
 </div>
@@ -254,10 +217,6 @@ export default {
     },
 
   computed: {
-    infoPanel(){
-      return this.$store.getters.infoPanelData;
-    },
-
      getTemperature:{
       get(){
         return this.$store.getters.temperature
@@ -740,47 +699,5 @@ export default {
     }
   }
 }
-
-  .control-info-panel {
-    flex: 0 0 auto;
-    display: flex;
-    width: 200px;
-    word-wrap:break-word;
-    border-left: 1px solid #DCDFE6;    
-    flex-direction: column;
-
-    .info-part1{
-      width: 100%;
-      height: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 16px;
-      border-top: 1px solid #DCDFE6;
-      border-bottom: 1px solid #DCDFE6;    
-
-
-      .info-content{
-        width: 95%;
-        height: 20%;
-        text-align:left;
-        display: flex;
-        align-items: center;
-
-        .control-info-panel-name{
-          flex: 1 1 auto;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-      }
-    }
-
-    .info-part2{
-      width: 100%;
-      height: 50%;
-      font-size: 18px;
-    }
-  }
 }
 </style>

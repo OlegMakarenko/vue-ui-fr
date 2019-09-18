@@ -113,7 +113,7 @@ export default {
 @-moz-document url-prefix() {
   .modal-backdrop-device-wifi-manage {
     width: 100%;
-    height: 63.5em;
+    height: 57em;
     display: flex;
     flex: 1 1 auto;
     align-items: center;
@@ -130,6 +130,18 @@ export default {
     overflow-x: none;
     cursor: default;
     padding: 10px;
+}
+
+@-moz-document url-prefix() {
+  .modal-device-wifi-manage{
+    width: 50%;
+    height: 34em;
+    background: #ffffff;
+    /* box-shadow: 2px 2px 20px 1px; */
+    overflow-x: none;
+    cursor: default;
+    padding: 10px;
+  }
 }
 
 .allp{

@@ -8,7 +8,7 @@
                 <img
                   class="brand"
                   src="../src/icon/vega.jpg"
-                  alt="fractal"
+                  alt="vega"
                   style="
                   margin-top: 6px;
                   width: 200px;"
@@ -23,7 +23,7 @@
       <el-form :model="authForm" ref="authForm">
         <el-form-item>
           <el-row class="auth-label">
-            Авторизация
+            Вход
           </el-row>
         </el-form-item>
 
@@ -253,6 +253,6 @@ export default  {
 .register-button{
   width: 100%;
   background: white;
-  color: #66b1ff;
+  color: #C0C4CC;
 }
 </style>

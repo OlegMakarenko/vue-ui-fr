@@ -211,7 +211,7 @@ export default {
     width: 100%;
     height: 90%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
 }
 

@@ -611,7 +611,7 @@ export default {
               // justify-content: space-between;
 
               .hysteresis-title{
-                height: 30%;
+                height: 40%;
                 display: flex;
                 align-items: flex-end;
                 justify-content: flex-start;
@@ -646,7 +646,7 @@ export default {
                 height: 50%;
                 display: flex;
                 align-items: center;
-                justify-content: space-evenly;
+                justify-content: space-around;
               }
 
               .manage{
@@ -654,7 +654,7 @@ export default {
                 height: 50%;
                 display: flex;
                 align-items: center;
-                justify-content: space-evenly;
+                justify-content: space-around;
               }
             }
           }
@@ -829,13 +829,13 @@ export default {
           width: 100%;
           height: 100%;
           align-items: center;
-          justify-content: space-between;
+          justify-content: space-around;
 
           .settings-button-content{
             display: flex;
             width: 30%;
             align-items: center;
-            justify-content: space-evenly;
+            justify-content: space-around;
           }
         }
       }

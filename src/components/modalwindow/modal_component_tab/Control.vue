@@ -622,7 +622,7 @@ export default {
             width: 100%;
             height: 25%;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-around;
             align-items: center;
           }
 
@@ -630,7 +630,7 @@ export default {
             width: 100%;
             height: 20%;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-around;
             align-items: center;
 
             .time-pick-white{

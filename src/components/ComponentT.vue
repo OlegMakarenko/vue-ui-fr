@@ -145,14 +145,8 @@ export default {
       return this.$store.getters.deviceData.temp + '°';
     },
 
-    getTemperature:{
-      get(){
+    getTemperature(){
         return this.$store.getters.temperature
-      },
-      set(value){
-        this.$store.commit("temperature", value)
-        this.$store.dispatch("getTemperature")
-      }
     },
 
     indicatorVisible(){
@@ -169,10 +163,10 @@ export default {
       // this.$set(this, "selectedNodeChildrenTemp", node.children.length);
     },
 
-    tempChange(value){
-      this.$store.commit("temperature", value)
-      this.$store.dispatch("getTemperature")
-    },
+    // tempChange(value){
+    //   this.$store.commit("temperature", value)
+    //   this.$store.dispatch("getTemperature")
+    // },
 
     onClickTitle() {
       this.$emit("click", this.title);

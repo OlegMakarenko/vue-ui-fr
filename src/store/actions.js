@@ -10,32 +10,24 @@ const WEB_SOCKET_ENDPOINT = "ws://pubgproxy.ddns.net/ws"
 const ws = new WebSocket(WEB_SOCKET_ENDPOINT);
 
 export default {
-        LOG_IN: (context, payload) => {
-            return new Promise((resolve, reject)=>{
-                context.commit("isLoading", true);
-                const body = JSON.stringify(payload);
+    LOG_IN: (context, payload) => {
+        return new Promise((resolve, reject)=>{
+            context.commit("isLoading", true);
+            const body = JSON.stringify(payload);
 
-                context.state.format.send({
-                    method: "post",
-                    url: "/",
-                    path: "accounts/user",
-                    class: "Auth",
-                    object: "a1",
-                    function: "Signin",
-                    data: {
-                        __password__: payload.password,
-                        __email__: payload.email,
+            context.state.format.send({
+                method: "post",
+                url: "/",
+                path: "accounts/user",
+                class: "Auth",
+                object: "a1",
+                function: "Signin",
+                data: {
+                    __password__: payload.password,
+                    __email__: payload.email,
                     }
                 }) .then(res => context.dispatch("RESPONSE_REQUEST", res.data))
-                    resolve()
-                // axios.post(context.state.http_endpoint + "/log_in", {
-                //     topic:"log_in",
-                //     data: {
-                //            __email__: payload.email, 
-                //            __password__: payload.password
-                //         }
-                // })
-                //     .then(res => context.dispatch("PROCESS_RESPONSE", res.data))
+                resolve()
             }
         );
     },
@@ -73,7 +65,26 @@ export default {
         }
     },
 
-    
+    addDeviceGroup:(context, payload) => { //формируем запрос для дерева устройств()
+        const name = context.getters.name;
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "devices/user",
+            class: "Devices",
+            object: "devices",
+            function: "UpdateGroupNameInGroupHierarchy",
+            data: {
+                "id": "00",
+                name: payload.name,
+                "object": "vega",
+                "description": "Это спальня",
+                "owner": 2,
+                "parent": "0"
+
+            }
+        }).then(res => context.dispatch("RESPONSE_REQUEST", res.data).then(context.commit("name")));
+    },
 
     getManageTree:(context, payload) => { //формируем запрос для дерева устройств()
         context.state.format.send({

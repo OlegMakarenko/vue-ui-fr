@@ -146,7 +146,6 @@ export default {
     },
 
     onAddDeviceClick() {
-      this.$store.dispatch("getDeviceInfo");
       this.showAddDevice = true;
     },
 

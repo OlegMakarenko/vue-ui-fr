@@ -122,7 +122,7 @@
               type="text" 
               readonly 
               class="input-footer" 
-              v-model="power">
+              v-model="consPower">
           </div>
 
           <div class="footer-content"> 
@@ -140,7 +140,7 @@
               type="text" 
               readonly 
               class="input-footer" 
-              v-model="consPower">
+              v-model="power">
           </div>
 
           <div class="footer-content">
@@ -241,11 +241,11 @@ export default {
     },
 
     consPower(){
-      return this.$store.getters.deviceData.consPower + '  кВт • ч';
+      return this.$store.getters.deviceData.consPower + ' А';
     },
 
     power(){
-      return this.$store.getters.deviceData.power + ' мкА';
+      return this.$store.getters.deviceData.power + ' кВт';
     },
 
     voltage(){

@@ -49,16 +49,7 @@ export default {
     },
 
     getTemperature:(context, payload) => {
-        // const sensorId = context.getters.sensorId;
         const temperature = context.getters.temperature;
-
-        var formattedDate = [];
-        if(temperature) {
-            formattedDate[0] = Math.round(temperature[0] + 1);
-            formattedDate[1] = Math.round(temperature[1] + 1);
-        }
-        else
-            formattedDate = [...temperature];
 
         context.state.format.send({
             method: "post",
@@ -157,22 +148,6 @@ export default {
             }
         }).then(dataTreeDevices => context.dispatch("RESPONSE_REQUEST", dataTreeDevices.data))
     },
-
-    getDeviceInfo: (context, payload) => {
-        context.state.format.send({
-            method: "post",
-            url: "/",
-            path: "realtime/user",
-            class: "Realtime",
-            object: "realtime",
-            function: "LastDeviceData",
-            data: {
-                sensId: "d342f214"
-            }
-        })
-    },
-
-    
 
     rename: (context, payload) => {
         console.log("rename", payload)

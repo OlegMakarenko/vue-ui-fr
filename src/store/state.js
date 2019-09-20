@@ -43,7 +43,7 @@ export default {
     // data:[],
     // id:[],
     // isRoot:[],
-    // name:[],
+    name:'',
     // owner:[],
     // type:[],
 
@@ -56,7 +56,7 @@ export default {
     instances: [],
     isLoading: false,
     infoPanelData: {
-        name: ' ',
+        name: '',
         activity: "None",
         childrenCount: null,
         info: "No info",

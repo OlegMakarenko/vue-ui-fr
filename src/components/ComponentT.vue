@@ -9,12 +9,19 @@
     <div class="tile-header">
       <div class="folder-odometer-icon">
         <i :class="iconClass"></i>
-        <img src="../icon/img13.jpg" style="width: 40px; height: 40px;" v-if="devicePicture" ondragstart="return false;">
+        <img src="../icon/ltc090.png" style="width: 40px; height: 40px;" v-if="ltc090Func" ondragstart="return false;">
+        <img src="../icon/ltc070.png" style="width: 40px; height: 40px;" v-if="ltc070Func" ondragstart="return false;">
+        <img src="../icon/ltc030.png" style="width: 40px; height: 40px;" v-if="ltc030Func" ondragstart="return false;">
+        <img src="../icon/ltc030.png" style="width: 40px; height: 40px;" v-if="ltc030FuncTest" ondragstart="return false;">
+
       </div>
 
       <div class="computed-title" v-if="iconSettings">
         <!-- {{computedTitle}} -->
-        LTC090
+        {{ltc030TextTest}} 
+        {{ltc090Text}} 
+        {{ltc070Text}} 
+        {{ltc030Text}} 
       </div>
 
       <div class="icon-tool" v-if="isSelected">
@@ -73,7 +80,7 @@
 import ModalC from "../components/modalwindow/modalComponent.vue";
 
 export default {
-  props: ["title", "content", "selectedId", "selectedTitle", "id", "type", 'childrenCount', 'data'],
+  props: ["title", "content", "selectedId", "selectedTitle", "id", "type", 'childrenCount', 'data', 'info'],
   created() {
      this.$store.dispatch("getTemperature");
   },
@@ -94,6 +101,9 @@ export default {
       visibleControl: true,
       iconUp: true,
       iconDown: false,
+      ltc090: true,
+      ltc030: true,
+      ltco70: true,
     };
   },
 
@@ -104,6 +114,10 @@ export default {
   computed: {
     computedTitle() {
       if (this.title) return this.title.toUpperCase();
+    },
+
+    infoPanel(){
+      return this.$store.getters.infoPanelData;
     },
 
     isSelected() {
@@ -131,6 +145,46 @@ export default {
       return true;
     },
 
+    ltc030FuncTest(){
+      if(this.id === '0' ) return this.ltc030 = true
+      else if(this.type === "folder") return this.ltc030 = false
+    },
+
+    ltc090Func(){
+      if(this.id === '1') return this.ltc090 = true
+      else if(this.type === "folder") return this.ltc090 = false
+    },
+
+    ltc070Func(){
+      if(this.id === '2') return this.ltc070 = true
+      else if(this.type === "folder") return this.ltc070 = false
+    },
+
+    ltc030Func(){
+      if(this.id === '3' ) return this.ltc030 = true
+      else if(this.type === "folder") return this.ltc030 = false
+    },
+
+    ltc030TextTest(){
+      if(this.id === '0' ) return 'LTC030'
+    },
+
+    ltc090Text(){
+      if(this.id === '1') return 'LTC090'
+    },
+
+    ltc070Text(){
+      if(this.id === '2') return 'LTC070'
+    },
+
+    ltc030Text(){
+      if(this.id === '3' ) return 'LTC030'
+    },
+
+    deviceIcon(){
+      if(this.id === '0') return
+    },
+
     tempView(){
       if (this.$store.getters.deviceData.temp > this.getTemperature){
          this.iconUp = false;
@@ -145,14 +199,8 @@ export default {
       return this.$store.getters.deviceData.temp + '°';
     },
 
-    getTemperature:{
-      get(){
+    getTemperature(){
         return this.$store.getters.temperature
-      },
-      set(value){
-        this.$store.commit("temperature", value)
-        this.$store.dispatch("getTemperature")
-      }
     },
 
     indicatorVisible(){
@@ -169,10 +217,10 @@ export default {
       // this.$set(this, "selectedNodeChildrenTemp", node.children.length);
     },
 
-    tempChange(value){
-      this.$store.commit("temperature", value)
-      this.$store.dispatch("getTemperature")
-    },
+    // tempChange(value){
+    //   this.$store.commit("temperature", value)
+    //   this.$store.dispatch("getTemperature")
+    // },
 
     onClickTitle() {
       this.$emit("click", this.title);

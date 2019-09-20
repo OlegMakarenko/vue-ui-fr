@@ -17,6 +17,7 @@
           :content="node.content"
           :key="node.name"
           :id="node.id"
+          :info="node.info"
           :selectedId="selectedId"
           :type="node.type"
           :childrenCount="node.children ? node.children.length: null"
@@ -84,7 +85,7 @@ export default {
 
     onComponentSelect(node) {
       this.$set(this, "selectedId", node.id);
-      // console.log(node.id)
+      console.log(node.id)
 
       this.$store.dispatch("NODE_SELECTED", node);
 
@@ -96,9 +97,9 @@ export default {
       this.$set(this, "selectedTitle", title)
     },
 
-    onComponentOpen() {
+    onComponentOpen(node) {
       // this.$set(this, "selectedId", null);
-      this.$store.dispatch("OPEN_NODE", node)
+      this.$store.dispatch("OPEN_NODE", node.children)
       // this.$store.dispatch("OPEN_NODE", {
       //   nodeId: id,
       //   treeId: 1

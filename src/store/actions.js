@@ -119,7 +119,7 @@ export default {
 
     OPEN_NODE: (context, node) => {
 
-        if(node.children.length){
+        if(node.children && node.children.length > 0){
             context.commit('content', node.children)         
         }       
 

@@ -97,7 +97,7 @@ export default {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
-    display: table;
+    display: flex;
     z-index: 2;
 }
 
@@ -111,17 +111,6 @@ export default {
     cursor: default;
 }
 
-@-moz-document url-prefix() {
-  .modal-backdrop-device-manage {    
-    width: 100%;
-    height: 57em;
-    display: flex;
-    flex: 1 1 auto;
-    align-items: center;
-    justify-content: center;
-    cursor: default;}
-}
-
 .modal-device-manage{
     width: 50%;
     height: 60%;
@@ -130,17 +119,6 @@ export default {
     overflow-x: none;
     cursor: default;
     padding: 10px;
-}
-
-@-moz-document url-prefix() {
-  .modal-device-manage {    
-    width: 50%;
-    height: 34em;
-    background: #ffffff;
-    box-shadow: 2px 2px 20px 1px;
-    overflow-x: none;
-    cursor: default;
-    padding: 10px;}
 }
 
 .allp{

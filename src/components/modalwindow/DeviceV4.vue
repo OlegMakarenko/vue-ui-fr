@@ -126,8 +126,9 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    display: table;
+    display: flex;
     z-index: 2;
+    
 }
 
 .modal-backdrop-device-vega-manage{
@@ -140,18 +141,6 @@ export default {
     cursor: default;
 }
 
-@-moz-document url-prefix() {
-  .modal-backdrop-device-vega-manage {
-    width: 100%;
-    height: 57em;
-    display: flex;
-    flex: 1 1 auto;
-    align-items: center;
-    justify-content: center;
-    cursor: default;
-  }
-}
-
 .modal-device-vega-manage{
     width: 55%;
     height: 65%;
@@ -160,18 +149,7 @@ export default {
     overflow-x: none;
     cursor: default;
     padding: 10px;
-}
-
-@-moz-document url-prefix() {
-  .modal-device-vega-manage {
-    width: 55%;
-    height: 37em;
-    background: #ffffff;
-    box-shadow: 2px 2px 20px 1px;
-    overflow-x: none;
-    cursor: default;
-    padding: 10px;
-  }
+    display: grid;
 }
 
 .modal-device-vega-content{

@@ -294,13 +294,13 @@ export default {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, .5);
-    display: table;
+    display: flex;
     z-index: 2;
 }
 
 .modal-backdrop-component-manage{
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     /* flex: 1 1 auto; */
     align-items: center;
@@ -308,17 +308,7 @@ export default {
     cursor: default;
 }
 
-@-moz-document url-prefix() {
-  .modal-backdrop-component-manage {
-    width: 100%;
-    height: 48.3em;
-    display: flex;
-    /* flex: 1 1 auto; */
-    align-items: center;
-    justify-content: center;
-    cursor: default;
-  }
-}
+
 
 .modal-component-manage{
     width: 90%;

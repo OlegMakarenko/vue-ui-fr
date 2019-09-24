@@ -10,7 +10,7 @@
                     
                     <div class="modal-device-header">
                         <div class="modal-device-name">
-                            Подключение аксессуара
+                            Подключение устройства
                         </div>
                         <div class="modal-device-button">
                             <button class="button-close" @click="close">x</button>
@@ -19,21 +19,24 @@
 
                     <div class="modal-device-body">
                         <div class="device-body-content">
-                            Для аксессуара устройства выберите тип подключаемого устройства
+                            <!-- Для аксессуара устройства выберите тип подключаемого устройства -->
                         </div>
 
                         <div class="device-body-button">
-                            <el-button class="button-vega" @click="wifiClick">Аксессуар VEGA 4</el-button>
-                            <el-button class="button-vega">Аксессуар VEGA 1S</el-button>
+                            <!-- <el-button class="button-vega" @click="wifiClick">Аксессуар VEGA 4</el-button>
+                            <el-button class="button-vega">Аксессуар VEGA 1S</el-button> -->
+                            <div class="body-text">Введите ID подключаемого устройства: </div>
+                            <el-input class="input-body" v-model="inputBody"></el-input>
                         </div>
                     </div>
                     
                     <div class="modal-device-footer">
-                        <div>
+                        <!-- <div>
                             После выбора типа акссесуара Вам будут показаны
                             соотвотствующие шаги подключения его в учетную
                             запись.
-                        </div>
+                        </div> -->
+                            <el-button type="primary" @click="inputBodyCheck">Подключить устройство</el-button>                    
                     </div>
 
                     <modalWifi v-if="modalWifiVisible" @buttonClose="closeWifiModal"/>
@@ -54,7 +57,15 @@ export default {
     data(){
         return{
             modalWifiVisible: false,
+            inputBody: '',
+            id: ''
         };
+    },
+
+    computed:{
+        content() {
+            return this.$store.getters.content;
+        },
     },
 
     components:{
@@ -84,6 +95,21 @@ export default {
 
         closeWifiModal(){
             this.modalWifiVisible = false
+        },
+
+        inputBodyCheck(id){
+            if(this.inputBody === '2019040000_LTC090_1'){
+                // console.warn("TRUE LTC090_1")
+                return this.$store.dispatch("getDeviceById", {id: 1})
+            } else if (this.inputBody === '2019040000_LTC070_1'){
+                // console.warn("TRUE LTC070_1")
+                return this.$store.dispatch("getDeviceById", {id: 2})
+            } else if(this.inputBody === '2019040000_LTC030_1'){
+                // console.warn("TRUE LTC030_1")
+                return this.$store.dispatch("getDeviceById", {id: 3})
+            } else {
+                return console.error("FALSE DEVICE ID")
+            }
         }
     }
 }
@@ -113,7 +139,7 @@ export default {
 
 .modal-device-manage{
     width: 50%;
-    height: 60%;
+    height: 40%; /* 60% */
     background: #ffffff;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: none;
@@ -186,10 +212,19 @@ export default {
 
 .device-body-button{
     width: 100%;
-    height: 90%;
+    height: 70%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.body-text{
+    margin: 20px;
+}
+
+.input-body{
+    width: 400px;
 }
 
 .button-vega{
@@ -200,7 +235,7 @@ export default {
 
 .modal-device-footer{
     width: 100%;
-    height: 10%;  
+    height: 30%;  
     font-size: 19px;
     display: flex;
     align-items: center;

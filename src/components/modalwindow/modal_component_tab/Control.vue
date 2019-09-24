@@ -44,6 +44,8 @@
               </el-input-number>
             </div>
           </div>
+
+          
             
           <div class="left-bottom-content" v-if="timePick">
             <el-slider 
@@ -135,7 +137,7 @@
           </div>
 
           <div class="footer-content">
-            <span style="font-size: 15px">Потр. мощность:</span>
+            <span style="font-size: 15px">Мгновенная мощность:</span>
             <input 
               type="text" 
               readonly 

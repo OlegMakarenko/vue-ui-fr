@@ -36,7 +36,7 @@
           class="btn_add_group"
           icon="el-icon-delete"
           size="mini"
-          @click="onDelete"
+          @click="removeDevice"
           >Удалить</el-button>
 <!-- 
           <el-button
@@ -77,6 +77,8 @@ import addDeviceModal from "../../modalwindow/ModalW.vue"
 import BaseComponent from '../../BaseComponent.vue'
 
 export default {
+  props: ["selectedId", "id"],
+  
   extends: BaseComponent,
   components: {
     Breadcrumb,
@@ -116,13 +118,13 @@ export default {
       this.$store.dispatch('COLOR_SWITCH')
     },
 
-    onDelete(){
+    removeDevice(){
         this.$confirm('Вы действительно хотите удалить "' + this.$store.getters.selectedNode.name + '"?', 'Удаление', {
           confirmButtonText: 'Удалить',
           cancelButtonText: 'Отмена',
           type: 'warning'
         }).then(() => {
-          this.$store.dispatch("NODE_DELETE");
+          this.$store.dispatch('removeDeviceById', {selectedId: parseInt(this.id)});
         }).catch(() => {
           this.$message({
             type: 'info',

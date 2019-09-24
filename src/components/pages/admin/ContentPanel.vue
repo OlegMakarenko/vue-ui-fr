@@ -4,6 +4,8 @@
     <div class="content-panel-container">
       <div class="control-panel">
         <ControlPanel 
+          :title="selectedTitle"
+          :id="selectedId"
           @onInfoClick="onInfoClick" 
           @changeView="changeDeviceComponentView"
         />
@@ -25,7 +27,7 @@
           @open="onComponentOpen"
           @select="onComponentSelect(node)"
           @click="onComponentSelect2"/> <!--object="deviceContent"-->
-          <!-- :type="node.type" -->
+          <!-- :type="node.type"  -->
       </div>
     </div>
 
@@ -90,7 +92,7 @@ export default {
       this.$store.dispatch("NODE_SELECTED", node);
 
       if(node.children)
-      this.$set(this, "selectedNodeChildrenCount", node.children);
+        this.$set(this, "selectedNodeChildrenCount", node.children);
     },
 
     onComponentSelect2(title){

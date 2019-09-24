@@ -91,6 +91,33 @@ export default {
         }) 
     },
 
+    getDeviceById: (context, payload) => {
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "devices/user",
+            class: "Devices",
+            object: "dev",
+            function: "ConfirmDev",
+            data: {
+                "datId": payload.id
+            }
+        }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
+    },
+
+    removeDeviceById: (context, payload) => {
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "devices/user",
+            class: "Devices",
+            object: "dev",
+            function: "RemoveDev",
+            data: {
+                "datId": payload.selectedId
+            }
+        }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
+    },
 
     getChartControl: (context, payload) => {
         const trendsDate = context.getters.trendsDataControl
@@ -149,21 +176,37 @@ export default {
         }).then(dataTreeDevices => context.dispatch("RESPONSE_REQUEST", dataTreeDevices.data))
     },
 
-    rename: (context, payload) => {
-        console.log("rename", payload)
-        context.state.format.send({
-            method: "post",
-            url: "",
-            path: "d1/d2",
-            class: "AnotherBackendService",
-            object: "someObject",
-            function: [],
-            data: {
-                name: payload.name,
-                id: payload.nodeId
-            }
-        })
-    },
+    // rename: (context, payload) => {
+    //     console.log("rename", payload)
+    //     context.state.format.send({
+    //         method: "post",
+    //         url: "",
+    //         path: "d1/d2",
+    //         class: "AnotherBackendService",
+    //         object: "someObject",
+    //         function: [],
+    //         data: {
+    //             name: payload.name,
+    //             id: payload.nodeId
+    //         }
+    //     })
+    // },
+
+    // remove: (context, payload) => {
+    //     console.log("rename", payload)
+    //     context.state.format.send({
+    //         method: "post",
+    //         url: "",
+    //         path: "d1/d2",
+    //         class: "AnotherBackendService",
+    //         object: "someObject",
+    //         function: [],
+    //         data: {
+    //             name: payload.name,
+    //             id: payload.nodeId
+    //         }
+    //     })
+    // },
 
     addGroup: (context, payload) => {
         console.log("addGroup", payload)

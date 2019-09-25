@@ -247,7 +247,7 @@ export default {
     },
 
     power(){
-      return this.$store.getters.deviceData.power + ' кВт';
+      return this.$store.getters.deviceData.power + ' Вт';
     },
 
     voltage(){

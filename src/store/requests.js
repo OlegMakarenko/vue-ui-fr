@@ -119,8 +119,12 @@ export default {
             data: {
                 "datId": payload.selectedId
             }
-        }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
-            .then(() => context.dispatch("getTreeDevices"))
+        })
+            .then(res => context.dispatch("RESPONSE_REQUEST", res.data))
+            .then(() => context.dispatch("getTreeDevices")) //upload tree when deleting file
+            .then(() => context.dispatch("getTreeGroup")) //upload tree when deleting file
+            .then(() => context.dispatch("doSetContent")) //upload content when deleting device
+            
     },
 
     getChartControl: (context, payload) => {

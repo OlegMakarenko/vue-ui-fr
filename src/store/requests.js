@@ -106,6 +106,7 @@ export default {
             .then(res => context.dispatch("RESPONSE_REQUEST", res.data))
             .then(() => context.dispatch("getTreeGroup"))
             .then(() => context.dispatch("getTreeDevices"))
+            .then(() => context.dispatch("doSetContent")) //upload content when deleting device
     },
 
     removeDeviceById: (context, payload) => {
@@ -178,7 +179,9 @@ export default {
             class: "Trees",
             object: "trees",
             function: "GetGroupHierarchy",
-            data: {}
+            data: {
+                "owner": 2
+            }
         }).then(dataTreeGroup => context.dispatch("RESPONSE_REQUEST", dataTreeGroup.data));
     },
     
@@ -190,7 +193,9 @@ export default {
             class: "Trees",
             object: "trees",
             function: "GetOwnerDevicesHierarchy",
-            data: {}
+            data: {
+                "owner": 2
+            }
         }).then(dataTreeDevices => context.dispatch("RESPONSE_REQUEST", dataTreeDevices.data))
     },
 

@@ -6,7 +6,7 @@
         <div class="info-title">
         <h3 style="font-size: 18px;
                  font-weight: 500;"
-        >{{deviceName}}</h3>
+        >{{infoPanel.name}}</h3>
 
           <i class="el-icon-edit" @click="editTitle" style="font-size:19px; cursor: pointer"></i>
         </div>

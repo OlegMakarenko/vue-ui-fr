@@ -110,6 +110,8 @@ export default  {
         if (isValid && form.model.email && form.model.password){
           this.auth(form.model.email, form.model.password);
           this.$store.dispatch("DEVICE_INFO") //getting device info then they load from Control.vue
+          this.$store.dispatch("getTreeGroupVisible")
+          this.$store.dispatch("getTreeDevicesVisible")
         }
         else
           if (!form.model.email)

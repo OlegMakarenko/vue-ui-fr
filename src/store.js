@@ -360,8 +360,8 @@ import { Notification } from 'element-ui';
 
 Vue.use(Vuex);
 
-const HTTP_BASE_URL = "http://pubgproxy.ddns.net";
-const WEB_SOCKET_ENDPOINT = "ws://pubgproxy.ddns.net/ws"
+const HTTP_BASE_URL = "http://vega-test.fractal.tools/request";
+const WEB_SOCKET_ENDPOINT = "ws://vega-test.fractal.tools/ws"
 const ws = new WebSocket(WEB_SOCKET_ENDPOINT);
 
 ws.onopen = function(){

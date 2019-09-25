@@ -13,7 +13,7 @@
                             Подключение устройства
                         </div>
                         <div class="modal-device-button">
-                            <button class="button-close" @click="close">x</button>
+                            <i class="el-icon-close button-close" @click="close"></i>
                         </div>
                     </div>
 
@@ -36,7 +36,7 @@
                             соотвотствующие шаги подключения его в учетную
                             запись.
                         </div> -->
-                            <el-button type="primary" @click="inputBodyCheck">Подключить устройство</el-button>                    
+                            <el-button type="primary" @click="addDevice">Подключить устройство</el-button>                    
                     </div>
 
                     <modalWifi v-if="modalWifiVisible" @buttonClose="closeWifiModal"/>
@@ -57,7 +57,7 @@ export default {
     data(){
         return{
             modalWifiVisible: false,
-            inputBody: '',
+            inputBody: '2019040000_LTC090_1',
             id: ''
         };
     },
@@ -97,19 +97,37 @@ export default {
             this.modalWifiVisible = false
         },
 
-        inputBodyCheck(id){
-            if(this.inputBody === '2019040000_LTC090_1'){
-                // console.warn("TRUE LTC090_1")
-                return this.$store.dispatch("getDeviceById", {id: 1})
-            } else if (this.inputBody === '2019040000_LTC070_1'){
-                // console.warn("TRUE LTC070_1")
-                return this.$store.dispatch("getDeviceById", {id: 2})
-            } else if(this.inputBody === '2019040000_LTC030_1'){
-                // console.warn("TRUE LTC030_1")
-                return this.$store.dispatch("getDeviceById", {id: 3})
-            } else {
-                return console.error("FALSE DEVICE ID")
+        addDevice(){
+            let deviceId = null;
+            switch(this.inputBody) {
+                case '2019040000_LTC090_1':
+                    deviceId = 1;
+                    break;
+                case '2019040000_LTC070_1':
+                    deviceId = 2;
+                    break;
+                case '2019040000_LTC030_1':
+                    deviceId = 3;
+                    break;
             }
+
+            if(deviceId != null)
+                this.$store.dispatch("getDeviceById", {id: deviceId})
+                    .then(() => this.close());
+            else
+                this.$notify.error({message: "FALSE DEVICE ID"});
+            // if(this.inputBody === '2019040000_LTC090_1'){
+            //     this.$store.dispatch("getDeviceById", {id: 1})
+            //     //this.$store.dispatch("getTreeGroup")
+            // } else if (this.inputBody === '2019040000_LTC070_1'){
+            //     this.$store.dispatch("getDeviceById", {id: 2})
+            //     //this.$store.dispatch("getTreeGroup")
+            // } else if(this.inputBody === '2019040000_LTC030_1'){
+            //     this.$store.dispatch("getDeviceById", {id: 3})
+            //     //this.$store.dispatch("getTreeGroup")
+            // } else {
+            //     return console.error("FALSE DEVICE ID")
+            // }
         }
     }
 }
@@ -185,7 +203,7 @@ export default {
     justify-content: center;
 }
 .button-close{
-    font-size: 30px;
+    font-size: 26px;
     color: #a1adb2;
     border: none;
     outline: none;

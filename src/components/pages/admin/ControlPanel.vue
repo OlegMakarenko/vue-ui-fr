@@ -8,19 +8,21 @@
           icon="el-icon-plus"
           @click="addGroupClick"
           size="mini"
-          v-if="manageButtons"
-          >Добавить устройство в группу</el-button>
+          v-if="currentTree === 1"
+        >
+          Добавить устройство в группу
+        </el-button>
 
-          <el-button
-            class="btn_add_group"
-            icon="el-icon-folder"
-            @click="onAddGroupClick"
-            :infoPanel="infoPanel"
-            size="mini"
-            v-if="manageButtons"
-            >
-              Добавить группу
-          </el-button>         
+        <el-button
+          class="btn_add_group"
+          icon="el-icon-folder"
+          @click="onAddGroupClick"
+          :infoPanel="infoPanel"
+          size="mini"
+          v-if="currentTree === 1"
+        >
+          Добавить группу
+        </el-button>         
 
 
         <el-button
@@ -29,23 +31,19 @@
           icon="el-icon-plus"
           @click="onAddDeviceClick"
           size="mini"
-          v-if="manageButtons =! manageButtons"
-          >Подключить устройство</el-button>
+          v-if="currentTree === 2"
+        >
+          Подключить устройство
+        </el-button>
 
         <el-button
           class="btn_add_group"
           icon="el-icon-delete"
           size="mini"
           @click="removeDevice"
-          >Удалить</el-button>
-<!-- 
-          <el-button
-          class="btn_add_group"
-          size="mini"
-          @click="colorSw"
-          >Изменить фон</el-button> -->
-
-        <!-- <i class="el-icon-info button-right-side" @click="onInfoClick"></i> -->
+        >
+          Удалить
+        </el-button>
 
         <i
           id="button-icon-minus"
@@ -105,7 +103,11 @@ export default {
     
     manageButtons(){
         return this.$store.getters.content.type === 'devices';
-      }
+      },
+
+    currentTree() {
+      return this.$store.getters.currentTree;
+    }
   },
 
   methods: {

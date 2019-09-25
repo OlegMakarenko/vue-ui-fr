@@ -49,6 +49,7 @@ export default {
     name: state => state.name,
     owner: state => state.owner,
     type: state => state.type,
+    currentTree: state =>state.currentTree,
 
     //TREEDATA
 

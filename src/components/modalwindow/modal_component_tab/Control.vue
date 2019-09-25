@@ -37,10 +37,10 @@
               <el-input-number 
                 style="width: 115px" 
                 size="medium" 
-                @change="getTemperature"
+                @change="setTemperature"
                 :min="0"
                 :max="50"
-                v-model="getTemperature">
+                v-model="sliderTemp">
               </el-input-number>
             </div>
           </div>
@@ -50,12 +50,12 @@
           <div class="left-bottom-content" v-if="timePick">
             <el-slider 
               style="width: 250px; margin-left: 10px;" 
-              v-model="getTemperature" 
+              v-model="sliderTemp" 
               :max="50"
-              @change="getTemperature"
+              @change="setTemperature"
               :show-tooltip="false">
             </el-slider>
-            {{getTemperature+'°C'}}
+            {{sliderTemp+'°C'}}
           </div>
 
           <div class="left-bottom-content" v-else>
@@ -215,17 +215,17 @@ export default {
         ready: true,
         value1: 1,
         chartVisible: true,
+        //sliderTemp: 0,
       };
     },
 
   computed: {
-     getTemperature:{
+     sliderTemp:{
       get(){
         return this.$store.getters.temperature
       },
       set(value){
-        this.$store.commit("temperature", value)
-        this.$store.dispatch("getTemperature")
+        this.$store.commit("temperature", value);
       }
     },
 
@@ -271,10 +271,10 @@ export default {
     },
 
     tempView(){
-      if (this.$store.getters.deviceData.temp > this.getTemperature){
+      if (this.$store.getters.deviceData.temp > this.sliderTemp){
          this.iconUp = false;
          this.iconDown = true;
-      } else if (this.$store.getters.deviceData.temp < this.getTemperature){
+      } else if (this.$store.getters.deviceData.temp < this.sliderTemp){
         this.iconUp = true;
         this.iconDown = false;
       }
@@ -315,6 +315,11 @@ export default {
 
 
   methods: {
+     setTemperature(value){
+        this.$store.commit("temperature", value)
+        this.$store.dispatch("getTemperature")
+    },
+
     onClick(){
       this.$emit('buttonClick')
     },

@@ -5,8 +5,8 @@ import Vuex from "vuex"
 
 Vue.use(Vuex);
 
-const HTTP_BASE_URL = "http://pubgproxy.ddns.net/request";
-const WEB_SOCKET_ENDPOINT = "ws://pubgproxy.ddns.net/ws"
+const HTTP_BASE_URL = "http://vega-test.fractal.tools/request";
+const WEB_SOCKET_ENDPOINT = "ws://vega-test.fractal.tools/ws"
 const ws = new WebSocket(WEB_SOCKET_ENDPOINT);
 
 export default {
@@ -39,10 +39,8 @@ export default {
             path: "realtime/user",
             class: "Realtime",
             object: "realtime",
-            function: "LastDeviceData",
-            data: {
-                "sensId": 1
-            }
+            function: "LastAllDevData",
+            data: {}
         })
         ws.onmessage = function(event){
             console.log('Realtime ' + event.data);
@@ -62,6 +60,31 @@ export default {
             }
 
             context.commit("deviceData", parsedData);
+        }
+    },
+
+    changeCurrentTree:({commit, getters}, treeNumber) => { //формируем запрос для дерева устройств()
+        commit("currentTree", treeNumber);
+        let content = [];
+        if(treeNumber === 1 && getters.tree1Data)
+            content = getters.tree1Data.children;
+        else
+        if(treeNumber === 2 && getters.tree2Data)
+            content = getters.tree2Data.children;
+        commit("content", content);
+    },
+
+    currentTree:(context, payload) => { //формируем запрос для дерева устройств()
+        var currentTree = context.state.currentTree
+        var tree1Data = context.getters.tree1Data
+        var tree2Data = context.getters.tree2Data
+
+        if(currentTree === 1){
+            context.commit('content', tree1Data)
+            console.warn("TREE1")
+        } else if (currentTree === 2){
+            context.commit('content', tree2Data)
+            console.warn("TREE2")
         }
     },
 
@@ -86,19 +109,19 @@ export default {
         }).then(res => context.dispatch("RESPONSE_REQUEST", res.data).then(context.commit("name")));
     },
 
-    getManageTree:(context, payload) => { //формируем запрос для дерева устройств()
-        context.state.format.send({
-            method: "post",
-            url: "/",
-            path: "devices/user",
-            class: "Devices",
-            object: "devices",
-            function: "GetOwnerDevicesHierarchy",
-            data: {
-                "owner": 2
-            }
-        }).then(res => context.commit("manageTree", res.data));
-    },
+    // getManageTree:(context, payload) => { //формируем запрос для дерева устройств()
+    //     context.state.format.send({
+    //         method: "post",
+    //         url: "/",
+    //         path: "devices/user",
+    //         class: "Devices",
+    //         object: "devices",
+    //         function: "GetOwnerDevicesHierarchy",
+    //         data: {
+    //             "owner": 2
+    //         }
+    //     }).then(res => context.commit("manageTree", res.data));
+    // },
 
     RESPONSE_REQUEST: (context, payload) => {
         return new Promise((resolve, reject) => {

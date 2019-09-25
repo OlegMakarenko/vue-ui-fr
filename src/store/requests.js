@@ -92,7 +92,7 @@ export default {
     },
 
     getDeviceById: (context, payload) => {
-        context.state.format.send({
+        return context.state.format.send({
             method: "post",
             url: "/",
             path: "devices/user",
@@ -102,7 +102,10 @@ export default {
             data: {
                 "datId": payload.id
             }
-        }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
+        })
+            .then(res => context.dispatch("RESPONSE_REQUEST", res.data))
+            .then(() => context.dispatch("getTreeGroup"))
+            .then(() => context.dispatch("getTreeDevices"))
     },
 
     removeDeviceById: (context, payload) => {
@@ -117,6 +120,7 @@ export default {
                 "datId": payload.selectedId
             }
         }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
+            .then(() => context.dispatch("getTreeDevices"))
     },
 
     getChartControl: (context, payload) => {
@@ -152,9 +156,9 @@ export default {
         context.state.format.send({
             method: "post",
             url: "/",
-            path: "devices/user",
-            class: "Devices",
-            object: "devices",
+            path: "trees/user",
+            class: "Trees",
+            object: "trees",
             function: "GetGroupHierarchy",
             data: {
                 "owner": 2
@@ -162,51 +166,43 @@ export default {
         }).then(dataTreeGroup => context.dispatch("RESPONSE_REQUEST", dataTreeGroup.data));
     },
 
+    getTreeGroupVisible: (context, payload) => { //kostyl`
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "trees/user",
+            class: "Trees",
+            object: "trees",
+            function: "GetGroupHierarchy",
+            data: {}
+        }).then(dataTreeGroup => context.dispatch("RESPONSE_REQUEST", dataTreeGroup.data));
+    },
+    
+    getTreeDevicesVisible: (context, payload) => { //kostyl`
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "trees/user",
+            class: "Trees",
+            object: "trees",
+            function: "GetOwnerDevicesHierarchy",
+            data: {}
+        }).then(dataTreeDevices => context.dispatch("RESPONSE_REQUEST", dataTreeDevices.data))
+    },
+
     getTreeDevices: (context, payload) => {
         context.state.format.send({
             method: "post",
             url: "/",
-            path: "devices/user",
-            class: "Devices",
-            object: "devices",
+            path: "trees/user",
+            class: "Trees",
+            object: "trees",
             function: "GetOwnerDevicesHierarchy",
             data: {
                 "owner": 2
             }
         }).then(dataTreeDevices => context.dispatch("RESPONSE_REQUEST", dataTreeDevices.data))
     },
-
-    // rename: (context, payload) => {
-    //     console.log("rename", payload)
-    //     context.state.format.send({
-    //         method: "post",
-    //         url: "",
-    //         path: "d1/d2",
-    //         class: "AnotherBackendService",
-    //         object: "someObject",
-    //         function: [],
-    //         data: {
-    //             name: payload.name,
-    //             id: payload.nodeId
-    //         }
-    //     })
-    // },
-
-    // remove: (context, payload) => {
-    //     console.log("rename", payload)
-    //     context.state.format.send({
-    //         method: "post",
-    //         url: "",
-    //         path: "d1/d2",
-    //         class: "AnotherBackendService",
-    //         object: "someObject",
-    //         function: [],
-    //         data: {
-    //             name: payload.name,
-    //             id: payload.nodeId
-    //         }
-    //     })
-    // },
 
     addGroup: (context, payload) => {
         console.log("addGroup", payload)

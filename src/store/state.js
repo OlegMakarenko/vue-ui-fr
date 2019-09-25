@@ -2,8 +2,8 @@ export default {
     auth_token: null,
     http_endpoint: "http://95.217.9.204:8101",
     currentDeviceList: [],
-    tree1Data: [],
-    tree2Data: [],
+    tree1Data: {},
+    tree2Data: {},
     node: [],
     contentType: null,
     relayState: [],
@@ -44,6 +44,7 @@ export default {
     // id:[],
     // isRoot:[],
     name:'',
+    currentTree: 2,
     // owner:[],
     // type:[],
 

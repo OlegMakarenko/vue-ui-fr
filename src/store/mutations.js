@@ -90,6 +90,10 @@ export default {
         state.type = payload
     },
 
+    currentTree:(state, payload)=>{
+        state.currentTree = payload
+    },
+
     //мутации для запроса дерева ------------------------------
 
     content:(state, data) => {

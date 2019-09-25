@@ -52,7 +52,7 @@ import Tree from "../../Tree.vue";
 export default {
   
   created(){
-    this.$store.dispatch('getTreeDevices');
+    // this.$store.dispatch('getTreeDevices');
   },
   
   data() {
@@ -69,9 +69,9 @@ export default {
       console.log(tab, event);
     },
 
-    devicesFunction(node){
+    devicesFunction(){
+      this.$store.dispatch("changeCurrentTree", 2);
       if(this.handleMode == false){
-        this.$store.dispatch('getTreeDevices');
         this.handleMode = true
         this.tree2DataVisible = true
         this.tree1DataVisible = false
@@ -79,9 +79,9 @@ export default {
       }
     },
 
-    groupFunction(node){
+    groupFunction(){
+      this.$store.dispatch("changeCurrentTree", 1);
       if(this.scheduleMode == false){
-        this.$store.dispatch('getTreeGroup');
         this.scheduleMode = true
         this.tree1DataVisible = true
         this.tree2DataVisible = false

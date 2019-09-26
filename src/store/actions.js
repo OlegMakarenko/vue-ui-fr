@@ -89,13 +89,17 @@ export default {
     },
 
     changeCurrentTree:({commit, getters, context}, treeNumber) => { //формируем запрос для дерева устройств()
-        commit("currentTree", treeNumber);
+        commit("currentTree", treeNumber);;
         let content = [];
-        if(treeNumber === 1 && getters.tree1Data)
+        if(treeNumber === 1 && getters.tree1Data){
             content = getters.tree1Data.children;
+            commit('currentFolderId', getters.tree1Data.id);
+        }
         else
-        if(treeNumber === 2 && getters.tree2Data)
+        if(treeNumber === 2 && getters.tree2Data){
             content = getters.tree2Data.children;
+            commit('currentFolderId', getters.tree1Data.id);
+        }
         commit("content", content);
     },
 
@@ -173,12 +177,13 @@ export default {
     },
 
     OPEN_NODE: (context, node) => {
-
+        console.warn('action.OPEN_NODE', node);
+        context.commit('currentFolderId', node.id);
         if(node.children && node.children.length > 0){
-            context.commit('content', node.children)         
+            context.commit('content', node.children)           
         }       
 
-            console.warn('node clcick: ', node)
+            
     },
 
     SHOW_NODE: (context, node) => {
@@ -322,4 +327,37 @@ export default {
         }
     },
 
+    updateContent: ({ state, commit }, instance) => {
+        let folderId = state.currentFolderId;
+        let currentTree = state.currentTree;
+        
+        if(folderId != null) {
+            let tree = [];
+
+            if(currentTree === 2)
+                tree = state.tree1Data;
+            else
+                tree = state.tree2Data;
+
+            function findNode(element, id){
+                if(element.id === id)
+                    return element;
+                else if (element.children != null){
+                    var i;
+                    var result = null;
+                    for(i=0; result === null && i < element.children.length; i++)
+                        result = searchTree(element.children[i], id);
+                    return result;
+                }
+                return null;
+            }
+
+            let currentFolder = findNode(tree, folderId);
+            console.warn("CurrentFolder", currentFolder)
+            if(currentFolder && currentFolder.children)
+                commit("content", currentFolder.children);
+            else 
+                commit("content", []);
+        }
+    },
 }

@@ -39,14 +39,9 @@ export default {
 
     //TREEDATA
 
-    // dataTreeGroup:[],
-    // dataTreeDevices:[],
-    // children:[],
-    // data:[],
-    // id:[],
-    // isRoot:[],
     name:'',
     currentTree: 2,
+    currentFolderId: null,
     // owner:[],
     // type:[],
 

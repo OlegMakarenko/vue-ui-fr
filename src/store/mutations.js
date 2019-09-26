@@ -169,5 +169,10 @@ export default {
 
     updatePosts(state, posts){
         state.posts = posts
+    },
+
+    currentFolderId(state, id){
+        console.log("mutation.currentFolderId", id)
+        state.currentFolderId = id;
     }
 }

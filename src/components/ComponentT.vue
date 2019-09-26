@@ -32,7 +32,7 @@
           @click="showModal2">
         </i>
     </div>
-        <ModalC v-show="isModalVisible2" @close="closeModal2"  :visibleControl="this.visibleControl"/>
+        <ModalC v-show="isModalVisible2" @close="closeModal2" :id="this.id"/>
     </div>
 
 

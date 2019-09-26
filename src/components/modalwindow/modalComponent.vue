@@ -58,7 +58,7 @@
                             </button>
 
                         </div>
-                        <controlTab @buttonClick="close" object="controlTab" v-if="controlTabVisible"/>
+                        <controlTab @buttonClick="close" object="controlTab" v-if="controlTabVisible" :id="this.id"/>
                         <eventTab @buttonClick="close" object="eventTab" v-if="eventTabVisible"/>
                         <graphicTab @buttonClick="close" object="graphicTab" v-if="graphicTabVisible"/>
                         <scheduleTab @buttonClick="close" object="scheduleTab" v-if="scheduleTabVisible"/>
@@ -94,7 +94,7 @@
 
                         <div class="info-content">
                             <span class="info-content-span">
-                                Тип управления: Н 
+                                Тип управления: Н
                             </span> 
                         </div>
                     </div>
@@ -116,7 +116,7 @@ import settingsTab from './modal_component_tab/Settings.vue'
 
 export default {
     name: 'modal',
-
+    props:['id'],
     computed:{
          infoPanel(){
             return this.$store.getters.infoPanelData;

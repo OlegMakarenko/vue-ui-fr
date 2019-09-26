@@ -120,18 +120,7 @@ export default {
                 this.$store.dispatch("getDeviceById", {id: deviceId})
             }
 
-            // if(this.inputBody === '2019040000_LTC090_1'){
-            //     this.$store.dispatch("getDeviceById", {id: 1})
-            //     //this.$store.dispatch("getTreeGroup")
-            // } else if (this.inputBody === '2019040000_LTC070_1'){
-            //     this.$store.dispatch("getDeviceById", {id: 2})
-            //     //this.$store.dispatch("getTreeGroup")
-            // } else if(this.inputBody === '2019040000_LTC030_1'){
-            //     this.$store.dispatch("getDeviceById", {id: 3})
-            //     //this.$store.dispatch("getTreeGroup")
-            // } else {
-            //     return console.error("FALSE DEVICE ID")
-            // }
+
         }
     }
 }

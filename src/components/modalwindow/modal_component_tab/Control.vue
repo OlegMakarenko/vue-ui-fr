@@ -182,6 +182,8 @@ import {setTimeout} from 'timers'
 export default {
   extends: BaseComponent,
 
+  props:['id'],
+
   created(){
     //  this.$store.dispatch("DEVICE_INFO");
     //  this.$store.dispatch('getChartControl');
@@ -225,7 +227,12 @@ export default {
       },
       set(value){
         this.$store.commit("temperature", value);
+        this.$store.commit("sensorId", parseInt(this.id))
       }
+    },
+
+    deviceData(){
+      return this.$store.getters.getDeviceDataById(this.id)
     },
 
     chartData(){
@@ -242,23 +249,28 @@ export default {
     // },
 
     consPower(){
-      return this.$store.getters.deviceData.consPower + ' А';
+      if(this.deviceData != null)
+      return this.deviceData.consPower + ' А';
     },
 
     power(){
-      return this.$store.getters.deviceData.power + ' Вт';
+      if(this.deviceData != null)
+      return this.deviceData.power + ' Вт';
     },
 
     voltage(){
-      return this.$store.getters.deviceData.voltage + ' В';
+      if(this.deviceData != null)
+      return this.deviceData.voltage + ' В';
     },
 
     temperature(){
-      return this.$store.getters.deviceData.temp + ' °C';
+      if(this.deviceData != null)
+      return this.deviceData.temp + ' °';
     },
 
     status(){
-        return this.$store.getters.deviceData.status + ' дБм'
+        if(this.deviceData != null)
+      return this.deviceData.status + ' дБм'
     },  
 
     releState(){
@@ -270,10 +282,14 @@ export default {
     },
 
     tempView(){
-      if (this.$store.getters.deviceData.temp > this.sliderTemp){
+      function deviceCheck(){
+        if(this.deviceData != null)
+        return this.deviceData.temp + ' °';
+      }
+      if (this.deviceCheck > this.sliderTemp){
          this.iconUp = false;
          this.iconDown = true;
-      } else if (this.$store.getters.deviceData.temp < this.sliderTemp){
+      } else if (this.deviceCheck < this.sliderTemp){
         this.iconUp = true;
         this.iconDown = false;
       }

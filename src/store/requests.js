@@ -50,7 +50,7 @@ export default {
 
     getTemperature:(context, payload) => {
         const temperature = context.getters.temperature;
-
+        const sensId = context.getters.sensorId;
         context.state.format.send({
             method: "post",
             url: "/",
@@ -60,7 +60,7 @@ export default {
             function: "setTemperature",
             data: {
             "object": "vega",
-            "sensorId": 1,
+            "sensorId": sensId,
             temperature
             }
         }).then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))
@@ -120,7 +120,7 @@ export default {
             .then(res => context.dispatch("RESPONSE_REQUEST", res.data))
             .then(() => context.dispatch("getTreeGroup"))
             .then(() => context.dispatch("getTreeDevices"))
-            .then(res => context.dispatch("doSetContent", res.data)) //upload content when deleting device
+            .then(() => context.dispatch("updateContent")) //upload content when deleting device
     },
 
     removeDeviceById: (context, payload) => {
@@ -138,7 +138,7 @@ export default {
             .then(res => context.dispatch("RESPONSE_REQUEST", res.data))
             .then(() => context.dispatch("getTreeDevices")) //upload tree when deleting file
             .then(() => context.dispatch("getTreeGroup")) //upload tree when deleting file
-            .then(res => context.dispatch("doSetContent", res.data)) //upload content when deleting device
+            .then(() => context.dispatch("updateContent")) //upload content when deleting device
 
             // .then(() => context.dispatch("doSetContent")) //upload content when deleting device
             
@@ -174,7 +174,7 @@ export default {
     },
 
     getTreeGroup: (context, payload) => {
-        context.state.format.send({
+        return context.state.format.send({
             method: "post",
             url: "/",
             path: "trees/user",
@@ -216,7 +216,7 @@ export default {
     },
 
     getTreeDevices: (context, payload) => {
-        context.state.format.send({
+        return context.state.format.send({
             method: "post",
             url: "/",
             path: "trees/user",

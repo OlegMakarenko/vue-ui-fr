@@ -26,10 +26,15 @@ export default {
     Admin
   },
 
+  // created(){
+  //    this.$store.dispatch("DEVICE_INFO");
+  // },
+
+
   computed:{
     isLoggedIn(){
       return this.$store.getters.isLoggedIn;
-    }
+    },
   }
 }
 </script>

@@ -59,7 +59,7 @@
             src="../icon/heating-icon-up.png">
         </div>
         <div class="preassigned-output">
-          {{getTemperature+'°'}}
+          {{sliderTemp+'°'}}
         </div>
       </div>
     </div>
@@ -81,13 +81,6 @@ import ModalC from "../components/modalwindow/modalComponent.vue";
 
 export default {
   props: ["title", "content", "selectedId", "selectedTitle", "id", "type", 'childrenCount', 'data', 'info'],
-  created() {
-     this.$store.dispatch("getTemperature");
-  },
-  mounted() {
-     this.$store.dispatch("getTemperature");
-
-  },
 
   data() {
     return {
@@ -186,10 +179,10 @@ export default {
     },
 
     tempView(){
-      if (this.$store.getters.deviceData.temp > this.getTemperature){
+      if (this.$store.getters.deviceData.temp > this.sliderTemp){
          this.iconUp = false;
          this.iconDown = true;
-      } else if (this.$store.getters.deviceData.temp < this.getTemperature){
+      } else if (this.$store.getters.deviceData.temp < this.sliderTemp){
         this.iconUp = true;
         this.iconDown = false;
       }
@@ -199,8 +192,13 @@ export default {
       return this.$store.getters.deviceData.temp + '°';
     },
 
-    getTemperature(){
+    sliderTemp:{
+      get(){
         return this.$store.getters.temperature
+      },
+      set(value){
+        this.$store.commit("temperature", value);
+      }
     },
 
     indicatorVisible(){
@@ -246,7 +244,7 @@ export default {
 
     showModal2() {
       this.isModalVisible2 = true;
-      this.$store.dispatch("DEVICE_INFO");
+      // this.$store.dispatch("DEVICE_INFO");
     },
 
     closeModal2() {

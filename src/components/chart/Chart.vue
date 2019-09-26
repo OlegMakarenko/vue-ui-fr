@@ -1,20 +1,28 @@
 <template>
         <div 
             class="chart" 
-            v-loading="!ready" 
-        >
+            v-loading="!ready">
+
             <apexcharts 
                 v-if="ready && showChart" 
                 type="line" 
                 height="100%" 
                 :options="chartOptions" 
                 :series="series" 
-                class="chart-canvas"
-            ></apexcharts>
+                class="chart-canvas">
+                
+            </apexcharts>
+
             <div 
                 v-else 
-                style="text-align: center; position: absolute; height: 100%; width: 100%; right: 0px; font-weight: bold"
-            >
+                style="
+                    text-align: center;
+                    dipsplay: flex; 
+                    height: 100%; 
+                    width: 100%; 
+                    margin-top: 10px;
+                    font-weight: bold;">
+
                 <svg version="1.1" 
                 id="Layer_1" 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -85,8 +93,8 @@
             </div>
             <div 
                 v-if="ready && showChart && axesButton" 
-                style="position: absolute; top: 3px; right: 150px"
-            >
+                style="position: absolute; top: 3px; right: 150px">
+
                 <el-radio-group v-model="separateAxes" size="mini" @change="redraw()">
                     <el-radio-button :label="false">1</el-radio-button>>
                     <el-radio-button :label="true">N</el-radio-button>
@@ -108,7 +116,7 @@ export default {
     },
 
     created(){
-      return this.$store.dispatch("getChart")
+    //   return this.$store.dispatch("getChart")
         // this.$store.mutations.chartData
     },
 

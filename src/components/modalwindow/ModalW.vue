@@ -99,6 +99,9 @@ export default {
 
         addDevice(){
             let deviceId = null;
+
+            var getDevice = this.$store.dispatch("getDeviceById", {id: deviceId})
+
             switch(this.inputBody) {
                 case '2019040000_LTC090_1':
                     deviceId = 1;
@@ -111,11 +114,13 @@ export default {
                     break;
             }
 
-            if(deviceId != null)
-                this.$store.dispatch("getDeviceById", {id: deviceId})
+            if(deviceId != null){
+               getDevice
                     .then(() => this.close());
-            else
-                this.$notify.error({message: "FALSE DEVICE ID"});
+            } else if(deviceId === 1 ||deviceId === 2 || deviceId === 3){
+                getDevice = false
+            }
+
             // if(this.inputBody === '2019040000_LTC090_1'){
             //     this.$store.dispatch("getDeviceById", {id: 1})
             //     //this.$store.dispatch("getTreeGroup")

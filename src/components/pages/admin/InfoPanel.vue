@@ -67,7 +67,7 @@ export default {
         cancelButtonText: 'Отмена',
         inputValidator: function(value){return value.length},
       }).then(({ value }) => {
-        this.$store.dispatch("addDeviceGroup", {name: value});
+        this.$store.dispatch("addDeviceGroup", {name: value}); //Chto za dich ya sdelal.
       }).catch(() => {
         this.$message({
           type: 'info',

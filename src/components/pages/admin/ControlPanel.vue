@@ -40,7 +40,7 @@
           class="btn_add_group"
           icon="el-icon-delete"
           size="mini"
-          @click="removeDevice"
+          @click="removeDevice"                   
         >
           Удалить
         </el-button>
@@ -121,7 +121,10 @@ export default {
     },
 
     removeDevice(){
-        this.$confirm('Вы действительно хотите удалить "' + this.$store.getters.selectedNode.name + '"?', 'Удаление', {
+      var deviceName = this.$store.getters.selectedNode.name
+      
+      if (deviceName) {
+        this.$confirm('Вы действительно хотите удалить "' + deviceName + '"?', 'Удаление', {
           confirmButtonText: 'Удалить',
           cancelButtonText: 'Отмена',
           type: 'warning'
@@ -133,6 +136,13 @@ export default {
             message: 'Удаление отменено'
           });
         });
+      } else if(deviceName === ""){
+        this.$message({
+            type: 'warning',
+            message: 'Выберите устройство для удаления.'
+          });
+      }
+        
       },
 
     changeDeviceComponentView() {

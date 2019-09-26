@@ -136,7 +136,7 @@ export default {
 
     showModal2() {
       this.isModalVisible2 = true;
-      this.$store.dispatch("DEVICE_INFO");
+      // this.$store.dispatch("DEVICE_INFO");
     },
 
     closeModal2() {

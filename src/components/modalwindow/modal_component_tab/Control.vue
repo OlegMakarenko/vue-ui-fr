@@ -100,8 +100,7 @@
           <div class="right-center-content">
             <el-button 
               :class="timePickClass"
-              @click="timePickFunc"
-              v-on:click="redraw" 
+              @click="timePickFunc" 
               v-if="sensorVisible">
                 Режим работы без датчика
             </el-button>
@@ -164,11 +163,11 @@
         </div>
       </div>
       <div style="width: 100%; height: 60%; margin-left: -20px">
-        <Chart
-            :toolbar="false"
-            :axesButton="false"
-            :data="chartData"
-            v-if="chartVisible"/>
+        <Chart 
+          :toolbar="false"
+          :axesButton="false"
+          :data="chartData"
+        />
       </div>
     </div>
   </div>
@@ -186,12 +185,12 @@ export default {
   created(){
     //  this.$store.dispatch("DEVICE_INFO");
     //  this.$store.dispatch('getChartControl');
-     this.$store.dispatch("getTemperature");
+    //  this.$store.dispatch("getTemperature");
   },
 
-  mounted(){
-    this.$store.dispatch('getChartControl');
-  },
+  // mounted(){
+  //   this.$store.dispatch("getFilterOptions");
+  // },
 
   components: {
     Chart
@@ -230,17 +229,17 @@ export default {
     },
 
     chartData(){
-      return this.$store.getters.chartData
+      return this.$store.getters.chartData;
     },
 
     allPosts(){
       return this.$store.getters.allPosts;
     },
 
-    visibleContentGunc(){
-      if(this.contentVisible == true)
-        return this.$store.dispatch("DEVICE_INFO")
-    },
+    // visibleContentGunc(){
+    //   if(this.contentVisible == true)
+    //     return this.$store.dispatch("DEVICE_INFO")
+    // },
 
     consPower(){
       return this.$store.getters.deviceData.consPower + ' А';
@@ -361,11 +360,6 @@ export default {
       });
     },
 
-    tempChange(value){
-      this.$store.commit("temperature", value)
-      this.$store.dispatch("getTemperature")
-    },
-
     timePickFunc(){
       console.log(' time picker button ' + this.timePick)
       if(this.timePick == false) this.timePick = true
@@ -400,12 +394,6 @@ export default {
         this.scheduleMode = false
       }
     },
-
-    redraw(){
-        this.ready = false;
-        setTimeout(()=>{ this.ready = true }, 500);
-    },
-
     
     getRelay(value){
       this.$store.commit("relayState", value)

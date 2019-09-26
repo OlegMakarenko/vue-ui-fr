@@ -360,33 +360,9 @@ import { Notification } from 'element-ui';
 
 Vue.use(Vuex);
 
-const HTTP_BASE_URL = "http://vega-test.fractal.tools/request";
-const WEB_SOCKET_ENDPOINT = "ws://vega-test.fractal.tools/ws"
-const ws = new WebSocket(WEB_SOCKET_ENDPOINT);
-
-ws.onopen = function(){
-    console.log("Установлено соединение по WebSocket");
-    ws.send("Соединение установлено");
-};
-
-ws.onmessage = function(event) {
-    console.log("Получены данные ");
-    console.log(event.data);
-};
-
-ws.onclose = function(event) {
-    if (event.wasClean) {
-        console.log('Соединение закрыто чисто');
-    } else {
-        console.log('Обрыв соединения');
-    }
-    console.log('Код: ' + event.code + ' причина: ' + event.reason);
-};
-
-ws.onerror = function(error) {
-    console.log("Ошибка " + error.message);
-};
-
+// const HTTP_BASE_URL = "http://vega-test.fractal.tools/request";
+// const WEB_SOCKET_ENDPOINT = "ws://vega-test.fractal.tools/ws"
+// const ws = new WebSocket(WEB_SOCKET_ENDPOINT);
 
 const exampleFetchAPI = (endpoint, body) =>
     new Promise((resolve, reject)=>

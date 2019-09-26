@@ -2,6 +2,8 @@ import axios from "axios"
 import Format from 'fractal-format-protocol'
 import Vue from "vue"
 import Vuex from "vuex"
+import { Notification } from 'element-ui';
+
 
 Vue.use(Vuex);
 
@@ -42,8 +44,27 @@ export default {
             function: "LastAllDevData",
             data: {}
         })
+        ws.onopen = function(){
+            console.log("Установлено соединение по WebSocket");
+            ws.send("Соединение установлено");
+        };
+        
+        ws.onclose = function(event) {
+            if (event.wasClean) {
+                console.log('Соединение закрыто чисто');
+            } else {
+                console.log('Обрыв соединения');
+            }
+            console.log('Код: ' + event.code + ' причина: ' + event.reason);
+        };
+        
+        ws.onerror = function(error) {
+            console.log("Ошибка " + error.message);
+        };
+
         ws.onmessage = function(event){
             console.log('Realtime ' + event.data);
+            
             var wsData = JSON.parse(event.data);
 
             var parsedData = {};
@@ -63,7 +84,7 @@ export default {
         }
     },
 
-    changeCurrentTree:({commit, getters}, treeNumber) => { //формируем запрос для дерева устройств()
+    changeCurrentTree:({commit, getters, context}, treeNumber) => { //формируем запрос для дерева устройств()
         commit("currentTree", treeNumber);
         let content = [];
         if(treeNumber === 1 && getters.tree1Data)
@@ -86,6 +107,13 @@ export default {
             context.commit('content', tree2Data)
             console.warn("TREE2")
         }
+    },
+
+    doNotification: (context, payload) => {
+        Notification({
+            message: payload.message,
+            type: payload.type
+            });
     },
 
     addDeviceGroup:(context, payload) => { //формируем запрос для дерева устройств()

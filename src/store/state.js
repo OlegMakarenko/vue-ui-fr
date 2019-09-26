@@ -33,7 +33,8 @@ export default {
     },
 
     sensorId: [],
-    temperature: [],
+
+    temperature: 0,
 
     //TREEDATA
 

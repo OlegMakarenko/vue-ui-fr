@@ -32,6 +32,7 @@ export default {
     eventsDateRange: state => state.eventsDateRange,
 
     sensorId: state => state.sensorId,
+    
     temperature: state => state.temperature,
 
     deviceData: state => state.deviceData,

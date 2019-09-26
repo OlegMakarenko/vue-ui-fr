@@ -57,12 +57,11 @@
         </div>
       </div>
       <Chart 
-          :object="pickerOptions"
-  		  	:toolbar="true"
-	    		:axesButton="true"
-          :data="chartData"
-
-        />
+        :object="pickerOptions"
+        :toolbar="true"
+        :axesButton="true"
+        :data="chartData"
+      />
     </div>
   </div>
 </template>

@@ -66,6 +66,20 @@ export default {
         }).then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))
     },
 
+    lastDeviceData:(context, payload) => {
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "realtime/user",
+            class: "Realtime",
+            object: "realtime",
+            function: "LastDeviceData",
+            data: {
+                "sensId": payload.id
+            }
+        }).then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))
+    },
+
     getRelay:(context, payload) => {
         const currentState = context.getters.relayState
 

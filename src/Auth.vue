@@ -78,12 +78,11 @@ export default  {
     registerForm
   },
 
-  created(){
-     this.$store.dispatch("DEVICE_INFO");
-  },
 
   computed:{
-
+    content(){
+      return this.$store.getters.content;
+    }
   },
 
   data()
@@ -109,9 +108,9 @@ export default  {
       {
         if (isValid && form.model.email && form.model.password){
           this.auth(form.model.email, form.model.password);
-          this.$store.dispatch("DEVICE_INFO") //getting device info then they load from Control.vue
           this.$store.dispatch("getTreeGroupVisible")
           this.$store.dispatch("getTreeDevicesVisible")
+          this.$store.dispatch("lastDeviceData", {id: this.content.id})
         }
         else
           if (!form.model.email)
@@ -165,7 +164,7 @@ export default  {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
   padding-right: 30px;
   padding-left: 30px;
   min-width: 330px;

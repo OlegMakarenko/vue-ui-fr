@@ -58,6 +58,10 @@ export default {
     ModalSettings
   },
 
+  mounted(){
+     return this.$store.dispatch("changeCurrentTree", 2);
+  },
+
   computed: {
     content() {
         return this.$store.getters.content;
@@ -87,7 +91,7 @@ export default {
 
     onComponentSelect(node) {
       this.$set(this, "selectedId", node.id);
-      console.log(node.id)
+      // console.log(node.id)
 
       this.$store.dispatch("NODE_SELECTED", node);
 

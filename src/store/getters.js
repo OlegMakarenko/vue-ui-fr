@@ -15,6 +15,8 @@ export default {
         return state.posts
     },
 
+    getDeviceDataById: state => id => state.deviceData[id],
+
     node: state => state.node,
     contentType: state => state.contentType,
 
@@ -32,7 +34,7 @@ export default {
     eventsDateRange: state => state.eventsDateRange,
 
     sensorId: state => state.sensorId,
-    
+
     temperature: state => state.temperature,
 
     deviceData: state => state.deviceData,

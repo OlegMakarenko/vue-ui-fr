@@ -110,7 +110,7 @@ export default  {
           this.auth(form.model.email, form.model.password);
           this.$store.dispatch("getTreeGroupVisible")
           this.$store.dispatch("getTreeDevicesVisible")
-          this.$store.dispatch("lastDeviceData", {id: this.content.id})
+          this.$store.dispatch("DEVICE_INFO")
         }
         else
           if (!form.model.email)

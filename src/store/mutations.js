@@ -90,6 +90,10 @@ export default {
         state.type = payload
     },
 
+    setDeviceDataById:(state, payload)=>{
+        Vue.set(state.deviceData, payload.sensId, payload) //object device data
+    },
+
     currentTree:(state, payload)=>{
         state.currentTree = payload
     },

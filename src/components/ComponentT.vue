@@ -109,6 +109,10 @@ export default {
       if (this.title) return this.title.toUpperCase();
     },
 
+    deviceData(){
+      return this.$store.getters.getDeviceDataById(this.id)
+    },
+
     infoPanel(){
       return this.$store.getters.infoPanelData;
     },
@@ -189,7 +193,8 @@ export default {
     },
 
     temperature(){
-      return this.$store.getters.deviceData.temp + '°';
+      if(this.deviceData != null)
+      return this.deviceData.temp + '°';
     },
 
     sliderTemp:{
@@ -200,6 +205,8 @@ export default {
         this.$store.commit("temperature", value);
       }
     },
+
+
 
     indicatorVisible(){
       if(this.type === "device") return true;

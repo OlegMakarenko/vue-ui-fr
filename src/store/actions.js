@@ -80,8 +80,12 @@ export default {
                 parsedData = wsData.calls[0].Class.obj.Func.data
             }
 
-            context.commit("deviceData", parsedData);
+            context.dispatch("setDeviceData", parsedData);
         }
+    },
+
+    setDeviceData:(context, payload) => { //формируем запрос для дерева устройств()
+        context.commit("setDeviceDataById", payload)
     },
 
     changeCurrentTree:({commit, getters, context}, treeNumber) => { //формируем запрос для дерева устройств()
@@ -242,6 +246,7 @@ export default {
         for(var key in payload)
             context.commit(key, payload[key])
     },
+
     doSetContent: (context, payload) => {
         console.log("Content", payload)
             context.commit("content", payload)

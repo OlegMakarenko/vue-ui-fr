@@ -120,7 +120,7 @@ export default {
             .then(res => context.dispatch("RESPONSE_REQUEST", res.data))
             .then(() => context.dispatch("getTreeGroup"))
             .then(() => context.dispatch("getTreeDevices"))
-            .then(() => context.dispatch("doSetContent")) //upload content when deleting device
+            .then(res => context.dispatch("doSetContent", res.data)) //upload content when deleting device
     },
 
     removeDeviceById: (context, payload) => {
@@ -138,7 +138,9 @@ export default {
             .then(res => context.dispatch("RESPONSE_REQUEST", res.data))
             .then(() => context.dispatch("getTreeDevices")) //upload tree when deleting file
             .then(() => context.dispatch("getTreeGroup")) //upload tree when deleting file
-            .then(() => context.dispatch("doSetContent")) //upload content when deleting device
+            .then(res => context.dispatch("doSetContent", res.data)) //upload content when deleting device
+
+            // .then(() => context.dispatch("doSetContent")) //upload content when deleting device
             
     },
 

@@ -7,6 +7,7 @@ export default {
     node: [],
     contentType: null,
     relayState: [],
+    deviceData: {},
 
     manageTree: [],
     deviceInfo:{},

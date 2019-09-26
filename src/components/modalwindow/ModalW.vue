@@ -99,8 +99,7 @@ export default {
 
         addDevice(){
             let deviceId = null;
-
-            var getDevice = this.$store.dispatch("getDeviceById", {id: deviceId})
+            
 
             switch(this.inputBody) {
                 case '2019040000_LTC090_1':
@@ -115,10 +114,10 @@ export default {
             }
 
             if(deviceId != null){
-               getDevice
+                this.$store.dispatch("getDeviceById", {id: deviceId})
                     .then(() => this.close());
-            } else if(deviceId === 1 ||deviceId === 2 || deviceId === 3){
-                getDevice = false
+            } else if(deviceId === 1 ||deviceId === 2 || deviceId === 3) {
+                this.$store.dispatch("getDeviceById", {id: deviceId})
             }
 
             // if(this.inputBody === '2019040000_LTC090_1'){

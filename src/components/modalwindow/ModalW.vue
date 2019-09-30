@@ -57,7 +57,7 @@ export default {
     data(){
         return{
             modalWifiVisible: false,
-            inputBody: '2019040000_LTC090_1',
+            inputBody: '',
             id: ''
         };
     },

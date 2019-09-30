@@ -7,12 +7,11 @@
             <div class="header-brand">
               <img
                 class="brand"
-                src="../src/icon/vega.jpg"
+                src="../../src/icon/vega.jpg"
                 alt="fractal"
                 style="
-                margin-top: 12px;
-                width: 180px;"
-                height="35"
+                width: 200px;"
+                height="55"
               />
             </div>
           </div>
@@ -20,79 +19,72 @@
       </el-row>
     </nav>
 
+   
+
     <div class="form-wrapper">
+       <div class="register-form-content">
+      <span class="register-span">Регистрация</span>
+      <div class="regContent">
+        Укажите адрес электронной почты, на который Вам прийдет
+        код подтверждения регистрации пользователя
+      </div>
+    </div>
       <el-form :model="registerForm" ref="registerForm">
-        <el-form-item>
-          <el-row class="register-label">Регистрация</el-row>
-        </el-form-item>
+        <el-col>
+           <el-col>
+            <el-form-item>
+              <el-input 
+                type="text" 
+                placeholder="E-mail"
+                style="font-size: 12.5px"
+                v-model="registerForm.email">
+              </el-input>
+            </el-form-item>
+          </el-col>
 
-        <el-form-item>
-          <el-input prop="name"
-            v-model="registerForm.name"
-            auto-complete="on"
-            @keyup.13.native="submitForm('registerForm')" 
-            placeholder="Введите ваше Имя" 
-            type="text">
-          </el-input>
-        </el-form-item>
+          <el-row :gutter="10" style="display: flex">
+          <el-col>
+            <el-form-item>
+              <el-input 
+                type="password" 
+                placeholder="Введите пароль"
+                style="font-size: 12.5px"
+                v-model="registerForm.firstPassword" 
+                show-password>
+              </el-input>
+            </el-form-item>
+          </el-col>
 
-        <el-form-item>
-          <el-input prop="secondName"
-            v-model="registerForm.secondName"
-            auto-complete="on"
-            @keyup.13.native="submitForm('registerForm')" 
-            placeholder="Введите вашу Фамилию"
-            type="text"
-          ></el-input>
-        </el-form-item>
+          <el-col>
+            <el-form-item>
+              <el-input 
+                type="password" 
+                placeholder="Подтвердите пароль"
+                style="font-size: 12.5px"
+                v-model="registerForm.secondPassword" 
+                show-password>
+              </el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        </el-col>
+        <el-row :gutter="20" style="display: flex">
+          <el-col>
+            <el-form-item>
+              <el-button style="width: 100%">
+                  Войти
+              </el-button>
+            </el-form-item>
+          </el-col>
 
-        <el-form-item>
-          <el-input prop="phoneNumber"
-            v-model="registerForm.phoneNumber"
-            auto-complete="on"
-            @keyup.13.native="submitForm('registerForm')" 
-            placeholder="Введите ваш номер телефона"
-            type="text">
-          </el-input>
-        </el-form-item>
-
-        <el-form-item>
-          <el-input prop="email"
-            v-model="registerForm.email" 
-            auto-complete="on"
-            @keyup.13.native="submitForm('registerForm')" 
-            placeholder="Введите ваш e-mail" 
-            type="email">
-            </el-input>
-        </el-form-item>
-
-        <el-form-item>
-          <el-input prop="password"
-            v-model="registerForm.password" 
-            auto-complete="on"
-            @keyup.13.native="submitForm('registerForm')" 
-            placeholder="Введите пароль" 
-            type="password">
-            </el-input>
-        </el-form-item>
-
-        <el-form-item>
-          <el-input prop="secondPassword"
-            v-model="registerForm.secondPassword"
-            auto-complete="on"
-            @keyup.13.native="submitForm('registerForm')" 
-            placeholder="Повторите введеный пароль"
-            type="password">
-          </el-input>
-        </el-form-item>
-
-        <el-form-item>
-          <el-button
-            class="register-button"
-            type="primary"
-            @click="submitForm('registerForm')"
-          >Зарегистрироваться</el-button>
-        </el-form-item>
+          <el-col>
+            <el-form-item>
+              <el-button style="width: 100%"  type="primary">
+                  Регистрация
+              </el-button>
+            </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
     </div>
   </div>
@@ -107,7 +99,7 @@ export default {
         secondName: "",
         phoneNumber: "",
         email: "",
-        password: "",
+        firstPassword: "",
         secondPassword: ""
       }
     };
@@ -222,6 +214,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100%;
 }
 
@@ -245,10 +238,26 @@ export default {
   background-size: 65vh;
 }
 
-.brand {
-  margin-right: 20px;
-  margin-top: 23px;
-  width: 50px;
+.register-form-content{
+  width: 350px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #565656;
+  margin-bottom: 15px;
+}
+
+.register-span{
+  margin-bottom: 30px;
+  font-size: 25px;
+}
+
+.regContent{
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 15px;
 }
 
 .header-text {

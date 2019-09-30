@@ -10,7 +10,6 @@
 <script>
 
 import Auth from './Auth'
-import Register from './Register'
 import Admin from './components/pages/admin/Admin.vue'
 
 
@@ -22,7 +21,6 @@ export default {
   name: 'app',
   components: {
     Auth,
-    Register,
     Admin
   },
 

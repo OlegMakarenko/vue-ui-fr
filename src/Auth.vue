@@ -10,7 +10,6 @@
                   src="../src/icon/vega.jpg"
                   alt="vega"
                   style="
-                  margin-top: 6px;
                   width: 200px;"
                   height="55"
                 />
@@ -51,17 +50,24 @@
         <el-row :gutter="20" style="display: flex">
           <el-col>
             <el-form-item>
-          <el-button
-            class="auth-button"
-            type="primary"
-            @click="submitForm('authForm')">Войти</el-button>
-        </el-form-item></el-col>
-          <el-col><el-form-item>
-          <el-button
-            class="register-button"
-            @click="showRegister"
-            >Регистрация</el-button>
-        </el-form-item></el-col>
+              <el-button
+                class="auth-button"
+                type="primary"
+                @click="submitForm('authForm')">
+                  Войти
+              </el-button>
+            </el-form-item>
+          </el-col>
+
+          <el-col>
+            <el-form-item>
+              <el-button
+                class="register-button"
+                @click="showRegister">
+                  Регистрация
+              </el-button>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
     </div>
@@ -70,7 +76,7 @@
 </template>
 
 <script>
-import registerForm from './Register'
+import registerForm from './RegisterForm/Register'
 
 export default  {
 
@@ -197,7 +203,6 @@ export default  {
 .form-wrapper > form {
   width: 350px;
   max-width: 350px;
-
   z-index: 1000;
 }
 
@@ -213,12 +218,6 @@ export default  {
   background-repeat: no-repeat;
   background-position: -220px 210px;
   background-size: 65vh;
-}
-
-.brand {
-  margin-right: 20px;
-  margin-top: 23px;
-  width: 50px;
 }
 
 .header-text {

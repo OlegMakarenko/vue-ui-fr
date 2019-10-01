@@ -1,9 +1,8 @@
 <template>
-  <div class="register-page">
-
-    <nav class="register-header">
+  <div class="confirm-page">
+    <nav class="confirm-header">
       <el-row :gutter="20" type="flex" justify="center">
-        <div class="register-header-content">
+        <div class="confirm-header-content">
           <div class="header-text">
             <div class="header-brand">
               <img
@@ -20,61 +19,35 @@
       </el-row>
     </nav>
 
-    <authForm v-if="authVisible"/>
-    <Confirm v-if="confirmVisible"/>
+    <div class="form-wrapper">
 
-    <div v-if="registerVisible" class="form-wrapper">
-       <div class="register-form-content">
-      <span class="register-span">Регистрация</span>
+    <authForm v-if="authVisible"/>
+
+      <el-form v-else ref="confirmForm">
+       <div class="confirm-form-content">
+      <span class="confirm-span">Подтверждение регистрации</span>
       <div class="regContent">
-        Укажите адрес электронной почты, на который Вам прийдет
-        код подтверждения регистрации пользователя
+          Введите код подтверждения регистрации пользователся из письма,
+          отправленного на укзанный электронный адрес.
       </div>
     </div>
-      <el-form ref="registerForm">
         <el-col>
            <el-col>
             <el-form-item>
               <el-input 
-                type="text" 
-                placeholder="E-mail"
+                type="text"
+                placeholder="Введите код"
                 style="font-size: 12.5px"
-                v-model="email">
+                v-model="confirm">
               </el-input>
             </el-form-item>
           </el-col>
-
-          <el-row :gutter="10" style="display: flex">
-          <el-col>
-            <el-form-item>
-              <el-input 
-                type="password" 
-                placeholder="Введите пароль"
-                style="font-size: 12.5px"
-                v-model="firstPassword" 
-                show-password>
-              </el-input>
-            </el-form-item>
-          </el-col>
-
-          <el-col>
-            <el-form-item>
-              <el-input 
-                type="password" 
-                placeholder="Подтвердите пароль"
-                style="font-size: 12.5px"
-                v-model="secondPassword" 
-                show-password>
-              </el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
         </el-col>
         <el-row :gutter="20" style="display: flex">
           <el-col>
             <el-form-item>
-              <el-button style="width: 100%" @click="backTo">
-                  Войти
+              <el-button style="width: 100%" @click="submitPassword">
+                  Отправить ещё раз
               </el-button>
             </el-form-item>
           </el-col>
@@ -85,7 +58,7 @@
                 style="width: 100%"  
                 type="primary"
                 @click="submitPassword">
-                  Регистрация
+                  Подтвердить
               </el-button>
             </el-form-item>
           </el-col>
@@ -97,52 +70,36 @@
 
 <script>
 
-import authForm from '../Auth'
-import Confirm from './ConfirmRegister.vue'
+import {authForm} from '../Auth.vue'
 
 export default {
   data() {
     return {
-        name: "",
-        secondName: "",
-        phoneNumber: "",
-        email: "",
-        firstPassword: "",
-        secondPassword: "",
+        confirm: '',
         authVisible: false,
-        confirmVisible: false,
-        registerVisible: true,
     };
   },
 
   components:{
-    authForm,
-    Confirm
+      'authForm':authForm
   },
 
   methods: {
     submitPassword(){
-      if(this.firstPassword != this.secondPassword){
+      if(this.confirm === '' ){
         this.$notify.error({
-          title: `Ошибка повтора пароля`,
-          message: "Пожалуйста введите 2 одинаковых пароля",
+          title: `Ошибка ввода кода`,
+          message: "Пожалуйста введите код",
           type: "error"
         });
       } else {
-        this.registerVisible = false;
-        this.confirmVisible = true;
+        this.authVisible = true
         this.$notify.success({
           title: `Готово`,
           message: "",
           type: "succes"
         });
       }
-    },
-
-    backTo(){
-      if(this.registerVisible === true)
-        this.registerVisible = false
-        return this.authVisible = true
     },
 
     submitForm(formName) {
@@ -215,14 +172,14 @@ export default {
 </script>
 
 <style scoped>
-.register-header {
+.confirm-header {
   height: 100px;
   border-bottom: 1px solid #c6c3d4;
   background: white;
   min-height: 100px;
 }
 
-.register-header-content {
+.confirm-header-content {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -232,11 +189,11 @@ export default {
   min-width: 330px;
 }
 
-.register-content {
+.confirm-content {
   background-color: #f5f9fc;
 }
 
-.register-page {
+.confirm-page {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -263,7 +220,7 @@ export default {
   z-index: 1000;
 }
 
-.register-page::after {
+.confirm-page::after {
   content: "";
   opacity: 0.1;
   top: 0;
@@ -277,7 +234,7 @@ export default {
   background-size: 65vh;
 }
 
-.register-form-content{
+.confirm-form-content{
   width: 350px;
   font-size: 16px;
   display: flex;
@@ -288,7 +245,7 @@ export default {
   margin-bottom: 15px;
 }
 
-.register-span{
+.confirm-span{
   margin-bottom: 30px;
   font-size: 25px;
 }
@@ -318,14 +275,14 @@ export default {
   display: inline-block;
 }
 
-.register-label {
+.confirm-label {
   font-size: 24px;
   color: #444;
   justify-content: center;
   display: flex;
 }
 
-.register-button {
+.confirm-button {
   width: 100%;
 }
 </style>

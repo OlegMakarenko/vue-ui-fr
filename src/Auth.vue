@@ -18,8 +18,14 @@
           </div>
       </el-row>
     </nav>
-    <div class="form-wrapper" v-if="authVisible">
-      <el-form :model="authForm" ref="authForm">
+
+    
+    <div class="form-wrapper" >
+
+    <registerForm v-if="registerVisible"/>
+    <Recovery v-if="recoveryVisible"/>
+
+      <el-form :model="authForm" v-if="authVisible" ref="authForm">
         <el-form-item>
           <el-row class="auth-label">
             Вход
@@ -51,6 +57,15 @@
           <el-col>
             <el-form-item>
               <el-button
+                class="register-button"
+                @click="showRegister">
+                  Регистрация
+              </el-button>
+            </el-form-item>
+          </el-col>
+          <el-col>
+            <el-form-item>
+              <el-button
                 class="auth-button"
                 type="primary"
                 @click="submitForm('authForm')">
@@ -58,30 +73,47 @@
               </el-button>
             </el-form-item>
           </el-col>
+        </el-row>
+
+        <el-row :gutter="20" style="display: flex">
+          <el-col>
+            <el-form-item style="color: #565656">
+              <span>Русский</span>
+              <!-- <el-button
+                class="auth-button"
+                type="primary"
+                @click="submitForm('authForm')">
+                  Войти
+              </el-button> -->
+            </el-form-item>
+          </el-col>
 
           <el-col>
-            <el-form-item>
-              <el-button
+            <el-form-item style="float: right; color: #565656; cursor: pointer">
+              <span @click="recoveryPassword">Забыли пароль?</span>
+              <!-- <el-button
                 class="register-button"
                 @click="showRegister">
                   Регистрация
-              </el-button>
+              </el-button> -->
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
     </div>
-    <registerForm v-else v-show="registerVisible"/>
   </div>
 </template>
 
 <script>
 import registerForm from './RegisterForm/Register'
+import Recovery from './RegisterForm/RecoveryAcces'
 
 export default  {
+  name: 'authForm',
 
   components:{
-    registerForm
+    registerForm,
+    Recovery
   },
 
 
@@ -95,7 +127,9 @@ export default  {
   {
     return {
       authVisible: true,
-      registerVisible: true,
+      registerVisible: false,
+      confirmVisible: false,
+      recoveryVisible: false,
       authForm:{
         email: '',
         password: ''
@@ -150,8 +184,17 @@ export default  {
     },
 
     showRegister(){
-      if(this.authVisible = false){
-        this.registerVisible = false;
+      if(this.authVisible = true){
+        this.registerVisible = true;
+        this.authVisible = false;
+      }
+    },
+
+    recoveryPassword(){
+      if(this.authVisible === true){
+        this.authVisible = false
+        this.registerVisible = false
+        this.recoveryVisible = true
       }
     }
   }

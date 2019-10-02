@@ -20,10 +20,13 @@
     </nav>
 
     <div class="form-wrapper">
+      <el-form v-if="authVisible">
+        <authForm/>
+      </el-form>
 
-    <authForm v-if="authVisible"/>
 
       <el-form v-else ref="confirmForm">
+      <button @click="checkBut">123</button>
        <div class="confirm-form-content">
       <span class="confirm-span">Подтверждение регистрации</span>
       <div class="regContent">
@@ -70,9 +73,12 @@
 
 <script>
 
-import {authForm} from '../Auth.vue'
+import authForm from '../Auth.vue'
 
 export default {
+
+  name:'authForm',
+
   data() {
     return {
         confirm: '',
@@ -81,7 +87,7 @@ export default {
   },
 
   components:{
-      'authForm':authForm
+      authForm
   },
 
   methods: {
@@ -93,12 +99,19 @@ export default {
           type: "error"
         });
       } else {
-        this.authVisible = true
         this.$notify.success({
           title: `Готово`,
           message: "",
           type: "succes"
         });
+        this.authVisible = true
+      }
+    },
+
+    checkBut(){
+      console.log(this.authVisible)
+      if(this.authVisible === false){
+        this.authVisible = true
       }
     },
 

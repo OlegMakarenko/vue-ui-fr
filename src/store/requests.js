@@ -6,8 +6,10 @@ export default {
             formattedDate[0] = Math.round(trendsDate[0] / 1000);
             formattedDate[1] = Math.round(trendsDate[1] / 1000);
         }
-        else
+        else{
             formattedDate = [...trendsDate];
+        }
+
         const trendsFilters = context.getters.trendsFilters;
         
         context.state.format.send({
@@ -170,6 +172,20 @@ export default {
             object: "trends",
             function: "GetFiltrOptions",
             data: {}
+        }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
+    },
+
+    getSensFilterOptions:(context, payload) => {       
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "trends/user",
+            class: "Trends",
+            object: "trends",
+            function: "GetSensFiltrOptions",
+            data: {
+                "sensId": payload.id
+            }
         }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
     },
 

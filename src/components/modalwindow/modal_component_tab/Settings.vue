@@ -195,7 +195,7 @@
             <!-- <el-button @click="changeColor">Применить цвет</el-button> -->
 
             <div class="settings-button-content">
-              <h style="font-size: 18px;">Блокировка кнопок</h>
+              <span style="font-size: 18px;">Блокировка кнопок</span>
               <el-switch v-model="blockButton"></el-switch>
             </div>
 

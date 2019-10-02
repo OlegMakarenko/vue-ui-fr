@@ -50,6 +50,8 @@
                 </el-option>
               </el-select>
 
+              <button @click="getSensFilterOptions"></button>
+
               
             </div>
           </div>
@@ -104,6 +106,10 @@ export default {
 
     trendsFiltersOptions(){
       return this.$store.getters.trendsFiltersOptions
+    },
+
+    getSensFilterOptions(){
+      return this.$store.dispatch("getSensFilterOptions", {id: this.id})
     }
   },
 

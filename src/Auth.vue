@@ -108,7 +108,7 @@
 import registerForm from './RegisterForm/Register'
 import Recovery from './RegisterForm/RecoveryAcces'
 
-export default  {
+export default {
   name: 'authForm',
 
   components:{

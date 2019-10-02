@@ -183,10 +183,10 @@ export default {
     },
 
     tempView(){
-      if (this.$store.getters.deviceData.temp > this.sliderTemp){
+      if (this.deviceData != null && this.deviceData.temp > this.sliderTemp){
          this.iconUp = false;
          this.iconDown = true;
-      } else if (this.$store.getters.deviceData.temp < this.sliderTemp){
+      } else if (this.deviceData != null && this.deviceData.temp  < this.sliderTemp){
         this.iconUp = true;
         this.iconDown = false;
       }
@@ -205,8 +205,6 @@ export default {
         this.$store.commit("temperature", value);
       }
     },
-
-
 
     indicatorVisible(){
       if(this.type === "device") return true;

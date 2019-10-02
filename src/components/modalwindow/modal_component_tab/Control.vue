@@ -250,28 +250,33 @@ export default {
 
     consPower(){
       if(this.deviceData != null)
-      return this.deviceData.consPower + ' А';
+        return this.deviceData.consPower + ' А';
     },
 
     power(){
       if(this.deviceData != null)
-      return this.deviceData.power + ' Вт';
+        return this.deviceData.power + ' Вт';
     },
 
     voltage(){
       if(this.deviceData != null)
-      return this.deviceData.voltage + ' В';
+        return this.deviceData.voltage + ' В';
     },
 
     temperature(){
       if(this.deviceData != null)
-      return this.deviceData.temp + ' °';
+        return this.deviceData.temp + ' °';
     },
 
     status(){
-        if(this.deviceData != null)
-      return this.deviceData.status + ' дБм'
+      if(this.deviceData != null)
+        return this.deviceData.status + ' дБм'
     },  
+
+    targetTemp(){
+      if(this.deviceData != null)
+        return this.deviceData.targetTemp + ' °';
+    },
 
     releState(){
       if(this.$store.getters.deviceData.releState === 1){
@@ -282,14 +287,10 @@ export default {
     },
 
     tempView(){
-      function deviceCheck(){
-        if(this.deviceData != null)
-        return this.deviceData.temp + ' °';
-      }
-      if (this.deviceCheck > this.sliderTemp){
+      if (this.deviceData != null && this.deviceData.temp > this.sliderTemp){
          this.iconUp = false;
          this.iconDown = true;
-      } else if (this.deviceCheck < this.sliderTemp){
+      } else if (this.deviceData != null && this.deviceData.temp  < this.sliderTemp){
         this.iconUp = true;
         this.iconDown = false;
       }
@@ -413,7 +414,7 @@ export default {
     
     getRelay(value){
       this.$store.commit("relayState", value)
-      this.$store.dispatch("getRelay")
+      this.$store.dispatch("getRelay", {id: parseInt(this.id)})
     }
   }
 };

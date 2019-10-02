@@ -60,7 +60,7 @@ export default {
             function: "setTemperature",
             data: {
             "object": "vega",
-            "sensorId": sensId,
+            "sensorId": 1, //sensId для передачи температуры по каждому устройству
             temperature
             }
         }).then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))
@@ -82,7 +82,7 @@ export default {
 
     getRelay:(context, payload) => {
         const currentState = context.getters.relayState
-
+        const sensId = context.getters.sensorId;
         var currentRelay;
         if(currentState) {
             currentRelay = Math.round(currentState); // 1
@@ -99,7 +99,7 @@ export default {
             function: "switchRelay",
             data: {
             "object": "vega",
-            "sensorId": 1,
+            "sensorId": payload.id, // id устройства на которое переджается реле
             currentState:currentRelay, //присвоение значения
             }
         }) 

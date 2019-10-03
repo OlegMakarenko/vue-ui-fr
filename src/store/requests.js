@@ -157,7 +157,7 @@ export default {
             object: "trends",
             function: "GetChart",
             data: {
-                trendsDate,
+                "trendsDate": [1569478054, 1570082854],
                 trendsFilters
             }
         }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))

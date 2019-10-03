@@ -48,11 +48,7 @@
                   :label="item.label"
                   :value="item.value">
                 </el-option>
-              </el-select>
-
-              <button @click="getSensFilterOptions"></button>
-
-              
+              </el-select>      
             </div>
           </div>
           <el-button icon="el-icon-delete" circle class="clear-button"></el-button>

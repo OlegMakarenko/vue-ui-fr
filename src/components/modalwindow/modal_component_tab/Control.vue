@@ -186,13 +186,13 @@ export default {
 
   created(){
     //  this.$store.dispatch("DEVICE_INFO");
-    //  this.$store.dispatch('getChartControl');
     //  this.$store.dispatch("getTemperature");
+    this.$store.dispatch('getChartControl');
   },
 
-  // mounted(){
-  //   this.$store.dispatch("getFilterOptions");
-  // },
+  mounted(){
+    this.$store.dispatch("getFilterOptions");
+  },
 
   components: {
     Chart

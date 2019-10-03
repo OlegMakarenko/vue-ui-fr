@@ -62,7 +62,7 @@
                   <el-tag 
                     size="medium" 
                     :type="scope.row.eventType === 'normal' ? 'primary': 'danger'">
-                      {{ scope.row.eventType.toUpperCase() }}
+                      {{ scope.row.eventType }}
                   </el-tag>
                 </div>
               </template>

@@ -194,7 +194,7 @@ export default {
 
     temperature(){
       if(this.deviceData != null)
-      return this.deviceData.temp + '°';
+      return Math.round(this.deviceData.temp) + '°';
     },
 
     sliderTemp:{

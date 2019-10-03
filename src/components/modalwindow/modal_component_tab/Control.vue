@@ -12,6 +12,10 @@
             <div class="ltc-right">
               Заданная
             </div>
+
+            <div class="ltc-targetTemp">
+              Воздух
+            </div>
           </div>
 
           <div class="left-center-content" v-if="timePick">
@@ -42,6 +46,10 @@
                 :max="50"
                 v-model="sliderTemp">
               </el-input-number>
+            </div>
+
+            <div class="lcc-targetTemp">
+              {{targetTemp}}
             </div>
           </div>
 
@@ -99,17 +107,17 @@
 
           <div class="right-center-content">
             <el-button 
-              :class="timePickClass"
-              @click="timePickFunc" 
-              v-if="sensorVisible">
-                Режим работы без датчика
-            </el-button>
-            <el-button 
               type="info" 
               @click="troubleButton"
               plain 
               style="width: 200px">
               Спящий режим
+            </el-button>
+            <el-button 
+              :class="timePickClass"
+              @click="timePickFunc" 
+              v-if="sensorVisible">
+                Режим работы без датчика
             </el-button>
           </div>
         </div>
@@ -186,13 +194,13 @@ export default {
 
   created(){
     //  this.$store.dispatch("DEVICE_INFO");
+    //  this.$store.dispatch('getChartControl');
     //  this.$store.dispatch("getTemperature");
-    this.$store.dispatch('getChartControl');
   },
 
-  mounted(){
-    this.$store.dispatch("getFilterOptions");
-  },
+  // mounted(){
+  //   this.$store.dispatch("getFilterOptions");
+  // },
 
   components: {
     Chart
@@ -255,7 +263,7 @@ export default {
 
     power(){
       if(this.deviceData != null)
-        return this.deviceData.power + ' Вт';
+        return Math.round(this.deviceData.power) / 1000 + ' Вт';
     },
 
     voltage(){
@@ -265,7 +273,7 @@ export default {
 
     temperature(){
       if(this.deviceData != null)
-        return this.deviceData.temp + ' °';
+        return Math.round(this.deviceData.temp) + ' °';
     },
 
     status(){
@@ -275,7 +283,7 @@ export default {
 
     targetTemp(){
       if(this.deviceData != null)
-        return this.deviceData.targetTemp + ' °';
+        return Math.round(this.deviceData.targetTemp) + ' °';
     },
 
     releState(){
@@ -496,7 +504,7 @@ export default {
             flex-direction: row;
 
             .ltc-left{
-              width: 33%;
+              width: 25%;
               height: 100%;
               display: flex;
               align-items: center;
@@ -505,12 +513,21 @@ export default {
             }
 
             .invisible-ltc{
-              width: 30%;
+              width: 25%;
               height: 100%;
             }
 
             .ltc-right{
-              width: 36%;
+              width: 25%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 15px;
+            }
+
+            .ltc-targetTemp{
+              width: 25%;
               height: 100%;
               display: flex;
               align-items: center;
@@ -528,14 +545,14 @@ export default {
             flex-direction: row;
 
             .lcc-left{
-              width: 33%;
+              width: 25%;
               height:100%;
               display: flex;
               align-items: center;
               justify-content: center;
             }
             .lcc-center{
-              width: 33%;
+              width: 25%;
               height:100%;
               display: flex;
               align-items: center;
@@ -547,7 +564,15 @@ export default {
               }
             }
             .lcc-right{
-              width: 33%;
+              width: 25%;
+              height:100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+
+            .lcc-targetTemp{
+              width: 25%;
               height:100%;
               display: flex;
               align-items: center;
@@ -583,7 +608,7 @@ export default {
 
             .handle-mode-button{
               height: 40px;
-              width: 143px;
+              width: 33%;
               background-color: #ffffff;
               border: 1px solid #DCDFE6;
               border-top-left-radius: 4px;
@@ -595,7 +620,7 @@ export default {
 
             .schedule-mode-button{
               height: 40px;
-              width: 143px;
+              width: 33%;
               background-color: #ffffff;
               border-top: 1px solid #DCDFE6;
               border-bottom: 1px solid #DCDFE6;
@@ -608,7 +633,7 @@ export default {
 
             .ongo-mode-button{
               height: 40px;
-              width: 143px;
+              width: 33%;
               background-color: #ffffff;
               border: 1px solid #DCDFE6;
               border-top-right-radius: 4px;
@@ -642,7 +667,7 @@ export default {
             width: 100%;
             height: 20%;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
 
             .time-pick-white{

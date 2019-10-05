@@ -358,7 +358,7 @@ export default {
   methods: {
      setTemperature(value){
         this.$store.commit("temperature", value)
-        this.$store.dispatch("getTemperature")
+        this.$store.dispatch("getTemperature", {id: this.id})
     },
 
     onClick(){

@@ -16,11 +16,12 @@
         <el-button
           class="btn_add_group"
           icon="el-icon-folder"
-          @click="onAddGroupClick"
+          
           :infoPanel="infoPanel"
           size="mini"
           v-if="currentTree === 1"
-        >
+        > 
+        <!-- @click="onAddGroupClick" -->
           Добавить группу
         </el-button>         
 

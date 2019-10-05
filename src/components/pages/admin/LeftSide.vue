@@ -13,13 +13,13 @@
                 :class="scheduleButtonClass" 
                 @click="groupFunction" 
                 class="schedule-mode-button">Группы</button>
+            <div style="margin-top:53px"></div>
           </div>
-          <el-button
+          <!-- <el-button
           class="profile-system"
           type="primary"
           size="mini"
-          >Профиль и системные функции</el-button>
-
+          >Профиль и системные функции</el-button> -->
           <el-divider></el-divider>
 
             <Tree

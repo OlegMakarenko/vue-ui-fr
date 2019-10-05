@@ -54,7 +54,7 @@
         </el-form-item>
 
         <el-row :gutter="20" style="display: flex">
-          <el-col>
+          <!-- <el-col>
             <el-form-item>
               <el-button
                 class="register-button"
@@ -62,7 +62,7 @@
                   Регистрация
               </el-button>
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <el-col>
             <el-form-item>
               <el-button
@@ -75,30 +75,19 @@
           </el-col>
         </el-row>
 
-        <el-row :gutter="20" style="display: flex">
+        <!-- <el-row :gutter="20" style="display: flex">
           <el-col>
             <el-form-item style="color: #565656">
               <span>Русский</span>
-              <!-- <el-button
-                class="auth-button"
-                type="primary"
-                @click="submitForm('authForm')">
-                  Войти
-              </el-button> -->
             </el-form-item>
           </el-col>
 
           <el-col>
             <el-form-item style="float: right; color: #565656; cursor: pointer">
               <span @click="recoveryPassword">Забыли пароль?</span>
-              <!-- <el-button
-                class="register-button"
-                @click="showRegister">
-                  Регистрация
-              </el-button> -->
             </el-form-item>
           </el-col>
-        </el-row>
+        </el-row> -->
       </el-form>
     </div>
   </div>

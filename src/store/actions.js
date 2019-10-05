@@ -7,8 +7,8 @@ import { Notification } from 'element-ui';
 
 Vue.use(Vuex);
 
-const HTTP_BASE_URL = "http://vega-test.fractal.tools/request";
-const WEB_SOCKET_ENDPOINT = "ws://vega-test.fractal.tools/ws"
+const HTTP_BASE_URL = "http://vega-staging.fractal.tools/request"; //<--vega-staging |create 2 branches| vega-test-->// http://vega-test.fractal.tools/request
+const WEB_SOCKET_ENDPOINT = "ws://vega-staging.fractal.tools/ws" //<--vega-staging |create 2 branches| vega-test-->// ws://vega-test.fractal.tools/ws
 const ws = new WebSocket(WEB_SOCKET_ENDPOINT);
 
 export default {

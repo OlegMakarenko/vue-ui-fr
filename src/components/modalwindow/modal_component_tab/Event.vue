@@ -53,7 +53,7 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column
+            <!-- <el-table-column
               prop="eventType"
               label="Тип события"
               >
@@ -66,7 +66,7 @@
                   </el-tag>
                 </div>
               </template>
-            </el-table-column>
+            </el-table-column> -->
             <el-table-column
               prop="description"
               label="Описание">

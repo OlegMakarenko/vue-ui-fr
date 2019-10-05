@@ -62,7 +62,7 @@ export default {
             function: "setTemperature",
             data: {
             "object": "vega",
-            "sensorId": 1, //sensId для передачи температуры по каждому устройству
+            "sensorId": sensId, //sensId для передачи температуры по каждому устройству
             temperature
             }
         }).then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))
@@ -149,16 +149,16 @@ export default {
     getChartControl: (context, payload) => {
         const trendsDate = context.getters.trendsDataControl
         const trendsFilters = context.getters.trendsFiltersControl
-        context.state.format.send({
-            method: "post",
-            url: "/",
-            path: "trends/user",
+            context.state.format.send({
+                method: "post",
+                url: "/",
+                path: "trends/user",
             class: "Trends",
             object: "trends",
             function: "GetChart",
             data: {
-                "trendsDate": [1569478054, 1570082854],
-                trendsFilters
+                "trendsDate": [1569661702, 1570266502],
+                "trendsFilters":["vega/1 temperature", "vega/1 voltage", "vega/1 consPower"]
             }
         }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
     },

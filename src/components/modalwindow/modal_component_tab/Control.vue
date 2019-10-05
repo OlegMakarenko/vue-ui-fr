@@ -49,7 +49,7 @@
             </div>
 
             <div class="lcc-targetTemp">
-              {{targetTemp}}
+              {{temperatureAir}}
             </div>
           </div>
 
@@ -194,13 +194,15 @@ export default {
 
   created(){
     //  this.$store.dispatch("DEVICE_INFO");
-    //  this.$store.dispatch('getChartControl');
+    //  this.$store.dispatch('getChartControl', {id: this.id});
     //  this.$store.dispatch("getTemperature");
   },
 
-  // mounted(){
-  //   this.$store.dispatch("getFilterOptions");
-  // },
+  mounted(){
+    // this.$store.dispatch("getFilterOptions");
+     this.$store.dispatch('getChartControl', {id: this.id});
+
+  },
 
   components: {
     Chart
@@ -262,8 +264,10 @@ export default {
     },
 
     power(){
+      let kvtData = this.deviceData.power
       if(this.deviceData != null)
-        return Math.round(this.deviceData.power) / 1000 + ' Вт';
+        // return Math.round(this.deviceData.power) / 1000 + ' кВт';
+        return kvtData.toPrecision(2) / 1000 + ' кВт'
     },
 
     voltage(){
@@ -272,8 +276,21 @@ export default {
     },
 
     temperature(){
-      if(this.deviceData != null)
-        return Math.round(this.deviceData.temp) + ' °';
+      let dataTemp = this.deviceData.temp["1"];
+      if(this.deviceData != null){
+        // alert(dataTemp)
+        return Math.round(dataTemp) + ' °'
+          // return JSON.stringify(this.deviceData.temp) + ' °';
+      }
+    },
+
+    temperatureAir(){
+      let airTemp = this.deviceData.temp["2"];
+      if(this.deviceData != null){
+        // alert(dataTemp)
+        return Math.round(airTemp) + ' °'
+          // return JSON.stringify(this.deviceData.temp) + ' °';
+      }
     },
 
     status(){
@@ -295,10 +312,10 @@ export default {
     },
 
     tempView(){
-      if (this.deviceData != null && this.deviceData.temp > this.sliderTemp){
+      if (this.deviceData != null && this.deviceData.temp["1"] > this.sliderTemp){
          this.iconUp = false;
          this.iconDown = true;
-      } else if (this.deviceData != null && this.deviceData.temp  < this.sliderTemp){
+      } else if (this.deviceData != null && this.deviceData.temp["1"]  < this.sliderTemp){
         this.iconUp = true;
         this.iconDown = false;
       }

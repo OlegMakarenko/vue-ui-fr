@@ -183,18 +183,22 @@ export default {
     },
 
     tempView(){
-      if (this.deviceData != null && this.deviceData.temp > this.sliderTemp){
+      if (this.deviceData != null && this.deviceData.temp["1"] > this.sliderTemp){
          this.iconUp = false;
          this.iconDown = true;
-      } else if (this.deviceData != null && this.deviceData.temp  < this.sliderTemp){
+      } else if (this.deviceData != null && this.deviceData.temp["1"]  < this.sliderTemp){
         this.iconUp = true;
         this.iconDown = false;
       }
     },
 
     temperature(){
-      if(this.deviceData != null)
-      return Math.round(this.deviceData.temp) + '°';
+      let dataTemp = this.deviceData.temp["1"];
+      if(this.deviceData != null){
+        // alert(dataTemp)
+        return Math.round(dataTemp) + ' °'
+          // return JSON.stringify(this.deviceData.temp) + ' °';
+      }
     },
 
     sliderTemp:{

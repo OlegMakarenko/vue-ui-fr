@@ -96,7 +96,7 @@
                 style="position: absolute; top: 3px; right: 150px">
 
                 <el-radio-group v-model="separateAxes" size="mini" @change="redraw()">
-                    <el-radio-button :label="false">1</el-radio-button>>
+                    <el-radio-button :label="false">1</el-radio-button>
                     <el-radio-button :label="true">N</el-radio-button>
                 </el-radio-group>  
             </div>

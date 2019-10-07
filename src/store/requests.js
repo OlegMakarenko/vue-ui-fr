@@ -157,8 +157,8 @@ export default {
             object: "trends",
             function: "GetChart",
             data: {
-                "trendsDate": [1569661702, 1570266502],
-                "trendsFilters":["vega/1 temperature", "vega/1 voltage", "vega/1 consPower"]
+                "trendsDate": [1570395600, payload.secondTime],
+                "trendsFilters":["vega/1 temp#1", "vega/1 temp#2", "vega/1 targetTemp", "vega/1 consPower"]
             }
         }).then(res => context.dispatch("RESPONSE_REQUEST", res.data))
     },

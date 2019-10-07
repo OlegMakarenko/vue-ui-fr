@@ -20,7 +20,12 @@
 
           <div class="left-center-content" v-if="timePick">
             <div class="lcc-left">
-              {{temperature}}
+              <span v-if="tempMsg">
+                {{temperature}}
+              </span>
+              <span v-if="checkTemperature">
+                {{errMsg}}
+              </span>
             </div>
 
             <div class="lcc-center">
@@ -173,7 +178,7 @@
       <div style="width: 100%; height: 60%; margin-left: -20px">
         <Chart 
           :toolbar="false"
-          :axesButton="false"
+          :axesButton="true"
           :data="chartData"
         />
       </div>
@@ -200,7 +205,7 @@ export default {
 
   mounted(){
     // this.$store.dispatch("getFilterOptions");
-     this.$store.dispatch('getChartControl', {id: this.id});
+     this.$store.dispatch('getChartControl', {secondTime: this.showData});
 
   },
 
@@ -224,8 +229,10 @@ export default {
         iconDown: false,
         contentVisible: true,
         ready: true,
-        value1: 1,
+        value1: true,
         chartVisible: true,
+        errMsg: "Error",
+        tempMsg: true
         //sliderTemp: 0,
       };
     },
@@ -233,10 +240,11 @@ export default {
   computed: {
      sliderTemp:{
       get(){
-        if(this.deviceData != null){
-          console.log("TARGET TEMP ", this.deviceData.targetTemp)
-          return this.deviceData.targetTemp;
-        }
+        return this.$store.getters.temperature
+        // if(this.deviceData != null){
+        //   console.log("TARGET TEMP ", this.deviceData.targetTemp)
+        //   return this.deviceData.targetTemp;
+        // }
       },
       set(value){
         this.$store.commit("temperature", value);
@@ -246,6 +254,21 @@ export default {
 
     deviceData(){
       return this.$store.getters.getDeviceDataById(this.id)
+    },
+
+    showData(){
+      var now = new Date();
+      var year = now.getFullYear();
+      var hour = now.getHours();
+      var day = now.getDate();
+      var month = now.getMonth()+1;
+      var min = "0" + now.getMinutes();
+      var sec = "0" + now.getSeconds();
+
+      var humanDate = day + "." + month + "." + year
+      var timeStamp = new Date(humanDate.split(".").reverse().join(".")).getTime()/1000;
+      
+      return timeStamp;
     },
 
     chartData(){
@@ -281,18 +304,24 @@ export default {
     temperature(){
       let dataTemp = this.deviceData.temp["1"];
       if(this.deviceData != null){
-        // alert(dataTemp)
         return dataTemp + '°'
-          // return JSON.stringify(this.deviceData.temp) + ' °';
+      } 
+      // else if (this.deviceData != null  && this.deviceData.temp["1"] < 0 || this.deviceData != null  && this.deviceData.temp["1"] > 90){
+      //   return "Error"
+      // }
+    },
+
+    checkTemperature(){
+      if(this.temperature < "0" || this.temperature > "90"){
+        this.tempMsg = false
+        return this.errMsg
       }
     },
 
     temperatureAir(){
       let airTemp = this.deviceData.temp["2"];
       if(this.deviceData != null){
-        // alert(dataTemp)
         return Math.round(airTemp) + '°'
-          // return JSON.stringify(this.deviceData.temp) + ' °';
       }
     },
 
@@ -448,7 +477,12 @@ export default {
     getRelay(value){
       this.$store.commit("relayState", value)
       this.$store.dispatch("getRelay", {id: parseInt(this.id)})
-    }
+    },
+    
+    relayState(){
+       if(this.deviceData != null)
+        return this.deviceData.releState
+    },
   }
 };
 </script>

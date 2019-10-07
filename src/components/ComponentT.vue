@@ -43,7 +43,12 @@
 
       <div class="temperature-content"  v-if="isTemperature">
         <div class="temperature-output">
-          {{temperature}}
+          <span v-if="tempMsg">
+            {{temperature}}
+          </span>
+          <span v-if="checkTemperature">
+            {{errMsg}}
+          </span>
         </div>
         <div class="icon-view">
           <img
@@ -97,6 +102,8 @@ export default {
       ltc090: true,
       ltc030: true,
       ltco70: true,
+      tempMsg: true,
+      errMsg: "Error",
     };
   },
 
@@ -124,6 +131,13 @@ export default {
 
     isSelectedTitle(){
       return this.selectedTitle == this.title;
+    },
+
+    checkTemperature(){
+      if(this.temperature < "0" || this.temperature > "90"){
+        this.tempMsg = false
+        return this.errMsg
+      }
     },
 
     iconClass() {
@@ -203,10 +217,11 @@ export default {
 
     sliderTemp:{
       get(){
-        if(this.deviceData != null){
-          // console.log("TARGET TEMP ", this.deviceData.targetTemp)
-          return this.deviceData.targetTemp;
-        }
+        return this.$store.getters.temperature
+        // if(this.deviceData != null){
+        //   // console.log("TARGET TEMP ", this.deviceData.targetTemp)
+        //   return this.deviceData.targetTemp;
+        // }
       },
       set(value){
         this.$store.commit("temperature", value);

@@ -60,7 +60,7 @@
                         </div>
                         <controlTab @buttonClick="close" object="controlTab" v-if="controlTabVisible" :id="this.id"/>
                         <eventTab @buttonClick="close" object="eventTab" v-if="eventTabVisible"/>
-                        <graphicTab @buttonClick="close" object="graphicTab" v-if="graphicTabVisible"/>
+                        <graphicTab @buttonClick="close" object="graphicTab" v-if="graphicTabVisible" :id="this.id"/>
                         <scheduleTab @buttonClick="close" object="scheduleTab" v-if="scheduleTabVisible"/>
                         <settingsTab @buttonClick="close" object="settingsTab" v-if="settingsTabVisible"/>
                 <div class="modal-info-panel">

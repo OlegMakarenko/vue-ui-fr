@@ -101,8 +101,8 @@
           Реле <el-switch v-model="value1"
                     :value="getRelay" 
                      @change="getRelay"  
-                     active-text="Вкл"
-                     inactive-text="Выкл"></el-switch>
+                     active-text="Выкл"
+                     inactive-text="Вкл"></el-switch>
           </div>
 
           <div class="right-center-content">
@@ -233,7 +233,10 @@ export default {
   computed: {
      sliderTemp:{
       get(){
-        return this.$store.getters.temperature
+        if(this.deviceData != null){
+          console.log("TARGET TEMP ", this.deviceData.targetTemp)
+          return this.deviceData.targetTemp;
+        }
       },
       set(value){
         this.$store.commit("temperature", value);
@@ -272,14 +275,14 @@ export default {
 
     voltage(){
       if(this.deviceData != null)
-        return this.deviceData.voltage + ' В';
+        return Math.round(this.deviceData.voltage) + ' В';
     },
 
     temperature(){
       let dataTemp = this.deviceData.temp["1"];
       if(this.deviceData != null){
         // alert(dataTemp)
-        return Math.round(dataTemp) + ' °'
+        return dataTemp + '°'
           // return JSON.stringify(this.deviceData.temp) + ' °';
       }
     },
@@ -288,7 +291,7 @@ export default {
       let airTemp = this.deviceData.temp["2"];
       if(this.deviceData != null){
         // alert(dataTemp)
-        return Math.round(airTemp) + ' °'
+        return Math.round(airTemp) + '°'
           // return JSON.stringify(this.deviceData.temp) + ' °';
       }
     },
@@ -298,14 +301,19 @@ export default {
         return this.deviceData.status + ' дБм'
     },  
 
-    targetTemp(){
-      if(this.deviceData != null)
-        return Math.round(this.deviceData.targetTemp) + ' °';
+    targetTemp:{
+      get(){
+        if(this.deviceData != null)
+          return Math.round(this.deviceData.targetTemp);
+      },
+      set(value){
+        this.setTemperature(value)
+      }
     },
 
     releState(){
       if(this.$store.getters.deviceData.releState === 1){
-        return 0
+        return 1
       } else if (this.$store.getters.deviceData.releState === 0){
         return 0
       }

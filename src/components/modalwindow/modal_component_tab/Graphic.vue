@@ -68,17 +68,18 @@
 import Chart from '../../chart/Chart.vue'
 
 export default {
-  props: ['object'],
+  props: ['object', 'id'],
   components: {
     Chart
   },
 
-  // created(){
-  //   this.$store.dispatch("TRENDS")
-  // },
+  created(){
+    // this.$store.dispatch("TRENDS")
+    this.$store.dispatch("getSensFilterOptions", {id: this.id})
+    // this.$store.dispatch("getFilterOptions");
+  },
 
   mounted(){
-    this.$store.dispatch("getFilterOptions");
   },
 
   computed: {

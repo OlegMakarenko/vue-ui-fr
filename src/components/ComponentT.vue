@@ -143,39 +143,39 @@ export default {
     },
 
     ltc030FuncTest(){
-      if(this.id === '0' ) return this.ltc030 = true
+      if(this.id === 0 ) return this.ltc030 = true
       else if(this.type === "folder") return this.ltc030 = false
     },
 
     ltc090Func(){
-      if(this.id === '1') return this.ltc090 = true
-      else if(this.type === "folder") return this.ltc090 = false
+      if(this.id === 1) return this.ltc090 = true
+      // else if(this.type === "folder") return this.ltc090 = false
     },
 
     ltc070Func(){
-      if(this.id === '2') return this.ltc070 = true
+      if(this.id === 2) return this.ltc070 = true
       else if(this.type === "folder") return this.ltc070 = false
     },
 
     ltc030Func(){
-      if(this.id === '3' ) return this.ltc030 = true
+      if(this.id === 3) return this.ltc030 = true
       else if(this.type === "folder") return this.ltc030 = false
     },
 
     ltc030TextTest(){
-      if(this.id === '0' ) return 'LTC030'
+      if(this.id === 0 ) return 'LTC030'
     },
 
     ltc090Text(){
-      if(this.id === '1') return 'LTC090'
+      if(this.id === 1) return 'LTC090'
     },
 
     ltc070Text(){
-      if(this.id === '2') return 'LTC070'
+      if(this.id === 2) return 'LTC070'
     },
 
     ltc030Text(){
-      if(this.id === '3' ) return 'LTC030'
+      if(this.id === 3 ) return 'LTC030'
     },
 
     deviceIcon(){
@@ -196,17 +196,21 @@ export default {
       let dataTemp = this.deviceData.temp["1"];
       if(this.deviceData != null){
         // alert(dataTemp)
-        return Math.round(dataTemp) + ' °'
+        return dataTemp + '°'
           // return JSON.stringify(this.deviceData.temp) + ' °';
       }
     },
 
     sliderTemp:{
       get(){
-        return this.$store.getters.temperature
+        if(this.deviceData != null){
+          // console.log("TARGET TEMP ", this.deviceData.targetTemp)
+          return this.deviceData.targetTemp;
+        }
       },
       set(value){
         this.$store.commit("temperature", value);
+        this.$store.commit("sensorId", parseInt(this.id))
       }
     },
 

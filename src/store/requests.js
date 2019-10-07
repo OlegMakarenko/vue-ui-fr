@@ -90,7 +90,7 @@ export default {
             currentRelay = Math.round(currentState); // 1
         }
         else
-        currentRelay = Math.round(currentState); // 0
+        currentRelay = Math.round(currentState); // 0       
 
         context.state.format.send({
             method: "post",
@@ -102,7 +102,7 @@ export default {
             data: {
             "object": "vega",
             "sensorId": payload.id, // id устройства на которое переджается реле
-            currentState:currentRelay, //присвоение значения
+            currentState: currentRelay, //присвоение значения
             }
         }) 
     },

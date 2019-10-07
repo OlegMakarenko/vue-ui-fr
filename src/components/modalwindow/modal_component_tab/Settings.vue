@@ -148,7 +148,7 @@
                     <el-input 
                       style="width: 60px;" 
                       size="mini" 
-                      v-model="hysteresis">
+                      v-model="hysteresisFunc">
                     </el-input>
                   </div>
                 </div>
@@ -334,6 +334,10 @@ export default {
          return 'handle-pick-white'
       }
     },
+
+    hysteresisFunc(){
+      return this.hysteresis / 10
+    }
   },
 
   data() {

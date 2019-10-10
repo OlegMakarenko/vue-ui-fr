@@ -62,7 +62,7 @@ export default {
             function: "setTemperature",
             data: {
             "object": "vega",
-            "sensorId": payload.id, //sensId для передачи температуры по каждому устройству
+            "sensorId": payload.id, //payload.id для передачи температуры по каждому устройству
             temperature
             }
         }).then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))

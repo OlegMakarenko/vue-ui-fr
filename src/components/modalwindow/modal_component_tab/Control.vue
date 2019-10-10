@@ -58,8 +58,6 @@
             </div>
           </div>
 
-          
-            
           <div class="left-bottom-content" v-if="timePick">
             <el-slider 
               style="width: 250px; margin-left: 10px;" 
@@ -205,7 +203,7 @@ export default {
 
   mounted(){
     // this.$store.dispatch("getFilterOptions");
-     this.$store.dispatch('getChartControl', {secondTime: this.showData});
+     this.$store.dispatch('getChartControl', {firstTime: this.showDataPast, secondTime: this.showDataCurrent});
 
   },
 
@@ -242,8 +240,8 @@ export default {
       get(){
         return this.$store.getters.temperature
         // if(this.deviceData != null){
-        //   console.log("TARGET TEMP ", this.deviceData.targetTemp)
-        //   return this.deviceData.targetTemp;
+          // console.log("TARGET TEMP", this.deviceData.targetTemp)
+          // return this.deviceData.targetTemp;
         // }
       },
       set(value){
@@ -256,7 +254,7 @@ export default {
       return this.$store.getters.getDeviceDataById(this.id)
     },
 
-    showData(){
+    showDataCurrent(){
       var now = new Date();
       var year = now.getFullYear();
       var hour = now.getHours();
@@ -267,7 +265,22 @@ export default {
 
       var humanDate = day + "." + month + "." + year
       var timeStamp = new Date(humanDate.split(".").reverse().join(".")).getTime()/1000;
-      
+
+      return timeStamp;
+    },
+
+    showDataPast(){
+      var now = new Date();
+      var year = now.getFullYear();
+      var hour = now.getHours();
+      var day = now.getDate();
+      var month = now.getMonth()+1;
+      var min = "0" + now.getMinutes();
+      var sec = "0" + now.getSeconds();
+
+      var humanDate = day + "." + month + "." + year
+      var timeStamp = new Date(humanDate.split(".").reverse().join(".")).getTime()/1000 - 85000;
+
       return timeStamp;
     },
 

@@ -238,11 +238,11 @@ export default {
   computed: {
      sliderTemp:{
       get(){
-        return this.$store.getters.temperature
-        // if(this.deviceData != null){
+        // return this.$store.getters.temperature
+        if(this.deviceData != null){
           // console.log("TARGET TEMP", this.deviceData.targetTemp)
-          // return this.deviceData.targetTemp;
-        // }
+          return this.deviceData.targetTemp;
+        }
       },
       set(value){
         this.$store.commit("temperature", value);
@@ -282,6 +282,12 @@ export default {
       var timeStamp = new Date(humanDate.split(".").reverse().join(".")).getTime()/1000 - 85000;
 
       return timeStamp;
+    },
+
+    setDeviceChart(){
+      if(this.id === 2){
+        this.$store.dispatch("getChartControl", {deviceView: "vega/2 temp#1"});
+      }
     },
 
     chartData(){
@@ -358,6 +364,8 @@ export default {
         return 1
       } else if (this.$store.getters.deviceData.releState === 0){
         return 0
+      } else {
+        return -1
       }
     },
 

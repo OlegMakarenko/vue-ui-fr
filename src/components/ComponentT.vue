@@ -217,11 +217,11 @@ export default {
 
     sliderTemp:{
       get(){
-        return this.$store.getters.temperature
-        // if(this.deviceData != null){
-        //   // console.log("TARGET TEMP ", this.deviceData.targetTemp)
-        //   return this.deviceData.targetTemp;
-        // }
+        // return this.$store.getters.temperature
+        if(this.deviceData != null){
+          // console.log("TARGET TEMP ", this.deviceData.targetTemp)
+          return Math.round(this.deviceData.targetTemp);
+        }
       },
       set(value){
         this.$store.commit("temperature", value);

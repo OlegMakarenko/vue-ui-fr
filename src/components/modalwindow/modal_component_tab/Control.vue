@@ -10,7 +10,9 @@
             </div> 
             <div class="invisible-ltc" ></div >
             <div class="ltc-right">
+              <button @click="minusButton">-1</button>
               Заданная
+              <button @click="plusButton">+1</button>
             </div>
 
             <div class="ltc-targetTemp">
@@ -170,7 +172,8 @@
                 v-model="statusHub">
             </div>
           </div>
-          
+          <!-- {{checkTargetTemp}} -->
+          <!-- {{showDataCurrent}} -->
         </div>
       </div>
       <div style="width: 100%; height: 60%; margin-left: -20px">
@@ -230,7 +233,8 @@ export default {
         value1: true,
         chartVisible: true,
         errMsg: "Error",
-        tempMsg: true
+        tempMsg: true,
+        checkTarget: this.sliderTemp,
         //sliderTemp: 0,
       };
     },
@@ -238,17 +242,25 @@ export default {
   computed: {
      sliderTemp:{
       get(){
-        return this.$store.getters.temperature
-        // if(this.deviceData != null){
-          // console.log("TARGET TEMP", this.deviceData.targetTemp)
-          // return this.deviceData.targetTemp;
-        // }
+        // this.minusButton
+        // return this.$store.getters.temperature
+        if(this.deviceData != null){
+          console.log("TARGET TEMP", this.deviceData.targetTemp)
+          return Math.round(this.deviceData.targetTemp);
+        }
       },
       set(value){
         this.$store.commit("temperature", value);
         this.$store.commit("sensorId", parseInt(this.id))
       }
     },
+
+    // checkTargetTemp(){
+    //   var targetTempUnkn = this.checkTarget
+    //   targetTempUnkn = this.sliderTemp
+
+    //   return targetTempUnkn
+    // },
 
     deviceData(){
       return this.$store.getters.getDeviceDataById(this.id)
@@ -264,7 +276,7 @@ export default {
       var sec = "0" + now.getSeconds();
 
       var humanDate = day + "." + month + "." + year
-      var timeStamp = new Date(humanDate.split(".").reverse().join(".")).getTime()/1000;
+      var timeStamp = new Date(humanDate.split(".").reverse().join(".")).getTime()/1000 + 90000;
 
       return timeStamp;
     },
@@ -279,7 +291,7 @@ export default {
       var sec = "0" + now.getSeconds();
 
       var humanDate = day + "." + month + "." + year
-      var timeStamp = new Date(humanDate.split(".").reverse().join(".")).getTime()/1000 - 85000;
+      var timeStamp = new Date(humanDate.split(".").reverse().join(".")).getTime()/1000 - 1000;
 
       return timeStamp;
     },
@@ -297,11 +309,6 @@ export default {
     allPosts(){
       return this.$store.getters.allPosts;
     },
-
-    // visibleContentGunc(){
-    //   if(this.contentVisible == true)
-    //     return this.$store.dispatch("DEVICE_INFO")
-    // },
 
     consPower(){
       if(this.deviceData != null)
@@ -325,9 +332,6 @@ export default {
       if(this.deviceData != null){
         return dataTemp + '°'
       } 
-      // else if (this.deviceData != null  && this.deviceData.temp["1"] < 0 || this.deviceData != null  && this.deviceData.temp["1"] > 90){
-      //   return "Error"
-      // }
     },
 
     checkTemperature(){
@@ -417,6 +421,22 @@ export default {
      setTemperature(value){
         this.$store.commit("temperature", value)
         this.$store.dispatch("getTemperature", {id: this.id})
+    },
+
+    plusButton(){
+      // this.sliderTemp += 1
+       if(this.deviceData != null){
+         var plusTemp = Math.round(this.deviceData.targetTemp += 1) ;
+         this.$store.dispatch("getTemperature", {id: this.id, targetTemp: plusTemp})
+       }
+    },
+
+    minusButton(){
+      // this.sliderTemp += 1
+       if(this.deviceData != null){
+         var plusTemp = Math.round(this.deviceData.targetTemp -= 1) ;
+         this.$store.dispatch("getTemperature", {id: this.id, targetTemp: plusTemp})
+       }
     },
 
     onClick(){

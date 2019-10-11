@@ -10,9 +10,7 @@
             </div> 
             <div class="invisible-ltc" ></div >
             <div class="ltc-right">
-              <button @click="minusButton">-1</button>
               Заданная
-              <button @click="plusButton">+1</button>
             </div>
 
             <div class="ltc-targetTemp">
@@ -45,14 +43,21 @@
             </div>
 
             <div class="lcc-right" v-if="timePick">
-              <el-input-number 
+              <button @click="minusButton" class="button-minus"><i class="el-icon-minus"></i></button>
+              <input 
+              type="text" 
+              readonly 
+              class="input-number" 
+              v-model="sliderTemp">
+              <button @click="plusButton" class="button-plus"><i class="el-icon-plus"></i></button>
+              <!-- <el-input-number 
                 style="width: 115px" 
                 size="medium" 
                 @change="setTemperature"
                 :min="0"
                 :max="50"
                 v-model="sliderTemp">
-              </el-input-number>
+              </el-input-number> -->
             </div>
 
             <div class="lcc-targetTemp">
@@ -669,6 +674,43 @@ export default {
               display: flex;
               align-items: center;
               justify-content: center;
+
+              .input-number{
+                width: 50px; 
+                height: 30px; 
+                text-align: center; 
+                // border-radius: 4px; 
+                border: 1px solid #DCDFE6; 
+                border-left: none;
+                border-right: none;
+                outline: none;
+                color: #606266;
+                cursor: default;
+              }
+
+              .button-plus{
+                height: 34px; 
+                text-align: center; 
+                border: 1px solid #DCDFE6; 
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
+                background-color: #f7f7f7;
+                outline: none;
+                color: #606266;
+                cursor: pointer;
+              }
+
+              .button-minus{
+                height: 34px; 
+                text-align: center; 
+                border: 1px solid #DCDFE6; 
+                border-top-left-radius: 3px;
+                border-bottom-left-radius: 3px;
+                background-color: #f7f7f7;
+                outline: none;
+                color: #606266;
+                cursor: pointer;
+              }
             }
 
             .lcc-targetTemp{

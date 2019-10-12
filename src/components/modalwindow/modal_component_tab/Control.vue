@@ -43,13 +43,23 @@
             </div>
 
             <div class="lcc-right" v-if="timePick">
-              <button @click="minusButton" class="button-minus"><i class="el-icon-minus"></i></button>
+              <button 
+                @click="minusButton" 
+                class="button-minus">
+                  <i class="el-icon-minus"></i>
+              </button>
+
               <input 
-              type="text" 
-              readonly 
-              class="input-number" 
-              v-model="sliderTemp">
-              <button @click="plusButton" class="button-plus"><i class="el-icon-plus"></i></button>
+                type="text" 
+                readonly 
+                class="input-number" 
+                v-model="sliderTemp">
+
+              <button 
+                @click="plusButton" 
+                class="button-plus">
+                  <i class="el-icon-plus"></i>
+              </button>
               <!-- <el-input-number 
                 style="width: 115px" 
                 size="medium" 
@@ -69,10 +79,18 @@
             <el-slider 
               style="width: 250px; margin-left: 10px;" 
               v-model="sliderTemp" 
+              :min="0"
               :max="50"
               @change="setTemperature"
               :show-tooltip="false">
             </el-slider>
+            <!-- <input 
+              class="left-bottom-content-slider"
+              type="range" 
+              value="0"
+              min="1" max="50"
+              @change="slider"
+              v-model="sliderTemp"> -->
             {{sliderTemp+'°C'}}
           </div>
 
@@ -108,7 +126,7 @@
           </div>
 
           <div class="rightc-content">
-          Реле <el-switch v-model="value1"
+          Реле <el-switch v-model="relayState"
                     :value="getRelay" 
                      @change="getRelay"  
                      active-text="Выкл"
@@ -361,7 +379,7 @@ export default {
     targetTemp:{
       get(){
         if(this.deviceData != null)
-          return Math.round(this.deviceData.targetTemp);
+          return Math.round(this.deviceData.targetTemp += 1);
       },
       set(value){
         this.setTemperature(value)
@@ -433,6 +451,9 @@ export default {
        if(this.deviceData != null){
          var plusTemp = Math.round(this.deviceData.targetTemp += 1) ;
          this.$store.dispatch("getTemperature", {id: this.id, targetTemp: plusTemp})
+       } else {
+         var plusTemp = Math.round(this.deviceData.targetTemp -= 1) ;
+         this.$store.dispatch("getTemperature", {id: this.id, targetTemp: plusTemp})
        }
     },
 
@@ -441,6 +462,16 @@ export default {
        if(this.deviceData != null){
          var plusTemp = Math.round(this.deviceData.targetTemp -= 1) ;
          this.$store.dispatch("getTemperature", {id: this.id, targetTemp: plusTemp})
+       }
+    },
+
+    slider(){
+      if(this.deviceData != null){
+         var plusTemp = Math.round(this.deviceData.targetTemp += 1) ;
+         this.$store.dispatch("getTemperature", {id: this.id, targetTemp: plusTemp})
+       } else if (this.deviceData != null){
+         var minusTemp = Math.round(this.deviceData.targetTemp -= 1) ;
+         this.$store.dispatch("getTemperature", {id: this.id, targetTemp: minusTemp})
        }
     },
 
@@ -526,8 +557,13 @@ export default {
     },
     
     relayState(){
-       if(this.deviceData != null)
-        return this.deviceData.releState
+       if(this.deviceData != null && this.deviceData.releState === 1){
+         return 1
+       } else if (this.deviceData != null && this.deviceData.releState === 0) {
+         return 0
+       } else {
+         return -1
+       }
     },
   }
 };
@@ -729,6 +765,41 @@ export default {
             flex-direction: row;
             justify-content: space-around;
             align-items: center;
+
+            .left-bottom-content-slider {
+              -webkit-appearance: none;
+              width: 250px;
+              height: 5px;
+              background: #d3d3d3;
+              outline: none;
+              opacity: 0.7;
+              -webkit-transition: .2s;
+              transition: opacity .2s;
+            }
+
+            .left-bottom-content-slider:hover {
+              opacity: 1;
+            }
+
+            .left-bottom-content-slider::-webkit-slider-thumb {
+              -webkit-appearance: none;
+              appearance: none;
+              border-radius: 360px;
+              width: 20px;
+              height: 20px;
+              border: 2px solid #d3d3d3;
+              background: white;
+              cursor: pointer;
+            }
+
+            .left-bottom-content-slider::-moz-range-thumb {
+              border-radius: 360px;
+              width: 20px;
+              height: 20px;
+              border: 2px solid #d3d3d3;
+              background: white;
+              cursor: pointer;
+            }
           }
         }
 

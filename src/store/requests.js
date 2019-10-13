@@ -68,6 +68,24 @@ export default {
         }).then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))
     },
 
+    getTemperatureSlider:(context, payload) => {
+        const temperature = context.getters.temperature;
+        const sensId = context.getters.sensorId;
+        context.state.format.send({
+            method: "post",
+            url: "/",
+            path: "mode-controller/user",
+            class: "ModeController",
+            object: "controller",
+            function: "setTemperature",
+            data: {
+            "object": "vega",
+            "sensorId": payload.id, //payload.id для передачи температуры по каждому устройству
+            temperature
+            }
+        }).then(temperatureData => context.dispatch("RESPONSE_REQUEST", temperatureData.data))
+    },
+
     lastDeviceData:(context, payload) => {
         context.state.format.send({
             method: "post",

@@ -4,6 +4,7 @@
     <div class="control-panel-view">
       <div class="control-header-content">
         <div class="header-content-left">
+          {{grs}}
           <div class="left-top-content" v-if="timePick">
             <div class="ltc-left" >
               Текущая
@@ -78,12 +79,12 @@
           <div class="left-bottom-content" v-if="timePick">
             <el-slider 
               style="width: 250px; margin-left: 10px;" 
-              v-model="sliderTemp" 
-              :min="0"
+              v-model="changeSliderTemp" 
               :max="50"
-              @change="setTemperature"
+              @change="setTemperatureSlider"
               :show-tooltip="false">
             </el-slider>
+            {{changeSliderTemp+'°C'}}
             <!-- <input 
               class="left-bottom-content-slider"
               type="range" 
@@ -91,7 +92,6 @@
               min="1" max="50"
               @change="slider"
               v-model="sliderTemp"> -->
-            {{sliderTemp+'°C'}}
           </div>
 
           <div class="left-bottom-content" v-else>
@@ -126,9 +126,8 @@
           </div>
 
           <div class="rightc-content">
-          Реле <el-switch v-model="relayState"
-                    :value="getRelay" 
-                     @change="getRelay"  
+          Реле <el-switch v-model="value1"
+                     @change="getRelayState"  
                      active-text="Выкл"
                      inactive-text="Вкл"></el-switch>
           </div>
@@ -257,7 +256,6 @@ export default {
         chartVisible: true,
         errMsg: "Error",
         tempMsg: true,
-        checkTarget: this.sliderTemp,
         //sliderTemp: 0,
       };
     },
@@ -276,6 +274,25 @@ export default {
         this.$store.commit("temperature", value);
         this.$store.commit("sensorId", parseInt(this.id))
       }
+    },
+
+    changeSliderTemp:{
+      get(){
+        return this.$store.getters.temperature
+        // if(this.deviceData != null){
+          // console.log("TARGET TEMP", this.deviceData.targetTemp)
+          // return this.deviceData.targetTemp;
+        // }
+      },
+      set(value){
+        this.$store.commit("temperature", value);
+        this.$store.commit("sensorId", parseInt(this.id))
+      }
+    },
+
+    grs(){
+      if(this.deviceData != null)
+      return this.deviceData.releState
     },
 
     // checkTargetTemp(){
@@ -351,9 +368,8 @@ export default {
     },
 
     temperature(){
-      let dataTemp = this.deviceData.temp["1"];
       if(this.deviceData != null){
-        return dataTemp + '°'
+        return this.deviceData.temp["1"] + '°'
       } 
     },
 
@@ -365,9 +381,8 @@ export default {
     },
 
     temperatureAir(){
-      let airTemp = this.deviceData.temp["2"];
       if(this.deviceData != null){
-        return Math.round(airTemp) + '°'
+        return Math.round(this.deviceData.temp["2"]) + '°'
       }
     },
 
@@ -444,6 +459,24 @@ export default {
      setTemperature(value){
         this.$store.commit("temperature", value)
         this.$store.dispatch("getTemperature", {id: this.id})
+    },
+
+    setTemperatureSlider(value){
+        this.$store.commit("temperature", value)
+        this.$store.dispatch("getTemperatureSlider", {id: this.id})
+    },
+//getTemperatureSlider
+    getRelayState(){
+      if(this.deviceData != null && this.value1 === true){
+        console.log("Rele ON", this.deviceData.releState)
+        return this.deviceData.releState = 1
+      } else if (this.deviceData != null && this.value1 === false){
+        console.log("Rele OFF", this.deviceData.releState)
+        return this.deviceData.releState = 0
+      } else if(this.deviceData != null && this.deviceData.releState === 0 || this.deviceData.releState === 1){
+        console.log("Rele in auto")
+        return this.deviceData.releState
+      }
     },
 
     plusButton(){

@@ -207,10 +207,9 @@ export default {
     },
 
     temperature(){
-      let dataTemp = this.deviceData.temp["1"];
       if(this.deviceData != null){
         // alert(dataTemp)
-        return dataTemp + '°'
+        return this.deviceData.temp["1"] + '°'
           // return JSON.stringify(this.deviceData.temp) + ' °';
       }
     },

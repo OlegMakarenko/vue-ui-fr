@@ -4,7 +4,7 @@
     <div class="control-panel-view">
       <div class="control-header-content">
         <div class="header-content-left">
-          {{grs}}
+          <!-- {{grs}} -->
           <div class="left-top-content" v-if="timePick">
             <div class="ltc-left" >
               Текущая
@@ -126,10 +126,18 @@
           </div>
 
           <div class="rightc-content">
-          Реле <el-switch v-model="value1"
-                     @change="getRelayState"  
-                     active-text="Выкл"
-                     inactive-text="Вкл"></el-switch>
+          Реле 
+          <!-- <el-switch v-model="value1"
+            @change="getRelayState"  
+            active-text="Выкл"
+            inactive-text="Вкл">
+          </el-switch> -->
+          <el-switch v-model="value1"
+            :value="getRelay" 
+            @change="getRelay"  
+            active-text="Выкл"
+            inactive-text="Вкл">
+          </el-switch>
           </div>
 
           <div class="right-center-content">

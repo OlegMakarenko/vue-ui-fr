@@ -20,13 +20,7 @@
     </nav>
 
     <div class="form-wrapper">
-      <el-form v-if="authVisible">
-        <authForm/>
-      </el-form>
-
-
-      <el-form v-else ref="confirmForm">
-      <button @click="checkBut">123</button>
+      <el-form ref="confirmForm">
        <div class="confirm-form-content">
       <span class="confirm-span">Подтверждение регистрации</span>
       <div class="regContent">
@@ -73,26 +67,29 @@
 
 <script>
 
-import authForm from '../Auth.vue'
+// import authForm from '../Auth.vue'
 
 export default {
 
-  name:'authForm',
+  props:["authVisible"],
+
+  // name:'authForm',
 
   data() {
     return {
         confirm: '',
-        authVisible: false,
+        // authVisible: false,
     };
   },
 
   components:{
-      authForm
+      // authForm
   },
 
   methods: {
     submitPassword(){
       if(this.confirm === '' ){
+        // return this.authVisible = true
         this.$notify.error({
           title: `Ошибка ввода кода`,
           message: "Пожалуйста введите код",

@@ -71,8 +71,7 @@
 export default {
   data() {
     return {
-        recovery: '',
-        authVisible: false,
+        recovery: ''
     };
   },
 
@@ -89,7 +88,6 @@ export default {
           type: "error"
         });
       } else {
-        this.authVisible = true
         this.$notify.success({
           title: `Готово`,
           message: "",

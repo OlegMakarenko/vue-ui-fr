@@ -1,6 +1,5 @@
 <template>
   <div class="register-page">
-
     <nav class="register-header">
       <el-row :gutter="20" type="flex" justify="center">
         <div class="register-header-content">
@@ -20,8 +19,6 @@
       </el-row>
     </nav>
 
-    <authForm v-if="authVisible"/>
-    <Confirm v-if="confirmVisible"/>
 
     <div v-if="registerVisible" class="form-wrapper">
        <div class="register-form-content">
@@ -97,10 +94,9 @@
 
 <script>
 
-import authForm from '../Auth'
-import Confirm from './ConfirmRegister.vue'
-
 export default {
+  name: 'authForm',
+
   data() {
     return {
         name: "",
@@ -109,15 +105,13 @@ export default {
         email: "",
         firstPassword: "",
         secondPassword: "",
-        authVisible: false,
+        authFormVisible: false,
         confirmVisible: false,
         registerVisible: true,
     };
   },
 
   components:{
-    authForm,
-    Confirm
   },
 
   methods: {
@@ -129,8 +123,6 @@ export default {
           type: "error"
         });
       } else {
-        this.registerVisible = false;
-        this.confirmVisible = true;
         this.$notify.success({
           title: `Готово`,
           message: "",

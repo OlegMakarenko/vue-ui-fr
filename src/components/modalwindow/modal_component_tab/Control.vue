@@ -61,14 +61,6 @@
                 class="button-plus">
                   <i class="el-icon-plus"></i>
               </button>
-              <!-- <el-input-number 
-                style="width: 115px" 
-                size="medium" 
-                @change="setTemperature"
-                :min="0"
-                :max="50"
-                v-model="sliderTemp">
-              </el-input-number> -->
             </div>
 
             <div class="lcc-targetTemp">
@@ -202,8 +194,7 @@
                 v-model="statusHub">
             </div>
           </div>
-          <!-- {{checkTargetTemp}} -->
-          <!-- {{showDataCurrent}} -->
+
         </div>
       </div>
       <div style="width: 100%; height: 60%; margin-left: -20px">
@@ -229,13 +220,11 @@ export default {
   props:['id'],
 
   created(){
-    //  this.$store.dispatch("DEVICE_INFO");
-    //  this.$store.dispatch('getChartControl', {id: this.id});
-    //  this.$store.dispatch("getTemperature");
+
   },
 
   mounted(){
-    // this.$store.dispatch("getFilterOptions");
+
      this.$store.dispatch('getChartControl', {firstTime: this.showDataPast, secondTime: this.showDataCurrent});
 
   },
@@ -269,9 +258,8 @@ export default {
     },
 
   computed: {
-     sliderTemp:{
+     sliderTemp:{ // +- инпут
       get(){
-        // this.minusButton
         // return this.$store.getters.temperature
         if(this.deviceData != null){
           console.log("TARGET TEMP", this.deviceData.targetTemp)
@@ -284,13 +272,14 @@ export default {
       }
     },
 
-    changeSliderTemp:{
+    changeSliderTemp:{ // слайдер
       get(){
-        return this.$store.getters.temperature
-        // if(this.deviceData != null){
-          // console.log("TARGET TEMP", this.deviceData.targetTemp)
-          // return this.deviceData.targetTemp;
-        // }
+        // return this.$store.getters.temperature // получение данных с getters
+
+        if(this.deviceData != null){ // получение данных с сервера Дарины
+          console.log("TARGET TEMP", this.deviceData.targetTemp)
+          return this.deviceData.targetTemp;
+        }
       },
       set(value){
         this.$store.commit("temperature", value);
@@ -302,13 +291,6 @@ export default {
       if(this.deviceData != null)
       return this.deviceData.releState
     },
-
-    // checkTargetTemp(){
-    //   var targetTempUnkn = this.checkTarget
-    //   targetTempUnkn = this.sliderTemp
-
-    //   return targetTempUnkn
-    // },
 
     deviceData(){
       return this.$store.getters.getDeviceDataById(this.id)
@@ -464,7 +446,7 @@ export default {
 
 
   methods: {
-     setTemperature(value){
+     setTemperature(value){ // ?
         this.$store.commit("temperature", value)
         this.$store.dispatch("getTemperature", {id: this.id})
     },
@@ -473,7 +455,7 @@ export default {
         this.$store.commit("temperature", value)
         this.$store.dispatch("getTemperatureSlider", {id: this.id})
     },
-//getTemperatureSlider
+
     getRelayState(){
       if(this.deviceData != null && this.value1 === true){
         console.log("Rele ON", this.deviceData.releState)
@@ -503,16 +485,6 @@ export default {
        if(this.deviceData != null){
          var plusTemp = Math.round(this.deviceData.targetTemp -= 1) ;
          this.$store.dispatch("getTemperature", {id: this.id, targetTemp: plusTemp})
-       }
-    },
-
-    slider(){
-      if(this.deviceData != null){
-         var plusTemp = Math.round(this.deviceData.targetTemp += 1) ;
-         this.$store.dispatch("getTemperature", {id: this.id, targetTemp: plusTemp})
-       } else if (this.deviceData != null){
-         var minusTemp = Math.round(this.deviceData.targetTemp -= 1) ;
-         this.$store.dispatch("getTemperature", {id: this.id, targetTemp: minusTemp})
        }
     },
 

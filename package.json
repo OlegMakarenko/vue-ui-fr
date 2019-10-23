@@ -15,7 +15,7 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "clone-deep": "^4.0.1",
-    "element-ui": "^2.10.1",
+    "element-ui": "^2.12.0",
     "fractal-format-protocol": "^1.0.4",
     "url-loader": "^1.1.1",
     "vue": "^2.5.11",

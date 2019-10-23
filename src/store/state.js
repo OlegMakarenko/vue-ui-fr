@@ -26,11 +26,6 @@ export default {
     trendsFiltersControl: ["vega/1 temperature"],
 
     deviceData:{
-        power: null,
-        consPower: null,
-        temp: null,
-        voltage: null,
-        status: null,
     },
 
     sensorId: [],

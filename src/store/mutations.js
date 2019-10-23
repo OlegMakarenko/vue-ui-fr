@@ -2,7 +2,6 @@ import Vue from "vue"
 
 export default {
     isLoading: (state, v) => {
-        console.log(v)
         state.isLoading = v;
     },
     SET_AUTH_TOKEN: (state, token) => {
@@ -19,21 +18,17 @@ export default {
 
     tree1Data:(state, data) => {
         Vue.set(state, "tree1Data", data);
-        console.log(data)
     },
     tree2Data:(state, data)=>{
         Vue.set(state, "tree2Data", data)
-        console.log(data)
     },
 
     node:(state, payload)=>{
         state.node = payload
-        console.log(data)
     },
 
     contentType:(state, payload)=>{
         state.node = payload
-        console.log(data)
     },
 
     manageTree:(state, data) =>{
@@ -91,7 +86,8 @@ export default {
     },
 
     setDeviceDataById:(state, payload)=>{
-        Vue.set(state.deviceData, payload.sensId, payload) //object device data
+        console.warn("New data arrived for device #"+payload.sensId, payload)
+        Vue.set(state.deviceData, payload.sensId, {...payload}) //object device data
     },
 
     currentTree:(state, payload)=>{
@@ -107,7 +103,6 @@ export default {
         Vue.set(state, "path", data);
     },
     infoPanelData: (state, data) => {
-        // console.log("infoPanelData", data)
         Vue.set(state.infoPanelData, "name", data.name);
         Vue.set(state.infoPanelData, "activity", data.data.activity);
         Vue.set(state.infoPanelData, "childrenCount", data.children.length);
@@ -172,7 +167,6 @@ export default {
     },
 
     currentFolderId(state, id){
-        console.log("mutation.currentFolderId", id)
         state.currentFolderId = id;
     }
 }
